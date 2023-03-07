@@ -9,6 +9,7 @@ function App() {
      <Navbar></Navbar>
      <Home></Home>
      <Doorslidersystem></Doorslidersystem>
+     <Doorslidersystem></Doorslidersystem>
      
     </div>
   );
