@@ -1,11 +1,15 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Doorslidersystem from './Doorslidersystem';
 
 function App() {
   return (
     <div className="App">
-      <Doorslidersystem></Doorslidersystem>
+     <h1>Hello sangey</h1>
+     <h1>hello agina</h1>
+     <div>
+      <h1>hello sangey 3</h1>
+      <p>this is</p>
+     </div>
     </div>
   );
 }
