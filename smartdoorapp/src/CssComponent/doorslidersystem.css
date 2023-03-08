@@ -1,0 +1,182 @@
+
+.wall-container{
+    width:100%;
+    height:90vh;
+   
+    position: relative;
+    background-size:50%;
+    background-position:center;
+    background-size:7%;
+    background-color: rgb(190, 108, 252);
+    position: relative;
+   
+    
+}
+.wall-texture{
+    width:100%;
+    height:100%;
+    background-size:7%;
+    
+}
+
+.door{
+    width:14%;
+    height:300px;
+    position: absolute;
+    bottom:0px;
+    left:50%;
+    transform: translate(-50%,-0%);
+    border:10px solid rgb(255, 255, 255);
+    /* box-shadow:inset 2px 2px 3px rgb(14, 14, 14); */
+    
+    border-bottom:none;
+    border-radius:1px;
+    background-position:center;
+    background-size: 100%;
+  
+}
+.doorImage{
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position: center;
+  
+    
+}
+.door-outerline{
+    width:100%;
+    height:100%;
+    border:3px solid rgb(223, 223, 223);
+    border-bottom: none;
+    padding:0px;
+    box-shadow:inset 100px 1000px 5px 10px  rgb(241, 241, 241) ;
+    z-index:99999;
+}
+.door-outline-child{
+    width:100%;
+    height:100%;
+    border:5px solid rgb(176, 175, 175);
+    border-bottom: none;
+  
+}
+.wall-door-border-design{
+   
+    background-color:red;
+}
+
+/* ======================== */
+.window1{
+    width:150px;
+    height:220px;
+    position: absolute;
+    top:20%;
+    left:15%;
+    background-position:cover;
+    background-repeat: no-repeat;
+    background-size:100%;
+    border:3px solid rgb(204, 204, 204);
+    box-shadow:-0px -0px 0px rgb(95, 94, 94);
+    outline:5px solid rgb(247, 247, 247);
+
+}
+.window2{
+    width:150px;
+    height:220px;
+    position: absolute;
+    top:20%;
+    right:15%;
+    background-position:cover;
+    background-repeat: no-repeat;
+    background-size:100%;
+    border:3px solid rgb(211, 211, 211);
+    box-shadow:-0px -0px 0px rgb(138, 138, 138);
+    outline:5px solid rgb(247, 247, 247);
+
+}
+/* floor====================== */
+.floor{
+    width:100%;
+    height:10vh;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+}
+
+/* flower1 ====================*/
+.flower1{
+    width:150px;
+    height:300px;
+    background-size: 100%;
+    top:-200px;
+    left:30%;
+    /* filter:drop-shadow(1px 0px 3px rgb(56, 56, 56)); */
+    position: absolute;
+    background-repeat: no-repeat;
+   
+}
+.flower2{
+    width:150px;
+    height:300px;
+    background-size: 100%;
+    top:-200px;
+    right:30%;
+    /* filter:drop-shadow(1px 0px 3px rgb(56, 56, 56)); */
+    position: absolute;
+    background-repeat: no-repeat;
+   
+}
+.flower3{
+    width:250px;
+    height:350px;
+    background-size: 100%;
+    top:-325px;
+    right:5%;
+    /* filter:drop-shadow(1px 0px 3px rgb(56, 56, 56)); */
+    position: absolute;
+    background-repeat: no-repeat;
+   
+}
+
+/* wallcolor section =============== */
+.wallcolor-container{
+    width:50px;
+    height:200px;
+   
+    position:absolute;
+    top:20px;
+    left:20px;
+    transition:all 1s ease;
+}
+
+.wallcolor-container > ul > li{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    margin:10px 0px;
+    list-style-type: none;
+    border:3px solid white;
+    background-color:black;
+
+}
+.wallcolor-container > ul >li:nth-child(1){
+   
+    background-color:tomato;
+
+}
+.wallcolor-container > ul >li:nth-child(2){
+    background-color:lightblue;
+    
+}
+.wallcolor-container > ul >li:nth-child(3){
+    background-color:pink;
+    
+}
+.wallcolor-container > ul >li:nth-child(4){
+    background-color:orange;
+    
+}
+.wallcolor-container > ul >li:nth-child(5){
+    background-color:purple;
+    
+}
+
+/* ================================== */
