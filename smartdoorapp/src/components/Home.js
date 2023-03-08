@@ -1,8 +1,21 @@
 
 //home css
 import '../style/Home.css';
-
+import service1 from '../image/services/service1.jpg';
+import service2 from '../image/services/service2.jpg';
+import service3 from '../image/services/service3.jpg';
+import service4 from '../image/services/service4.jpg';
+import service5 from '../image/services/service5.jpg';
+import service6 from '../image/services/service6.jpg';
 function Home(){
+    const serviceCard=[
+        {title:"Door accessories",image:service1,detail:"clean and custom"},
+        {title:"Door Replacement",image:service2,detail:"clean and custom"},
+        {title:"Customization",image:service3,detail:"clean and custom"},
+        {title:"Installation",image:service4,detail:"clean and custom"},
+        {title:"Door Design",image:service5,detail:"clean and custom"},
+        {title:"Consulting",image:service6,detail:"clean and custom"},
+    ]
     return(
     <div>
         <div className="home-carousel">
@@ -117,13 +130,31 @@ function Home(){
                 </div>
             </div>
             <div className="row service-grid">
-                <div className="service-card">
-                    <div className="service-card-img"></div>
-                    <div className="service-card-detail">
-                        <div className="service-card-title">Doors accessories</div>
-                        <div className="service-card-p">custom and clean</div>
-                        <div className="service-card-icon"><i class="fa-solid fa-chevron-right service-right"></i></div>
-                    </div>
+              {serviceCard.map((e)=>{
+                  return <div className="service-card">
+                        <div className="service-card-img" style={{background: `url(${e.image})`}}></div>
+                        <div className="service-card-detail">
+                            <div className="service-card-title">{e.title}</div>
+                            <div className="service-card-p">{e.detail}</div>
+                        </div>
+                        </div>
+              })}
+            </div>
+        </div>
+        <div className="premium">
+           <div className="row row-premium">
+            <div className="col-sm-12">
+            <div className="premium-head">Upgrade Your Home Security with Our Expert Door Services</div>
+            <div className="premium-detail">If you're in need of new doors for your home or business, or if your current doors need repair or maintenance, don't hesitate to give us a call. Our team of experienced professionals will work with you to find the perfect doors for your needs and budget. Contact us today to schedule your consultation and get started on improving the security and appearance of your property.</div>
+            <div className="premium-btn btn text-uppercase">find more</div>
+            </div>
+           </div>
+        </div>
+        <div className="topsales">
+            <div className="row row-topsales">
+                <div className="col-md-3">
+                    <div className="topsales-title">Recon Veneer</div>
+                    <div className="topsales-btn btn">click for more</div>
                 </div>
             </div>
         </div>
