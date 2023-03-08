@@ -23,19 +23,19 @@
 .home-carousel-topic{
     font-size:54px;
 }
-.carousel-item:nth-child(1){
+.home-carousel-item:nth-child(1){
     background:url('../image/home-img/home1.jpg')center/cover no-repeat;
 }
 
-.carousel-item:nth-child(2){
+.home-carousel-item:nth-child(2){
     background:url('../image/home-img/home2.jpg')center/cover no-repeat;
 }
 
-.carousel-item:nth-child(3){
+.home-carousel-item:nth-child(3){
     background:url('../image/home-img/home3.jpg')center/cover no-repeat;
 }
 
-.carousel-item:nth-child(4){
+.home-carousel-item:nth-child(4){
     background:url('../image/home-img/home4.jpg')center/cover no-repeat;
 }
 .btn-explore{
@@ -151,7 +151,7 @@
     position: relative;
     font-weight:700;
 }
-.service ::before{
+.service-head::before{
     font-weight:700;
     content: 'profesional services';
     color:#0d1d4e;
@@ -171,5 +171,37 @@
     grid-gap:20px;
 }
 .service-card{
-    
+    display: grid;
+    grid-template-rows:60% 40%;
+    border:1px solid red;
+    height:40vh;
+}
+.service-card-img{
+    background:url('../image/services/service1.jpg')center/cover no-repeat;
+}
+.service-card-detail{
+    border:1px solid black;
+    display:flex;
+    width:100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+.service-card-title{
+    color:#2e2e36;
+    font-weight: 600;
+    font-size:22px;
+}
+.service-card-p{
+    color:#abb8c3;
+}
+.service-card-icon{
+    margin-right: 20px;
+    margin-left: auto;
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    border:1px solid grey;
+}
+.service-right{
+    padding:5px;
 }

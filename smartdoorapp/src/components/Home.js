@@ -14,7 +14,7 @@ function Home(){
                     <button type="button" data-bs-target="#homecarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
                 </div>
                 <div className="carousel-inner">
-                    <div className="carousel-item active"> 
+                    <div className="home-carousel-item carousel-item active"> 
                         <div className="row home-item-row">
                             <div className="col-sm-8 mx-auto mt-sm-2">
                                 <div className="home-carousel-detail d-flex align-items-start flex-column">
@@ -31,7 +31,7 @@ function Home(){
                             </div>                
                         </div>        
                     </div>
-                    <div className="carousel-item">
+                    <div className="home-carousel-item carousel-item">
                         <div className="row home-item-row">
                         <div className="col-md-8 col-sm-12 mx-auto">
                                 <div className="home-carousel-detail d-flex align-items-start flex-column">
@@ -48,7 +48,7 @@ function Home(){
                             </div> 
                         </div>
                     </div>
-                    <div className="carousel-item">
+                    <div className="home-carousel-item carousel-item">
                         <div className="row home-item-row">
                             <div className="col-sm-8 mx-auto mt-sm-2">
                                 <div className="home-carousel-detail d-flex align-items-start flex-column">
@@ -65,7 +65,7 @@ function Home(){
                             </div>                
                         </div>   
                     </div>
-                    <div className="carousel-item">
+                    <div className="home-carousel-item carousel-item">
                     <div className="row home-item-row">
                         <div className="col-md-8 col-sm-12 mx-auto">
                                 <div className="home-carousel-detail d-flex align-items-start flex-column">
@@ -122,7 +122,7 @@ function Home(){
                     <div className="service-card-detail">
                         <div className="service-card-title">Doors accessories</div>
                         <div className="service-card-p">custom and clean</div>
-                        <div className="service-card-icon"><i class="fa-solid fa-chevron-right"></i></div>
+                        <div className="service-card-icon"><i class="fa-solid fa-chevron-right service-right"></i></div>
                     </div>
                 </div>
             </div>
