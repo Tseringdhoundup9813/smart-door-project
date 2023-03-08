@@ -1,9 +1,10 @@
-import './Navbar.css';
+//import css
+import '../style/Navbar.css';
 import logo from "../image/logo/smart-doors-logo.png"
 function Navbar (){
     return(
         <div>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
                         <img src={logo} className="img-fluid" alt="logo" />
@@ -12,7 +13,7 @@ function Navbar (){
                     <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav mx-auto">
                         <li className="nav-item">
                         <a className="nav-link active text-capitalize" aria-current="page" href="#">Home</a>
                         </li>

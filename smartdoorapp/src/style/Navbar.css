@@ -1,0 +1,15 @@
+.navbar img{
+    width:20%;
+}
+.nav-item{
+    text-align:left;
+    padding-left:20px;
+}
+@media screen and (max-width:486px){
+    .navbar img{
+        width:40%;
+    }
+    .navbar-brand{
+        width:50%;
+    }
+}
