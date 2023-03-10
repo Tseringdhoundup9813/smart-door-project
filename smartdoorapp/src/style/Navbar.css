@@ -3,7 +3,7 @@
 }
 .nav-item{
     text-align:left;
-    padding-left:20px;
+    cursor: pointer;
 }
 @media screen and (max-width:486px){
     .navbar img{
