@@ -16,6 +16,9 @@ import productimgcan from '../image/products/canadian/CD101.jpg';
 import productimgdouble from '../image/products/double/DDGK.jpg';
 import productimgmembrane from '../image/products/membrane/SD11.jpeg';
 function Home(){
+    const top=()=>{
+        window.scrollTo(0,0)
+    }
     const serviceCard=[
         {title:"Door accessories",image:service1,detail:"clean and custom"},
         {title:"Door Replacement",image:service2,detail:"clean and custom"},
@@ -215,9 +218,9 @@ function Home(){
                     clients
                 </div>
               </div>
-            <div id="testomial" class="carousel slide" data-bs-ride="carousel">
+            <div id="testomial" class="carousel slide" data-bs-ride="carousel" >
                 <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="1000">
+                    <div class="carousel-item active" data-bs-interval="10000" >
                         <div className="row row-carousel-item">
                             <div className="col-md-4  col-sm-12 testomial-img"></div>
                             <div className="col-md-8 col-sm-12 testomial-detail">
@@ -235,7 +238,7 @@ function Home(){
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="2000">
+                    <div class="carousel-item"  data-bs-interval="2000" >
                         <div className="row row-carousel-item">
                                 <div className="col-md-4  col-sm-12 testomial-img"></div>
                                 <div className="col-md-8 col-sm-12 testomial-detail">
@@ -273,15 +276,32 @@ function Home(){
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#testomial" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon fa-solid fa-chevron-left testo-prev" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#testomial" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon fa-solid fa-chevron-right testo-prev" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
+        <div className="yourdesign">
+            <div className="row yourdesign-row">
+                <div className="col-9 d-flex align-items-start justify-content-center flex-column">
+                    <div className="yourdesign-title text-capitalize">
+                    Got an Incredible Door Design Or Idea Right Now?
+                    </div>
+                    <div className="yourdesign-para text-start">
+                    Objectively innovate empowered factory products else best platforms.
+                    </div>
+                </div>
+                <div className="col-3 d-flex align-items-center justify-content-center">
+                    <div className="yourdesign-btn btn text-uppercase">contact us</div>
+                </div>
+            </div>
+        </div>
+     <div  onClick={top} className="btn top-btn"><i class="fa-solid fa-arrow-up"></i></div>
+
     </div>
     )
 }

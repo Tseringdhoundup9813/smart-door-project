@@ -1,5 +1,33 @@
+.top-btn{
+    font-size:20px;
+    background-color: #005FFF;
+    border: 1px solid #00afff;
+    color:#fff;
+    border-radius: 5px;
+    position:fixed;
+    bottom:10px;
+    right:5px;
+    cursor:pointer;
+    animation:up .5s ease-in
+}
+@keyframes up {
+    from{
+        bottom:0;
+        right:0px;
+    }
+    to
+    {
+        bottom:40px;
+        right:20px;
+
+    }
+}
+.top-btn:hover{
+    background-color: #00afff;
+    border: 1px solid #005FFF;
+}
 #homecarousel{
-    height:50vh;
+    height:70vh;
     width: 100%;
 }
 .carousel-inner{
@@ -333,7 +361,7 @@
 }
 /* =====================================product========================== */
 .product{
-    background:rgba(98, 171, 240, 0.096);
+    background:#62abf018;
     padding:50px;
 }
 .product-row{
@@ -582,42 +610,18 @@
         grid-template-rows: 60% 30%;
     }
     .us{
-        padding:50px 0;
+        padding:0;
     }
 }
 
 /* ==========tsetomials====== */
 .testomial{
-    background:#003287;
+    background:#62abf018;
     padding: 25px 0;
 }
 #testomial{
     height:40vh;
 }
-@media screen and (max-width:869px){
-    .testomial-head::before{
-     font-size:33px;
-    }
-    .testomial-head{font-size:93px;}
- }
- @media screen and (max-width:768px){
-     .testomial-head::before{
-      font-size:25px;
-      top :40px;
-     }
-     .testomial-head{font-size:70px;}  
- }
- @media screen and (max-width:480px){
-     .testomial-head {
-         font-size: 29px;
-     }
-     .testomial-head::before {
-         font-size: 25px;
-         top: 17px;
-         padding: 0px;
-     }
-     .testomial-row{width:100%;}
- }
 .testomial-img{
     background:url('../image/logo/smart-doors-logo.png')center/contain no-repeat;
 }
@@ -632,11 +636,11 @@
     padding: 20px;
 }
 .testomial-detail{
-    color:#fff
+    color:black
 }
 .testomial-row{
     width:90%;
-    margin:20px auto;
+    margin:0 auto;
 }
 .testomial-head{
     color:rgba(187, 187, 187, 0.253);
@@ -644,11 +648,12 @@
     position: relative;
     font-weight:700;
     text-align: start;
+    margin-left:15px;
 }
 .testomial-head::before{
     font-weight:700;
     content: 'testomials';
-    color:#fff;
+    color:#0d1d4e;
     font-size:44px;
     position: absolute;
     top:90px;
@@ -687,6 +692,24 @@
 .testo-para{
     color: #afa2a2;
 }
+@media screen and (max-width:869px){
+    .testomial-head::before{
+     font-size:33px;
+    }
+    .testomial-head{font-size:93px;}
+ }
+ @media screen and (max-width:480px){
+     .testomial-head::before {
+         font-size: 25px;
+         top: 17px;
+         padding: 0px;
+     }
+     .testo-quote-left{
+        display: none;
+     }
+     .testomial-row{width:100%;}
+     .row-carousel-item{height:auto;}
+ }
 /* ====media screen=== */
 @media screen and (max-width:1023px){
     .testo-para{
@@ -695,7 +718,8 @@
     .row-carousel-item{width:70%;}
 }
 @media screen and (max-width:768px){
-    .testo-para{font-size:10px}
+    .testomial-head::before{font-size:25px;top :40px;}
+    .testomial-head{font-size:70px;}  
     .testo-head{font-size:13px;}
     .testo-name{font-size:11px}
     .testo-position{font-size:10px;}
@@ -704,14 +728,85 @@
     .testomial-img{height:68px;}
 }
 @media screen and (max-width:585px){
+    .testomial-head::before {
+        top: 22px;
+        left: 1px;
+        font-size:30px;
+    }
+    .testo-quote-left{
+       display: none;
+    }
+    .testomial-row{width:100%;}
+    .row-carousel-item{height:auto;}
+    .testo-para{font-size:10px}
     #testomial {
         height: 49vh;
     }
     .testomial-head{
-        font-size:70px;
+        font-size:50px;
     }
-    .testomial-head:before{
-        top: 38px;
-        left: -10px;
+    .row-testo{
+        margin:0 auto;
+    }
+    .testomial{
+        padding:0;
+    }
+}
+.testo-prev{
+    color:black;
+    background: transparent !important;
+}
+
+/* =======custom design contact=================== */
+.yourdesign{
+    padding:40px 0;
+}
+.yourdesign-row{
+    width:90%;
+    margin:0 auto;
+}
+.yourdesign-title{
+    font-weight:700;
+    font-size:20px;
+}
+.yourdesign-para{
+    color:grey;
+}
+.yourdesign-btn{
+    background-color: #ffdd01;
+    border-color: #ffdd01;
+    border-radius:0;
+    font-weight:600;
+    transition: all 0.3s ease-in-out;
+}
+.yourdesign-btn:hover{
+    color: #fff;
+    background-color: #005FFF;
+    border-color: #005FFF;
+}
+/* ====media screen=== */
+@media screen and (max-width:768px){
+    .yourdesign-btn{
+        font-size: 12px;
+    }
+    .yourdesign-title{
+        font-size:15px;
+    }
+    .yourdesign-para {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:585px){
+    .yourdesign-btn {
+        font-size: 9px;
+    }
+    .yourdesign-title {
+        font-size: 11px;
+    }
+    .yourdesign-para {
+        font-size: 10px;
+    }
+    .yourdesign-row {
+        width: 96%;
     }
 }
