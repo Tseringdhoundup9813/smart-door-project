@@ -1,0 +1,137 @@
+.contact-row{
+    width: 90%;
+    margin:0 auto;
+}
+.map-row{
+    margin:0 auto;
+    padding:45px 40px;
+    background:#94b8f718;
+}
+.contact-img-wrapper{
+    height:50vh;
+    background:url('../image/home-img/home2.jpg')center/cover no-repeat;
+    background-attachment: fixed;
+}
+.contact-title{
+    font-weight:700;
+    font-size:30px;
+    color:#fff;
+}
+.contact-para{
+    font-size:20px;
+    text-align:center;
+    color:#fff;
+}
+.form-title{
+    font-size:20px;
+    font-weight:700;
+    margin:10px 0;
+}
+.form-label{
+    width:100%;
+}
+.form-input{
+    width: 100%;
+    padding:5px 10px;
+    outline:none;
+    margin:5px;
+}
+.contact-textarea{
+    width: 100%;
+    padding:5px 10px ;
+    outline: none;
+}
+.form-input::placeholder, .contact-textarea::placeholder{
+    color:grey;
+    text-transform: capitalize;
+}
+
+.contact-btn{
+    color: #fff;
+    background-color: #005FFF;
+    border-color: #005FFF;
+    text-transform: uppercase;
+    margin:5px;
+    transition:all .2s ease-in-out;
+}
+.contact-btn:hover{
+    background:yellow;
+    color:black;
+}
+.contact-grid{
+    display:grid;
+    grid-template-rows: 60% 40%;
+}
+.contact-map{
+    height:100%;
+    width:100%;
+}
+.map-iframe{
+    border:0;
+    width:100%;
+    height:100%;
+}
+.contact-icon-container{
+    padding :10px;
+}
+.contact-location-icon, 
+.contact-phone-icon, 
+.contact-mail-icon,
+.contact-fb, .contact-insta, .contact-whatsapp{
+    font-size:25px;
+    margin-right:10px;
+    color:#06719b;
+    cursor:pointer;
+    transition:all .3s linear;
+}
+.contact-mail:hover.contact-mail::after, 
+.contact-location:hover.contact-location::after,
+.contact-phone:hover.contact-phone::after{
+    width:120%;
+}
+.contact-location-icon:hover,
+.contact-mail-icon:hover,
+.contact-phone-icon:hover,
+.contact-fb:hover,.contact-insta:hover,.contact-whatsapp:hover {
+    color:green;
+}
+.contact-mail:hover,
+.contact-location:hover,
+.contact-phone:hover{
+    color:#06719b;
+}
+.contact-location, .contact-phone, .contact-mail{
+    color:#052256;
+    position:relative;
+    z-index: 9;
+}
+.contact-mail::after,
+.contact-location::after,
+.contact-phone::after{
+    position: absolute;
+    bottom:-5px;
+    left:-0;
+    background:#06719b;
+    height:10%;
+    transition:all .3s ease-in-out;
+    width:0%;
+    content:"";
+    z-index: -2;
+    border-radius:10px;
+}
+
+
+.contact-social{
+    margin:10px 0; 
+}
+
+/* ===media query=== */
+@media screen and (max-width:576px){
+    .contact-grid{
+        height:120vh;
+        margin-top:40px;
+    }
+    .contact-icon-container{
+        width:100%;
+    }
+}
