@@ -1,10 +1,14 @@
 //import css
 import '../style/Navbar.css';
 import logo from "../image/logo/smart-doors-logo.png"
+
+
+//router
+import {NavLink} from 'react-router-dom'
 function Navbar (){
     return(
         <div>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary ">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
                         <img src={logo} className="img-fluid" alt="logo" />
@@ -15,7 +19,7 @@ function Navbar (){
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav mx-auto">
                         <li className="nav-item">
-                        <a className="nav-link active text-capitalize" aria-current="page" href="#">Home</a>
+                        <NavLink to="/" className="nav-link text-capitalize">home</NavLink>
                         </li>
                         <li className="nav-item">
                         <a className="nav-link text-capitalize" href="#">Blogs</a>
@@ -33,7 +37,8 @@ function Navbar (){
                         <a className="nav-link text-capitalize" href="#">FAQs</a>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link text-capitalize" href="#">contact</a>
+                        <NavLink to="/contact" className="nav-link text-capitalize">contact</NavLink>
+
                         </li>
                     </ul>
                     </div>
