@@ -1,0 +1,141 @@
+.product-filter-title{
+    text-transform:capitalize;
+    font-size:20px;
+    font-weight:600;
+}
+.pagination-number{
+    text-align:center;
+}
+.pagination-btn{
+    background:grey;
+    padding:5px;
+    width:30px;
+}
+#pagination {
+    background:#fff;
+    width:15%;
+}
+
+.filter-clear{
+    font-size:11px;
+    border-bottom:1px solid red;
+}
+.filter-cat-head,.filter-col-head, .filter-length-head{
+    text-transform:capitalize;
+    font-size:20px;
+    font-weight:500;
+    margin:10px 0;
+}
+.filter-cat-ul {
+    padding-left:10px;
+}
+.filter-cat-ul li, .filter-col-ul{
+    list-style-type:none;
+}
+.filter-cat-ul li input{
+    border-radius:0;
+    cursor:pointer;
+}
+.filter-col-ul li{
+    display:inline;
+}
+.color{
+    height:42px;
+    width:42px;
+    margin:0 5px;
+    border-radius:50%;
+}
+.color:nth-child(1){
+    background: #462828;
+}
+.color:nth-child(2){
+    background: #46282899;
+
+}
+.color:nth-child(3){
+    background: #00000099;
+}
+.color:nth-child(4){
+    background: #000000;
+}
+.filter-con{
+    margin-left:5px;
+}
+.sort-title{
+    margin:0 5px;
+}
+
+.show-card{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border:1px solid black;
+    overflow:hidden;
+    grid-gap:10px;
+}
+.show-card-container{
+    border:1px solid green;
+    display: grid;
+    grid-template-rows:80% 20%;
+    height: 80vh;
+}
+.show-card-detail{
+    display:flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+    border:1px solid yellow
+}
+
+@media screen and (max-width:1023px){
+    .show-card-container{
+        height:70vh;
+    }
+    .color{
+        height:30px;
+        width:30px;
+    }
+    .filter-cat-ul li, .filter-size{
+        font-size:13px;
+    }
+}
+@media screen and (max-width:768px){
+    .show-card{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .color{
+        height:18px;
+    }
+    .filter-cat-ul li, .filter-size{
+        font-size:11px;
+    }
+    .filter-cat-head, .filter-col-head, .filter-length-head {
+        font-size: 17px;
+    }
+    #pagination {
+    width: 29%;
+    font-size: 12px;
+    }
+    .pagination-btn{
+        padding:9px;
+    }
+    .color {
+        height: 15px;
+        width:15px;
+    }
+    .filter-cat-head, .filter-col-head, .filter-length-head {
+    font-size: 13px;
+    }
+    .show-card-container {
+        height: 53vh;
+    }
+    .show-card-detail{
+        font-size:12px;
+    }
+}
+
+/* =====small screen==== */
+.sm-filter{
+    display:flex;
+    text-transform:capitalize;
+}
