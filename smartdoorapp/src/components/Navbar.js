@@ -15,16 +15,9 @@ function Navbar (){
     }
     return(
         <div>
-<<<<<<< HEAD
-            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed navbar-container">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">
-                        <img src={logo} className="img-fluid" alt="logo" />
-=======
             <nav className="navbar navbar-expand-md bg-body-tertiary ">
                 <div className="container-fluid navbar-container">
                     <a className="navbar-brand navbar-img" href="#">
->>>>>>> b19fb1c22649d7c688406c626f038cc688a80e7a
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

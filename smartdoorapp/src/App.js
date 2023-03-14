@@ -3,15 +3,15 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './App.css';
-import Doorslidersystem from './components/Doorslidersystem';
+// import Doorslidersystem from './components/Doorslidersystem';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-import Product from './components/backendProduct';
+// import Product from './components/backendProduct';
 
-import Product from './components/backendProduct';
-import Admin from './components/Admin';
+// import Product from './components/backendProduct';
+
 function App() {
   return (
     <BrowserRouter>
