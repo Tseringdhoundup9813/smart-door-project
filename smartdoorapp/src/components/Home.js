@@ -2,7 +2,37 @@
 //home css
 import '../style/Home.css';
 
+//service card- images
+import service1 from '../image/services/service1.jpg';
+import service2 from '../image/services/service2.jpg';
+import service3 from '../image/services/service3.jpg';
+import service4 from '../image/services/service4.jpg';
+import service5 from '../image/services/service5.jpg';
+import service6 from '../image/services/service6.jpg';
+
+//products images
+import productimg from '../image/products/3d/SD110.jpeg';
+import productimgcan from '../image/products/canadian/CD101.jpg';
+import productimgdouble from '../image/products/double/DDGK.jpg';
+import productimgmembrane from '../image/products/membrane/SD11.jpeg';
 function Home(){
+    const top=()=>{
+        window.scrollTo(0,0)
+    }
+    const serviceCard=[
+        {title:"Door accessories",image:service1,detail:"clean and custom"},
+        {title:"Door Replacement",image:service2,detail:"clean and custom"},
+        {title:"Customization",image:service3,detail:"clean and custom"},
+        {title:"Installation",image:service4,detail:"clean and custom"},
+        {title:"Door Design",image:service5,detail:"clean and custom"},
+        {title:"Consulting",image:service6,detail:"clean and custom"},
+    ]
+    const product=[
+        {image:productimg, cat:"3D"},
+        {image:productimgcan, cat:"canadian"},
+        {image:productimgdouble, cat:" double"},
+        {image:productimgmembrane, cat:"membrane"},
+    ]
     return(
     <div>
         <div className="home-carousel">
@@ -117,16 +147,161 @@ function Home(){
                 </div>
             </div>
             <div className="row service-grid">
-                <div className="service-card">
-                    <div className="service-card-img"></div>
-                    <div className="service-card-detail">
-                        <div className="service-card-title">Doors accessories</div>
-                        <div className="service-card-p">custom and clean</div>
-                        <div className="service-card-icon"><i class="fa-solid fa-chevron-right service-right"></i></div>
-                    </div>
+              {serviceCard.map((e)=>{
+                  return <div className="service-card">
+                        <div className="service-card-img" style={{background: `url(${e.image})`}}></div>
+                        <div className="service-card-detail">
+                            <div className="service-card-title">{e.title}</div>
+                            <div className="service-card-p">{e.detail}</div>
+                        </div>
+                        </div>
+              })}
+            </div>
+        </div>
+        <div className="premium">
+           <div className="row row-premium">
+            <div className="col-sm-12">
+            <div className="premium-head">Upgrade Your Home Security with Our Expert Door Services</div>
+            <div className="premium-detail">If you're in need of new doors for your home or business, or if your current doors need repair or maintenance, don't hesitate to give us a call. Our team of experienced professionals will work with you to find the perfect doors for your needs and budget. Contact us today to schedule your consultation and get started on improving the security and appearance of your property.</div>
+            <div className="premium-btn btn text-uppercase">find more</div>
+            </div>
+           </div>
+        </div>
+        <div className="product">
+              <div className="row product-row">
+                <div className="product-head text-capitalize">
+                    Top sales
+                </div>
+              </div>
+              <div className="row product-grid">
+                {product.map((e)=>{
+                return <div className="product-card">
+                            <div className="product-img"  style={{background: `url(${e.image})center/contain no-repeat`}}>
+                                <div className="product-detail">
+                                    <div className="product-name">premium {e.cat} Door</div>
+                                    <div className="product-model">sd102</div>
+                                    <div className="product-btn btn">click here</div>
+                                </div>
+                            </div>
+                            <div className="product-cat text-capitalize"><span className="premium-red">premium </span> {e.cat} <span className="premium-doors"> doors <span className="prem-do"></span></span> </div>
+                        </div>
+                    })
+                }
+              </div>
+        </div>
+        <div className="us">
+            <div className="row us-row">
+                <div className="col-sm-12 us-detail">
+                    <div className="us-title text-capitalize">why choose us</div>
+                    <div className="us-para">We use the best Teak, Sissau and Chaap wood for our entire range of products and treatments. Each parts of doors pass through proper check before final selection. Durability, Strength and Attractiveness are our top most priority.</div>
+                </div>
+            </div>
+            <div className="row row-card-us">
+            <div className="col-sm-4 us-card">
+                    <div className="us-icon"><i class="fa-solid fa-rocket"></i></div>
+                    <div className="us-card-title">200+ Distributer</div>
+                </div>
+                <div className="col-sm-4 us-card">
+                    <div className="us-icon"><i class="fa-solid fa-users"></i></div>
+                    <div className="us-card-title">10000+ Customer</div>
+                </div>
+                <div className="col-sm-4 us-card">
+                    
+                    <div className="us-icon"><i class="fa-solid fa-users"></i></div>
+                    <div className="us-card-title">10000+ Sales</div>
                 </div>
             </div>
         </div>
+        <div className="testomial">
+             <div className="row testomial-row">
+                <div className="testomial-head text-capitalize">
+                    clients
+                </div>
+              </div>
+            <div id="testomial" class="carousel slide" data-bs-ride="carousel" >
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000" >
+                        <div className="row row-carousel-item">
+                            <div className="col-md-4  col-sm-12 testomial-img"></div>
+                            <div className="col-md-8 col-sm-12 testomial-detail">
+                                <div className="testo-quote-left"><i class="fa-solid fa-quote-left"></i></div>
+                                <div className="testomial-title">
+                                    <div className="testo-name">ram babu gurung</div>
+                                    <div className="testo-position"> - businessman</div>
+                                </div>
+                                <div className="testo-head">amazing customer service</div>
+                                <div className="testo-para">
+                                    
+                                We have purchased this for our office space and are extremely thankful for an entire team for their patience and information provided for our purchase related decisions. Material hardness can be ensured on the spot and every doors are perfectly...
+                                <div className="testo-quote-right"><i class="fa-solid fa-quote-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item"  data-bs-interval="2000" >
+                        <div className="row row-carousel-item">
+                                <div className="col-md-4  col-sm-12 testomial-img"></div>
+                                <div className="col-md-8 col-sm-12 testomial-detail">
+                                    <div className="testo-quote-left"><i class="fa-solid fa-quote-left"></i></div>
+                                    <div className="testomial-title">
+                                        <div className="testo-name">ram babu gurung</div>
+                                        <div className="testo-position"> - businessman</div>
+                                    </div>
+                                    <div className="testo-head">amazing customer service</div>
+                                    <div className="testo-para">
+                                        
+                                    We have purchased this for our office space and are extremely thankful for an entire team for their patience and information provided for our purchase related decisions. Material hardness can be ensured on the spot and every doors are perfectly...
+                                    <div className="testo-quote-right"><i class="fa-solid fa-quote-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div className="row row-carousel-item">
+                                <div className="col-md-4  col-sm-12 testomial-img"></div>
+                                <div className="col-md-8 col-sm-12 testomial-detail">
+                                    <div className="testo-quote-left"><i class="fa-solid fa-quote-left"></i></div>
+                                    <div className="testomial-title">
+                                        <div className="testo-name">ram babu gurung</div>
+                                        <div className="testo-position"> - businessman</div>
+                                    </div>
+                                    <div className="testo-head">amazing customer service</div>
+                                    <div className="testo-para">
+                                        
+                                    We have purchased this for our office space and are extremely thankful for an entire team for their patience and information provided for our purchase related decisions. Material hardness can be ensured on the spot and every doors are perfectly...
+                                    <div className="testo-quote-right"><i class="fa-solid fa-quote-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testomial" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon fa-solid fa-chevron-left testo-prev" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testomial" data-bs-slide="next">
+                    <span class="carousel-control-next-icon fa-solid fa-chevron-right testo-prev" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div className="yourdesign">
+            <div className="row yourdesign-row">
+                <div className="col-9 d-flex align-items-start justify-content-center flex-column">
+                    <div className="yourdesign-title text-capitalize">
+                    Got an Incredible Door Design Or Idea Right Now?
+                    </div>
+                    <div className="yourdesign-para text-start">
+                    Objectively innovate empowered factory products else best platforms.
+                    </div>
+                </div>
+                <div className="col-3 d-flex align-items-center justify-content-center">
+                    <div className="yourdesign-btn btn text-uppercase">contact us</div>
+                </div>
+            </div>
+        </div>
+     <div  onClick={top} className="btn top-btn"><i class="fa-solid fa-arrow-up"></i></div>
+
     </div>
     )
 }
