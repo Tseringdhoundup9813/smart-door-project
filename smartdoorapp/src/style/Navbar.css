@@ -1,9 +1,15 @@
 .navbar img{
-    width:20%;
+    width:17%;
 }
 .nav-item{
     text-align:left;
-    padding-left:20px;
+    padding-left:0px 20px;
+  
+}
+.navbar-container{
+    width:100%;
+    height:9vh;
+    z-index: 9999;
 }
 @media screen and (max-width:486px){
     .navbar img{
