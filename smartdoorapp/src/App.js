@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-// import Product from './components/backendProduct';
+import Product from './components/Product';
 
 // import Product from './components/backendProduct';
 
