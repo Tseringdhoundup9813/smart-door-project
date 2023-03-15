@@ -1,6 +1,6 @@
 .pv-row{
     bordeR:1px solid red;
-    width:99%;
+    width:90%;
     margin:0 auto;
 }
 /* ============picture========== */
@@ -32,4 +32,73 @@
 
 .pv-img-detail{
     bordeR:1px solid brown;
+}
+
+
+/* ========pv detail===== */
+.pv-title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 38px;
+}
+.pv-sub-title{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    text-transform: capitalize;
+}
+
+/* ===============pv-more ad====================== */
+.pv-more-ad{
+    border: 0.666667px solid #DDDDDD;
+    border-radius: 3px;
+    background:pink;
+    padding:10px 0;
+    margin:10px 0;
+    display:grid;
+    grid-template-columns: 10% 90%;
+}
+.pv-more-title{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+}
+.pv-more-price{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+}
+.pv-more-checkbox{
+    border:1px solid black;
+    height:20px;
+    width:20px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:all .3s linear;
+    padding:3px;
+}
+.pv-more-checkbox:hover{
+    background:black;
+}
+.pv-more-img{
+    padding:3px;
+    height:60px;
+    width:60px;
+    border:1px solid black;
+}
+.pv-more-img2{
+    padding:3px;
+    height: 34px;
+    width: 28px;
+    margin:0 5px;
+    border:1px solid black;
+}
+.pv-more-img-div{
+    height:100%;
+    width:100%;
+    background:url('../image/products/double/DDGK.jpg')center/contain no-repeat;
+    margin:0 !important;
+}
+.pv-img-container{
+    display:flex;
 }
