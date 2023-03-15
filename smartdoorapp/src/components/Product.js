@@ -25,6 +25,24 @@ useEffect(()=>{
     })
  },[pageCount])
 
+
+//  filter ============================================
+
+const filter=()=>{
+    const filterCon=document.querySelector('.filter-body-sm');
+    
+
+    if(filterCon.style.display === "none"){
+    filterCon.style.display="block";
+    filterCon.style.transform="translate(0,0)";
+    
+    }else if (filterCon.style.display="block"){
+        filterCon.style.display = "none";
+    }
+
+}
+// end of filter ===========================================================
+
 // ===================================================
    
     return(
