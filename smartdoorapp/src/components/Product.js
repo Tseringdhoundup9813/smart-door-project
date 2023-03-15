@@ -51,6 +51,16 @@ function Product (){
         carouselContainer.style.transition = 'transform .4s ease-in-out';
         (count++);
         carouselContainer.style.transform = 'translateX('+ (-width *count)  + 'px)';
+
+        //for show product
+        let productdiv =document.querySelectorAll('.show-product')
+        let productwidth=productdiv[1].clientWidth;
+        let productContainer=document.querySelector('.show-product-container')
+        productContainer.style.transition = 'transform .4s ease-in-out';
+        (count++);
+        productContainer.style.transform = 'translateX('+ (-productwidth *count)  + 'px)';
+
+
     }
     const pagebtnLeft=()=>{
         let div =document.querySelectorAll('.pagenumber')
@@ -60,11 +70,27 @@ function Product (){
         carouselContainer.style.transition = 'transform .4s ease-in-out';
         (count--);
         carouselContainer.style.transform = 'translateX('+ (-width * count)  + 'px)';
+
+    }
+
+
+    const filter=()=>{
+        const filterCon=document.querySelector('.filter-body-sm');
+        
+
+        if(filterCon.style.display === "none"){
+        filterCon.style.display="block";
+        filterCon.style.transform="translate(0,0)";
+        
+        }else if (filterCon.style.display="block"){
+            filterCon.style.display = "none";
+        }
+
     }
     return(
     <div>
     <div className="product-row row">
-        <div className="col-sm-3 product-filter border border-primary">
+        <div className="col-sm-3 product-filter  filter-md">
             <div className="d-flex align-items-end justify-content-between">
             <div className="product-filter-title">Filter</div>
             <div className="filter-clear">Clear All</div>
@@ -116,41 +142,71 @@ function Product (){
             </div>
             <div className="row show-sort">
                 <div className="col show-sm-filter d-flex align-items-center justify-content-end">
-                <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div>
-                <div className="sm-filter">filter </div>
-                <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                <div className="filter-sm-con" onClick={filter}>
+                    <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <div className="sm-filter">filter </div>
+                </div>
                 <div className="sort-title">Sort</div> 
+                <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div>
+            </div>
+            </div>
+            <div className="col-sm-3 product-filter  filter-body-sm border border-primary">
+            <div className="d-flex align-items-end justify-content-between">
+            <div className="product-filter-title">Filter</div>
+            <div className="filter-clear">Clear All</div>
+            </div>
+
+            <div className="filter-cat">
+            <div className="filter-cat-head">Categories</div>
+            <ul className="filter-cat-ul">
+                <li><input type="radio" name="door" /> 3D Doors</li>
+                <li><input type="radio" name="door"/> Double Doors</li>
+                <li><input type="radio" name="door"/> Canadian Doors</li>
+                <li><input type="radio" name="door"/> Membrance Doors</li>
+            </ul>    
+            </div>
+            <div className="filter-col">
+                <div className="filter-col-head">Color</div>
+                <div className="filter-col d-flex">
+                    <div className="color"></div>
+                    <div className="color"></div>
+                    <div className="color"></div>
+                    <div className="color"></div>
+                </div>
+            </div>  
+            <div className="filter-length filter-sm">
+                <div className="filter-length-head">Length</div>
+                <div className="filter-con">
+                    <div className="filter-size"><input type="radio"  name="size"/>  30mm</div>
+                    <div className="filter-size"><input type="radio"  name="size"/>  60mm</div>
+                </div>
+            </div>
+
+            <div className="filter-btn-sm d-flex justify-content-around my-2">
+                <div className="filter-close-btn" onClick={filter}>
+                <i class="fa-solid fa-x"></i>
+                </div>
+                <div className="filter-search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
             </div>
             </div>
             <div className="show-product">
-            <div className="show-product-container">
+            <div className="show-card">
+                {productImgpage1.map((e)=>{
+                    return <div className="show-card-container">   
+                    <div className="show-card-img" style={{ background: `url(${e.image})center/contain no-repeat`}}>
+                    </div>
+                    <div className="show-card-detail">
+                        <div className="show-card-title">Brown red</div>
+                        <div className="show-card-price">Rs. 3800/-</div>   
+                    </div>
+                </div>
+                })}
+            </div>
+            </div>
             
-            <div className="show-card">
-                {productImgpage1.map((e)=>{
-                    return <div className="show-card-container">   
-                    <div className="show-card-img" style={{ background: `url(${e.image})center/contain no-repeat`}}>
-                    </div>
-                    <div className="show-card-detail">
-                        <div className="show-card-title">Brown red</div>
-                        <div className="show-card-price">Rs. 3800/-</div>   
-                    </div>
-                </div>
-                })}
-            </div>
-            <div className="show-card">
-                {productImgpage1.map((e)=>{
-                    return <div className="show-card-container">   
-                    <div className="show-card-img" style={{ background: `url(${e.image})center/contain no-repeat`}}>
-                    </div>
-                    <div className="show-card-detail">
-                        <div className="show-card-title">Brown red</div>
-                        <div className="show-card-price">Rs. 3800/-</div>   
-                    </div>
-                </div>
-                })}
-            </div>
-            </div>
-            </div>
+
         </div>
     </div>
     </div>
