@@ -10,7 +10,6 @@ import Footer from './components/Footer';
 import Contact from './components/Contact';
 import Product from './components/Product';
 
-// import Product from './components/backendProduct';
 
 function App() {
   return (

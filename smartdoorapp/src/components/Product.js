@@ -42,6 +42,25 @@ function Product (){
         {image:productm5, name:"Balck door", price:"300"},
         {image:productm6, name:"Balck door", price:"300"},
     ]
+    let count= 0;
+    const pagebtnRight=()=>{
+        let div =document.querySelectorAll('.pagenumber')
+        let width=div[1].clientWidth;
+        let carouselContainer=document.querySelector('.page-number-container')
+        if(count>= div.length-1) return;
+        carouselContainer.style.transition = 'transform .4s ease-in-out';
+        (count++);
+        carouselContainer.style.transform = 'translateX('+ (-width *count)  + 'px)';
+    }
+    const pagebtnLeft=()=>{
+        let div =document.querySelectorAll('.pagenumber')
+        let width=div[1].clientWidth;
+        let carouselContainer=document.querySelector('.page-number-container')
+        if(count <= 0)return;
+        carouselContainer.style.transition = 'transform .4s ease-in-out';
+        (count--);
+        carouselContainer.style.transform = 'translateX('+ (-width * count)  + 'px)';
+    }
     return(
     <div>
     <div className="product-row row">
@@ -79,31 +98,44 @@ function Product (){
 
         </div>
         <div className="col-12 col-sm-9 product-show">
-            <div className="product-pagination d-flex justify-content-end" >
-            <div id="pagination" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item pagination-number active">
-                        1
-                    </div>
-                    <div class="carousel-item pagination-number">
-                        2
+
+         {/*button page*/}
+            <div className="page-btn d-flex justify-content-end">
+                <div className="page-btn-left" onClick={pagebtnLeft}><i class="fa-solid fa-angle-left"></i></div>
+                <div className="page-number">
+                    <div className="page-number-container">
+                        <div className="pageone pagenumber" >1</div>
+                        <div className="pagetwo pagenumber">2</div>
                     </div>
                 </div>
-                <button class="carousel-control-prev pagination-btn" type="button" data-bs-target="#pagination" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next pagination-btn" type="button" data-bs-target="#pagination" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-                </div>
+                <div className="page-btn-right" onClick={pagebtnRight}><i class="fa-solid fa-angle-right"></i></div>
             </div>
+
             <div className="row show-head ">
                 <div className="col d-flex align-items-center justify-content-center text-capitalize">View All (1000)</div>
             </div>
             <div className="row show-sort">
-                <div className="col d-flex align-items-center justify-content-end"><div className="sm-filter">filter <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div></div><div className="sort-title">Sort by newest</div> <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div></div>
+                <div className="col show-sm-filter d-flex align-items-center justify-content-end">
+                <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div>
+                <div className="sm-filter">filter </div>
+                <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                <div className="sort-title">Sort</div> 
+            </div>
+            </div>
+            <div className="show-product">
+            <div className="show-product-container">
+            
+            <div className="show-card">
+                {productImgpage1.map((e)=>{
+                    return <div className="show-card-container">   
+                    <div className="show-card-img" style={{ background: `url(${e.image})center/contain no-repeat`}}>
+                    </div>
+                    <div className="show-card-detail">
+                        <div className="show-card-title">Brown red</div>
+                        <div className="show-card-price">Rs. 3800/-</div>   
+                    </div>
+                </div>
+                })}
             </div>
             <div className="show-card">
                 {productImgpage1.map((e)=>{
@@ -116,6 +148,8 @@ function Product (){
                     </div>
                 </div>
                 })}
+            </div>
+            </div>
             </div>
         </div>
     </div>
