@@ -1,92 +1,32 @@
 //CSS
 import '../style/Product.css';
 
-//images
-//3d doors
-import product1 from '../image/products/3d/SD110.jpeg';
-//canadian
-import product2 from '../image/products/canadian/CD101.jpg';
-import product3 from '../image/products/canadian/CD102.jpg';
-import product4 from '../image/products/canadian/CD103.jpg';
-import product5 from '../image/products/canadian/CD104.jpg';
-//double door
-import productdd from '../image/products/double/DDGK.jpg';
-//membrance
-import productm from '../image/products/membrane/SD11.jpeg';
-import productm1 from '../image/products/membrane/SD101.jpg';
-import productm2 from '../image/products/membrane/SD102.jpg';
 
-//next page
-import productm3 from '../image/products/membrane/SD103.jpg';
-import productm4 from '../image/products/membrane/SD103.jpg';
-import productm5 from '../image/products/membrane/SD106.jpg';
-import productm6 from '../image/products/membrane/SD115.jpg';
+
+import React,{useState,useEffect} from 'react'
+import axios from "axios"
 function Product (){
+//product get all from Server =================================================
+const[allproduct,setallproduct] =useState([]);
 
-    const productImgpage1=[
-        {image:product1, name:"Balck door", price:"300"},
-        {image:product2, name:"Balck door", price:"300"},
-        {image:product3, name:"Balck door", price:"300"},
-        {image:product4, name:"Balck door", price:"300"},
-        {image:product5, name:"Balck door", price:"300"},
-
-        {image:productdd, name:"Balck door", price:"300"},
-
-        {image:productm, name:"Balck door", price:"300"},
-        {image:productm1, name:"Balck door", price:"300"},
-        {image:productm2, name:"Balck door", price:"300"}
-    ]
-    const productImag2=[        
-        {image:productm3, name:"Balck door", price:"300"},
-        {image:productm4, name:"Balck door", price:"300"},
-        {image:productm5, name:"Balck door", price:"300"},
-        {image:productm6, name:"Balck door", price:"300"},
-    ]
-    let count= 0;
-    const pagebtnRight=()=>{
-        let div =document.querySelectorAll('.pagenumber')
-        let width=div[1].clientWidth;
-        let carouselContainer=document.querySelector('.page-number-container')
-        if(count>= div.length-1) return;
-        carouselContainer.style.transition = 'transform .4s ease-in-out';
-        (count++);
-        carouselContainer.style.transform = 'translateX('+ (-width *count)  + 'px)';
-
-        //for show product
-        let productdiv =document.querySelectorAll('.show-product')
-        let productwidth=productdiv[1].clientWidth;
-        let productContainer=document.querySelector('.show-product-container')
-        productContainer.style.transition = 'transform .4s ease-in-out';
-        (count++);
-        productContainer.style.transform = 'translateX('+ (-productwidth *count)  + 'px)';
+// pagination varaible 
+const[pageCount,setpageCount] =useState(1);
+const[totalProductCount,setTotalProductCount]=useState(0);
 
 
-    }
-    const pagebtnLeft=()=>{
-        let div =document.querySelectorAll('.pagenumber')
-        let width=div[1].clientWidth;
-        let carouselContainer=document.querySelector('.page-number-container')
-        if(count <= 0)return;
-        carouselContainer.style.transition = 'transform .4s ease-in-out';
-        (count--);
-        carouselContainer.style.transform = 'translateX('+ (-width * count)  + 'px)';
+console.log(Math.trunc(totalProductCount));
 
-    }
+useEffect(()=>{
+    axios.get(`http://localhost:3001/product?page=${pageCount}&limit=9`).then((res)=>{
+        setallproduct(res.data.data);
+        setTotalProductCount(res.data.productLenght/9);
+    }).catch((err)=>{
+        console.log(err);
+    })
+ },[pageCount])
 
-
-    const filter=()=>{
-        const filterCon=document.querySelector('.filter-body-sm');
-        
-
-        if(filterCon.style.display === "none"){
-        filterCon.style.display="block";
-        filterCon.style.transform="translate(0,0)";
-        
-        }else if (filterCon.style.display="block"){
-            filterCon.style.display = "none";
-        }
-
-    }
+// ===================================================
+   
     return(
     <div>
     <div className="product-row row">
@@ -124,21 +64,22 @@ function Product (){
 
         </div>
         <div className="col-12 col-sm-9 product-show">
+            <div className="product-pagination d-flex justify-content-end" >
+            <div id="pagination">
+                <button><i class="fa-solid fa-arrow-left"></i></button>
+                    
+                    <li onClick={()=>setpageCount(1)}>1</li>
+                    <li onClick={()=>setpageCount(2)}>2</li>
+                    <li onClick={()=>setpageCount(3)}>3</li>
+                <button><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+                
 
-         {/*button page*/}
-            <div className="page-btn d-flex justify-content-end">
-                <div className="page-btn-left" onClick={pagebtnLeft}><i class="fa-solid fa-angle-left"></i></div>
-                <div className="page-number">
-                    <div className="page-number-container">
-                        <div className="pageone pagenumber" >1</div>
-                        <div className="pagetwo pagenumber">2</div>
-                    </div>
-                </div>
-                <div className="page-btn-right" onClick={pagebtnRight}><i class="fa-solid fa-angle-right"></i></div>
+
             </div>
 
             <div className="row show-head ">
-                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All (1000)</div>
+                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All ({allproduct.length})</div>
             </div>
             <div className="row show-sort">
                 <div className="col show-sm-filter d-flex align-items-center justify-content-end">
@@ -193,13 +134,13 @@ function Product (){
             </div>
             <div className="show-product">
             <div className="show-card">
-                {productImgpage1.map((e)=>{
-                    return <div className="show-card-container">   
-                    <div className="show-card-img" style={{ background: `url(${e.image})center/contain no-repeat`}}>
+                {allproduct.map((product,key)=>{
+                    return <div key={key} className="show-card-container">   
+                    <div className="show-card-img" style={{ background: `url(${product.img})center/contain no-repeat`}}>
                     </div>
                     <div className="show-card-detail">
-                        <div className="show-card-title">Brown red</div>
-                        <div className="show-card-price">Rs. 3800/-</div>   
+                        <div className="show-card-title">{product.name}</div>
+                        <div className="show-card-price">{product.price}</div>   
                     </div>
                 </div>
                 })}

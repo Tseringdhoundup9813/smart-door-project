@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Contact from './components/Contact';
 import Product from './components/Product';
 import Productview from './components/ProductView';
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -21,8 +22,13 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
         <Route path="/product-view" element={<Productview />} />
+        <Route path="/admin" element={<Admin></Admin>}></Route>
+
       </Routes>
       <Footer></Footer>
+
+
+ 
   </BrowserRouter>
   );
 }

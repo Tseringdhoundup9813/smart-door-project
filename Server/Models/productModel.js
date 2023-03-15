@@ -19,14 +19,35 @@ const ProductScheme =new  mongoose.Schema({
 
 
     },
+    categories:{
+            type:String,
+            required:true,
+            
+    },
+    colors:{
+        type:String,
+        required:true,
+       
+    },
+    size:{
+        type:String,
+        required:true,
+    },
+
   
     img:{
        
         type:String,
         required:true,
-    }
+    },
+    addToCart:{
+        type:Boolean,
+        
+        
+    },
+   
 
-})
+},{timestamps:true})
 
 
 module.exports = new mongoose.model("Product",ProductScheme);

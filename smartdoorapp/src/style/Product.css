@@ -3,33 +3,50 @@
     font-size:20px;
     font-weight:600;
 }
+/* pagination ====================================== */
+#pagination {
+   width:250px;
+   display: flex;
+   height:30px;
 
-/* //page number carousel */
-.page-number{
-    margin:0 10px;
-    overflow:hidden;
+   justify-content: center;
+   align-items: center;
+
 }
-.page-number-container{
-    width:200%;
-    display: flex;
+
+#pagination  > li{
+
+    list-style-type: none;
+    background-color:rgb(84, 84, 84);
+    width:23px;
+    height:23px;
+    margin:0px 5px;
+    border-radius:5px;
+    text-align: center;
+    line-height:22px;
+    color:white;
+    cursor: pointer;
 }
-.pageone{
-    width:100%;
-    height:100%; 
+#pagination  > li:hover{
+
+   background-color: black;
 }
-.pagetwo{
-    width:100%;
-    height: 100%;
+
+#pagination > button{
+    height:90%;
+    font-size:0.6rem;
+    padding:0px 10px;
+    border:none;
+    background-color:rgb(250, 99, 72);
+    color:white;
+    border-radius:5px;
+    font-weight: bold;
 }
-.page-btn-left, .page-btn-right{
-    margin:0 5px;
-    background:grey;
-    width:20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor:pointer;
+#pagination > button:hover{
+    background-color:red;
 }
+
+/* end of pagination ======================================= */
 
 .filter-clear{
     font-size:11px;
