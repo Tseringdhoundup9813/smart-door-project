@@ -1,47 +1,32 @@
 //CSS
 import '../style/Product.css';
 
-//images
-//3d doors
-import product1 from '../image/products/3d/SD110.jpeg';
-//canadian
-import product2 from '../image/products/canadian/CD101.jpg';
-import product3 from '../image/products/canadian/CD102.jpg';
-import product4 from '../image/products/canadian/CD103.jpg';
-import product5 from '../image/products/canadian/CD104.jpg';
-//double door
-import productdd from '../image/products/double/DDGK.jpg';
-//membrance
-import productm from '../image/products/membrane/SD11.jpeg';
-import productm1 from '../image/products/membrane/SD101.jpg';
-import productm2 from '../image/products/membrane/SD102.jpg';
 
-//next page
-import productm3 from '../image/products/membrane/SD103.jpg';
-import productm4 from '../image/products/membrane/SD103.jpg';
-import productm5 from '../image/products/membrane/SD106.jpg';
-import productm6 from '../image/products/membrane/SD115.jpg';
+
+import React,{useState,useEffect} from 'react'
+import axios from "axios"
 function Product (){
+//product get all from Server =================================================
+const[allproduct,setallproduct] =useState([]);
 
-    const productImgpage1=[
-        {image:product1, name:"Balck door", price:"300"},
-        {image:product2, name:"Balck door", price:"300"},
-        {image:product3, name:"Balck door", price:"300"},
-        {image:product4, name:"Balck door", price:"300"},
-        {image:product5, name:"Balck door", price:"300"},
+// pagination varaible 
+const[pageCount,setpageCount] =useState(1);
+const[totalProductCount,setTotalProductCount]=useState(0);
 
-        {image:productdd, name:"Balck door", price:"300"},
 
-        {image:productm, name:"Balck door", price:"300"},
-        {image:productm1, name:"Balck door", price:"300"},
-        {image:productm2, name:"Balck door", price:"300"}
-    ]
-    const productImag2=[        
-        {image:productm3, name:"Balck door", price:"300"},
-        {image:productm4, name:"Balck door", price:"300"},
-        {image:productm5, name:"Balck door", price:"300"},
-        {image:productm6, name:"Balck door", price:"300"},
-    ]
+console.log(Math.trunc(totalProductCount));
+
+useEffect(()=>{
+    axios.get(`http://localhost:3001/product?page=${pageCount}&limit=9`).then((res)=>{
+        setallproduct(res.data.data);
+        setTotalProductCount(res.data.productLenght/9);
+    }).catch((err)=>{
+        console.log(err);
+    })
+ },[pageCount])
+
+// ===================================================
+   
     return(
     <div>
     <div className="product-row row">
@@ -80,39 +65,32 @@ function Product (){
         </div>
         <div className="col-12 col-sm-9 product-show">
             <div className="product-pagination d-flex justify-content-end" >
-            <div id="pagination" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item pagination-number active">
-                        1
-                    </div>
-                    <div class="carousel-item pagination-number">
-                        2
-                    </div>
-                </div>
-                <button class="carousel-control-prev pagination-btn" type="button" data-bs-target="#pagination" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next pagination-btn" type="button" data-bs-target="#pagination" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-                </div>
+            <div id="pagination">
+                <button><i class="fa-solid fa-arrow-left"></i></button>
+                    
+                    <li onClick={()=>setpageCount(1)}>1</li>
+                    <li onClick={()=>setpageCount(2)}>2</li>
+                    <li onClick={()=>setpageCount(3)}>3</li>
+                <button><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+                
+
+
             </div>
             <div className="row show-head ">
-                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All (1000)</div>
+                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All ({allproduct.length})</div>
             </div>
             <div className="row show-sort">
                 <div className="col d-flex align-items-center justify-content-end"><div className="sm-filter">filter <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div></div><div className="sort-title">Sort by newest</div> <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div></div>
             </div>
             <div className="show-card">
-                {productImgpage1.map((e)=>{
-                    return <div className="show-card-container">   
-                    <div className="show-card-img" style={{ background: `url(${e.image})center/contain no-repeat`}}>
+                {allproduct.map((product,key)=>{
+                    return <div key={key} className="show-card-container">   
+                    <div className="show-card-img" style={{ background: `url(${product.img})center/contain no-repeat`}}>
                     </div>
                     <div className="show-card-detail">
-                        <div className="show-card-title">Brown red</div>
-                        <div className="show-card-price">Rs. 3800/-</div>   
+                        <div className="show-card-title">{product.name}</div>
+                        <div className="show-card-price">{product.price}</div>   
                     </div>
                 </div>
                 })}

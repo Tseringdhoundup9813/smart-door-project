@@ -3,18 +3,50 @@
     font-size:20px;
     font-weight:600;
 }
-.pagination-number{
-    text-align:center;
-}
-.pagination-btn{
-    background:grey;
-    padding:5px;
-    width:30px;
-}
+/* pagination ====================================== */
 #pagination {
-    background:#fff;
-    width:15%;
+   width:250px;
+   display: flex;
+   height:30px;
+
+   justify-content: center;
+   align-items: center;
+
 }
+
+#pagination  > li{
+
+    list-style-type: none;
+    background-color:rgb(84, 84, 84);
+    width:23px;
+    height:23px;
+    margin:0px 5px;
+    border-radius:5px;
+    text-align: center;
+    line-height:22px;
+    color:white;
+    cursor: pointer;
+}
+#pagination  > li:hover{
+
+   background-color: black;
+}
+
+#pagination > button{
+    height:90%;
+    font-size:0.6rem;
+    padding:0px 10px;
+    border:none;
+    background-color:rgb(250, 99, 72);
+    color:white;
+    border-radius:5px;
+    font-weight: bold;
+}
+#pagination > button:hover{
+    background-color:red;
+}
+
+/* end of pagination ======================================= */
 
 .filter-clear{
     font-size:11px;
