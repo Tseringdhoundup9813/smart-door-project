@@ -1,0 +1,35 @@
+.pv-row{
+    bordeR:1px solid red;
+    width:99%;
+    margin:0 auto;
+}
+/* ============picture========== */
+.pv-container{
+    border:1px solid black;
+}
+
+.pv-img{
+    height:125px;
+    width:100%;
+    border:1px solid green;
+    margin:5px 0;
+}
+.pv-img:nth-child(1){
+    background:url('../image//products/canadian/CD101.jpg')center/contain no-repeat;
+}
+.pv-img:nth-child(2){
+    background:url('../image//products/canadian/CD102.jpg')center/contain no-repeat;
+}
+.pv-img:nth-child(3){
+    background:url('../image//products/canadian/CD103.jpg')center/contain no-repeat;
+}
+
+.pvimg{
+    background:url('../image/products/canadian/CD101.jpg')center/contain no-repeat;
+    height: 726px;
+}
+/* =========img-detail================== */
+
+.pv-img-detail{
+    bordeR:1px solid brown;
+}

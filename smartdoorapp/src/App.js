@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 import Product from './components/Product';
-
+import Productview from './components/ProductView';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/footer" element={<Footer />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/product-view" element={<Productview />} />
       </Routes>
       <Footer></Footer>
   </BrowserRouter>
