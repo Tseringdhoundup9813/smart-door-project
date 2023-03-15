@@ -30,7 +30,7 @@ useEffect(()=>{
     return(
     <div>
     <div className="product-row row">
-        <div className="col-sm-3 product-filter border border-primary">
+        <div className="col-sm-3 product-filter  filter-md">
             <div className="d-flex align-items-end justify-content-between">
             <div className="product-filter-title">Filter</div>
             <div className="filter-clear">Clear All</div>
@@ -77,12 +77,62 @@ useEffect(()=>{
 
 
             </div>
+
             <div className="row show-head ">
                 <div className="col d-flex align-items-center justify-content-center text-capitalize">View All ({allproduct.length})</div>
             </div>
             <div className="row show-sort">
-                <div className="col d-flex align-items-center justify-content-end"><div className="sm-filter">filter <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div></div><div className="sort-title">Sort by newest</div> <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div></div>
+                <div className="col show-sm-filter d-flex align-items-center justify-content-end">
+                <div className="filter-sm-con" onClick={filter}>
+                    <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <div className="sm-filter">filter </div>
+                </div>
+                <div className="sort-title">Sort</div> 
+                <div className="sort-icon"><i class="fa-solid fa-chevron-down"></i></div>
             </div>
+            </div>
+            <div className="col-sm-3 product-filter  filter-body-sm border border-primary">
+            <div className="d-flex align-items-end justify-content-between">
+            <div className="product-filter-title">Filter</div>
+            <div className="filter-clear">Clear All</div>
+            </div>
+
+            <div className="filter-cat">
+            <div className="filter-cat-head">Categories</div>
+            <ul className="filter-cat-ul">
+                <li><input type="radio" name="door" /> 3D Doors</li>
+                <li><input type="radio" name="door"/> Double Doors</li>
+                <li><input type="radio" name="door"/> Canadian Doors</li>
+                <li><input type="radio" name="door"/> Membrance Doors</li>
+            </ul>    
+            </div>
+            <div className="filter-col">
+                <div className="filter-col-head">Color</div>
+                <div className="filter-col d-flex">
+                    <div className="color"></div>
+                    <div className="color"></div>
+                    <div className="color"></div>
+                    <div className="color"></div>
+                </div>
+            </div>  
+            <div className="filter-length filter-sm">
+                <div className="filter-length-head">Length</div>
+                <div className="filter-con">
+                    <div className="filter-size"><input type="radio"  name="size"/>  30mm</div>
+                    <div className="filter-size"><input type="radio"  name="size"/>  60mm</div>
+                </div>
+            </div>
+
+            <div className="filter-btn-sm d-flex justify-content-around my-2">
+                <div className="filter-close-btn" onClick={filter}>
+                <i class="fa-solid fa-x"></i>
+                </div>
+                <div className="filter-search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            </div>
+            <div className="show-product">
             <div className="show-card">
                 {allproduct.map((product,key)=>{
                     return <div key={key} className="show-card-container">   
@@ -95,6 +145,9 @@ useEffect(()=>{
                 </div>
                 })}
             </div>
+            </div>
+            
+
         </div>
     </div>
     </div>

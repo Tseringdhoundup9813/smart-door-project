@@ -50,7 +50,6 @@
 
 .filter-clear{
     font-size:11px;
-    border-bottom:1px solid red;
 }
 .filter-cat-head,.filter-col-head, .filter-length-head{
     text-transform:capitalize;
@@ -101,12 +100,12 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    border:1px solid black;
     overflow:hidden;
     grid-gap:10px;
+    width:100%;
 }
+
 .show-card-container{
-    border:1px solid green;
     display: grid;
     grid-template-rows:80% 20%;
     height: 80vh;
@@ -116,9 +115,28 @@
     align-items: start;
     flex-direction: column;
     justify-content: center;
-    border:1px solid yellow
 }
 
+.filter-md{
+    background:#f3e4c71f;    
+}
+.filter-body-sm{
+    display:none;
+    margin:10px 0;
+    padding:5px;
+    transform: translate(100%, 0);
+    transition:all 3s linear;
+}
+
+.filter-sm-con{
+    display:none;
+    cursor:pointer;
+}
+
+.show-sm-filter{
+    font-size:auto;
+    margin:10px 0;
+}
 @media screen and (max-width:1023px){
     .show-card-container{
         height:70vh;
@@ -166,8 +184,44 @@
     }
 }
 
+
+@media screen and  (max-width:575px){
+
+    .sm-filter{
+        display:flex;
+        text-transform:capitalize;
+    }
+    .show-sm-filter{
+        font-size:12px;
+        margin:10px 0;
+    }
+    .show-sm-filter div{
+        margin:0 5px;
+    }
+    .show-card-container {
+        height: 44vh;
+    }
+    .filter-md{
+        display:none;
+    }
+    .filter-sm-con{
+        display: flex;
+    }
+}
+
+
 /* =====small screen==== */
-.sm-filter{
-    display:flex;
-    text-transform:capitalize;
+
+.filter-close-btn, .filter-search-btn{
+    width:40%;
+    text-align: center;
+    padding:0 5px;
+}
+.filter-close-btn{
+    background:black;
+    color:#fff;
+}
+.filter-search-btn{
+    background:red;
+    color:#fff;
 }
