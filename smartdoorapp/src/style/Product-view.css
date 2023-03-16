@@ -4,9 +4,6 @@
     margin:0 auto;
 }
 /* ============picture========== */
-.pv-container{
-    border:1px solid black;
-}
 
 .pv-img{
     height:125px;
@@ -30,9 +27,6 @@
 }
 /* =========img-detail================== */
 
-.pv-img-detail{
-    bordeR:1px solid brown;
-}
 
 
 /* ========pv detail===== */
@@ -54,7 +48,6 @@
     border-radius: 3px;
     background:pink;
     padding:10px 0;
-    margin:10px 0;
     display:grid;
     grid-template-columns: 10% 90%;
 }
@@ -101,4 +94,140 @@
 }
 .pv-img-container{
     display:flex;
+}
+.pv-more-detail{
+    padding:20px;
+}
+.pv-more-code{
+    font-weight:600;
+    margin:20px 0;
+}
+.pv-more-explore{
+    margin:20px 0;
+}
+.pv-membrance{
+    margin:20px 0; 
+    border:1px solid grey;
+    border-radius:3px;
+}
+.pv-more-explore span{
+    text-transform:uppercase;
+    background:black;
+    padding:5px 10px;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.pv-product-detail{
+    margin:10px 0;
+}
+.pv-product-detail-head{
+    font-size:20px;
+    font-weight:600;
+}
+.pv-product-detail-icon{
+    font-size:18px;
+    padding:0 5px;
+    font-weight:800;
+    background:grey;
+    color:#fff;
+    cursor:pointer;
+}
+.pv-product-detail-icon:hover{
+    color:green;
+}
+.pv-product-detail-head{
+    text-transform:capitalize;
+}
+.pv-detail-para{
+    display:none;
+    border-bottom:2px solid grey;
+    padding-bottom:10px;
+}
+.pv-detail-size{
+    display: none;
+}
+.pv-detail-size ul li{
+    list-style: none;
+    margin:10px 0;
+}
+.pv-detail-share{
+    display:none;
+    font-size:30px;
+    align-items: center;
+    justify-content:space-around;
+}
+.pv-fb, .pv-linked{
+    color:rgba(23, 110, 224, 0.734);
+}
+
+/* =========like row======== */
+.like-row{
+    width:90%;
+    margin:30px auto;
+}
+.pl-left{
+    font-weight:700;
+}
+.pl-right{
+    font-weight:600;
+}
+.like-img{
+    height:40vh;
+    background:url('../image//products/canadian/CD102.jpg')center/contain no-repeat;
+    position:relative;
+}
+.heart{
+    position: absolute;
+    top:5px;
+    right:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+.heart:hover{
+    color:red;
+}
+.slick-arrow{
+    background:green;
+}
+
+/* =======what are you====== */
+.look-row{
+    width:100%;
+    margin:0 auto;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    background: #f4ede5;
+}
+.look-head{
+    font-size:20px;
+    font-weight:600;
+}
+.look-para{
+    margin:10px 0;
+}
+.look-btn{
+    background:black;
+    color:#fff;
+    padding:5px 10px;
+    margin: 0 auto;
+    width: 25%;
+    text-transform:capitalize;
+    cursor:pointer;
+    border:1px solid transparent;
+    font-weight:700;
+    transition:all .5s ease-in-out
+}
+.look-btn:hover{
+    background:#fff;
+    border:1px solid black;
+    color:black;
+}
+/* ====testo=== */
+.pv-testo{
+    margin:10px 0;
 }
