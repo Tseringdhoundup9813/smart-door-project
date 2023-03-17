@@ -1,60 +1,89 @@
 .pv-row{
-    bordeR:1px solid red;
-    width:90%;
+    width:80%;
     margin:0 auto;
 }
+
 /* ============picture========== */
 
 .pv-img{
-    height:125px;
+    margin:10px auto;
+}
+.pv-img img{
+    height:70px;
     width:100%;
-    border:1px solid green;
-    margin:5px 0;
+    object-fit: contain;
 }
-.pv-img:nth-child(1){
-    background:url('../image//products/canadian/CD101.jpg')center/contain no-repeat;
+.pvslider-indicators{
+    position: initial;
+    flex-direction:column;
 }
-.pv-img:nth-child(2){
-    background:url('../image//products/canadian/CD102.jpg')center/contain no-repeat;
+.pvslider-inner{
+    height:90vh;
+    background-color: #bfb9b961;
+    border-radius: 5px;
 }
-.pv-img:nth-child(3){
-    background:url('../image//products/canadian/CD103.jpg')center/contain no-repeat;
+.pv-main-img img{
+    object-fit: contain;
+    height: 100%;
 }
-
-.pvimg{
-    background:url('../image/products/canadian/CD101.jpg')center/contain no-repeat;
-    height: 726px;
+@media screen and (max-width:768px){
+    .row-pvslider{
+        position:relative;
+    }
+    .pv-main-img{
+        order:1;
+    }
+    .pvslider-indicators{
+        display: flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: center;
+    }
+    .pv-img img{
+        height:40px;
+        width:100%;
+        object-fit: contain;
+    }
+    .pv-img{
+        margin:0 5px;
+    }
 }
-/* =========img-detail================== */
-
-
-
+@media screen and (max-width:575px){
+    .pvslider-inner {
+        height: 56vh;
+    }
+}
 /* ========pv detail===== */
+.pv-heart-icon {
+    font-size:26px;
+}
+.pv-price-detail{margin:10px 0;}
+.pv-price{
+    margin-right:10px;
+}
 .pv-title{
     font-weight: 600;
-    font-size: 24px;
+    font-size: 25px;
     line-height: 38px;
+    text-transform: capitalize;
+    color:#ff000096;
 }
 .pv-sub-title{
     font-weight: 600;
-    font-size: 16px;
+    font-size: 19px;
     line-height: 26px;
     text-transform: capitalize;
+    color:green;
 }
 
 /* ===============pv-more ad====================== */
 .pv-more-ad{
     border: 0.666667px solid #DDDDDD;
     border-radius: 3px;
-    background:pink;
-    padding:10px 0;
+    background:#F4EDE5;
+    padding:10px;
     display:grid;
     grid-template-columns: 10% 90%;
-}
-.pv-more-title{
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 26px;
 }
 .pv-more-price{
     font-weight: 600;
@@ -98,9 +127,13 @@
 .pv-more-detail{
     padding:20px;
 }
+.pv-more-code-d{
+    padding:15px;
+}
 .pv-more-code{
     font-weight:600;
     margin:20px 0;
+    color:rgb(12, 12, 133);
 }
 .pv-more-explore{
     margin:20px 0;
@@ -112,26 +145,27 @@
 }
 .pv-more-explore span{
     text-transform:uppercase;
-    background:black;
+    background:rgb(5 5 44);
     padding:5px 10px;
     color:#fff;
     font-weight:600;
     cursor:pointer;
+    border:1px solid rgb(5 5 44);
+    transition:all .3s ease-in-out;
 }
-
+.pv-more-explore span:hover{
+    border: 1px solid black;
+    background-color: #fff;
+    color:rgb(5 5 44);
+}
 .pv-product-detail{
     margin:10px 0;
-}
-.pv-product-detail-head{
-    font-size:20px;
-    font-weight:600;
 }
 .pv-product-detail-icon{
     font-size:18px;
     padding:0 5px;
     font-weight:800;
-    background:grey;
-    color:#fff;
+    color:#ff000096;
     cursor:pointer;
 }
 .pv-product-detail-icon:hover{
@@ -167,11 +201,27 @@
     width:90%;
     margin:30px auto;
 }
+.pl{
+    margin:10px 0;
+}
 .pl-left{
     font-weight:700;
 }
 .pl-right{
     font-weight:600;
+}
+.like-card{
+    margin:0 10px;
+    background:rgba(177, 175, 175, 0.208);
+    padding:10px;
+    border-radius:5px;
+}
+.like-p-title{
+    color:#ff000096;
+    font-weight:600;
+}
+.like-p-model{
+    color:rgb(42, 16, 155);
 }
 .like-img{
     height:40vh;
@@ -186,7 +236,7 @@
     cursor:pointer;
 }
 .heart:hover{
-    color:red;
+    color:#ff000096;
 }
 .slick-arrow{
     background:green;
@@ -210,12 +260,13 @@
 .look-para{
     margin:10px 0;
 }
+.look-btn-container{
+    margin-top:10px;
+}
 .look-btn{
     background:black;
     color:#fff;
     padding:5px 10px;
-    margin: 0 auto;
-    width: 25%;
     text-transform:capitalize;
     cursor:pointer;
     border:1px solid transparent;
@@ -230,4 +281,35 @@
 /* ====testo=== */
 .pv-testo{
     margin:10px 0;
+}
+@media screen and (max-width:1095px){
+    .pv-row{
+        width:90%
+    }
+    .pv-img-container{
+        display:block !important;
+    }
+    .pv-img-container div{
+        margin-bottom:10px;
+    }
+    .pv-more-detail{
+        padding:0;
+    }
+    .pv-title{
+        font-size:20px;
+    }
+    .pv-sub-title{
+        font-size:17px;
+    }
+}
+@media screen and (max-width:600px){
+    .look-head{
+        font-size:17px;
+    }
+    .look-para{
+        font-size:12px;
+    }
+    .look-btn{
+        font-weight:400;
+    }
 }

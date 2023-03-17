@@ -56,6 +56,7 @@ function SamplePrevArrow(props) {
 function Productview(){
     const [state, setState]=useState(false);
     const [size, setSize]= useState(false);
+    const [share, setShare]= useState(false);
     console.log(state);
     const plusIcon=()=>{
         setState( !state);
@@ -64,13 +65,13 @@ function Productview(){
     }
     const sizeIcon=()=>{
         setSize( !size);
-        const size= document.querySelector('.pv-detail-size');
-        size.style.display=`${state?"none":"block"}`
+        const psize= document.querySelector('.pv-detail-size');
+        psize.style.display=`${size?"none":"block"}`
     }
     const shareIcon=()=>{
-        setState( !state);
-        const share= document.querySelector('.pv-detail-share');
-        share.style.display=`${state?"none":"flex"}`
+        setShare( !share);
+        const ishare= document.querySelector('.pv-detail-share');
+        ishare.style.display=`${share?"none":"flex"}`
     }
     const likeimg=[
         {image:productimg, title:"3d ddors", price:"3800"},
@@ -96,9 +97,36 @@ function Productview(){
         slidesToScroll: 4,
         initialSlide: 0,
         nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
-    }
-
+        prevArrow: <SamplePrevArrow />,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 2,
+                infinite: true,
+                dots: false
+              }
+            },
+            
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+        };
+    
     const heart=()=>{
         console.log('hi')
     }
@@ -108,19 +136,49 @@ function Productview(){
 
             <div className="row pv-row justify-content-around">
                 <div className="col-sm-6 col-12">
-                    <div className="row">
-                        <div className="col-4 pv-container">
-                            <div className="pv-img"></div>
-                            <div className="pv-img"></div>
-                            <div className="pv-img"></div>
+                    <div className="row row-pvslider">
+                        <div className="col-md-3 col-sm-12 order-2 order-md-1 pv-container">
+
+                            {/* <!-- Indicator start --> */}
+                            <div className="pvslider-indicators">
+                                <div className='pv-img'>
+                                <button type="button" data-bs-target="#pvslider" className=" border border-secondary active w-100 d-flex align-items-center justify-content-center"
+                                    data-bs-slide-to="0">
+                                <img src={likeimg[0].image}/>
+                                </button>
+                                </div>
+                               <div className='pv-img'>
+                               <button type="button" data-bs-target="#pvslider" className=" border border-secondary   w-100 d-flex align-items-center justify-content-center" data-bs-slide-to="1">
+                                <img src={likeimg[1].image}/>
+                                </button>
+                               </div>
+                                <div className='pv-img'>
+                                <button type="button" data-bs-target="#pvslider" className=" border border-secondary   w-100 d-flex align-items-center justify-content-center" data-bs-slide-to="2">
+                                <img src={likeimg[2].image}/>
+                                </button>
+                                </div>
+                            </div>
+                    {/* <!-- Indicator Close --> */}
                         </div>
-                        <div className="col-8 pv-main-img">
-                            <div className="pvimg">
+                        <div className="col-sm-12 col-md-8 order-1 order-md-2 pv-main-img">
+                            <div id="pvslider" className="carousel slide" data-bs-touch="true" data-bs-ride="carousel" >
+                            <div className="carousel-inner pvslider-inner">
+                                <div className="carousel-item pv-main-img active">
+                                    <img src={likeimg[0].image} className=" w-100"/>
+                                </div>
+                                <div className="carousel-item pv-main-img">
+                                <img src={likeimg[1].image} className=" w-100"/>
+
+                                </div>
+                                <div className="carousel-item pv-main-img">
+                                <img src={likeimg[2].image} className=" w-100"/>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-4 col-12 pv-img-detail">
+                <div className="col-sm-6 col-12 pv-img-detail">
                     <div className="pv-heart-icon text-end">
                     <i class="fa-regular fa-heart"></i>
                     </div>
@@ -131,8 +189,8 @@ function Productview(){
                         smart doors
                     </div>
                     <div className="pv-price-detail d-flex">
-                        <div className="pv-price">Rs. 4500 original detail</div>
-                        <div className="pv-price-question"><i class="fa-regular fa-circle-question"></i></div>
+                        <div className="pv-price">Rs. 4500 original detail </div>
+                        <div className="pv-price-question"> <i class="fa-regular fa-circle-question"></i></div>
                     </div>
 
                     <div className="pv-more-ad">
@@ -142,7 +200,7 @@ function Productview(){
                         <div className="d-flex align-items-center px-2 justify-content-between">
                             <div className="pv-more-detail ">
                            <div>
-                           <div className="pv-more-title text-capitalize">
+                           <div className="pv-sub-title ">
                                 one-time order 
                             </div>
                             <div className="pv-more-p">
@@ -171,7 +229,7 @@ function Productview(){
                         </div>   
                         <div className="d-flex align-items-center px-2 justify-content-between">
                         <div className="pv-more-detail">
-                            <div className="pv-more-title text-capitalize">
+                            <div className="pv-sub-title text-capitalize">
                                 Membership
                             </div>
                             <div className="pv-more-p">
@@ -183,17 +241,21 @@ function Productview(){
                         </div>
                         <div>
                           <div className="pv-img-container">
+                          <div className="d-flex">
                           <div className="pv-more-img2">
                                 <div className="pv-more-img-div"></div>
                             </div>
                             <div className="pv-more-img2">
                                 <div className="pv-more-img-div"></div>
                             </div>
+                          </div>
+                            <div className="d-flex">
                             <div className="pv-more-img2">
                                 <div className="pv-more-img-div"></div>
                             </div>
                             <div className="pv-more-img2">
                                 <div className="pv-more-img-div"></div>
+                            </div>
                             </div>
                           </div>
                         </div>
@@ -201,7 +263,7 @@ function Productview(){
 
                         
                     </div>
-                    <div className="pv-more-detail">
+                    <div className="pv-more-code-d">
                             <div className="pv-more-code"> Code : SD123 RW</div>
                             <div className="ul pv-ul">
                                 <li className="pv-list">Get your own customization</li>
@@ -210,7 +272,7 @@ function Productview(){
                                 <li className="pv-list">Pause or cancel anytime</li>
                             </div>
 
-                            <div className="pv-more-explore">
+                            <div className="pv-more-explore pv-sub-title">
                                 <span>Explore Membership</span>
                             </div>
                         </div>
@@ -224,7 +286,7 @@ function Productview(){
                         </div>   
                         <div className="d-flex align-items-center px-2 justify-content-between">
                         <div className="pv-more-detail">
-                            <div className="pv-more-title text-capitalize">
+                            <div className="pv-sub-title text-capitalize">
                                 buy now
                             </div>
                             <div className="pv-more-p">
@@ -242,7 +304,7 @@ function Productview(){
 
                     <div id="pv-more-detail">
                        <div className="pv-product-detail  d-flex justify-content-between">
-                       <div className="pv-product-detail-head">Product Details</div>
+                       <div className="pv-title">Product Details</div>
                         <div className="pv-product-detail-icon" onClick={plusIcon}>
                             {
                                 state? "-" : "+"
@@ -257,7 +319,7 @@ function Productview(){
 
                     <div id="pv-more-detail">
                        <div className="pv-product-detail  d-flex justify-content-between">
-                       <div className="pv-product-detail-head">size</div>
+                       <div className="pv-title">size</div>
                         <div className="pv-product-detail-icon" onClick={sizeIcon}>
                             {
                                 size? "-" : "+"
@@ -276,10 +338,10 @@ function Productview(){
 
                     <div id="pv-more-detail">
                        <div className="pv-product-detail  d-flex justify-content-between">
-                       <div className="pv-product-detail-head">Share</div>
+                       <div className="pv-title">Share</div>
                         <div className="pv-product-detail-icon" onClick={shareIcon}>
                             {
-                                state? "-" : "+"
+                                share? "-" : "+"
                             }
                         </div>
                        </div>
@@ -323,10 +385,10 @@ function Productview(){
             </div>                   
             
             <div className="row look-row text-center ">
-                <div className="col-6">
+                <div className="">
                 <div className="look-head">What are you looking for ?</div>
                 <div className="look-para">We'll help you find a perfect door for your house.</div>
-                <div><div className="look-btn">see more</div></div>
+                <div className='look-btn-container'><span className="look-btn">see more</span></div>
                 </div>
             </div>
             <div className="pv-testo">
