@@ -72,7 +72,7 @@
 }
 .navbar-sm{
     position: absolute;
-    top:10px;
+    top:0;
     right:10px;
     display: none;
     align-items: center;
@@ -89,7 +89,7 @@
 .navbar-img-sm{
     display:none;
     position: absolute;
-    top:0;
+    top:-4px;
     left:75px;
     height:40px;
     background:url('../image/logo/smart-doors-logo.png')center/contain no-repeat;

@@ -50,6 +50,7 @@ function Navbar (){
                         <div className="search-icon" onClick={searchbtn}><i class="fa-solid fa-magnifying-glass"></i></div>
                         <div className="two-icon">
                         <div className="heart-icon"><i class="fa-regular fa-heart"></i></div>
+                        <div className="cart-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                         <div className="cart-icon"><i class="fa-solid fa-bag-shopping"></i></div>
                         </div>
                         <div  className="navbar-signbtn btn">Sign In</div>
