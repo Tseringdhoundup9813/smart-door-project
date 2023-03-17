@@ -1,35 +1,315 @@
 .pv-row{
-    bordeR:1px solid red;
-    width:99%;
+    width:80%;
     margin:0 auto;
 }
+
 /* ============picture========== */
-.pv-container{
-    border:1px solid black;
-}
 
 .pv-img{
-    height:125px;
+    margin:10px auto;
+}
+.pv-img img{
+    height:70px;
     width:100%;
-    border:1px solid green;
-    margin:5px 0;
+    object-fit: contain;
 }
-.pv-img:nth-child(1){
-    background:url('../image//products/canadian/CD101.jpg')center/contain no-repeat;
+.pvslider-indicators{
+    position: initial;
+    flex-direction:column;
 }
-.pv-img:nth-child(2){
+.pvslider-inner{
+    height:90vh;
+    background-color: #bfb9b961;
+    border-radius: 5px;
+}
+.pv-main-img img{
+    object-fit: contain;
+    height: 100%;
+}
+@media screen and (max-width:768px){
+    .row-pvslider{
+        position:relative;
+    }
+    .pv-main-img{
+        order:1;
+    }
+    .pvslider-indicators{
+        display: flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: center;
+    }
+    .pv-img img{
+        height:40px;
+        width:100%;
+        object-fit: contain;
+    }
+    .pv-img{
+        margin:0 5px;
+    }
+}
+@media screen and (max-width:575px){
+    .pvslider-inner {
+        height: 56vh;
+    }
+}
+/* ========pv detail===== */
+.pv-heart-icon {
+    font-size:26px;
+}
+.pv-price-detail{margin:10px 0;}
+.pv-price{
+    margin-right:10px;
+}
+.pv-title{
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 38px;
+    text-transform: capitalize;
+    color:#ff000096;
+}
+.pv-sub-title{
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    text-transform: capitalize;
+    color:green;
+}
+
+/* ===============pv-more ad====================== */
+.pv-more-ad{
+    border: 0.666667px solid #DDDDDD;
+    border-radius: 3px;
+    background:#F4EDE5;
+    padding:10px;
+    display:grid;
+    grid-template-columns: 10% 90%;
+}
+.pv-more-price{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+}
+.pv-more-checkbox{
+    border:1px solid black;
+    height:20px;
+    width:20px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:all .3s linear;
+    padding:3px;
+}
+.pv-more-checkbox:hover{
+    background:black;
+}
+.pv-more-img{
+    padding:3px;
+    height:60px;
+    width:60px;
+    border:1px solid black;
+}
+.pv-more-img2{
+    padding:3px;
+    height: 34px;
+    width: 28px;
+    margin:0 5px;
+    border:1px solid black;
+}
+.pv-more-img-div{
+    height:100%;
+    width:100%;
+    background:url('../image/products/double/DDGK.jpg')center/contain no-repeat;
+    margin:0 !important;
+}
+.pv-img-container{
+    display:flex;
+}
+.pv-more-detail{
+    padding:20px;
+}
+.pv-more-code-d{
+    padding:15px;
+}
+.pv-more-code{
+    font-weight:600;
+    margin:20px 0;
+    color:rgb(12, 12, 133);
+}
+.pv-more-explore{
+    margin:20px 0;
+}
+.pv-membrance{
+    margin:20px 0; 
+    border:1px solid grey;
+    border-radius:3px;
+}
+.pv-more-explore span{
+    text-transform:uppercase;
+    background:rgb(5 5 44);
+    padding:5px 10px;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    border:1px solid rgb(5 5 44);
+    transition:all .3s ease-in-out;
+}
+.pv-more-explore span:hover{
+    border: 1px solid black;
+    background-color: #fff;
+    color:rgb(5 5 44);
+}
+.pv-product-detail{
+    margin:10px 0;
+}
+.pv-product-detail-icon{
+    font-size:18px;
+    padding:0 5px;
+    font-weight:800;
+    color:#ff000096;
+    cursor:pointer;
+}
+.pv-product-detail-icon:hover{
+    color:green;
+}
+.pv-product-detail-head{
+    text-transform:capitalize;
+}
+.pv-detail-para{
+    display:none;
+    border-bottom:2px solid grey;
+    padding-bottom:10px;
+}
+.pv-detail-size{
+    display: none;
+}
+.pv-detail-size ul li{
+    list-style: none;
+    margin:10px 0;
+}
+.pv-detail-share{
+    display:none;
+    font-size:30px;
+    align-items: center;
+    justify-content:space-around;
+}
+.pv-fb, .pv-linked{
+    color:rgba(23, 110, 224, 0.734);
+}
+
+/* =========like row======== */
+.like-row{
+    width:90%;
+    margin:30px auto;
+}
+.pl{
+    margin:10px 0;
+}
+.pl-left{
+    font-weight:700;
+}
+.pl-right{
+    font-weight:600;
+}
+.like-card{
+    margin:0 10px;
+    background:rgba(177, 175, 175, 0.208);
+    padding:10px;
+    border-radius:5px;
+}
+.like-p-title{
+    color:#ff000096;
+    font-weight:600;
+}
+.like-p-model{
+    color:rgb(42, 16, 155);
+}
+.like-img{
+    height:40vh;
     background:url('../image//products/canadian/CD102.jpg')center/contain no-repeat;
+    position:relative;
 }
-.pv-img:nth-child(3){
-    background:url('../image//products/canadian/CD103.jpg')center/contain no-repeat;
+.heart{
+    position: absolute;
+    top:5px;
+    right:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+.heart:hover{
+    color:#ff000096;
+}
+.slick-arrow{
+    background:green;
 }
 
-.pvimg{
-    background:url('../image/products/canadian/CD101.jpg')center/contain no-repeat;
-    height: 726px;
+/* =======what are you====== */
+.look-row{
+    width:100%;
+    margin:0 auto;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    background: #f4ede5;
 }
-/* =========img-detail================== */
-
-.pv-img-detail{
-    bordeR:1px solid brown;
+.look-head{
+    font-size:20px;
+    font-weight:600;
+}
+.look-para{
+    margin:10px 0;
+}
+.look-btn-container{
+    margin-top:10px;
+}
+.look-btn{
+    background:black;
+    color:#fff;
+    padding:5px 10px;
+    text-transform:capitalize;
+    cursor:pointer;
+    border:1px solid transparent;
+    font-weight:700;
+    transition:all .5s ease-in-out
+}
+.look-btn:hover{
+    background:#fff;
+    border:1px solid black;
+    color:black;
+}
+/* ====testo=== */
+.pv-testo{
+    margin:10px 0;
+}
+@media screen and (max-width:1095px){
+    .pv-row{
+        width:90%
+    }
+    .pv-img-container{
+        display:block !important;
+    }
+    .pv-img-container div{
+        margin-bottom:10px;
+    }
+    .pv-more-detail{
+        padding:0;
+    }
+    .pv-title{
+        font-size:20px;
+    }
+    .pv-sub-title{
+        font-size:17px;
+    }
+}
+@media screen and (max-width:600px){
+    .look-head{
+        font-size:17px;
+    }
+    .look-para{
+        font-size:12px;
+    }
+    .look-btn{
+        font-weight:400;
+    }
 }

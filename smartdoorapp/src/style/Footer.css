@@ -1,37 +1,27 @@
 .footer{
-    background:#023d4edb;
+    background:#f7f7f7;
     padding:20px 0;
 }
 .row-footer{
-    width:90%;
+    width:80%;
     margin:0 auto;
 }
 .footer-title{
     text-transform:capitalize;
     text-align:start;
-    font-weight:700;
-    color:#fff;
+    font-weight:600;
+    color:black;
+
     font-size:20px;
-    margin:20px 0;
+    margin:5px 0;
     cursor: pointer;
-    position: relative;
-}
-.footer-title:after{
-    content: '';
-    position:absolute;
-    bottom: -10px;
-    left:0;
-    height:5px;
-    width:100%;
-    background:#d0fd77;
-    transition: all .3s ease-in;
 }
 .footer-title:hover .footer-title:after{
     background:red;
     width:100%;
 }
 .footer-para{
-    color:#Fff;
+    color:black;
     text-align: justify;
     font-size:15px;
 }
@@ -42,29 +32,17 @@
     list-style-type: none;
     text-transform:capitalize;
     font-size:15px;
-    margin:5px;
-    color:#fff;
+    padding:5px 0;
+    color:grey;
+    cursor: pointer;
 }
-.footer-ul li a{
-    text-decoration: none;
-    color:#fff;
-    transition: all .3s linear;
-    padding:5px;
-}
-.footer-ul li a:hover{
-    color:#dddddd;
+.footer-ul li:hover{
+    color:black;
 }
 .footer-none{
     text-transform:none !important;
 }
-.footer-email input{
-    width: 100%;
-    font-size: 15px;
-    padding: 5px 10px;
-    border: 1px solid grey;
-    outline: none;
-    margin:10px 0;
-}
+
 .footer-sub-btn{
     border-radius:0;
     font-weight:600;
@@ -80,13 +58,35 @@
     border-color: #ffdd01;
     color:black;
 }
+.footer-social{
+    font-size:20px;
+}
+.footer-fb, .footer-linkedin{
+    margin:0 5px; 
+    color:rgb(0, 128, 255);
+}
+.f-terms, .f-privacy, .f-acc, .f-cho{
+    margin:0 4px;
+    text-transform:capitalize;
+    color:rgb(55, 55, 55);
+    cursor:pointer;
+}
+.footer-copy, .f-terms, .f-privacy, .f-acc, .f-cho{
+    color:grey;
+    font-size:12px;
+}
+.row-copy{
+    width:95%;
+    margin:0 auto;
+}
 /* ====media screen=== */
 @media screen and (max-width:768px){
-    .row-footer {
-        width: 98%;
-    }
     .footer-title {
         font-size: 17px;
+    }
+    .footer-copy, .f-terms, .f-privacy, .f-acc, .f-cho {
+        color: grey;
+        font-size: 10px;
     }
 }
 @media screen and (max-width:576px){
