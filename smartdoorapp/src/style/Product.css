@@ -5,7 +5,7 @@
 }
 /* pagination ====================================== */
 #pagination {
-   width:250px;
+   width:50%;
    display: flex;
    height:30px;
 
@@ -44,6 +44,15 @@
 }
 #pagination > button:hover{
     background-color:red;
+}
+.pageleft{
+    transition:all 1s ease;
+}
+
+/* pageSelectionAddColor */
+
+.pagination-selection:nth-child(1){
+    background-color:black;
 }
 
 /* end of pagination ======================================= */
@@ -101,9 +110,12 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     overflow:hidden;
-    grid-gap:10px;
+    grid-gap:15px;
     width:100%;
+
+    
 }
+
 
 .show-card-container{
     display: grid;

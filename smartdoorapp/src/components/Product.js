@@ -11,20 +11,101 @@ const[allproduct,setallproduct] =useState([]);
 
 // pagination varaible 
 const[pageCount,setpageCount] =useState(1);
-const[totalProductCount,setTotalProductCount]=useState(0);
+const[totalProductCount,setTotalProductCount]=useState(1);
+const[totalProductShow,setTotalProductShow] = useState();
 
 
-console.log(Math.trunc(totalProductCount));
+// category filter 
+const[filtercategory,setFiltercategory] = useState("all");
+const[filterColor,setFilterColor] = useState("all");
+const[filterSize,setFilterSize] = useState("all");
+
+
+
+
 
 useEffect(()=>{
-    axios.get(`http://localhost:3001/product?page=${pageCount}&limit=9`).then((res)=>{
+
+
+    axios.get(`http://localhost:3001/product?page=${pageCount}&limit=9&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`).then((res)=>{
         setallproduct(res.data.data);
-        setTotalProductCount(res.data.productLenght/9);
+        const checkdecimal = Number.isInteger(res.data.productLenght/9);
+     
+        setTotalProductCount(Math.trunc(checkdecimal?res.data.productLenght/9:(res.data.productLenght/9) + 1));
+        setTotalProductShow(res.data.productLenght);
+
     }).catch((err)=>{
         console.log(err);
     })
- },[pageCount])
 
+
+    // if((filtercategory !=="all"||filterColor!=="all"||filterSize!=="all") || pageCount > totalProductShow/9 || totalProductShow < 9 ){
+    //     setpageCount(1);
+    // }
+    if(pageCount > totalProductShow/9){
+        setpageCount(1);
+    }
+   
+    
+    
+    paginationSelection();
+
+
+
+
+
+
+
+ },[pageCount,filtercategory,filterColor,filterSize,totalProductCount]);
+
+
+
+
+    // pagination select system===========================
+
+    
+
+ function paginationSelection(){
+    try{
+     
+        let paginationSelection = document.querySelectorAll(".pagination-selection");
+     
+        paginationSelection.forEach((item,index)=>{
+            if(item.value === pageCount){
+               item.style.background="black";
+            }
+            else{
+               item.style.background="grey";
+
+            }
+        })
+
+
+    }catch(err){
+        console.log(err);
+    }
+    let pageLeft = document.querySelector(".pageLeft");
+    let pageRight = document.querySelector(".pageRight");
+    if(pageCount <=1){
+        pageLeft.style.opacity="0.5";
+
+    }
+    else{
+        pageLeft.style.opacity="1";
+        
+    }
+    if(pageCount < totalProductCount){
+        pageRight.style.opacity="1";
+        console.log(pageCount);
+    }
+    else{
+        pageRight.style.opacity="0.5";
+    }
+
+ }
+
+
+// ==========================================
 
 //  filter ============================================
 
@@ -41,6 +122,20 @@ const filter=()=>{
     }
 
 }
+
+
+// clear all filter data
+
+    function ClearFilterData(){
+        setFilterColor("all");
+        setFilterSize("all");
+        setFiltercategory("all");
+    }
+
+// =======================================
+
+
+
 // end of filter ===========================================================
 
 // ===================================================
@@ -51,53 +146,65 @@ const filter=()=>{
         <div className="col-sm-3 product-filter  filter-md">
             <div className="d-flex align-items-end justify-content-between">
             <div className="product-filter-title">Filter</div>
-            <div className="filter-clear">Clear All</div>
+            <div className="filter-clear" onClick={ClearFilterData}>Clear All</div>
             </div>
 
             <div className="filter-cat">
             <div className="filter-cat-head">Categories</div>
             <ul className="filter-cat-ul">
-                <li><input type="radio" name="door" /> 3D Doors</li>
-                <li><input type="radio" name="door"/> Double Doors</li>
-                <li><input type="radio" name="door"/> Canadian Doors</li>
-                <li><input type="radio" name="door"/> Membrance Doors</li>
+                <li><input type="radio" name="cat" value="3D DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> 3D Doors</li>
+                <li><input type="radio" name="cat"  value="DOUBLE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> Double Doors</li>
+                <li><input type="radio"  name="cat" value="CANADA DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> Canadian Doors</li>
+                <li><input type="radio"  name="cat" value="MEMBRANE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> Membrance Doors</li>
             </ul>    
             </div>
             <div className="filter-col">
                 <div className="filter-col-head">Color</div>
                 <div className="filter-col d-flex">
-                    <div className="color"></div>
-                    <div className="color"></div>
-                    <div className="color"></div>
-                    <div className="color"></div>
+                    <div className="color" value="rose wood" onClick={()=>setFilterColor("rose wood")}></div>
+                    <div className="color"value="andrateak" onClick={()=>setFilterColor("andrateak")}></div>
                 </div>
             </div>  
             <div className="filter-length">
                 <div className="filter-length-head">Length</div>
                 <div className="filter-con">
-                    <div className="filter-size"><input type="radio"  name="size"/>  30mm</div>
-                    <div className="filter-size"><input type="radio"  name="size"/>  60mm</div>
+                    <div className="filter-size"><input type="radio" value="80-32" onClick={(e)=>setFilterSize(e.target.value)} name="size"/>80 * 32</div>
+                    <div className="filter-size"><input type="radio" value= "80-26"onClick={(e)=>setFilterSize(e.target.value)}  name="size"/>80 * 26</div>
+                    <div className="filter-size"><input type="radio"value ="75-26" onClick={(e)=>setFilterSize(e.target.value)}  name="size"/>75 * 26</div>
+                    <div className="filter-size"><input type="radio" value="72-26"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/>72 * 26</div>
+                    <div className="filter-size"><input type="radio" value="80-38"   onClick={(e)=>setFilterSize(e.target.value)} name="size"/>80 * 38</div>
+                    <div className="filter-size"><input type="radio" value="DD80-19" onClick={(e)=>setFilterSize(e.target.value)}   name="size"/>DD80 * 19</div>
+                    <div className="filter-size"><input type="radio" value="DD80-22" onClick={(e)=>setFilterSize(e.target.value)}  name="size"/>DD80 * 22</div>
+
+
                 </div>
             </div>
 
         </div>
         <div className="col-12 col-sm-9 product-show">
             <div className="product-pagination d-flex justify-content-end" >
+
+
+
+
+                {/* pagination ======================================== */}
             <div id="pagination">
-                <button><i class="fa-solid fa-arrow-left"></i></button>
-                    
-                    <li onClick={()=>setpageCount(1)}>1</li>
-                    <li onClick={()=>setpageCount(2)}>2</li>
-                    <li onClick={()=>setpageCount(3)}>3</li>
-                <button><i class="fa-solid fa-arrow-right"></i></button>
+                <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
+                    {
+                        [...Array(totalProductCount)].map((e,i)=>{
+                        return <li class="pagination-selection" key={i} onClick={(e)=>setpageCount(e.target.value)} value={i+1}>{i+1}</li>
+                     })
+                    }
+                 <button className="pageRight" onClick={()=>setpageCount((prev)=>prev>=totalProductCount-1?totalProductCount:++prev)}><i class="fa-solid fa-arrow-right"></i></button>
             </div>
                 
+            {/* end of pagination =================================== */}
 
 
             </div>
 
             <div className="row show-head ">
-                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All ({allproduct.length})</div>
+                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All ({totalProductShow})</div>
             </div>
             <div className="row show-sort">
                 <div className="col show-sm-filter d-flex align-items-center justify-content-end">
@@ -127,10 +234,9 @@ const filter=()=>{
             <div className="filter-col">
                 <div className="filter-col-head">Color</div>
                 <div className="filter-col d-flex">
-                    <div className="color"></div>
-                    <div className="color"></div>
-                    <div className="color"></div>
-                    <div className="color"></div>
+                    <div className="color" value="rose wood" onClick={(e)=>setFilterColor(e.target.value)}></div>
+                    <div className="color"value="andrateak" onClick={(e)=>setFilterColor(e.target.value)}></div>
+          
                 </div>
             </div>  
             <div className="filter-length filter-sm">
@@ -155,10 +261,15 @@ const filter=()=>{
                 {allproduct.map((product,key)=>{
                     return <div key={key} className="show-card-container">   
                     <div className="show-card-img" style={{ background: `url(${product.img})center/contain no-repeat`}}>
+                        
                     </div>
                     <div className="show-card-detail">
                         <div className="show-card-title">{product.name}</div>
-                        <div className="show-card-price">{product.price}</div>   
+                        <div className="show-card-price">{product.price}</div> 
+                        <p>{product.categories}</p>  
+                        <p>{product.colors}</p>  
+
+
                     </div>
                 </div>
                 })}
