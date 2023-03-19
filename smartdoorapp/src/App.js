@@ -12,6 +12,10 @@ import Product from './components/Product';
 import Productview from './components/ProductView';
 import Admin from "./components/Admin";
 
+import ProductCart from './components/productCart';
+import Faqs from './components/Faqs';
+import Vision from "./components/vision";
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +26,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
         <Route path="/product-view" element={<Productview />} />
+        <Route path="/product-cart" element={<ProductCart />} />
+        <Route path="/faqs" element={<Faqs />} />
+        <Route path="/about/our-vision" element={<Vision />} />
+    
         <Route path="/admin" element={<Admin></Admin>}></Route>
 
       </Routes>

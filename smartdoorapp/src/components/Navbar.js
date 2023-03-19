@@ -38,11 +38,20 @@ function Navbar (){
                         <li className="nav-item">
                         <NavLink to="/product" className="nav-link text-capitalize">product</NavLink>
                         </li>
-                        <li className="nav-item">
-                        <a className="nav-link text-capitalize" href="#">About Us</a>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                            <NavLink to="/about/our-vision" className=" dropdown-item nav-link text-capitalize">our vision</NavLink>
+                            </li>
+                            <li><a class="dropdown-item" href="#">our story</a></li>
+                        </ul>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link text-capitalize" href="#">FAQs</a>
+                        <NavLink to="/Faqs" className="nav-link text-capitalize">FAQs</NavLink>
+
                         </li>
                         <li className="nav-item">
                         <NavLink to="/contact" className="nav-link text-capitalize">contact us</NavLink>
@@ -50,7 +59,7 @@ function Navbar (){
                         <div className="search-icon" onClick={searchbtn}><i class="fa-solid fa-magnifying-glass"></i></div>
                         <div className="two-icon">
                         <div className="heart-icon"><i class="fa-regular fa-heart"></i></div>
-                        <div className="cart-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink>
                         <div className="cart-icon"><i class="fa-solid fa-bag-shopping"></i></div>
                         </div>
                         <div  className="navbar-signbtn btn">Sign In</div>
@@ -64,6 +73,8 @@ function Navbar (){
                     <div className="navbar-sm">
                         <div className="signbtn"><i class="fa-regular fa-user"></i></div>
                         <div className="likebtn"><i class="fa-regular fa-heart"></i></div>
+                        <NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink>
+
                         <div className="bagbtn"><i class="fa-solid fa-bag-shopping"></i></div>
                     </div>
                     <div className="navbar-img-sm">
