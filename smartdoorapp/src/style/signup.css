@@ -1,0 +1,28 @@
+#signup{
+    background-color: #F4EDE5;
+}
+.row-signup{
+    border:1px solid red;
+    width:60%;
+    margin:0 auto;
+    padding:50px 0;
+}
+.form-container{
+    border:1px solid green;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap:20px;
+    background:#fff;
+    padding:20px;
+    font-size:14px;
+    color:rgb(85, 81, 81);
+}
+.signup-left{
+    border:1px solid red;
+}
+.signup-input input{
+    width: 100%;
+    margin:10px 0;
+    outline:none;
+    padding:5px;
+}

@@ -8,11 +8,31 @@ function Navbar (){
     const searchbtn = () => {
        let searchInput=document.querySelector('.search-input')
        searchInput.style.display = "flex" ;
+
+       var x = window.matchMedia("(max-width: 768px)")
+       if (x.matches) { // If media query matches
+         var nav =document.querySelector('.nav-link')
+           document.querySelector('.navabr-toggler').click()
+       } 
     }
     const searchClose=()=>{
         let searchInput=document.querySelector('.search-input')
         searchInput.style.display = "none" ;
+
+        var x = window.matchMedia("(max-width: 768px)")
+        if (x.matches) { // If media query matches
+          var nav =document.querySelector('.nav-link')
+            document.querySelector('.navabr-toggler').click()
+        } 
     }
+    const navItem=()=>{
+            var x = window.matchMedia("(max-width: 768px)")
+              if (x.matches) { // If media query matches
+                var nav =document.querySelector('.nav-link')
+                  document.querySelector('.navabr-toggler').click()
+              } 
+    }
+    
     return(
         <div>
             <nav className="navbar navbar-expand-md bg-body-tertiary ">
@@ -20,9 +40,7 @@ function Navbar (){
                     <a className="navbar-brand navbar-img" href="#">
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="toggler-icon top-bar"></span>
-                    <span class="toggler-icon middle-bar"></span>
-                    <span class="toggler-icon bottom-bar"></span>
+                    <span class="navbar-toggler-icon"></span>
                     </button>
                     
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
@@ -32,11 +50,11 @@ function Navbar (){
 
                     </div>
                     <ul className="navbar-nav navbar-ul">
-                        <li className="nav-item">
-                        <NavLink to="/" className="nav-link text-capitalize">home</NavLink>
+                        <li className="nav-item" >
+                        <NavLink to="/" className="nav-link text-capitalize" onClick={navItem}> home</NavLink>
                         </li>
                         <li className="nav-item">
-                        <NavLink to="/product" className="nav-link text-capitalize">product</NavLink>
+                        <NavLink to="/product" className="nav-link text-capitalize" onClick={navItem}>product</NavLink>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,25 +62,29 @@ function Navbar (){
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                            <NavLink to="/about/our-vision" className=" dropdown-item nav-link text-capitalize">our vision</NavLink>
+                            <NavLink to="/about/our-vision" onClick={navItem} className=" dropdown-item nav-link text-capitalize">our vision</NavLink>
                             </li>
-                            <li><a class="dropdown-item" href="#">our story</a></li>
+                            <li>
+                            <NavLink to="/about/our-story" onClick={navItem} className=" dropdown-item nav-link text-capitalize">our story</NavLink>
+                            </li>
                         </ul>
                         </li>
                         <li className="nav-item">
-                        <NavLink to="/Faqs" className="nav-link text-capitalize">FAQs</NavLink>
+                        <NavLink to="/Faqs"  onClick={navItem} className="nav-link text-capitalize">FAQs</NavLink>
 
                         </li>
                         <li className="nav-item">
-                        <NavLink to="/contact" className="nav-link text-capitalize">contact us</NavLink>
+                        <NavLink to="/contact" onClick={navItem} className="nav-link text-capitalize">contact us</NavLink>
                         </li>
-                        <div className="search-icon" onClick={searchbtn}><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div className="search-icon"  onClick={searchbtn}><i class="fa-solid fa-magnifying-glass"></i></div>
                         <div className="two-icon">
+                        <NavLink to="/login" className=" dropdown-item nav-link text-capitalize"><div className="heart-icon"><i class="fa-regular fa-user"></i></div></NavLink>
+
                         <div className="heart-icon"><i class="fa-regular fa-heart"></i></div>
+                        
                         <NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink>
-                        <div className="cart-icon"><i class="fa-solid fa-bag-shopping"></i></div>
                         </div>
-                        <div  className="navbar-signbtn btn">Sign In</div>
+                        <div  className="navbar-signbtn btn">membership</div>
                         <div  className="search-input bg-tertiary" >
                         <input type="text" placeholder="search..."  />
                         <div className="search-close" onClick={searchClose}><i class="fa-solid fa-xmark"></i></div>
@@ -73,9 +95,8 @@ function Navbar (){
                     <div className="navbar-sm">
                         <div className="signbtn"><i class="fa-regular fa-user"></i></div>
                         <div className="likebtn"><i class="fa-regular fa-heart"></i></div>
-                        <NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink>
-
-                        <div className="bagbtn"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <div className="cart"><NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink>
+</div>
                     </div>
                     <div className="navbar-img-sm">
                     </div>
