@@ -30,7 +30,7 @@ async function getProduct(){
     try{
         let res = await axios.get(`http://localhost:3001/product?page=${pageCount}&limit=15&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
             setallproduct(res.data.data);
-            console.log(res.data.data);
+       
             if(res.data.data <=0){
                 setDeleteMessage(true);
             }
@@ -326,8 +326,7 @@ const filter=()=>{
                     
                 {
                 allproduct.map((product,key)=>{
-                    console.log(product);
-                     return <div key={key} className="show-card-container" > 
+                        return <div key={key} className="show-card-container" > 
                        
                             <div className="show-card-img">
                           

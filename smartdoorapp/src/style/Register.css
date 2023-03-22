@@ -1,0 +1,232 @@
+.register-container{
+    width:100%;
+    height:100%;
+    
+}
+
+.register-title{
+    width: 100%;
+    height:12vh;
+    display: flex;
+    /* background-color: rgb(250, 109, 66); */
+    justify-content: center;
+    flex-direction:column;
+    align-items: center;
+    position: relative;
+}
+
+.register-title > h1{
+    font-size:0.8rem;
+    color:rgb(148, 148, 148);
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+
+  
+}
+.register-title::after{
+    content:"";
+    width:90%;
+    height:1px;
+    background-color:rgb(237, 237, 237);
+    position: absolute;
+    margin-top:13%;
+}
+.message{
+    width:100%;
+    height:5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name:message;
+    animation-duration:2s;
+   
+}
+@keyframes message{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.message >h1{
+    font-size:0.8rem;
+    color:rgb(255, 255, 255);
+    background-color:rgb(161, 169, 255);
+    padding:7px 0px;
+    width:90%;
+    text-align: center;
+    text-transform:lowercase;
+
+}
+
+/* google-facebook */
+.google-facebook{
+    margin:auto;
+    width:85%;
+    height:10vh;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.google-facebook > div{
+    margin:0px 10px;
+    background-color:rgb(250, 250, 250);
+    width:50%;
+    height:40px;
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:1.6rem;
+    /* border:1px solid rgb(255, 255, 255); */
+    /* box-shadow:0px 0px 6px 0.5px rgb(238, 238, 238); */
+    transition:all 0.5s ease;
+    cursor: pointer;
+
+}
+
+.google-facebook > div:nth-child(1){
+    color:rgb(255, 53, 53);
+}
+.google-facebook>div:nth-child(1):hover{
+    background-color: rgb(255, 242, 242);
+}
+
+.google-facebook > div:nth-child(2){
+    color:rgb(23, 101, 247);
+}
+.google-facebook > div:nth-child(2):hover{
+    /* color:rgb(154, 189, 253); */
+    background-color: rgb(237, 237, 250);
+}
+
+
+
+/* input-container============= */
+.input-container{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.input-container > input{
+    width:82%;
+    outline:none;
+    border:0px;
+    margin:6px 0px;
+    /* border:1px solid rgb(211, 211, 211); */
+    border-bottom:1px solid rgb(218, 221, 240);
+  
+    padding:5px 0px;
+    text-indent:10px;
+    font-size:0.9rem;
+    transition:all 1s ease;
+
+}
+.input-container > div{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input-container > div>input{
+    width:82%;
+    border:none;
+    outline:none;
+    background-color: none;
+    border-bottom:1px solid rgb(218, 221, 240);
+    text-indent:10px;
+    margin:6px 0px;
+
+    
+}
+.input-container>input:focus{
+    border-bottom:1px solid rgb(147, 147, 147);
+}
+.input-container > div > input:focus{
+    border-bottom:1px solid rgb(147, 147, 147);
+
+}
+.input-container > input::placeholder{
+    font-size:0.8rem;
+    color:rgb(199, 199, 199);
+}
+.input-container > div>input::placeholder{
+    font-size:0.8rem;
+    color:rgb(199, 199, 199);
+}
+.input-container > button{
+    width:85%;
+    border:none;
+    background-color:rgb(255, 142, 110);
+    padding:5px 0px;
+    border-radius:4px;
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top:15px;
+    transition:all 1s ease;
+
+}
+.input-container > button:hover{
+    background-color:rgb(255, 151, 151);
+}
+
+/* forgetpassword */
+.forgetpassword{
+    width:85%;
+    margin:auto;
+    height:5vh;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-top:20px;
+}
+.forgetpassword > p{
+    font-size:0.7rem;
+    background-color: rgb(245, 245, 245);
+    padding:3px 5px;
+    border-radius:2px;
+    color:rgb(130, 127, 201);
+    cursor: pointer;
+    transition:all 0.5s ease;
+}
+.forgetpassword > p:hover{
+    background-color: rgb(109, 109, 109);
+    color:white;
+}
+/* policy-container */
+.policy-container{
+    width:100%;
+    height:10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin:0px;
+    padding:0px;
+    margin-bottom:20px;
+}
+
+.policy-container > p{
+    font-size:0.7rem;
+    color:grey;
+}
+
+.policy-container > div{
+    height:0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.policy-container > div > p{
+    font-size:0.7rem;
+    color:rgb(124, 131, 255);
+    font-weight: bold;
+    margin:0px 4px;
+    
+}

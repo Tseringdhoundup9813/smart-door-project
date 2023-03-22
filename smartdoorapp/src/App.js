@@ -17,8 +17,7 @@ import Faqs from './components/Faqs';
 import Vision from "./components/vision";
 import Story from './components/Story'
 
-import Signin from "./components/SignIn";
-import Signup from './components/Signup'
+
 
 function App() {
   return (
@@ -36,8 +35,7 @@ function App() {
         <Route path="/faqs" element={<Faqs />} />
         <Route path="/about/our-vision" element={<Vision />} />
         <Route path="/about/our-story" element={<Story />} />
-        <Route path="/login" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+    
 
     
         <Route path="/product/:productId" element={<Productview />} />
