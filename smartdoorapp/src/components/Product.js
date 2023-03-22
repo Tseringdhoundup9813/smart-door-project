@@ -1,5 +1,6 @@
 //CSS
 import '../style/Product.css';
+import {Link} from "react-router-dom";
 
 
 
@@ -19,46 +20,74 @@ const[totalProductShow,setTotalProductShow] = useState();
 const[filtercategory,setFiltercategory] = useState("all");
 const[filterColor,setFilterColor] = useState("all");
 const[filterSize,setFilterSize] = useState("all");
+const[DeleteMessage,setDeleteMessage] =useState(false);
 
+const[deleteConfirmBox,setdeleteConfirmBox] = useState(false);
+const[deleteID,setDeleteID]=useState("");
+
+
+async function getProduct(){
+    try{
+        let res = await axios.get(`http://localhost:3001/product?page=${pageCount}&limit=15&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
+            setallproduct(res.data.data);
+            console.log(res.data.data);
+            if(res.data.data <=0){
+                setDeleteMessage(true);
+            }
+            else{
+                setDeleteMessage(false);
+            }
+            
+           
+            const checkdecimal = Number.isInteger(res.data.productLenght/15);
+         
+            setTotalProductCount(Math.trunc(checkdecimal?res.data.productLenght/15:(res.data.productLenght/15) + 1));
+            setTotalProductShow(res.data.productLenght);
+
+    }catch(err){
+        console.log(err);
+    }
+}
 
 
 
 
 useEffect(()=>{
 
-
-    axios.get(`http://localhost:3001/product?page=${pageCount}&limit=9&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`).then((res)=>{
-        setallproduct(res.data.data);
-        const checkdecimal = Number.isInteger(res.data.productLenght/9);
-     
-        setTotalProductCount(Math.trunc(checkdecimal?res.data.productLenght/9:(res.data.productLenght/9) + 1));
-        setTotalProductShow(res.data.productLenght);
-
-    }).catch((err)=>{
-        console.log(err);
-    })
-
-
-    // if((filtercategory !=="all"||filterColor!=="all"||filterSize!=="all") || pageCount > totalProductShow/9 || totalProductShow < 9 ){
-    //     setpageCount(1);
-    // }
-    if(pageCount > totalProductShow/9){
+    getProduct();
+    
+    if(pageCount-1 > totalProductShow/15){
         setpageCount(1);
     }
-   
-    
-    
     paginationSelection();
 
+ },[pageCount,filtercategory,filterColor,filterSize,totalProductCount,deleteID]);
 
 
+//  delete product ======================
 
 
+    function deleteConfirmYes(){
+        
+        axios.delete(`http://localhost:3001/delete?id=${deleteID}`).
+        then((res)=>{
+            // setDeleteMessage(res.data.message);
+            setTimeout(function(){
+                setDeleteMessage("");
+                setDeleteID("");
+                setdeleteConfirmBox(false);
 
+            },500)
+        }).catch((err)=>{
+            console.log(err);
+        })
 
- },[pageCount,filtercategory,filterColor,filterSize,totalProductCount]);
+    }
+    function DeleteConfirmBoxFunction(key){
+        setdeleteConfirmBox(true);
+        setDeleteID(key);
 
-
+    }
 
 
     // pagination select system===========================
@@ -141,7 +170,29 @@ const filter=()=>{
 // ===================================================
    
     return(
+
     <div>
+
+        {/* delete message  */}
+        {
+            deleteConfirmBox?<div id="delete-confirm-box">
+                <h1>Delete Confirm</h1>
+                <div>
+                    <button onClick={()=>setdeleteConfirmBox(false)}>No</button>
+                    <button onClick={()=>deleteConfirmYes()}>Yes</button>
+
+                </div>
+            </div>:<div></div>
+
+        }
+
+    
+
+        {/* product not  found */}
+
+      
+
+        {/* ======================= */}
     <div className="product-row row">
         <div className="col-sm-3 product-filter  filter-md">
             <div className="d-flex align-items-end justify-content-between">
@@ -187,25 +238,12 @@ const filter=()=>{
 
 
 
-                {/* pagination ======================================== */}
-            <div id="pagination">
-                <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
-                    {
-                        [...Array(totalProductCount)].map((e,i)=>{
-                        return <li class="pagination-selection" key={i} onClick={(e)=>setpageCount(e.target.value)} value={i+1}>{i+1}</li>
-                     })
-                    }
-                 <button className="pageRight" onClick={()=>setpageCount((prev)=>prev>=totalProductCount-1?totalProductCount:++prev)}><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-                
-            {/* end of pagination =================================== */}
+             
 
 
             </div>
 
-            <div className="row show-head ">
-                <div className="col d-flex align-items-center justify-content-center text-capitalize">View All ({totalProductShow})</div>
-            </div>
+           
             <div className="row show-sort">
                 <div className="col show-sm-filter d-flex align-items-center justify-content-end">
                 <div className="filter-sm-con" onClick={filter}>
@@ -257,24 +295,81 @@ const filter=()=>{
             </div>
             </div>
             <div className="show-product">
-            <div className="show-card">
-                {allproduct.map((product,key)=>{
-                    return <div key={key} className="show-card-container">   
-                    <div className="show-card-img" style={{ background: `url(${product.img})center/contain no-repeat`}}>
-                        
-                    </div>
-                    <div className="show-card-detail">
-                        <div className="show-card-title">{product.name}</div>
-                        <div className="show-card-price">{product.price}</div> 
-                        <p>{product.categories}</p>  
-                        <p>{product.colors}</p>  
 
 
-                    </div>
+        {/* total item */}
+       
+        {/* end of total item */}
+        {/* pagination ======================================== */}
+            <div id="pagination">
+                <div className="row show-head ">
+                   <h1>Total product({totalProductShow})</h1>
                 </div>
-                })}
+                <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
+                    {
+                        [...Array(totalProductCount)].map((e,i)=>{
+                        return <li class="pagination-selection" key={i} onClick={(e)=>setpageCount(e.target.value)} value={i+1}>{i+1}</li>
+                     })
+                    }
+                 <button className="pageRight" onClick={()=>setpageCount((prev)=>prev>=totalProductCount-1?totalProductCount:++prev)}><i class="fa-solid fa-arrow-right"></i></button>
             </div>
+                
+            {/* end of pagination =================================== */}
+            <div className="show-card">
+
+                    
+                 {/* // product is not found ================================================= */}
+
+                    {
+                         DeleteMessage?<img src={"./Image/no-products.jpg"}></img>:""
+                    }
+                    
+                {
+                allproduct.map((product,key)=>{
+                    console.log(product);
+                     return <div key={key} className="show-card-container" > 
+                       
+                            <div className="show-card-img">
+                          
+                                <img src={product.img[0]}></img>
+                                </div>
+                            <Link to={`/product/${product._id}`} ></Link>
+
+
+                              
+
+                                
+                          
+                            <div className="show-card-detail">
+                                  {/* delete product  */}
+                                      {/* <li className="deleteproduct" onClick={()=>DeleteConfirmBoxFunction(product._id)}>delete</li> */}
+                              {/* ========== */} 
+                            
+                            
+                              <div className="show-card-title"><h1>{product.name}</h1></div>
+                            
+                                <div className="show-card-price"><h1>Rs { product.price}</h1></div> 
+                                {/* <p>{product.categories}</p>  
+                                <p>{product.colors}</p>   */}
+
+                           
+                            </div>
+                            
+                         </div>
+                    })
+
+
+                }
+
+         
+
+               
+
+
             </div>
+                
+            </div>
+       
             
 
         </div>

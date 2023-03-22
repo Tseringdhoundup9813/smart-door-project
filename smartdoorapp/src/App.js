@@ -21,7 +21,7 @@ function App() {
         <Route path="/footer" element={<Footer />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/product-view" element={<Productview />} />
+        <Route path="/product/:productId" element={<Productview />} />
         <Route path="/admin" element={<Admin></Admin>}></Route>
 
       </Routes>

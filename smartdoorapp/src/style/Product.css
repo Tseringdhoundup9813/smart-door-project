@@ -3,14 +3,33 @@
     font-size:20px;
     font-weight:600;
 }
+
+/* total product text */
+.show-head{
+   position: absolute;
+   left:1%;
+   top:50%;
+
+}
+.show-head >h1{
+    font-size:1rem;
+    text-transform: lowercase;
+    color:rgb(135, 135, 135)
+}
+
+/* ================= */
 /* pagination ====================================== */
 #pagination {
-   width:50%;
+   width:95%;
+  
    display: flex;
    height:30px;
 
-   justify-content: center;
+   justify-content:flex-end;
    align-items: center;
+   margin:auto;
+   position: relative;
+   
 
 }
 
@@ -18,13 +37,14 @@
 
     list-style-type: none;
     background-color:rgb(84, 84, 84);
-    width:23px;
-    height:23px;
+    width:21px;
+    height:21px;
     margin:0px 5px;
     border-radius:5px;
     text-align: center;
-    line-height:22px;
+    line-height:21px;
     color:white;
+    font-size:0.8rem;
     cursor: pointer;
 }
 #pagination  > li:hover{
@@ -33,9 +53,9 @@
 }
 
 #pagination > button{
-    height:90%;
+    height:75%;
     font-size:0.6rem;
-    padding:0px 10px;
+    padding:0px 6px;
     border:none;
     background-color:rgb(250, 99, 72);
     color:white;
@@ -59,6 +79,17 @@
 
 .filter-clear{
     font-size:11px;
+    background-color: rgb(237, 237, 237);
+    padding:2px 5px;
+    border-radius:5px; 
+    cursor: pointer;
+    transition:all 0.9s ease;
+    color:rgb(146, 146, 146);
+}
+.filter-clear:hover{
+    color:rgb(255, 247, 247);
+    border:none;
+    background-color: rgb(150, 150, 150);
 }
 .filter-cat-head,.filter-col-head, .filter-length-head{
     text-transform:capitalize;
@@ -68,9 +99,24 @@
 }
 .filter-cat-ul {
     padding-left:10px;
+   position: relative;
+
+}
+.filter-cat-ul::after{
+    content:"";
+    width:100%;
+    height:1px;
+    background-color: rgb(217, 216, 216);
+    position: absolute;
+    left:0px;
+    margin-top:20px;
 }
 .filter-cat-ul li, .filter-col-ul{
     list-style-type:none;
+ 
+
+  
+   
 }
 .filter-cat-ul li input{
     border-radius:0;
@@ -80,10 +126,11 @@
     display:inline;
 }
 .color{
-    height:42px;
-    width:42px;
+    height:30px;
+    width:30px;
     margin:0 5px;
     border-radius:50%;
+    border:3px solid hsl(245, 92%, 67%);
 }
 .color:nth-child(1){
     background: #462828;
@@ -107,30 +154,124 @@
 
 .show-card{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    overflow:hidden;
-    grid-gap:15px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows:repeat(4,300px);
+    grid-gap:20px 10px;
     width:100%;
+    padding:20px;
 
-    
+
+
 }
-
-
+/* product box -======================== */
 .show-card-container{
-    display: grid;
-    grid-template-rows:80% 20%;
-    height: 80vh;
+    border:1px solid rgb(223, 222, 222);
+    border-radius:4px;
+    height:100%;
+    overflow: hidden;
+    animation-name:productbox;
+    animation-duration:2s;
+    transition:all 1s ease;
+
 }
-.show-card-detail{
-    display:flex;
-    align-items: start;
-    flex-direction: column;
+.show-card-container:hover{
+   box-shadow:1px 1px 1px 3px rgb(239, 239, 239);
+}
+@keyframes productbox{
+  0%{
+    opacity:0;
+  }
+  100%{
+    opacity:1;
+  }
+}
+
+.show-card-img{
+    width:100%;
+    height:80%;
+    display: flex;
     justify-content: center;
+    align-items: center;
+
+}
+
+
+.show-card-img > img{
+    width:90%;
+    height:90%;
+    object-fit:contain;
+    margin:auto;
+}
+.show-card-price{
+
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    height:20%;
+    color:rgb(69, 34, 34);
+    
+    padding:5px 0px;
+    margin-top:2px;
+}
+.show-card-price > h1{
+    font-size:0.9rem;
+    text-indent:10px;
+    color:orange;
+}
+.show-card-title{
+    width:100%;
+    height:20%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    padding:10px 0px;
+   
+  
+}
+.show-card-title > h1{
+  
+    font-size:0.8rem;
+    color:rgb(90, 86, 95);
+    text-indent:10px;
+    margin-top:10px;
+    text-transform: uppercase;
+    font-weight: bold;
+   
+    
+
+}
+
+
+.show-card-detail{
+    width:100%;
+    height:30%;
+    display:flex;
+    flex-direction: column;
+    background-color: rgb(248, 246, 246);
+    position: relative;
+
+  
+    /* border:2px solid grey; */
+}
+
+/* end here */
+.deleteproduct{
+    position: absolute;
+    top:0px;
+    right:20px;
+    background-color:rgb(248, 66, 66);
+    color:white;
+    padding:2px 5px;
+    list-style: none;
+    border-radius:5px;
+    cursor: pointer;
 }
 
 .filter-md{
-    background:#f3e4c71f;    
+    width:20%;
+    background:#eae9e71f;   
+    max-height:100vh; 
+    margin-top:10%;
 }
 .filter-body-sm{
     display:none;
@@ -237,3 +378,72 @@
     background:red;
     color:#fff;
 }
+
+/* noproductFound--================== */
+.noproductFound{
+    margin:auto;
+    margin-top:10%;
+   
+}
+
+/* deletemessage */
+
+#delete-confirm-box{
+    width:20%;
+    background-color:white;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding:10px;
+    z-index: 99999;
+    border-radius:5px;
+    box-shadow:2px 1px 4px 4px rgba(72, 72, 72,0.4);
+
+
+    
+}
+#delete-confirm-box h1{
+    font-size:1.5rem;
+    text-align: center;
+    padding:20px 0px;
+    color:rgb(34, 22, 53);
+}
+#delete-confirm-box > div{
+    padding:4px 10px;
+    display: flex;
+    justify-content: space-around;
+}
+#delete-confirm-box > div > button{
+    border:none;
+    background-color: rgb(83, 48, 186);
+    padding:2px 20px;
+    border-radius:10px;
+    color:white;
+  
+}
+#delete-confirm-box > div > button:hover{
+    background-color:rgb(70, 44, 128);
+}
+#delete-confirm-box > div > button:nth-child(2){
+    background-color: rgb(247, 45, 45);
+    color:white;
+    padding:2px 20px;
+    border-radius:10px;
+  
+}
+#delete-confirm-box > div > button:nth-child(2):hover{
+    background-color: red;
+}
+#deletemessage{
+    padding:5px 20px;
+    background-color: rgb(254, 62, 62);
+    color:white;
+    text-align: center;
+    font-size:1.2rem;
+    position:absolute;
+    top:30%;
+    right:0px;
+    position: fixed;
+}
+/* ============== */
