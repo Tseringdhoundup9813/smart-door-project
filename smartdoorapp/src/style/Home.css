@@ -737,7 +737,7 @@
     .testo-quote-left{
        display: none;
     }
-    .testomial-row{width:100%;}
+    .testomial-row{width:90%;margin:0 auto;}
     .row-carousel-item{height:auto;}
     .testo-para{font-size:10px}
     #testomial {

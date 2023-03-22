@@ -32,7 +32,6 @@
    
 
 }
-
 #pagination  > li{
 
     list-style-type: none;
@@ -151,19 +150,17 @@
 .sort-title{
     margin:0 5px;
 }
-
 .show-card{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows:repeat(4,300px);
     grid-gap:20px 10px;
     width:100%;
-    padding:20px;
 
-
-
+    
 }
-/* product box -======================== */
+
+
 .show-card-container{
     border:1px solid rgb(223, 222, 222);
     border-radius:4px;
@@ -274,7 +271,6 @@
     margin-top:10%;
 }
 .filter-body-sm{
-    display:none;
     margin:10px 0;
     padding:5px;
     transform: translate(100%, 0);
@@ -337,6 +333,15 @@
     }
 }
 
+/* =====small screen==== */
+
+.filter-search-btn{
+    background:red;
+    color:#fff;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
 
 @media screen and  (max-width:575px){
 
@@ -354,16 +359,15 @@
     .show-card-container {
         height: 44vh;
     }
-    .filter-md{
-        display:none;
-    }
     .filter-sm-con{
         display: flex;
+    }
+    .filter-search-btn{
+        display: block;
     }
 }
 
 
-/* =====small screen==== */
 
 .filter-close-btn, .filter-search-btn{
     width:40%;
@@ -378,72 +382,3 @@
     background:red;
     color:#fff;
 }
-
-/* noproductFound--================== */
-.noproductFound{
-    margin:auto;
-    margin-top:10%;
-   
-}
-
-/* deletemessage */
-
-#delete-confirm-box{
-    width:20%;
-    background-color:white;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    padding:10px;
-    z-index: 99999;
-    border-radius:5px;
-    box-shadow:2px 1px 4px 4px rgba(72, 72, 72,0.4);
-
-
-    
-}
-#delete-confirm-box h1{
-    font-size:1.5rem;
-    text-align: center;
-    padding:20px 0px;
-    color:rgb(34, 22, 53);
-}
-#delete-confirm-box > div{
-    padding:4px 10px;
-    display: flex;
-    justify-content: space-around;
-}
-#delete-confirm-box > div > button{
-    border:none;
-    background-color: rgb(83, 48, 186);
-    padding:2px 20px;
-    border-radius:10px;
-    color:white;
-  
-}
-#delete-confirm-box > div > button:hover{
-    background-color:rgb(70, 44, 128);
-}
-#delete-confirm-box > div > button:nth-child(2){
-    background-color: rgb(247, 45, 45);
-    color:white;
-    padding:2px 20px;
-    border-radius:10px;
-  
-}
-#delete-confirm-box > div > button:nth-child(2):hover{
-    background-color: red;
-}
-#deletemessage{
-    padding:5px 20px;
-    background-color: rgb(254, 62, 62);
-    color:white;
-    text-align: center;
-    font-size:1.2rem;
-    position:absolute;
-    top:30%;
-    right:0px;
-    position: fixed;
-}
-/* ============== */

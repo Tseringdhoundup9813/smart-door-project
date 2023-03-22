@@ -43,6 +43,9 @@ function Navbar (){
         self.style.width="auto"
       
 
+        let icon=document.querySelector('.search-icon');
+        icon.style.width="auto"
+        
         var x = window.matchMedia("(max-width: 768px)")
         if (x.matches) { // If media query matches
             var nav = document.querySelector('.navbar-toggler')
