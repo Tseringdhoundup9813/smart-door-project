@@ -287,7 +287,7 @@ function Home(){
         </div>
         <div className="yourdesign">
             <div className="row yourdesign-row">
-                <div className="col-9 d-flex align-items-start justify-content-center flex-column">
+                <div className="col-12 col-sm-9 d-flex align-items-center justify-content-center flex-column">
                     <div className="yourdesign-title text-capitalize">
                     Got an Incredible Door Design Or Idea Right Now?
                     </div>
@@ -295,7 +295,7 @@ function Home(){
                     Objectively innovate empowered factory products else best platforms.
                     </div>
                 </div>
-                <div className="col-3 d-flex align-items-center justify-content-center">
+                <div className="col-12 my-sm-0 my-3 col-sm-3 d-flex align-items-center justify-content-center">
                     <div className="yourdesign-btn btn text-uppercase">contact us</div>
                 </div>
             </div>
