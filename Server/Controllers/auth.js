@@ -5,11 +5,27 @@ const ErrorResponse = require("../utils/errorResponse");
 exports.register =async (req,res,next)=>{
     const {username,email,password} = req.body;
     try{
-        const user = await User.create({username,email,password});
-        sendToken(user,201,res)
+         const isEmail = await User.findOne({email});
+         const isUsername = await User.findOne({username});
+        
+        if(isEmail){
+            res.status(200).json({message:"email is already exsits"}) 
+        }
+        else if(isUsername){
+            res.status(200).json({message:"username is already exsits"})
+
+        }
+        else{
+            const user = await User.create({username,email,password});
+            sendToken("successfully singup",user,201,res)
+        }
+      
     
     }catch(err){
-       next(err);
+    //    next(err);
+       res.status(404).json({message:"network err"})
+
+  
     }
     
 }
@@ -31,7 +47,7 @@ exports.login = async (req,res,next)=>{
             
 
         }
-        sendToken(user,200,res)
+        sendToken("sucessfully login",user,200,res)
 
     }catch(err){
        
@@ -64,7 +80,7 @@ exports.resetpassword = (req,res,next)=>{
 }
 
 
-const sendToken = (user,statusCode,res)=>{
+const sendToken = (msg,user,statusCode,res)=>{
    const token = user.getSignedToken();
-   res.status(statusCode).json({sucess:true,token})
+   res.status(statusCode).json({message:msg,success:true,token})
 }

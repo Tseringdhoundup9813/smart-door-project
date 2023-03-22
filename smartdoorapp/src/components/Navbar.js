@@ -1,13 +1,18 @@
 //import css
 import '../style/Navbar.css';
-
-
 import { useState } from 'react';
+import Auth from './Auth';
 
 //router
 import {NavLink} from 'react-router-dom'
+
+
+
 function Navbar (){
 
+// login and signup ===========
+    const[auth,setAuth] = useState(false);
+// end ===================
     
     const searchbtn = () => {
         // search input 
@@ -17,16 +22,26 @@ function Navbar (){
        //close btn
        document.querySelector('.search-close').style.display="block";
 
-       //navabr-ul
-       document.querySelector('.navbar-ul').style.display="none"
+    //    //navabr-ul
+    //    document.querySelector('.navbar-ul').style.display="none"
+        let a =  document.querySelector('.navbar-ul');
+        a.style.border ="2px solid green";
        //width of searchicon
        document.querySelector('.search-icon').style.width="100%"
     }
     const searchClose=()=>{
-       let navbar=document.querySelector('.navbar-ul')
-       navbar.style.display="block"; 
-       navbar.style.border="1px solid red"; 
+      let a =  document.querySelector('.navbar-ul');
+      a.style.border ="2px solid red";
+      a.style.backgroundColor = "red";
+      
 
+       let searchInput=document.querySelector('.search-input')
+       searchInput.style.display = "none" ;
+        
+
+        let self=document.querySelector('.search-icon')
+        self.style.width="auto"
+      
 
         let icon=document.querySelector('.search-icon');
         icon.style.width="auto"
@@ -44,9 +59,27 @@ function Navbar (){
                 nav.click()
               } 
     }
+
+    // AuthenticationSystem========================
+    function AuthenticationSystem(){
+
+    }
+    function authdisplay(props){
+        setAuth(props);
+    }
+    // end ===================================
     
     return(
         <div>
+
+
+
+            {/* singup and signin ==================== */}
+                {
+                 auth?<Auth getdisplay={authdisplay}></Auth>:""
+
+                }
+            {/* =============================== */}
             <nav className="navbar navbar-expand-md bg-body-tertiary ">
                 <div className="container-fluid navbar-container">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,9 +87,14 @@ function Navbar (){
                     </button>
                     <a className="navbar-brand navbar-img" href="#">
                     </a>
+
                  
                     <div className="two-icon ms-auto order-md-3">
-                       <div className="heart-icon fs-4"> <NavLink to="/login" className=" dropdown-item nav-link text-capitalize"><i class="fa-regular fa-user"></i></NavLink></div>
+
+
+                        {/* loin and signup ====================*/}
+                            <div className="heart-icon fs-4" onClick={()=>setAuth(true)}><i class="fa-regular fa-user"></i></div>
+                        {/* end ================= */}
 
                         <div className="heart-icon fs-4"><i class="fa-regular fa-heart"></i></div>
                         
