@@ -2,12 +2,12 @@ import React,{useState} from 'react'
 import axios from "axios"
 
 function Admin() {
-    const[productupload,setproductupload] = useState({name:"",description:"",price:"",img:"",categories:"3D DOORS",color:"rose wood",size:"80-32"});
+    const[productupload,setproductupload] = useState({name:"",description:"",price:"",img:[],categories:"3D DOORS",color:"rose wood",size:"80-32"});
 
     // sucessfully updated
     const[message,setMessage] =useState(""); 
 
-    console.log(productupload);
+
 
      const onSubmit =(e)=>{
    
@@ -16,12 +16,22 @@ function Admin() {
         formdata.append("name",productupload.name)
         formdata.append("description",productupload.description)
         formdata.append("price",productupload.price)
-        formdata.append("testImage",productupload.img);
+        {
+         
+            for(var a=0;a< productupload.img.length;a++){
+                formdata.append("testImage",productupload.img[a]);
+
+            }
+
+        
+        }
         formdata.append("categories",productupload.categories);
         formdata.append("colors",productupload.color);
         formdata.append("size",productupload.size);
+   
+        
 
-
+    
 
 
 
@@ -85,7 +95,10 @@ function Admin() {
                 </select>
 
 
-                 <input type="file" name="testImage" onChange={(e)=>setproductupload({...productupload,img:e.target.files[0]})} />
+                 <input type="file" name="testImage" onChange={(e)=>setproductupload({...productupload,img:[...productupload.img,e.target.files[0]]})} />
+                 <input type="file" name="testImage" onChange={(e)=>setproductupload({...productupload,img:[...productupload.img,e.target.files[0]]})} />
+         
+
                  </div>
                 <div className="form-group">
              <button className="btn btn-primary" type="submit">Upload</button>

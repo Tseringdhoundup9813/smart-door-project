@@ -37,9 +37,10 @@ const ProductScheme =new  mongoose.Schema({
   
     img:{
        
-        type:String,
-        required:true,
+        type:Array,
+        
     },
+   
     addToCart:{
         type:Boolean,
         

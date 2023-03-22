@@ -40,6 +40,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
     
+        <Route path="/product/:productId" element={<Productview />} />
         <Route path="/admin" element={<Admin></Admin>}></Route>
       </Routes>
 

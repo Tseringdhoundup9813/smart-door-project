@@ -5,17 +5,22 @@
 
 /* ============picture========== */
 
-.pv-img{
-    margin:10px auto;
+.indicator-img{
+  
+    width:100px;
+    height:100px;
+    margin-top:20px;
 }
-.pv-img img{
-    height:70px;
-    width:100%;
-    object-fit: contain;
+.indicator-img img{
+   width:100%;
+   height:100%;
+   object-fit:cover;
+   border:2px solid red;
 }
 .pvslider-indicators{
-    position: initial;
-    flex-direction:column;
+  width:100%;
+  height:100%;
+  border:2px solid grey;
 }
 .pvslider-inner{
     height:90vh;

@@ -1,6 +1,9 @@
 // css
 import '../style/Product-view.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+
+import { Link,useParams } from 'react-router-dom';
+import axios from 'axios';
 
 //slick
 import React, { Component } from "react";
@@ -30,6 +33,10 @@ import mem6 from '../image/products/membrane/SD115.jpg';
 
 
 function SampleNextArrow(props) {
+
+    // product id
+
+
     const { className, style, onClick } = props;
     return (
       <div
@@ -54,6 +61,32 @@ function SamplePrevArrow(props) {
   }
   
 function Productview(){
+
+
+    const {productId} = useParams();
+ 
+
+    useEffect(()=>{
+         productDetail();
+    },[])
+
+    const[product,setproduct]=useState();
+
+    async function productDetail(){
+        const product = await  axios.get(`http://localhost:3001/productdetail/${productId}`).then((res)=>{
+        setproduct(res.data.data);
+
+    })
+
+    }
+
+    if(product){
+        console.log(product.name);
+
+    }
+   
+    
+
     const [state, setState]=useState(false);
     const [size, setSize]= useState(false);
     const [share, setShare]= useState(false);
@@ -131,7 +164,8 @@ function Productview(){
         console.log('hi')
     }
     return(
-        <div>   
+        <div>  
+
             {/* large screen */}
 
             <div className="row pv-row justify-content-around">
@@ -140,23 +174,23 @@ function Productview(){
                         <div className="col-md-3 col-sm-12 order-2 order-md-1 pv-container">
 
                             {/* <!-- Indicator start --> */}
+
+                            
                             <div className="pvslider-indicators">
-                                <div className='pv-img'>
-                                <button type="button" data-bs-target="#pvslider" className=" border border-secondary active w-100 d-flex align-items-center justify-content-center"
-                                    data-bs-slide-to="0">
-                                <img src={likeimg[0].image}/>
-                                </button>
-                                </div>
-                               <div className='pv-img'>
-                               <button type="button" data-bs-target="#pvslider" className=" border border-secondary   w-100 d-flex align-items-center justify-content-center" data-bs-slide-to="1">
-                                <img src={likeimg[1].image}/>
-                                </button>
-                               </div>
-                                <div className='pv-img'>
-                                <button type="button" data-bs-target="#pvslider" className=" border border-secondary   w-100 d-flex align-items-center justify-content-center" data-bs-slide-to="2">
-                                <img src={likeimg[2].image}/>
-                                </button>
-                                </div>
+
+
+                                {product?product.img.map((img)=>{
+                                    return <div className='indicator-img'>
+                                        <button type="button" data-bs-target="#pvslider" className=" border border-secondary active w-100 d-flex align-items-center justify-content-center"
+                                            data-bs-slide-to="0">
+                                             <img src={img}/>
+                                        </button>
+                                    </div>
+                                    })
+                                    :""
+                                   
+                                }
+                            
                             </div>
                     {/* <!-- Indicator Close --> */}
                         </div>
@@ -164,15 +198,13 @@ function Productview(){
                             <div id="pvslider" className="carousel slide" data-bs-touch="true" data-bs-ride="carousel" >
                             <div className="carousel-inner pvslider-inner">
                                 <div className="carousel-item pv-main-img active">
-                                    <img src={likeimg[0].image} className=" w-100"/>
+                                    <img src={product?product.img[0]:""} className=" w-100"/>
                                 </div>
                                 <div className="carousel-item pv-main-img">
-                                <img src={likeimg[1].image} className=" w-100"/>
+                                <img src={product?product.img[1]:""} className=" w-100"/>
 
                                 </div>
-                                <div className="carousel-item pv-main-img">
-                                <img src={likeimg[2].image} className=" w-100"/>
-                                </div>
+                               
                             </div>
                             </div>
                         </div>
@@ -183,20 +215,25 @@ function Productview(){
                     <i class="fa-regular fa-heart"></i>
                     </div>
                     <div className="pv-title">
-                        3D Doors
+                        {product?product.categories:""}
                     </div>
                     <div className="pv-sub-title">
                         smart doors
                     </div>
                     <div className="pv-price-detail d-flex">
-                        <div className="pv-price">Rs. 4500 original detail </div>
+                        <div className="pv-price">Rs. {product?product.price:""} original detail </div>
                         <div className="pv-price-question"> <i class="fa-regular fa-circle-question"></i></div>
                     </div>
 
-                    <div className="pv-more-ad">
+
+
+
+                    {/* <div className="pv-more-ad">
                         <div className="d-flex align-items-center justify-content-center">
                         <div className="pv-more-checkbox"></div>
                         </div>   
+
+
                         <div className="d-flex align-items-center px-2 justify-content-between">
                             <div className="pv-more-detail ">
                            <div>
@@ -217,9 +254,9 @@ function Productview(){
                         </div>
                         </div>
                         
-                    </div>
+                    </div> */}
 
-
+{/* 
                     <div className="pv-membrance">
                     <div className="pv-more-ad ">
                         <div className="d-flex align-items-center  justify-content-center">
@@ -263,20 +300,21 @@ function Productview(){
 
                         
                     </div>
-                    <div className="pv-more-code-d">
-                            <div className="pv-more-code"> Code : SD123 RW</div>
-                            <div className="ul pv-ul">
-                                <li className="pv-list">Get your own customization</li>
-                                <li className="pv-list">Free shipping</li>
-                                <li className="pv-list">Door to door delivery</li>
-                                <li className="pv-list">Pause or cancel anytime</li>
-                            </div>
+                    
+                     <div className="pv-more-code-d">
+                    //         <div className="pv-more-code"> Code : SD123 RW</div>
+                    //         <div className="ul pv-ul">
+                    //             <li className="pv-list">Get your own customization</li>
+                    //             <li className="pv-list">Free shipping</li>
+                    //             <li className="pv-list">Door to door delivery</li>
+                    //             <li className="pv-list">Pause or cancel anytime</li>
+                    //         </div>
 
-                            <div className="pv-more-explore pv-sub-title">
-                                <span>Explore Membership</span>
-                            </div>
-                        </div>
-                    </div>
+                    //         <div className="pv-more-explore pv-sub-title">
+                    //             <span>Explore Membership</span>
+                    //         </div>
+                    //     </div> 
+                    </div> */}
                     
                     <div className="pv-more-ad ">
                         <div className="d-flex align-items-center  justify-content-center">
@@ -329,9 +367,8 @@ function Productview(){
 
                         <div className="pv-detail-size">
                             <ul>
-                                <li> <input type="radio" name="size" /> 80 <i class="fa-solid fa-xmark"></i> 32</li>
-                                <li> <input type="radio" name="size" /> 80 <i class="fa-solid fa-xmark"></i> 26</li>
-                                <li> <input type="radio" name="size" /> 75 <i class="fa-solid fa-xmark"></i>  26</li>
+                                <li> {product?product.size:""}</li>
+                               
                             </ul>
                         </div>
                     </div>
@@ -367,14 +404,18 @@ function Productview(){
                     <Slider {...settings}>
                      {  likeimg.map((e)=>{
                         return<div>
+                        
                             <div className="like-card">
-                                <div className="like-img" style={{background: `url(${e.image})center/contain no-repeat`}}>
+                                <div className="like-img" style={{background: `url(${product?product.img:""}})center/contain no-repeat`}}>
                                     <div className="heart" onClick={heart}><i class="fa-solid fa-heart"></i></div>
                                 </div>
                                 <div className="like-detail">
-                                    <div className="like-p-title">Premium Double Doors</div>
+                                    {
+                                        product?<div className="like-p-title">{product.name}</div>:<h1>no product</h1>
+
+                                    }
                                     <div className="like-p-model">SD1103</div>
-                                    <div className="like-p-price">Rs. 2800/-</div>
+                                    <div className="like-p-price">{product?product.price:""}</div>
                                 </div>
                             </div>
                         </div>
