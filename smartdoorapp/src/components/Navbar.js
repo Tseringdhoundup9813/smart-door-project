@@ -23,12 +23,14 @@ function Navbar (){
        document.querySelector('.search-icon').style.width="100%"
     }
     const searchClose=()=>{
-       document.querySelector('.navbar-ul').style.display="block"  
+       let navbar=document.querySelector('.navbar-ul')
+       navbar.style.display="block"; 
+       navbar.style.border="1px solid red"; 
 
-        let self=document.querySelector('.search-icon')
-        self.style.width="initial"
-        console.log(self)
 
+        let icon=document.querySelector('.search-icon');
+        icon.style.width="auto"
+        
         var x = window.matchMedia("(max-width: 768px)")
         if (x.matches) { // If media query matches
             var nav = document.querySelector('.navbar-toggler')
