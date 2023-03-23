@@ -10,6 +10,9 @@ const Register = (props) => {
     const[formdata,setformdata]= useState({username:"",email:"",password:""});
     const[Message,setMessage]=useState("");
     const[signupSucess,setSingupSucess] = useState(false);
+    const[passwordView,setPasswordView] = useState(false);
+    const[passwordViewTwo,setPasswordViewTwo] = useState(false);
+
 
     async function SubmitForm(){
         try{
@@ -35,8 +38,22 @@ useEffect(()=>{
             setMessage("");
         },9000)
     }
-},)
-   
+    let password = document.querySelector(".password");
+    if(formdata.password.length < 6){
+        password.style.color ="red";
+    }
+    else{
+        password.style.color ="blue";
+
+    }
+    console.log(formdata.password);
+},[formdata.password])
+
+// password validation 
+
+function PasswordValidation(e){
+    console.log(e);
+}
   return (
     <div className='register-container'>
         <div className="register-title">
@@ -66,16 +83,22 @@ useEffect(()=>{
             <input type="text" onChange={(e)=>setformdata({...formdata,username:e.target.value})} placeholder='enter username' />
             <input type="text"  onChange={(e)=>setformdata({...formdata,email:e.target.value})} placeholder='enter email' />
             <div>
-                 <input type="password" onChange={(e)=>setformdata({...formdata,password:e.target.value})} placeholder='enter password' />
-                 <i class="fa-solid fa-eye"></i>
+                 <input className='password' type={passwordView?"text":"password"} onChange={(e)=>setformdata({...formdata,password:e.target.value})} placeholder='enter password' />
+                 <div onClick={()=>setPasswordView((prev)=>!prev)}><i class="fa-solid fa-eye"></i></div>
             </div>
             <div>
-             <input type="password" placeholder='enter Confirm password' />
-
+             <input  type={passwordViewTwo?"text":"password"} placeholder='enter Confirm password' />
+                <div onClick={()=>setPasswordViewTwo((prev)=>!prev)}><i class="fa-solid fa-eye"></i></div>
             </div>
+
             <button onClick={SubmitForm}>Singup</button>
 
         </div>
+
+        {/* password verication  */}
+
+
+        {/* end of verication */}
         <div className="forgetpassword">
           
             <p onClick={ChangeTologin}>already have account login</p>

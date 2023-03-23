@@ -280,8 +280,25 @@ const filter=()=>{
         {/* =================product-view============= */}
         <div className="col-sm-9 col-xm-12" id="product-view">
         <div className="show-product">
-            <div className="show-card">
+               {/* pagination ======================================== */}
+               <div id="pagination">
+                <div className="row show-head ">
+                   <h1>Total product({totalProductShow})</h1>
+                </div>
+                <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
+                    {
+                        [...Array(totalProductCount)].map((e,i)=>{
+                        return <li class="pagination-selection" key={i} onClick={(e)=>setpageCount(e.target.value)} value={i+1}>{i+1}</li>
+                     })
+                    }
+                 <button className="pageRight" onClick={()=>setpageCount((prev)=>prev>=totalProductCount-1?totalProductCount:++prev)}><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+                
+            {/* end of pagination =================================== */}
 
+             
+            <div className="show-card">
+            
                     
                  {/* // product is not found ================================================= */}
 
