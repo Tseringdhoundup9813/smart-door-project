@@ -309,12 +309,12 @@ const filter=()=>{
                 {
                 allproduct.map((product,key)=>{
                         return <div key={key} className="show-card-container" > 
-                       
+                       <Link to={`/product/${product._id}`} >
                             <div className="show-card-img">
                           
                                 <img src={product.img[0]}></img>
                                 </div>
-                            <Link to={`/product/${product._id}`} ></Link>
+                            </Link>
 
 
                               
