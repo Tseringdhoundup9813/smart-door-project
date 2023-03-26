@@ -23,11 +23,6 @@
     cursor:pointer;
     border-radius:5px;
 }
-.active{
-    background:rgb(33, 67, 203);
-    color:#fff;
-    text-align:center
-}
 .side-icon{
     margin: 0 10px;
 }

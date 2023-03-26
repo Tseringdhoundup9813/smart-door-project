@@ -16,21 +16,21 @@ function AdminNavbar(){
                         </div>
                     </div>
                     <div className="sidebar-menu">
-                        <div className="side-chat text-capitalize">
-                        <NavLink to="/admin" className="sidechatNav">
+                        <div className="side-chat text-capitalize nav-item">
+                        <NavLink to="/admin" className="nav-link sidechatNav">
                             <div className="side-icon">
                             <i class="fa-solid fa-chart-line"></i></div>Dashboard
                         </NavLink>
                         </div>
-                        <div className="side-chat text-capitalize">
+                        <div className="side-chat text-capitalize nav-item">
                             
-                        <NavLink to="/admin" className="sidechatNav">
+                        <NavLink to="/admin" className="nav-link sidechatNav">
                             <div className="side-icon"><i class="fa-regular fa-message"></i></div>chats
                         </NavLink>
                         </div>
                         <div className="side-chat text-capitalize">
                             
-                            <NavLink to="/admin" className="sidechatNav">
+                            <NavLink to="/admin" className="nav-link sidechatNav">
                             <div className="side-icon"><i class="fa-solid fa-inbox"></i></div>inbox
                         </NavLink>
                         </div>
