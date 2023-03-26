@@ -10,14 +10,19 @@ import Footer from './components/Footer';
 import Contact from './components/Contact';
 import Product from './components/Product';
 import Productview from './components/ProductView';
-import Admin from "./components/Admin";
+// import Admin from "./components/Admin";
 
 import ProductCart from './components/productCart';
 import Faqs from './components/Faqs';
 import Vision from "./components/vision";
 import Story from './components/Story'
 
+
+//
+import { useParams } from 'react-router-dom';
 function Main() {
+  const {para}=useParams();
+  console.log(para)
   return (
     <div>
     <BrowserRouter>
@@ -34,9 +39,11 @@ function Main() {
         <Route path="/about/our-story" element={<Story />} />
         
         <Route path="/product/:productId" element={<Productview />} />
-        <Route path="/admin" element={<Admin></Admin>}></Route>
+        {/* <Route path="/admin" element={<Admin></Admin>}></Route> */}
 
         </Routes>
+
+        
       <Footer></Footer>
   </BrowserRouter>
     </div>

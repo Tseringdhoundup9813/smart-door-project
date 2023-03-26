@@ -20,10 +20,8 @@
 }
 .side-chat{
     border:1px solid yellow;
-    padding:15px 5px;
     cursor:pointer;
     border-radius:5px;
-    display:flex;
 }
 .active{
     background:rgb(33, 67, 203);
@@ -35,6 +33,11 @@
 }
 .admin-main{
     background-color: rgb(241, 241, 241);
+}
+.sidechatNav{
+    padding:10px 15px;
+    display: flex;
+    text-decoration: none;
 }
 /* ===========admin-nav==== */
 .admin-main-nav{
@@ -164,6 +167,10 @@
         font-size:12px;
     }
 }
+.row-order-list, .row-product-list{
+    width:99%;
+    margin:20px auto;
+}
 /* ========order-list============ */
 .main-ol{
     padding:20px;
@@ -257,7 +264,7 @@
         display: block;
     }
     .admin-sidebar{
-        width:40%;
+        width:auto;
         height: 100vh;
         transform:translate(-300%, 0);
         position: fixed;
