@@ -64,4 +64,4 @@ function App() {
     )
 }
 
-export default Aadmin;
+export default App;
