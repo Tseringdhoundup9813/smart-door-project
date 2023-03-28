@@ -68,7 +68,7 @@ function Productview(){
     const[product,setproduct]=useState("");
     const[userId,setUserId] = useState("");
     const[cartlist,setCartList] = useState([]);
-    const[productAdded,setProductAdded] = useState(false);
+    const[productAddedMessage,setProductAddedMessage] = useState(false);
    
 
 
@@ -88,25 +88,53 @@ function Productview(){
 
  
 
+
 // add to cart list ============================================================================================================================
     function AddTocart(){
         if(JSON.parse(localStorage.getItem("cart")) !==null){
-          
-            if(cartlist.includes(product)){
-    
+           
+            const checkExists = cartlist.filter((item)=>{
+                if(item._id == product._id){
+                    return true;
+                }else{
+                    return false;
+                }
+            })
+            if(checkExists.length > 0){
+                console.log("already add to cart");
+                setProductAddedMessage("already added to cart");
+                
+                setTimeout(function(){
+                    setProductAddedMessage("");
+                },1200)
             }
             else{
-               
                 localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
-                setCartList([...cartlist,product]);
-                // product add to cart message ========================
-                setProductAdded(true);
-                setTimeout(function(){
-                    setProductAdded(false);  
-                },2000)
+                    setCartList([...cartlist,product]);
+                    // product add to cart message ========================
+                    setProductAddedMessage("added to cart");
+                   
+                    setTimeout(function(){
+                        setProductAddedMessage("");
+                    },1200)
+            }
+           
+
+            // if(cartlist.includes(product)){
+            //     console.log("already add to cart");
+            // }
+            // else{
+               
+            //     localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
+            //     setCartList([...cartlist,product]);
+            //     // product add to cart message ========================
+            //     setProductAdded(true);
+            //     setTimeout(function(){
+            //         setProductAdded(false);  
+            //     },1200)
 
                        
-            } 
+            // } 
         }
         else{
             localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
@@ -221,10 +249,12 @@ function Productview(){
         <div> 
 
              {/*product add to the cart message =------------------------------  */}
-
-                <div style={{transform:`TranslateX(${productAdded?2:300}px)`}} className="product_add">
-                    <p>Product is add to cart</p>
-                </div>
+                {
+                    productAddedMessage.length > 0?<div style={{transform:"TranslateX(0px)"}} className="product_add">
+                    <p>{productAddedMessage}</p>
+                    </div>:""
+                }
+              
              {/* ==========================END========================================= */}
 
             {/* large screen */}

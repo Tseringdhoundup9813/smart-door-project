@@ -1,7 +1,6 @@
 import '../style/productCart.css'
 
 import {useState, useEffect, useId} from 'react'
-import axios from 'axios';
 
 //slick
 import React, { Component } from "react";
@@ -59,15 +58,12 @@ function ProductCart (){
     const[userId,setUserId] = useState();
     const[cartlist,setCartList] = useState([]);
     const[deletecartlist,setdeletecartlist] = useState();
-    console.log(cartlist);
-
+    
 
 
     useEffect(()=>{
 
         setCartList(JSON.parse(localStorage.getItem("cart")));
-       
-        showCartlist();
         handlePrice();
 
     },[]);
@@ -93,13 +89,7 @@ function ProductCart (){
         }
     }
 
-    // cart show ---------------------------------------
    
-    function showCartlist(){
-       
-    }
-    // -----------------------
-
         // deleteCartlist=============
         function deleteCartlist(key){
             
@@ -203,14 +193,15 @@ function ProductCart (){
 
                         {/*  */}
                         {
-                            cartlist?.map((proudct,key)=>{
+                            cartlist?.map((product,key)=>{
+                             
                               return  <div key ={key} className="cart-product-list">
                                 <div className="cart-product-detail">
-                                    <div className="cart-product-img" style={{backgroundImage:`url(${proudct.img[0]})`}}></div>
-                                    <div className="cart-product-name text-capitalize">{proudct.categories}</div>
+                                    <div className="cart-product-img" style={{backgroundImage:`url(${product.img[0]})`}}></div>
+                                    <div className="cart-product-name text-capitalize">{product.categories}</div>
                                 </div>
                                 <div className="cart-product-amt">
-                                    Rs.{proudct.price}
+                                    Rs.{product.price}
                                 </div>
                                 
                                 <div className="cart-product-quantity d-flex align-items-center">
@@ -292,8 +283,8 @@ function ProductCart (){
                 <div>
                   
                     <Slider {...settings}>
-                     {  likeimg.map((e)=>{
-                        return<div>
+                     {  likeimg.map((e,key)=>{
+                        return<div key={key}>
                             <div className="like-card">
                                 <div className="like-img" style={{background: `url(${e.image})center/contain no-repeat`}}>
                                     <div className="heart" onClick={heart}><i class="fa-solid fa-heart"></i></div>
