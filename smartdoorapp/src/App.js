@@ -3,65 +3,60 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './App.css';
-import React,{useState,useContext} from "react";
-// import Doorslidersystem from './components/Doorslidersystem';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Footer from './components/Footer';
-import Contact from './components/Contact';
-import Product from './components/Product';
-import Productview from './components/ProductView';
-import Admin from "./components/Admin";
-
-import ProductCart from './components/productCart';
-import Faqs from './components/Faqs';
-import Vision from "./components/vision";
-import Story from './components/Story'
-import { loginContext } from "./components/Context";
-// css
-import './style/aadmin.css';
 
 
 // css
 import './style/aadmin.css';
 
-function App() {
 
-  const[successLogin,setSuccessLogin] = useState(false);
-  const[validationBox,setValidationBox]= useState(false);
+//admin navbar
+import AdminNavbar from './admin/AdminNavbar';
+import AdminTop from './admin/AdminTop';
 
+import Dashboard from './admin/Navlink/Dashboard';
+import List from './admin/Orderlist'
 
-  return (
-    <BrowserRouter>
-    <div id="main">
+import Chats from './admin/Navlink/Chats';
+import Products from './admin/Navlink/Products';
+import Inbox from './admin/Navlink/Inbox';
+import Pages from "./admin/Navlink/Pages";
+import Media from "./admin/Navlink/Media";
 
-    <loginContext.Provider value={{successLogin,setSuccessLogin,validationBox,setValidationBox}}>
-    <Navbar></Navbar>
-      <Routes>
-        
-        <Route path="/" element={<Home />} />
-        <Route path="/footer" element={<Footer />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/product-view" element={<Productview />} />
-        
-        <Route path="/product-cart" element={<ProductCart />} />
-        <Route path="/faqs" element={<Faqs />} />
-        <Route path="/about/our-vision" element={<Vision />} />
-        <Route path="/about/our-story" element={<Story />} />
-    
-
-    
-        <Route path="/product/page-view:productId" element={<Productview />} />
-        <Route path="/admin" element={<Admin></Admin>}></Route>
-      </Routes>
-
-      <Footer></Footer>
-      </loginContext.Provider>
-
+import AddProduct from './admin/Navlink/AddProduct'
+import UpdateProduct from "./admin/Navlink/UpdateProduct";
+import Categories from './admin/Navlink/Categories';
+function Aadmin (){
+    return(
+    <div>
+      <BrowserRouter>
+      
+      
+        <div id="admin">
+            <div className="row row-admin">
+                <AdminNavbar></AdminNavbar>
+                <div className="col-md-10 col-sm-12 admin-main">
+                    <AdminTop></AdminTop>
+                    
+                    <Routes>
+                        <Route path="/admin/dashboard" element={<Dashboard />} />
+                        <Route path="/admin/order" element={<List/>}/>
+                        <Route path="/admin/chats" element={<Chats/>}/>
+                        <Route path="/admin/products" element={<Products/>}/>
+                        <Route path="/admin/inbox" element={<Inbox/>}/>
+                        <Route path="/admin/pages" element={<Pages/>}/>
+                        <Route path="/admin/media" element={<Media/>}/>
+                        <Route path="/admin/products/edit" element={<UpdateProduct/>}/>
+                        <Route path="/admin/add-products" element={<AddProduct/>}/>
+                        <Route path="/admin/categories" element={<Categories/>}/>
+                    </Routes>
+                
+                </div>
+            </div>
+           
+        </div>
+      </BrowserRouter>
     </div>
-    </BrowserRouter>
     )
 }
 
-export default App;
+export default Aadmin;
