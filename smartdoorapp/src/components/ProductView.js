@@ -2,7 +2,7 @@
 import '../style/Product-view.css';
 import {useEffect, useState} from 'react';
 
-import { Link,useParams } from 'react-router-dom';
+import { json, Link,useParams } from 'react-router-dom';
 import axios from 'axios';
 
 //slick
@@ -61,36 +61,90 @@ function SamplePrevArrow(props) {
   }
   
 function Productview(){
-
-
     const {productId} = useParams();
+   
+
+
+    const[product,setproduct]=useState("");
+    const[userId,setUserId] = useState("");
+    const[cartlist,setCartList] = useState([]);
+    const[productAdded,setProductAdded] = useState(false);
+   
+
+
+    async function productDetail(){ 
+     
+        try{
+            const product = await  axios.get(`http://localhost:3001/productdetail/${productId}`)
+          
+            setproduct(product.data.data);
+        
+        }catch(err){
+            console.log(err);
+        }
+       
+
+    }
+
  
 
-    useEffect(()=>{
-         productDetail();
-    },[])
-
-    const[product,setproduct]=useState();
-
-    async function productDetail(){
-        const product = await  axios.get(`http://localhost:3001/productdetail/${productId}`).then((res)=>{
-        setproduct(res.data.data);
-
-    })
-
-    }
-
-    if(product){
-        console.log(product.name);
-
-    }
-   
+// add to cart list ============================================================================================================================
+    function AddTocart(){
+        if(JSON.parse(localStorage.getItem("cart")) !==null){
+          
+            if(cartlist.includes(product)){
     
+            }
+            else{
+               
+                localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
+                setCartList([...cartlist,product]);
+                // product add to cart message ========================
+                setProductAdded(true);
+                setTimeout(function(){
+                    setProductAdded(false);  
+                },2000)
+
+                       
+            } 
+        }
+        else{
+            localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
+            setCartList([...cartlist,product]);
+            console.log("last one work too");
+        }
+        
+
+       
+       
+    }
+    // add to cart list =============================f;asdf;sldkaf=================================================
+  
+    useEffect(()=>{ 
+        // =========================
+        if(localStorage.getItem("cart") !== null){
+
+         setCartList(JSON.parse(localStorage.getItem("cart")));
+        }else{
+            setCartList([]);
+
+        }
+        // ======================
+     
+        // check product add to cart or not
+        productDetail();
+
+        
+    
+        
+    },[ ])
+
+   
 
     const [state, setState]=useState(false);
     const [size, setSize]= useState(false);
     const [share, setShare]= useState(false);
-    console.log(state);
+  
     const plusIcon=()=>{
         setState( !state);
         const para= document.querySelector('.pv-detail-para');
@@ -164,12 +218,19 @@ function Productview(){
         console.log('hi')
     }
     return(
-        <div>  
+        <div> 
+
+             {/*product add to the cart message =------------------------------  */}
+
+                <div style={{transform:`TranslateX(${productAdded?2:300}px)`}} className="product_add">
+                    <p>Product is add to cart</p>
+                </div>
+             {/* ==========================END========================================= */}
 
             {/* large screen */}
 
-            <div className="row pv-row justify-content-around">
-                <div className="col-sm-6 col-12">
+            <div className="row pv-row ">
+                <div className="col-sm-4 col-12">
                     <div className="row row-pvslider">
                         <div className="col-md-3 col-sm-12 order-2 order-md-1 pv-container">
 
@@ -179,10 +240,10 @@ function Productview(){
                             <div className="pvslider-indicators">
 
 
-                                {product?product.img.map((img)=>{
+                                {product?product.img.map((img,index)=>{
                                     return <div className='indicator-img'>
-                                        <button type="button" data-bs-target="#pvslider" className=" border border-secondary active w-100 d-flex align-items-center justify-content-center"
-                                            data-bs-slide-to="0">
+                                        <button type="button" data-bs-target="#pvslider" className=" active w-100 d-flex align-items-center justify-content-center"
+                                            data-bs-slide-to={index}>
                                              <img src={img}/>
                                         </button>
                                     </div>
@@ -194,7 +255,7 @@ function Productview(){
                             </div>
                     {/* <!-- Indicator Close --> */}
                         </div>
-                        <div className="col-sm-12 col-md-8 order-1 order-md-2 pv-main-img">
+                        <div className="col-sm-12 col-md-9 order-1 order-md-2 pv-main-img">
                             <div id="pvslider" className="carousel slide" data-bs-touch="true" data-bs-ride="carousel" >
                             <div className="carousel-inner pvslider-inner">
                                 <div className="carousel-item pv-main-img active">
@@ -210,168 +271,60 @@ function Productview(){
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-6 col-12 pv-img-detail">
-                    <div className="pv-heart-icon text-end">
-                    <i class="fa-regular fa-heart"></i>
+                <div className="col-sm-8 col-12 pv-img-detail">
+                    
+                        {/* // favourite */}
+                         {/* <div className="pv-heart-icon text-end">
+                            <i class="fa-regular fa-heart"></i>
+                        </div> */}
+                        {/* // end  */}
+                    
+                       
+                    <div className="pv-title door-title">
+                       <h1> {product?product.categories:""}</h1> 
+                       <h2>{product?product.name:""}</h2>
                     </div>
-                    <div className="pv-title">
-                        {product?product.categories:""}
-                    </div>
-                    <div className="pv-sub-title">
-                        smart doors
-                    </div>
+               
                     <div className="pv-price-detail d-flex">
-                        <div className="pv-price">Rs. {product?product.price:""} original detail </div>
-                        <div className="pv-price-question"> <i class="fa-regular fa-circle-question"></i></div>
+                        <div className="pv-price"><h1>Rs. {product?product.price:""}</h1></div>
                     </div>
 
 
-
-
-                    {/* <div className="pv-more-ad">
-                        <div className="d-flex align-items-center justify-content-center">
-                        <div className="pv-more-checkbox"></div>
-                        </div>   
-
-
-                        <div className="d-flex align-items-center px-2 justify-content-between">
-                            <div className="pv-more-detail ">
-                           <div>
-                           <div className="pv-sub-title ">
-                                one-time order 
-                            </div>
-                            <div className="pv-more-p">
-                                Order upto 10 doors for
-                            </div>
-                            <div className="pv-more-price">
-                                Rs. 34000
-                            </div>
-                            </div>
-                           </div>
-
-                            <div className="pv-more-img">
-                            <div className="pv-more-img-div"></div>
-                        </div>
-                        </div>
-                        
-                    </div> */}
-
-{/* 
-                    <div className="pv-membrance">
-                    <div className="pv-more-ad ">
-                        <div className="d-flex align-items-center  justify-content-center">
-                        <div className="pv-more-checkbox">
-                            <div className="pv-more-dark"></div>
-                        </div>
-                        </div>   
-                        <div className="d-flex align-items-center px-2 justify-content-between">
-                        <div className="pv-more-detail">
-                            <div className="pv-sub-title text-capitalize">
-                                Membership
-                            </div>
-                            <div className="pv-more-p">
-                                Get exclusive offer
-                            </div>
-                            <div className="pv-more-price">
-                                Rs. 34000
-                            </div>
-                        </div>
-                        <div>
-                          <div className="pv-img-container">
-                          <div className="d-flex">
-                          <div className="pv-more-img2">
-                                <div className="pv-more-img-div"></div>
-                            </div>
-                            <div className="pv-more-img2">
-                                <div className="pv-more-img-div"></div>
-                            </div>
-                          </div>
-                            <div className="d-flex">
-                            <div className="pv-more-img2">
-                                <div className="pv-more-img-div"></div>
-                            </div>
-                            <div className="pv-more-img2">
-                                <div className="pv-more-img-div"></div>
-                            </div>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-
-                        
-                    </div>
-                    
-                     <div className="pv-more-code-d">
-                    //         <div className="pv-more-code"> Code : SD123 RW</div>
-                    //         <div className="ul pv-ul">
-                    //             <li className="pv-list">Get your own customization</li>
-                    //             <li className="pv-list">Free shipping</li>
-                    //             <li className="pv-list">Door to door delivery</li>
-                    //             <li className="pv-list">Pause or cancel anytime</li>
-                    //         </div>
-
-                    //         <div className="pv-more-explore pv-sub-title">
-                    //             <span>Explore Membership</span>
-                    //         </div>
-                    //     </div> 
-                    </div> */}
-                    
-                    <div className="pv-more-ad ">
-                        <div className="d-flex align-items-center  justify-content-center">
-                        <div className="pv-more-checkbox">
-                            <div className="pv-more-dark"></div>
-                        </div>
-                        </div>   
-                        <div className="d-flex align-items-center px-2 justify-content-between">
-                        <div className="pv-more-detail">
-                            <div className="pv-sub-title text-capitalize">
-                                buy now
-                            </div>
-                            <div className="pv-more-p">
-                                Pre-loved item excellent condition
-                            </div>
-                            <div className="pv-more-price">
-                                Rs. 3800
-                            </div>
-                        </div>
-                        </div>
-
-                        
-                    </div>
+                 
 
 
                     <div id="pv-more-detail">
                        <div className="pv-product-detail  d-flex justify-content-between">
                        <div className="pv-title">Product Details</div>
-                        <div className="pv-product-detail-icon" onClick={plusIcon}>
-                            {
-                                state? "-" : "+"
-                            }
-                        </div>
+                     
                        </div>
 
                         <div className="pv-detail-para">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet, sint? Quisquam possimus laudantium iusto repellat praesentium sapiente dolore eos. Est laboriosam nemo recusandae?
+                          <p> {product?product.description:""}</p>  
                         </div>
                     </div>
 
                     <div id="pv-more-detail">
                        <div className="pv-product-detail  d-flex justify-content-between">
                        <div className="pv-title">size</div>
-                        <div className="pv-product-detail-icon" onClick={sizeIcon}>
-                            {
-                                size? "-" : "+"
-                            }
-                        </div>
+                       
                        </div>
 
                         <div className="pv-detail-size">
-                            <ul>
-                                <li> {product?product.size:""}</li>
-                               
-                            </ul>
+                            <h1>{product?product.size:""}inches</h1>
+                          
                         </div>
                     </div>
+                       {/* add to cart and buy button */}
+                       <div className="cart-buy-button ">
+                        <div onClick={AddTocart}className="add-to-cart-box">
+                            <p>Add to cart</p>
+                        </div>
+                        <div className="buy-box">
+                            <p>Buy</p>
+                        </div>
+                    </div>
+                    {/* -================= */}
 
                     <div id="pv-more-detail">
                        <div className="pv-product-detail  d-flex justify-content-between">

@@ -1,6 +1,7 @@
 import '../style/productCart.css'
 
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useId} from 'react'
+import axios from 'axios';
 
 //slick
 import React, { Component } from "react";
@@ -55,6 +56,25 @@ function SamplePrevArrow(props) {
 function ProductCart (){
     const [price, setPrice] = useState(0);
     const [amount, setAmount]=useState(1)
+    const[userId,setUserId] = useState();
+    const[cartlist,setCartList] = useState([]);
+    const[deletecartlist,setdeletecartlist] = useState();
+    console.log(cartlist);
+
+
+
+    useEffect(()=>{
+
+        setCartList(JSON.parse(localStorage.getItem("cart")));
+       
+        showCartlist();
+        handlePrice();
+
+    },[]);
+    
+  
+
+
     const itemprice=55;
     
     const handlePrice = ()=>{
@@ -72,9 +92,37 @@ function ProductCart (){
             setAmount(1)
         }
     }
-    useEffect(()=>{
-        handlePrice();
-    })
+
+    // cart show ---------------------------------------
+   
+    function showCartlist(){
+       
+    }
+    // -----------------------
+
+        // deleteCartlist=============
+        function deleteCartlist(key){
+            
+          
+          let deletecart = JSON.parse(localStorage.getItem("cart")).filter((item,index,array)=>{
+                if(index !==key){
+                    return item;
+                }
+          })
+
+          localStorage.setItem("cart",JSON.stringify(deletecart));
+         setCartList(JSON.parse(localStorage.getItem("cart")));
+
+        
+          
+        //   console.log(deletecart);
+
+   
+        }
+
+        // ==========================
+
+
 
     //slick 
     var settings = {
@@ -152,41 +200,48 @@ function ProductCart (){
                             <div className="cart-h text-uppercase">quantity</div>
                             <div className="cart-h text-uppercase">subtotal</div>
                         </div>
-                        <div className="cart-product-list">
-                            <div className="cart-product-detail">
-                                <div className="cart-product-img"></div>
-                                <div className="cart-product-name text-capitalize">canadian door 
+
+                        {/*  */}
+                        {
+                            cartlist?.map((proudct,key)=>{
+                              return  <div key ={key} className="cart-product-list">
+                                <div className="cart-product-detail">
+                                    <div className="cart-product-img" style={{backgroundImage:`url(${proudct.img[0]})`}}></div>
+                                    <div className="cart-product-name text-capitalize">{proudct.categories}</div>
+                                </div>
+                                <div className="cart-product-amt">
+                                    Rs.{proudct.price}
+                                </div>
                                 
+                                <div className="cart-product-quantity d-flex align-items-center">
+                                    <div className="text-uppercase">qty:</div>
+                                    <div className="cart-product-incerase align-items-center ">
+                                        <div className="cart-product-minus" onClick={cartminus}><i class="fa-solid fa-minus"></i></div>
+                                        <div className="cart-product-number">{amount} </div>
+                                        <div className="cart-product-plus" onClick={cartplus}><i class="fa-solid fa-plus"></i></div>
+                                    </div>
+                                </div>
+                                <div className="cart-product-price d-flex justify-content-around">
+                                    <div className="cart-product-amount">
+                                   <span className="cart-amt-sm">Grand Total</span>  Rs. {price}/-
+                                    </div>
+                                    <div className="cart-product-remove" onClick={()=>deleteCartlist(key)}>
+                                    <i class="fa-solid fa-xmark"></i>
+                                    </div>
+                                </div>
+                                <div className="cart-product-remove-sm">
+                                    <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </div>
-                            <div className="cart-product-amt">
-                                Rs.{itemprice}/-
-                            </div>
-                            
-                            <div className="cart-product-quantity d-flex align-items-center">
-                                <div className="text-uppercase">qty:</div>
-                                <div className="cart-product-incerase align-items-center ">
-                                    <div className="cart-product-minus" onClick={cartminus}><i class="fa-solid fa-minus"></i></div>
-                                    <div className="cart-product-number">{amount} </div>
-                                    <div className="cart-product-plus" onClick={cartplus}><i class="fa-solid fa-plus"></i></div>
-                                </div>
-                            </div>
-                            <div className="cart-product-price d-flex justify-content-around">
-                                <div className="cart-product-amount">
-                               <span className="cart-amt-sm">Grand Total</span>  Rs. {price}/-
-                                </div>
-                                <div className="cart-product-remove">
-                                <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </div>
-                            <div className="cart-product-remove-sm">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                        </div>
+    
+                            })
+                        }
+                       
+                        {/*  */}
 
                     </div>
                 </div>
-                <div className="row row-cart-coupon">
+                {/* <div className="row row-cart-coupon">
                     <div className="col-12 coupon-container">
                         <div className="coupon-name text-capitalize">
                             coupon
@@ -201,7 +256,7 @@ function ProductCart (){
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="row row-cart-coupon">
                     <div className="col-12 coupon-container">

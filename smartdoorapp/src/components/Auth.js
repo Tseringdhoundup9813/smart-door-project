@@ -2,15 +2,21 @@
 
 //navlink
 import "../style/auth.css"
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 import Register from './Register';
 import Login from "./Login";
+import { loginContext } from "./Context";
 
 function Auth (props){
+
+
+    const{setValidationBox} = useContext(loginContext);
     const[singup,setsingup]=useState(false);
         
     function closeAuth(){
-        props.getdisplay(false);
+      
+        setValidationBox(false);
+
     }
 
     function ChangeToSingup(bol){

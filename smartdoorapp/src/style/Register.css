@@ -39,6 +39,7 @@
     align-items: center;
     animation-name:message;
     animation-duration:2s;
+    transition:all 3s ease;
    
 }
 @keyframes message{
@@ -104,7 +105,8 @@
 
 
 /* input-container============= */
-.input-container{
+
+ form > .input-container{
     width:100%;
     display: flex;
     flex-direction: column;
@@ -132,6 +134,16 @@
     justify-content: center;
     align-items: center;
     position: relative;
+}
+.input-container > div > li{
+    color:rgb(234, 234, 234);
+    position: absolute;
+    top:50%;
+    left:8%;
+    transform: translate(-50%,-50%);
+}
+h1{
+    color:rgb(204, 204, 204);
 }
 .input-container > div> div{
     font-size:0.6rem;
@@ -241,3 +253,27 @@
     margin:0px 4px;
     
 }
+/* logout================= */
+#logout{
+
+    background-color: rgb(184, 184, 184);
+    border-radius:5px;
+    width:44px;
+    height:30px;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#logout:hover{
+    background-color:rgb(78, 78, 78);
+}
+#logout > h1{
+ font-size:0.7rem;
+ color:rgb(255, 255, 255);
+
+ margin:auto;
+
+}
+/* end ============ */

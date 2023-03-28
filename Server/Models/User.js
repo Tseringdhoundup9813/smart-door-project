@@ -21,6 +21,9 @@ const UserScheme = new mongoose.Schema({
         minlenght:6,
         select:false,
     },
+    cart:{
+        type:Array,
+    },
     resetPasswordToken:String,
     resetPasswordExpire:Date,
 });

@@ -33,21 +33,24 @@ exports.register =async (req,res,next)=>{
 exports.login = async (req,res,next)=>{
     const{email,password} = req.body;
     if(!email||!password){
-       return next(new ErrorResponse("please provide email and password"));
+    //    return next(new ErrorResponse("please provide email and password"));
+        res.status(200).json({message:"please fill email and password"})
     }
+  
     try{
         const user = await User.findOne({email}).select("+password");
         if(!user){
-             return next(new ErrorResponse("please enter a valid email",401));
-            
+    
+            res.status(200).json({message:"please enter correct validation"})
         }
+
         const isMatch = await user.matchPasswords(password);
         if(!isMatch){
-            return next(new ErrorResponse("please provide a correct password",401));
-            
+           
+            res.status(200).json({message:"please enter correct validation"})
 
         }
-        sendToken("sucessfully login",user,200,res)
+        sendToken("sucessfully login",user,user.username,user._id,200,res);
 
     }catch(err){
        
@@ -55,6 +58,7 @@ exports.login = async (req,res,next)=>{
     }
 
 }
+
 
 exports.forgetpassword = async(req,res,next)=>{
     const {email} = req.body;
@@ -80,7 +84,7 @@ exports.resetpassword = (req,res,next)=>{
 }
 
 
-const sendToken = (msg,user,statusCode,res)=>{
+const sendToken = (msg,user,username,id,statusCode,res,)=>{
    const token = user.getSignedToken();
-   res.status(statusCode).json({message:msg,success:true,token})
+   res.status(statusCode).json({message:msg,success:true,token,username,id})
 }

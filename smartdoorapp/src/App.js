@@ -3,6 +3,7 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './App.css';
+import React,{useState,useContext} from "react";
 // import Doorslidersystem from './components/Doorslidersystem';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -16,21 +17,30 @@ import ProductCart from './components/productCart';
 import Faqs from './components/Faqs';
 import Vision from "./components/vision";
 import Story from './components/Story'
+import { loginContext } from "./components/Context";
 
 
 
 function App() {
+
+  const[successLogin,setSuccessLogin] = useState(false);
+  const[validationBox,setValidationBox]= useState(false);
+
+
   return (
     <BrowserRouter>
     <div id="main">
 
+    <loginContext.Provider value={{successLogin,setSuccessLogin,validationBox,setValidationBox}}>
     <Navbar></Navbar>
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/footer" element={<Footer />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
         <Route path="/product-view" element={<Productview />} />
+        
         <Route path="/product-cart" element={<ProductCart />} />
         <Route path="/faqs" element={<Faqs />} />
         <Route path="/about/our-vision" element={<Vision />} />
@@ -38,11 +48,13 @@ function App() {
     
 
     
-        <Route path="/product/:productId" element={<Productview />} />
+        <Route path="/product/page-view:productId" element={<Productview />} />
         <Route path="/admin" element={<Admin></Admin>}></Route>
       </Routes>
 
       <Footer></Footer>
+      </loginContext.Provider>
+
     </div>
 
 

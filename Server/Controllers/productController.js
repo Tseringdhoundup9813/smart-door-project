@@ -1,6 +1,7 @@
 
 const express = require("express");
 const productModel = require("../Models/productModel");
+const User = require("../Models/User")
 
 
 
@@ -122,3 +123,51 @@ exports.ProductDetail = async(req,res)=>{
 
     }
 }
+
+
+// add to cart ===================
+exports.AddToCart = async(req,res)=>{
+    try{
+        const id = req.params.id;
+      
+        const userId = req.body.userId;
+        const cartlist = await productModel.find({_id:id});
+       
+
+        const updateproudct = await User.findByIdAndUpdate({_id:userId},{$addToSet: {cart:cartlist}});
+        res.status(201).json({updateproudct});
+
+    }catch(err){
+        console.log(err);
+    }
+
+}
+
+exports.CartShow = async(req,res)=>{
+    try{
+        const user_id = req.params.id;
+      
+  
+        const cartlist  = await User.find({_id:user_id}).select("cart");
+       
+        res.status(200).json({data:cartlist})
+        
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.deletecartlist = async(req,res)=>{
+    const product_id = req.params.id;
+    const user_id = req.body.user_id;
+    console.log(user_id);
+   
+    try{
+        await User.updateOne({_id:user_id},{$pop:{cart:-1}});
+        
+    }catch(err){
+        console.log(err);
+    }
+}
+// add to cart=========================

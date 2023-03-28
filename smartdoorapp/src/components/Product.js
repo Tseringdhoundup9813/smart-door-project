@@ -1,6 +1,6 @@
 //CSS
 import '../style/Product.css';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 
@@ -28,7 +28,7 @@ const[deleteID,setDeleteID]=useState("");
 
 async function getProduct(){
     try{
-        let res = await axios.get(`http://localhost:3001/product?page=${pageCount}&limit=15&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
+        let res = await axios.get(`http://localhost:3001/product?page=${pageCount}&limit=20&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
             setallproduct(res.data.data);
        
             if(res.data.data <=0){
@@ -39,9 +39,9 @@ async function getProduct(){
             }
             
            
-            const checkdecimal = Number.isInteger(res.data.productLenght/15);
+            const checkdecimal = Number.isInteger(res.data.productLenght/20);
          
-            setTotalProductCount(Math.trunc(checkdecimal?res.data.productLenght/15:(res.data.productLenght/15) + 1));
+            setTotalProductCount(Math.trunc(checkdecimal?res.data.productLenght/15:(res.data.productLenght/20) + 1));
             setTotalProductShow(res.data.productLenght);
 
     }catch(err){
@@ -274,7 +274,7 @@ const filter=()=>{
                {/* pagination ======================================== */}
                <div id="pagination">
                 <div className="row show-head ">
-                   <h1>Total product({totalProductShow})</h1>
+                   <h1>Total product<span id="total-product-number">{totalProductShow}</span></h1>
                 </div>
                 <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
                     {
@@ -298,14 +298,16 @@ const filter=()=>{
                     }
                     
                 {
+
+
                 allproduct.map((product,key)=>{
                         return <div key={key} className="show-card-container" > 
-                       
-                            <div className="show-card-img">
-                          
-                                <img src={product.img[0]}></img>
+                            <NavLink to={`/product/page-view${product._id}`} >
+                                <div className="show-card-img">
+                                     <img src={product.img[0]}></img>
                                 </div>
-                            <Link to={`/product/${product._id}`} ></Link>
+                                </NavLink>
+                          
 
 
                               

@@ -1,7 +1,8 @@
 //import css
 import '../style/Navbar.css';
-import { useState } from 'react';
+import { useState,useContext,useEffect} from 'react';
 import Auth from './Auth';
+import { loginContext } from './Context';
 
 //router
 import {NavLink} from 'react-router-dom'
@@ -10,6 +11,32 @@ import {NavLink} from 'react-router-dom'
 
 function Navbar (){
 
+    // login sucuessfull or not ----------
+    const{successLogin} = useContext(loginContext);
+    const{validationBox,setValidationBox} = useContext(loginContext);
+    const[token,setToken] = useState("");
+    console.log(validationBox);
+    // ========================
+
+
+// u
+useEffect(()=>{
+    setToken(localStorage.getItem("token"));
+},[token,localStorage.getItem("token")])
+
+
+// customerhaslogin}===============
+function customerhaslogin(){
+    console.log("hello");
+    localStorage.setItem("token","");
+    setToken(localStorage.getItem("token"))
+    localStorage.setItem("user_id","");
+    localStorage.setItem("username","");
+
+}
+
+// ===================
+  
 // login and signup ===========
     const[auth,setAuth] = useState(false);
 // end ===================
@@ -61,9 +88,7 @@ function Navbar (){
     }
 
     // AuthenticationSystem========================
-    function AuthenticationSystem(){
-
-    }
+  
     function authdisplay(props){
         setAuth(props);
     }
@@ -76,7 +101,7 @@ function Navbar (){
 
             {/* singup and signin ==================== */}
                 {
-                 auth?<Auth getdisplay={authdisplay}></Auth>:""
+                 validationBox?<Auth ></Auth>:""
 
                 }
             {/* =============================== */}
@@ -93,7 +118,11 @@ function Navbar (){
 
 
                         {/* loin and signup ====================*/}
-                            <div className="heart-icon fs-4" onClick={()=>setAuth(true)}><i class="fa-regular fa-user"></i></div>
+                        {
+                        token?<div id="logout" onClick={customerhaslogin}><h1>logout</h1></div>:
+                        <div className="heart-icon fs-4" id="logout" onClick={()=>setValidationBox(true)}><h1>login</h1></div>
+                        }
+                       
                         {/* end ================= */}
 
                         <div className="heart-icon fs-4"><i class="fa-regular fa-heart"></i></div>
@@ -142,11 +171,7 @@ function Navbar (){
                         <div className="search-close" onClick={searchClose}><i class="fa-solid fa-xmark"></i></div>
                     </div>
                       
-                      {/* <div  className="navbar-signbtn btn">membership</div>
-                      <div  className="search-input bg-tertiary" >
-                      <input type="text" placeholder="search..."  />
-                      <div className="search-close" onClick={searchClose}><i class="fa-solid fa-xmark"></i></div>
-                      </div> */}
+                    
                 </div>
             </nav>
         </div>

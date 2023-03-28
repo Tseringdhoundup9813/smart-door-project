@@ -40,6 +40,7 @@ const ProductScheme =new  mongoose.Schema({
         type:Array,
         
     },
+  
    
     addToCart:{
         type:Boolean,
