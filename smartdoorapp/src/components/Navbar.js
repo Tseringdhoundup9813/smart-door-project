@@ -23,8 +23,9 @@ function Navbar (){
 useEffect(()=>{
     setToken(localStorage.getItem("token"));
     // setTotalCartList(JSON.parse(localStorage.getItem("cart")));
+    console.log(JSON.parse(localStorage.getItem("cart")));
     
-},[token,localStorage.getItem("token")]);
+},[token,localStorage.getItem("token"),localStorage.getItem("cart")]);
 
 
 // customerhaslogin}===============
