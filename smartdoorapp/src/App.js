@@ -25,6 +25,7 @@ import Media from "./admin/Navlink/Media";
 import AddProduct from './admin/Navlink/AddProduct'
 import UpdateProduct from "./admin/Navlink/UpdateProduct";
 import Categories from './admin/Navlink/Categories';
+import OrderView from "./admin/Navlink/OrderView";
 function Aadmin (){
     return(
     <div>
@@ -48,6 +49,7 @@ function Aadmin (){
                         <Route path="/admin/products/edit" element={<UpdateProduct/>}/>
                         <Route path="/admin/add-products" element={<AddProduct/>}/>
                         <Route path="/admin/categories" element={<Categories/>}/>
+                        <Route path="/admin/order/order-view" element={<OrderView/>}/>
                     </Routes>
                 
                 </div>
