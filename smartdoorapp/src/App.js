@@ -5,7 +5,7 @@ import {
     RouterProvider
   } from 'react-router-dom'
   
-  // pages
+import { useState,  } from 'react';
 
 // import Doorslidersystem from './components/Doorslidersystem';
 import Home from './components/Home';
@@ -28,13 +28,6 @@ import NotFound from './layout/NotFound'
   
 // css
 import './style/aadmin.css';
-
-function App() {
-
-  const[successLogin,setSuccessLogin] = useState(false);
-  const[validationBox,setValidationBox]= useState(false);
-
-
 
 import Dashboard from './admin/Navlink/Dashboard';
 import List from './admin/Orderlist'
@@ -83,61 +76,14 @@ import Categories from './admin/Navlink/Categories';
         <Route path="/product/:productId" element={<Productview />} />
       </Route>
     ))
-//     const adrouter = createBrowserRouter(
-//         createRoutesFromElements(
-//           <Route path="/admin" element={<AdminLayout />}>
-//             <Route path="footer" element={<Footer />} />
-//             <Route path="contact" element={<Contact />} />
-//             <Route path="product" element={<Product />} />
-//             <Route path="product-view" element={<Productview />} />
-//             <Route path="product-cart" element={<ProductCart />} />
-//             <Route path="faqs" element={<Faqs />} />
-//             <Route path="about/our-vision" element={<Vision />} />
-//             <Route path="about/our-story" element={<Story />} />
-            
-//             <Route path="product/:productId" element={<Productview />} />
-//           </Route>
-//         )
-//   )
-  
   function App() {
+    const[successLogin,setSuccessLogin] = useState(false);
+    const[validationBox,setValidationBox]= useState(false);
     return (
      <div>
          <RouterProvider router={router} />
-      {/* <RouterProvider router={adrouter} /> */}
      </div>
     );
   }
   
-  export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //react router 
-// import { BrowserRouter, Routes, Route} from "react-router-dom";
-
-// import './App.css';
-
-
-
-// function Aadmin (){
-//     return(
-//     <div>
-
-//     </div>
-//     )
-// }
-
-// export default Aadmin;
+  export default App;
