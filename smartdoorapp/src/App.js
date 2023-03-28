@@ -5,7 +5,7 @@ import {
     RouterProvider
   } from 'react-router-dom'
   
-import { useState,  } from 'react';
+import { useState,useContext } from 'react';
 
 // import Doorslidersystem from './components/Doorslidersystem';
 import Home from './components/Home';
@@ -42,8 +42,12 @@ import AddProduct from './admin/Navlink/AddProduct'
 import UpdateProduct from "./admin/Navlink/UpdateProduct";
 import Categories from './admin/Navlink/Categories';
 
+import { loginContext } from './components/Context';
+
+
   const router = createBrowserRouter(
     createRoutesFromElements(
+
       <Route path="/" element={<RootLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/footer" element={<Footer />} />
@@ -55,6 +59,7 @@ import Categories from './admin/Navlink/Categories';
         <Route path="/about/our-vision" element={<Vision />} />
         <Route path="/about/our-story" element={<Story />} />
         <Route path="*" element={<NotFound/>}/>
+
 
         {/* for admin */}
         <Route path='/admin' element={<Admin/>}>
@@ -73,15 +78,24 @@ import Categories from './admin/Navlink/Categories';
         </Route>
 
         
-        <Route path="/product/:productId" element={<Productview />} />
+        <Route path="/product/page-view:productId" element={<Productview />} />
       </Route>
+
     ))
   function App() {
     const[successLogin,setSuccessLogin] = useState(false);
     const[validationBox,setValidationBox]= useState(false);
     return (
      <div>
+     
+     <loginContext.Provider value={{successLogin,setSuccessLogin,validationBox,setValidationBox}}>
+
          <RouterProvider router={router} />
+      </loginContext.Provider>
+
+       
+     
+
      </div>
     );
   }

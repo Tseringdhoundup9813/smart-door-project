@@ -76,11 +76,11 @@ function Productview(){
 
 
     async function productDetail(){ 
-     
         try{
             const product = await  axios.get(`http://localhost:3001/productdetail/${productId}`)
-          
+            console.log("hello");
             setproduct(product.data.data);
+            console.log(product.data);
         
         }catch(err){
             console.log(err);
@@ -122,22 +122,6 @@ function Productview(){
                     },1200)
             }
            
-
-            // if(cartlist.includes(product)){
-            //     console.log("already add to cart");
-            // }
-            // else{
-               
-            //     localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
-            //     setCartList([...cartlist,product]);
-            //     // product add to cart message ========================
-            //     setProductAdded(true);
-            //     setTimeout(function(){
-            //         setProductAdded(false);  
-            //     },1200)
-
-                       
-            // } 
         }
         else{
             localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
@@ -161,31 +145,22 @@ function Productview(){
 
         }
         // ======================
-     
-        // check product add to cart or not
-        productDetail();
+        // product detail fetch from server==============================================
+            productDetail();
+            
+        //===============END=========================/
 
         
     
         
-    },[ ])
+    },[])
 
    
 
-    const [state, setState]=useState(false);
-    const [size, setSize]= useState(false);
+  
     const [share, setShare]= useState(false);
   
-    const plusIcon=()=>{
-        setState( !state);
-        const para= document.querySelector('.pv-detail-para');
-        para.style.display=`${state?"none":"block"}`
-    }
-    const sizeIcon=()=>{
-        setSize( !size);
-        const psize= document.querySelector('.pv-detail-size');
-        psize.style.display=`${size?"none":"block"}`
-    }
+   
     const shareIcon=()=>{
         setShare( !share);
         const ishare= document.querySelector('.pv-detail-share');
