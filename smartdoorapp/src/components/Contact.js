@@ -1,6 +1,9 @@
 //import css
 import '../style/Contact.css';
-
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
 function Contact (){
     const checkboxsub=()=>{
         let input =document.querySelector('.checkbox');
@@ -8,6 +11,7 @@ function Contact (){
     }
     return(
         <div>
+            <Navbar></Navbar>
             <div id="contact">
                 <div className="row contact-map container-fluid">
                     <div className="col-12">
@@ -76,6 +80,7 @@ function Contact (){
                 </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

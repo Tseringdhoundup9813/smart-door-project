@@ -2,7 +2,10 @@
 import '../style/Product.css';
 import {NavLink} from "react-router-dom";
 
-
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
 
 import React,{useState,useEffect} from 'react'
 import axios from "axios"
@@ -174,7 +177,7 @@ const filter=()=>{
     return(
 
     <div>
-
+        <Navbar></Navbar>
         {/* delete message  */}
         {
             deleteConfirmBox?<div id="delete-confirm-box">
@@ -347,6 +350,7 @@ const filter=()=>{
         </div>
 
     </div>
+    <Footer></Footer>
     </div>
 
     )

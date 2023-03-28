@@ -29,6 +29,10 @@ import mem4 from '../image/products/membrane/SD104.jpg';
 import mem5 from '../image/products/membrane/SD106.jpg';
 import mem6 from '../image/products/membrane/SD115.jpg';
 
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -183,6 +187,7 @@ function ProductCart (){
     ]
     return(
         <div>
+            <Navbar></Navbar>
             <div id="cart-list">
                 <div className="row row-cartList">
                     <div className="cartlist-container d-flex justify-content-between align-items-center">
@@ -311,6 +316,7 @@ function ProductCart (){
                 </div>
             </div> 
             </div>
+            <Footer></Footer>
         </div>
     )
 }

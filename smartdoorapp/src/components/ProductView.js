@@ -31,7 +31,10 @@ import mem4 from '../image/products/membrane/SD104.jpg';
 import mem5 from '../image/products/membrane/SD106.jpg';
 import mem6 from '../image/products/membrane/SD115.jpg';
 
-
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
 function SampleNextArrow(props) {
 
     // product id
@@ -219,6 +222,7 @@ function Productview(){
     }
     return(
         <div> 
+            <Navbar></Navbar>
 
              {/*product add to the cart message =------------------------------  */}
 
@@ -378,81 +382,14 @@ function Productview(){
                 </div>
             </div>                   
             
-            <div className="row look-row text-center ">
+            {/* <div className="row look-row text-center ">
                 <div className="">
                 <div className="look-head">What are you looking for ?</div>
                 <div className="look-para">We'll help you find a perfect door for your house.</div>
                 <div className='look-btn-container'><span className="look-btn">see more</span></div>
                 </div>
-            </div>
-            <div className="pv-testo">
-            <div id="testomial" class="carousel slide" data-bs-ride="carousel" >
-                <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="10000" >
-                        <div className="row row-carousel-item">
-                            <div className="col-md-4  col-sm-12 testomial-img"></div>
-                            <div className="col-md-8 col-sm-12 testomial-detail">
-                                <div className="testo-quote-left"><i class="fa-solid fa-quote-left"></i></div>
-                                <div className="testomial-title">
-                                    <div className="testo-name">ram babu gurung</div>
-                                    <div className="testo-position"> - businessman</div>
-                                </div>
-                                <div className="testo-head">amazing customer service</div>
-                                <div className="testo-para">
-                                    
-                                We have purchased this for our office space and are extremely thankful for an entire team for their patience and information provided for our purchase related decisions. Material hardness can be ensured on the spot and every doors are perfectly...
-                                <div className="testo-quote-right"><i class="fa-solid fa-quote-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item"  data-bs-interval="2000" >
-                        <div className="row row-carousel-item">
-                                <div className="col-md-4  col-sm-12 testomial-img"></div>
-                                <div className="col-md-8 col-sm-12 testomial-detail">
-                                    <div className="testo-quote-left"><i class="fa-solid fa-quote-left"></i></div>
-                                    <div className="testomial-title">
-                                        <div className="testo-name">ram babu gurung</div>
-                                        <div className="testo-position"> - businessman</div>
-                                    </div>
-                                    <div className="testo-head">amazing customer service</div>
-                                    <div className="testo-para">
-                                        
-                                    We have purchased this for our office space and are extremely thankful for an entire team for their patience and information provided for our purchase related decisions. Material hardness can be ensured on the spot and every doors are perfectly...
-                                    <div className="testo-quote-right"><i class="fa-solid fa-quote-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div className="row row-carousel-item">
-                                <div className="col-md-4  col-sm-12 testomial-img"></div>
-                                <div className="col-md-8 col-sm-12 testomial-detail">
-                                    <div className="testo-quote-left"><i class="fa-solid fa-quote-left"></i></div>
-                                    <div className="testomial-title">
-                                        <div className="testo-name">ram babu gurung</div>
-                                        <div className="testo-position"> - businessman</div>
-                                    </div>
-                                    <div className="testo-head">amazing customer service</div>
-                                    <div className="testo-para">
-                                        
-                                    We have purchased this for our office space and are extremely thankful for an entire team for their patience and information provided for our purchase related decisions. Material hardness can be ensured on the spot and every doors are perfectly...
-                                    <div className="testo-quote-right"><i class="fa-solid fa-quote-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#testomial" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon fa-solid fa-chevron-left testo-prev" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testomial" data-bs-slide="next">
-                    <span class="carousel-control-next-icon fa-solid fa-chevron-right testo-prev" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
+            </div> */}
+        <Footer></Footer>
         </div>
     )
 }

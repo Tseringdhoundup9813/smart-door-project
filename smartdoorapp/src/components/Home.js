@@ -10,6 +10,11 @@ import service4 from '../image/services/service4.jpg';
 import service5 from '../image/services/service5.jpg';
 import service6 from '../image/services/service6.jpg';
 
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
+
 //products images
 import productimg from '../image/products/3d/SD110.jpeg';
 import productimgcan from '../image/products/canadian/CD101.jpg';
@@ -35,6 +40,7 @@ function Home(){
     ]
     return(
     <div>
+        <Navbar></Navbar>
         <div className="home-carousel">
             <div id="homecarousel" class="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-indicators">
@@ -301,7 +307,7 @@ function Home(){
             </div>
         </div>
      <div  onClick={top} className="btn top-btn"><i class="fa-solid fa-arrow-up"></i></div>
-
+        <Footer></Footer>
     </div>
     )
 }

@@ -1,8 +1,12 @@
 import '../style/faqs.css'
-
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
 function Faqs(){
     return(
         <div>
+            <Navbar></Navbar>
             <div id="faq-how">
                 <div className="row row-fa">
                     <div className="fa-center d-flex justify-content-center flex-column">
@@ -45,6 +49,7 @@ function Faqs(){
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

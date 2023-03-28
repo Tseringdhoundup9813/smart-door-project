@@ -1,17 +1,35 @@
+import {
+    createBrowserRouter, 
+    createRoutesFromElements,
+    Route, 
+    RouterProvider
+  } from 'react-router-dom'
+  
+  // pages
 
-//react router 
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+// import Doorslidersystem from './components/Doorslidersystem';
+import Home from './components/Home';
+import Footer from './components/Footer';
+import Contact from './components/Contact';
+import Product from './components/Product';
+import Productview from './components/ProductView';
+// import Admin from "./components/Admin";
+import Admin from "./layout/AdminLayout"
 
-import './App.css';
-
-
+import ProductCart from './components/productCart';
+import Faqs from './components/Faqs';
+import Vision from "./components/vision";
+import Story from './components/Story'
+import NotFound from './layout/NotFound'
+  
+  // layouts
+  import RootLayout from './layout/RootLayout';
+//   import AdminLayout from './layout/AdminLayout';
+  
 // css
 import './style/aadmin.css';
 
 
-//admin navbar
-import AdminNavbar from './admin/AdminNavbar';
-import AdminTop from './admin/AdminTop';
 
 import Dashboard from './admin/Navlink/Dashboard';
 import List from './admin/Orderlist'
@@ -25,38 +43,96 @@ import Media from "./admin/Navlink/Media";
 import AddProduct from './admin/Navlink/AddProduct'
 import UpdateProduct from "./admin/Navlink/UpdateProduct";
 import Categories from './admin/Navlink/Categories';
-function Aadmin (){
-    return(
-    <div>
-      <BrowserRouter>
-      
-      
-        <div id="admin">
-            <div className="row row-admin">
-                <AdminNavbar></AdminNavbar>
-                <div className="col-md-10 col-sm-12 admin-main">
-                    <AdminTop></AdminTop>
-                    
-                    <Routes>
-                        <Route path="/admin/dashboard" element={<Dashboard />} />
-                        <Route path="/admin/order" element={<List/>}/>
-                        <Route path="/admin/chats" element={<Chats/>}/>
-                        <Route path="/admin/products" element={<Products/>}/>
-                        <Route path="/admin/inbox" element={<Inbox/>}/>
-                        <Route path="/admin/pages" element={<Pages/>}/>
-                        <Route path="/admin/media" element={<Media/>}/>
-                        <Route path="/admin/products/edit" element={<UpdateProduct/>}/>
-                        <Route path="/admin/add-products" element={<AddProduct/>}/>
-                        <Route path="/admin/categories" element={<Categories/>}/>
-                    </Routes>
-                
-                </div>
-            </div>
-           
-        </div>
-      </BrowserRouter>
-    </div>
-    )
-}
 
-export default Aadmin;
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/footer" element={<Footer />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/product-view" element={<Productview />} />
+        <Route path="/product-cart" element={<ProductCart />} />
+        <Route path="/faqs" element={<Faqs />} />
+        <Route path="/about/our-vision" element={<Vision />} />
+        <Route path="/about/our-story" element={<Story />} />
+        <Route path="*" element={<NotFound/>}/>
+
+        {/* for admin */}
+        <Route path='/admin' element={<Admin/>}>
+          <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="order" element={<List/>}/>
+          <Route path="chats" element={<Chats/>}/>
+          <Route path="inbox" element={<Inbox/>}/>
+          <Route path="pages" element={<Pages/>}/>
+          <Route path="media" element={<Media/>}/>
+          <Route path="add-products" element={<AddProduct/>}/>
+          <Route path="products" element={<Products/>}/>
+
+          <Route path="edit" element={<UpdateProduct/>}/>
+          <Route path="categories" element={<Categories/>}/>
+
+        </Route>
+
+        
+        <Route path="/product/:productId" element={<Productview />} />
+      </Route>
+    ))
+//     const adrouter = createBrowserRouter(
+//         createRoutesFromElements(
+//           <Route path="/admin" element={<AdminLayout />}>
+//             <Route path="footer" element={<Footer />} />
+//             <Route path="contact" element={<Contact />} />
+//             <Route path="product" element={<Product />} />
+//             <Route path="product-view" element={<Productview />} />
+//             <Route path="product-cart" element={<ProductCart />} />
+//             <Route path="faqs" element={<Faqs />} />
+//             <Route path="about/our-vision" element={<Vision />} />
+//             <Route path="about/our-story" element={<Story />} />
+            
+//             <Route path="product/:productId" element={<Productview />} />
+//           </Route>
+//         )
+//   )
+  
+  function App() {
+    return (
+     <div>
+         <RouterProvider router={router} />
+      {/* <RouterProvider router={adrouter} /> */}
+     </div>
+    );
+  }
+  
+  export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //react router 
+// import { BrowserRouter, Routes, Route} from "react-router-dom";
+
+// import './App.css';
+
+
+
+// function Aadmin (){
+//     return(
+//     <div>
+
+//     </div>
+//     )
+// }
+
+// export default Aadmin;

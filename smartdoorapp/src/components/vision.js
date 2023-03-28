@@ -1,9 +1,13 @@
 //css
 import '../style/vision.css';
-
+//navbar
+import Navbar from '../components/Navbar';
+//footer
+import Footer from '../components/Footer';
 function Vision (){
     return(
         <div>
+            <Navbar></Navbar>
             <div className="row row-vision">
                 <div className="col-12 vision-container">
                     <div className="vision-head">Our vision</div>
@@ -35,6 +39,7 @@ function Vision (){
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 }
