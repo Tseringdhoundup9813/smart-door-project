@@ -1,0 +1,102 @@
+.products-row{
+    width:auto;
+    margin:20px auto;
+}
+.show-card-products{
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: auto !important;
+}
+
+.products-edit{
+    border:1px solid green;
+    color:green;
+    border-radius:5px;
+    width:45%;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+.products-edit:hover{
+    background:green;
+    color:#fff;
+}
+.products-delete{
+    border:1px solid red;
+    color:red;
+    border-radius:5px;
+    width:45%;
+    text-align:center;
+    transition: all .3s linear;
+    cursor: pointer;
+}
+.products-delete:hover{
+    background:red;
+    color:#fff;
+}
+
+
+/* ============UpdateProduct css===== */
+.row-uproduct{
+    margin:30px auto;
+}
+.up-back-btn{
+    background:red;
+    border: 1px solid red;
+    border-radius:5px;
+    color:#fff;
+    padding:5px 10px;
+}
+.up-publish-btn{
+    background:green;
+    border:1px solid green;
+    border-radius:5px;
+    color:#fff;
+    padding:5px 10px;
+}
+.up-title{
+    font-size:20px;
+    font-weight:600;
+    text-transform: capitalize;
+}
+
+/* ============up input======= */
+.up-input{
+    border:1px solid grey;
+    background:#fff;
+    padding:10px;
+    border-radius:5px;
+}
+.up-product-title input, .up-product-title textarea{
+    width:100%;
+    border: 1px solid grey;
+    border-radius:5px;
+}
+.up-product-title input:hover, .up-product-title textarea:hover{
+    border:1px solid green;
+}
+.upSize, .up-cat{
+    display: inline;
+}
+#upSize, #upCat{
+    padding:5px;
+    outline: none;
+    border:1px solid grey;
+    border-radius:5px;
+}
+
+#upSize option, #upCat option{
+    border-radius: 0;
+    padding:5px;
+}
+.up-img{
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+.img{
+    height: 50%;
+    width:100%;
+    border:1px solid grey;
+}
+.img-upload{
+    margin:10px 0;
+}
