@@ -29,6 +29,11 @@ import NotFound from './layout/NotFound'
 // css
 import './style/aadmin.css';
 
+function App() {
+
+  const[successLogin,setSuccessLogin] = useState(false);
+  const[validationBox,setValidationBox]= useState(false);
+
 
 
 import Dashboard from './admin/Navlink/Dashboard';

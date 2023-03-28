@@ -15,14 +15,16 @@ function Navbar (){
     const{successLogin} = useContext(loginContext);
     const{validationBox,setValidationBox} = useContext(loginContext);
     const[token,setToken] = useState("");
-    console.log(validationBox);
-    // ========================
+    const[totalCartList,setTotalCartList] = useState();
+    console.log(totalCartList);
+    console.log(JSON.parse(localStorage.getItem("cart")));
 
-
-// u
+// ===============================
 useEffect(()=>{
     setToken(localStorage.getItem("token"));
-},[token,localStorage.getItem("token")])
+    // setTotalCartList(JSON.parse(localStorage.getItem("cart")));
+    
+},[token,localStorage.getItem("token")]);
 
 
 // customerhaslogin}===============
