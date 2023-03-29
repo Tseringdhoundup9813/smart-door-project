@@ -52,7 +52,6 @@
     font-size:54px;
 }
 .home-carousel-item:nth-child(1){
-    border:1px solid red;
     background:url('../image/home-img/home1.jpg')center/cover no-repeat;
 }
 

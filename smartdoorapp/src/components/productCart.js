@@ -33,6 +33,8 @@ import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
 
+//cart quantity
+import CartQty from '../components/cartQty'
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -58,18 +60,17 @@ function SamplePrevArrow(props) {
   }
 function ProductCart (){
     const [price, setPrice] = useState(0);
-    const [amount, setAmount]=useState(1)
     const[userId,setUserId] = useState();
     const[cartlist,setCartList] = useState([]);
     const[deletecartlist,setdeletecartlist] = useState();
-    
+
 
 
     useEffect(()=>{
 
         setCartList(JSON.parse(localStorage.getItem("cart")));
         handlePrice();
-
+        
     },[]);
     
   
@@ -79,19 +80,10 @@ function ProductCart (){
     
     const handlePrice = ()=>{
         let ans =0;
-            ans += amount * itemprice
+            ans += qty * itemprice
         setPrice(ans);
     }
-    const cartplus=()=>{
-        setAmount(amount + 1)
-    }
-    const cartminus=()=>{
-        if (amount>1){
-            setAmount(amount - 1);
-        }else{
-            setAmount(1)
-        }
-    }
+
 
    
         // deleteCartlist=============
@@ -113,11 +105,6 @@ function ProductCart (){
 
    
         }
-
-        // ==========================
-
-
-
     //slick 
     var settings = {
         dots: false,
@@ -175,6 +162,18 @@ function ProductCart (){
         {image:mem5, title:"3d ddors", price:"3800"},
         {image:mem6, title:"3d ddors", price:"3800"},
     ]
+    
+    const [qty, setQty]=useState(1);
+    const cartplus=()=>{
+        setQty(qty + 1)
+    }
+    const cartminus=()=>{
+        if (qty>1){
+            setQty(qty - 1);
+        }else{
+            setQty(1)
+        }
+    } 
     return(
         <div>
             <Navbar></Navbar>
@@ -209,24 +208,26 @@ function ProductCart (){
                                     Rs.{product.price}
                                 </div>
                                 
+                                
                                 <div className="cart-product-quantity d-flex align-items-center">
                                     <div className="text-uppercase">qty:</div>
                                     <div className="cart-product-incerase align-items-center ">
                                         <div className="cart-product-minus" onClick={cartminus}><i class="fa-solid fa-minus"></i></div>
-                                        <div className="cart-product-number">{amount} </div>
+                                        <div className="cart-product-number">{qty} </div>
                                         <div className="cart-product-plus" onClick={cartplus}><i class="fa-solid fa-plus"></i></div>
                                     </div>
                                 </div>
+
                                 <div className="cart-product-price d-flex justify-content-around">
                                     <div className="cart-product-amount">
-                                   <span className="cart-amt-sm">Grand Total</span>  Rs. {price}/-
+                                   <span className="cart-amt-sm">Grand Total</span>  Rs. {product.price * qty}/-
                                     </div>
                                     <div className="cart-product-remove" onClick={()=>deleteCartlist(key)}>
-                                    <i class="fa-solid fa-xmark"></i>
+                                    <i class="fa-solid fa-trash-can"></i>
                                     </div>
                                 </div>
-                                <div className="cart-product-remove-sm">
-                                    <i class="fa-solid fa-xmark"></i>
+                                <div className="cart-product-remove-sm"onClick={()=>deleteCartlist(key)}>
+                                <i class="fa-solid fa-trash-can"></i>
                                 </div>
                             </div>
     

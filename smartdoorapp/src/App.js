@@ -38,7 +38,7 @@ import Inbox from './admin/Navlink/Inbox';
 import Pages from "./admin/Navlink/Pages";
 import Media from "./admin/Navlink/Media";
 
-import AddProduct from './admin/Navlink/AddProduct'
+import AddProduct from './components/Admin'
 import UpdateProduct from "./admin/Navlink/UpdateProduct";
 import Categories from './admin/Navlink/Categories';
 
