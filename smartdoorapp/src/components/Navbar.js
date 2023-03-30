@@ -167,7 +167,7 @@ function customerhaslogout(){
                         {
                         token?<div id="logout" >
                                 <div className="username">
-                                    <p>{localStorage.getItem("username").slice(0,3)}</p>
+                                    <p>{localStorage.getItem("username").}</p>
                                 </div>
                                 <div onClick={customerhaslogout}className="logout">
                                     <p>Logout</p>
