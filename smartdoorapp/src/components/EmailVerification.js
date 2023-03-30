@@ -16,11 +16,12 @@ export default function EmailVerification (){
         let id_first = url.indexOf("user/") + 5;
         let id_second = url.indexOf("/verify");
         let id = url.slice(id_first,id_second);
- 
+     
         let token_first = url.indexOf("verify");
         let token = url.slice(token_first + 7);
+      
      
-
+        
         try{
             const verify =  await axios.get(`http://localhost:3001/user/${id}/verify/${token}`);
             console.log(verify.data + "working");
