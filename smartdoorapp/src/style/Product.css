@@ -6,8 +6,6 @@
 
 /* total product text */
 .show-head{
-   position: absolute;
-   left:3%;
  
    /* background-color:rgb(239, 239, 239); */
    display: flex;
@@ -38,17 +36,11 @@
 #pagination {
    width:95%;
    display: flex;
-   height:30px;
-   justify-content:flex-end;
+   justify-content:space-around;
    align-items: center;
-   position: relative;
-   position: absolute;
-   top:-3%;
    margin:auto;
-   
-
 }
-#pagination  > li{
+.pagination-btn  > li{
 
     list-style-type: none;
     background-color:rgb(84, 84, 84);
@@ -62,13 +54,12 @@
     font-size:0.8rem;
     cursor: pointer;
 }
-#pagination  > li:hover{
+.pagination-btn  > li:hover{
 
    background-color: black;
 }
 
-#pagination > button{
-    height:75%;
+.pagination-btn button{
     font-size:0.6rem;
     padding:0px 6px;
     border:none;
@@ -77,7 +68,7 @@
     border-radius:5px;
     font-weight: bold;
 }
-#pagination > button:hover{
+.pagination-btn button:hover{
     background-color:red;
 }
 .pageleft{
@@ -331,7 +322,6 @@
         font-size: 17px;
     }
     #pagination {
-    width: 29%;
     font-size: 12px;
     }
     .pagination-btn{

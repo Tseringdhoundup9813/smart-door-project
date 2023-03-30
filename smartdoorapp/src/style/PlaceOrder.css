@@ -1,0 +1,79 @@
+#placeOrder{
+    background-color: rgb(240, 239, 239);
+}
+.row-placeOrder{
+    width:99%;
+    margin:0 auto;
+    padding:50px 10px;
+}
+.khalti,.cod{
+    background-color: #f5f6f9;
+    margin-right:5px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+.khalti-icon{
+    height:100px;
+    width:100px;
+    background: url('../image/payment/khalti.png')center/contain no-repeat;
+}
+.cod-icon{
+    height: 100px;
+    width:100px;
+    background:url('../image/payment/cod.png')center/contain no-repeat;
+}
+.payment-points{
+    background:#fff;
+    color:black;
+    padding:30px;
+    border-radius:5px;
+
+}
+.pay-nowbtn{
+    background:green;
+    color:#fff;
+    transition:all .3s linear;
+    margin:20px 0;
+}
+.pay-nowbtn:hover{
+    background:#fff;
+    color:green;
+    border:1px solid green;
+}
+.ordersummary{
+    background-color: #fff;
+    padding:30px 20px;
+    border-radius:5px;
+}
+.img-padding{
+    padding:20px;
+}
+@media screen and (max-width:992px){
+    .row-placeOrder{
+        font-size:12px;
+        padding:0 10px;
+    }
+    .cod-icon,.khalti-icon{
+        height:75px;
+    }
+    .img-padding{
+        padding:10px;
+    }
+}
+@media screen and (max-width:576px){
+    .cod-icon, .khalti-icon {
+        height: 33px;
+    }
+    .payment-points {
+        padding: 19px;
+    }
+    .paynow-btn, .pay-nowbtn{
+        font-size:12px;
+    }
+    .ordersummary {
+        padding: 20px 20px;
+    }
+    .img-padding{
+        padding:0;
+    }
+}

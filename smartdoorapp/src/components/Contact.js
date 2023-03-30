@@ -72,7 +72,7 @@ function Contact (){
                             Sign up for our <div className="sub-news">newsletter</div>
                         </div>
                     </div>
-                    <div className="col-10 mx-auto input-container">
+                    <div className="col-10 mx-auto">
                         <div className="sub-input order-1"><input type="email" placeholder="Enter your Email ID" requried/> <div className="sub-btn btn text-uppercase order-3">Subscribe</div></div>
                         <div className="sub-check order-2"><div className="sub-checkbox"><input type="checkbox" className="checkbox" /></div><div className="sub-check-title" onClick={checkboxsub}>I consent to LABELUK collecting my details through this form.</div></div>
                     </div>
