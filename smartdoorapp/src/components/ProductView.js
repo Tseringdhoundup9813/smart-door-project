@@ -2,7 +2,7 @@
 import '../style/Product-view.css';
 import {useEffect, useState} from 'react';
 
-import { json, Link,useParams } from 'react-router-dom';
+import { json, NavLink, Link,useParams } from 'react-router-dom';
 import axios from 'axios';
 
 //slick
@@ -330,7 +330,7 @@ function Productview(){
                             <p>Add to cart</p>
                         </div>
                         <div className="buy-box">
-                            <p>Buy</p>
+                            <p><NavLink to="/product/buy-now" className="nav-link">Buy Now</NavLink></p>
                         </div>
                     </div>
                     {/* -================= */}

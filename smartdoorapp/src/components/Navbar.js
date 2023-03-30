@@ -121,7 +121,7 @@ function customerhaslogin(){
                         {/* loin and signup ====================*/}
                         {
                         token?<div id="logout" onClick={customerhaslogin}><h1>logout</h1></div>:
-                        <div className="heart-icon fs-4" id="logout" onClick={()=>setValidationBox(true)}><h1>login</h1></div>
+                        <div className="heart-icon fs-4" id="logout" onClick={()=>setValidationBox(true)}><h1>login <i className="fa-regular fa-user"></i></h1></div>
                         }
                        
                         {/* end ================= */}

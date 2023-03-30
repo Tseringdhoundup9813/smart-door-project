@@ -1,6 +1,7 @@
 import '../style/productCart.css'
 
 import {useState, useEffect, useId} from 'react'
+import { NavLink } from 'react-router-dom';
 
 //slick
 import React, { Component } from "react";
@@ -274,7 +275,7 @@ function ProductCart (){
                                 <div className="cart-total-amt"> Rs.{price}/-</div>
                             </div>
                             <div className="coupon-cart">
-                                <div className="btn coupon-cart-update update cart">proceed to checkout</div>
+                                <div className="btn coupon-cart-update update cart"><NavLink to="/product/buy-now" className="nav-link">proceed to checkout</NavLink></div>
                             </div>
                         </div>
                     </div>
