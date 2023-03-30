@@ -46,7 +46,7 @@ import { loginContext } from './components/Context';
 import BuyNow from './components/BuyNow';
 import PlaceOrder from './components/PlaceOrder';
 
-
+import EmailVerification from './components/EmailVerification'
 const router = createBrowserRouter(
   createRoutesFromElements(
 
@@ -61,6 +61,7 @@ const router = createBrowserRouter(
       <Route path="/about/our-story" element={<Story />} />
       <Route path="/product/buy-now" element={<BuyNow />} />
       <Route path="/product/placeorder" element={<PlaceOrder />} />
+      <Route path="/user/:id/verify/:token" element={<EmailVerification/>} />
       <Route path="*" element={<NotFound/>}/>
 
 

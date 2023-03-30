@@ -3,7 +3,7 @@ import axios from 'axios'
 import "../style/email_verification.css"
 
 
-export const EmailVerification = () => {
+export default function EmailVerification (){
     // const[url,setUrl] = useState();
     const[iD,setId] = useState();
     const[Token,setToken] = useState();
