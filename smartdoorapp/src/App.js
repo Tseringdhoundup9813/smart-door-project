@@ -21,6 +21,7 @@ import Faqs from './components/Faqs';
 import Vision from "./components/vision";
 import Story from './components/Story'
 import NotFound from './layout/NotFound'
+import { EmailVerification } from './components/EmailVerification';
   
   // layouts
   import RootLayout from './layout/RootLayout';
@@ -58,7 +59,12 @@ import { loginContext } from './components/Context';
         <Route path="/faqs" element={<Faqs />} />
         <Route path="/about/our-vision" element={<Vision />} />
         <Route path="/about/our-story" element={<Story />} />
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="/user/:id/verify/:token" element={<EmailVerification/>} />
+
+        
+        <Route path="*" element={<NotFound/>}/> 
+
+
 
 
         {/* for admin */}

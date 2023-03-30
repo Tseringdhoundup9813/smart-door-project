@@ -1,6 +1,8 @@
 const User = require("../Models/User");
 const ErrorResponse = require("../utils/errorResponse");
-
+const Email =require("../utils/sendEmail")
+const Token= require("../Models/Token")
+const crypto = require("crypto");
 
 exports.register =async (req,res,next)=>{
     const {username,email,password} = req.body;
@@ -16,29 +18,58 @@ exports.register =async (req,res,next)=>{
 
         }
         else{
+
             const user = await User.create({username,email,password});
-            sendToken("successfully singup",user,201,res)
+            sendToken("sucessfully Singup && Email send to verify",user,user.username,user._id,false,200,res);
+            const token = await new Token({
+                userId:user._id,
+                token:crypto.randomBytes(32).toString("hex")
+
+            }).save();
+            const url = `http://localhost:3000/user/${user._id}/verify/${token.token}`
+            await Email(user.email,'Email Verification',url)
         }
-      
+
+        
     
     }catch(err){
     //    next(err);
-       res.status(404).json({message:"network err"})
+       res.status(200).json({message:"network err"})
 
   
     }
     
 }
+exports.VerifyEmail=async (req,res)=>{
+    const id = req.params.id;
+
+    try{
+        const token = await new Token({
+            userId:id,
+            token:crypto.randomBytes(32).toString("hex")
+    
+        }).save();
+        const user_Email = await User.find({_id:id});
+        const url = `http://localhost:3000/user/${id}/verify/${token.token}`
+        await Email(user_Email[0].email,'Email Verification',url)
+        res.status(200).json({message:"Email Verification Send to your gmail " + user_Email[0].email})
+      
+    }catch(err){
+        console.log(err);
+        res.status(404).json({message:"Server ERROR"})
+
+        
+    } 
+}
 
 exports.login = async (req,res,next)=>{
     const{email,password} = req.body;
     if(!email||!password){
-    //    return next(new ErrorResponse("please provide email and password"));
         res.status(200).json({message:"please fill email and password"})
     }
   
     try{
-        const user = await User.findOne({email}).select("+password");
+        const user = await User.findOne({email}).select("+password")
         if(!user){
     
             res.status(200).json({message:"please enter correct validation"})
@@ -50,7 +81,8 @@ exports.login = async (req,res,next)=>{
             res.status(200).json({message:"please enter correct validation"})
 
         }
-        sendToken("sucessfully login",user,user.username,user._id,200,res);
+       
+         sendToken("sucessfully login",user,user.username,user._id,user.verified,200,res);
 
     }catch(err){
        
@@ -84,7 +116,7 @@ exports.resetpassword = (req,res,next)=>{
 }
 
 
-const sendToken = (msg,user,username,id,statusCode,res,)=>{
+const sendToken = (msg,user,username,id,email_verify,statusCode,res,)=>{
    const token = user.getSignedToken();
-   res.status(statusCode).json({message:msg,success:true,token,username,id})
+   res.status(statusCode).json({message:msg,success:true,token,username,id,email_verify})
 }

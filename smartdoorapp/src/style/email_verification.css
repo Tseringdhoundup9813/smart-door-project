@@ -1,0 +1,51 @@
+
+.email-verification-container{
+    width:100%;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.email-verification {
+
+   background-color: rgb(237, 13, 13);
+   text-align: center;
+   color:rgb(32, 32, 32);
+   border-radius:5px;
+   font-weight:bold;
+}
+
+.email-verification > h1{
+    padding:5px 50px;
+}
+.email-send-notify{
+    width:100%;
+    height:25px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(47, 47, 47);
+    margin:auto 20px;
+    
+    
+
+}
+.email-send-notify > h1{
+
+    font-size:0.9rem;
+    color:white;
+    margin:auto 0px;
+
+    
+}
+.email-send-notify > h1:nth-child(2){
+    
+    
+    font-size:0.9rem;
+    padding:5px 10px;
+    background-color: red;
+    color:white; 
+    margin:auto 40px;
+    cursor: pointer;
+}

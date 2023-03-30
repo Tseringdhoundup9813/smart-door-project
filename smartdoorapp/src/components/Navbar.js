@@ -6,6 +6,7 @@ import { loginContext } from './Context';
 
 //router
 import {NavLink} from 'react-router-dom'
+import axios from 'axios';
 
 
 
@@ -16,27 +17,44 @@ function Navbar (){
     const{validationBox,setValidationBox} = useContext(loginContext);
     const[token,setToken] = useState("");
     const[totalCartList,setTotalCartList] = useState();
+    const[Email_verify_message,set_Email_Verify_message] = useState(); 
+
+    console.log(totalCartList);
   
 
 // ===============================
 useEffect(()=>{
     setToken(localStorage.getItem("token"));
+    if(JSON.parse(localStorage.getItem("cart"))!==null){
+        if(JSON.parse(localStorage.getItem("cart")).length < 1){
+            setTotalCartList(0);
+          
+        }
+       else{
+            console.log("not working");
+            setTotalCartList(JSON.parse(localStorage.getItem("cart")).length);
+    
+        }
+    }
+   
     
     
-},[token,localStorage.getItem("token")]);
+},[token,localStorage.getItem("token"),localStorage.getItem("cart")]);
 
 
-// customerhaslogin}===============
-function customerhaslogin(){
+// customerhaslogout}===========================================================================flaskdflkasdlfkdslf
+function customerhaslogout(){
 
     localStorage.setItem("token","");
     setToken(localStorage.getItem("token"))
     localStorage.setItem("user_id","");
     localStorage.setItem("username","");
+    localStorage.removeItem("email_verify");
+
 
 }
 
-// ===================
+// ===================fkasdlfklsd afds-----------------========================================
   
 // login and signup ===========
     const[auth,setAuth] = useState(false);
@@ -94,9 +112,36 @@ function customerhaslogin(){
         setAuth(props);
     }
     // end ===================================
+
+    // verify email send ======================================
+   
+    async function VerifyEmailSend(){
+        console.log((localStorage.getItem("user_id")));
+        const verifySend = await axios.get(`http://localhost:3001/verifyEmail/${(localStorage.getItem("user_id"))}`)
+        console.log(verifySend.data);
+        set_Email_Verify_message(verifySend.data.message);
+        
+    }
+
+
+    // ++++++==============END+====================================
     
     return(
         <div>
+
+            {/* email verfication notification ================================================== */}
+            {   
+                Email_verify_message?<div className='email-send-notify '><h1>{Email_verify_message}</h1><h1 className='email'>Send Email Again</h1></div>:
+
+                JSON.parse(localStorage.getItem("email_verify"))||JSON.parse(localStorage.getItem("email_verify"))==null?"":
+                <div className="email-verification-notification">
+                <h1>{(localStorage.getItem("username"))} You need to  Verify your Email</h1>
+                <h1 onClick={VerifyEmailSend}>Send Verification code to email</h1>
+                </div>
+            }
+
+               
+            {/* ===============END+================================================ */}
 
 
 
@@ -114,13 +159,20 @@ function customerhaslogin(){
                     <a className="navbar-brand navbar-img" href="#">
                     </a>
 
-                 
+                   
                     <div className="two-icon ms-auto order-md-3">
 
 
                         {/* loin and signup ====================*/}
                         {
-                        token?<div id="logout" onClick={customerhaslogin}><h1>logout</h1></div>:
+                        token?<div id="logout" >
+                                <div className="username">
+                                    <p>{localStorage.getItem("username").slice(0,3)}</p>
+                                </div>
+                                <div onClick={customerhaslogout}className="logout">
+                                    <p>Logout</p>
+                                </div>
+                            </div>:
                         <div className="heart-icon fs-4" id="logout" onClick={()=>setValidationBox(true)}><h1>login</h1></div>
                         }
                        
@@ -128,7 +180,7 @@ function customerhaslogin(){
 
                         <div className="heart-icon fs-4"><i class="fa-regular fa-heart"></i></div>
                         
-                        <div className="cart-icon fs-4"><NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink></div>
+                        <div className="cart-icon fs-4"><p className='totalcartlistCount'>{totalCartList==null||!totalCartList?0:totalCartList}</p><NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink></div>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     {/* <div className="navbar-search-sm row d-flex align-items-center justify-content-center">

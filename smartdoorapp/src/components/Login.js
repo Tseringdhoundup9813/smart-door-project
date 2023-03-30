@@ -49,6 +49,7 @@ const Login = (props) => {
                 localStorage.setItem("token",response.data.token);
                 localStorage.setItem("user_id",response.data.id);
                 localStorage.setItem("username",response.data.username);
+                localStorage.setItem("email_verify",response.data.email_verify);
                 setMessage(response.data.message);
                 setLoginSucess(response.data.success);
                

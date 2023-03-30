@@ -35,7 +35,6 @@ const Register = (props) => {
             try{
                 let response = await axios.post("http://localhost:3001/register",formdata);
                 setMessage(response.data.message);
-                // console.log(response.data.message);
                 setSingupSucess(response.data.success);
                 console.log(response.data)
                 
@@ -140,7 +139,7 @@ useEffect(()=>{
         let confirm_password = document.querySelector(".confirm_password");
         confirm_password.style.color = "lightgreen";
         setConfirmPasswordCheck(true);
-        console.log("green");
+       
     }
     else if(confirmPassword.length <= 0){
         let confirm_password = document.querySelector(".confirm_password");
@@ -156,7 +155,7 @@ useEffect(()=>{
 
     }
     // -==============================
-},[formdata,confirmPassword,usernameCheck,emailCheck,passwordCheck,confirmPasswordCheck,signupSucess])
+},[formdata,confirmPassword,usernameCheck,emailCheck,passwordCheck,confirmPasswordCheck,signupSucess,ChangeTologin])
 
 
 return (

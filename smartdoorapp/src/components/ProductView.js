@@ -78,9 +78,9 @@ function Productview(){
     async function productDetail(){ 
         try{
             const product = await  axios.get(`http://localhost:3001/productdetail/${productId}`)
-            console.log("hello");
+        
             setproduct(product.data.data);
-            console.log(product.data);
+  
         
         }catch(err){
             console.log(err);
