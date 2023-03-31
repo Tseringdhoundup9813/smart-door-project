@@ -84,9 +84,6 @@ function ProductCart (){
             ans += qty * itemprice
         setPrice(ans);
     }
-
-
-   
         // deleteCartlist=============
         function deleteCartlist(key){
             
@@ -96,15 +93,9 @@ function ProductCart (){
                     return item;
                 }
           })
-
           localStorage.setItem("cart",JSON.stringify(deletecart));
          setCartList(JSON.parse(localStorage.getItem("cart")));
-
-        
-          
         //   console.log(deletecart);
-
-   
         }
     //slick 
     var settings = {
@@ -180,11 +171,9 @@ function ProductCart (){
             <Navbar></Navbar>
             <div id="cart-list">
                 <div className="row row-cartList">
-                    <div className="cartlist-container d-flex justify-content-between align-items-center">
-                        <div className="cart-l-shopping text-capitalize">shopping cart</div>
-                        <div className="cart-l-shopping text-capitalize">whistlist</div>
-                        <div className="cart-l-shopping text-capitalize">order tracking</div>
-                        <div className="cart-l-shopping text-capitalize">login</div>
+                    <div className="cartlist-container d-flex align-items-center">
+                        <NavLink to="/product-cart" className="nav-link me-3 "><div className="cart-l-shopping text-capitalize ">shopping cart</div></NavLink>
+                        <NavLink to="/product/order-tracking" className="nav-link"><div className="cart-l-shopping text-capitalize">order tracking</div></NavLink>
                     </div> 
                 </div>
                 <div className="row row-cart-table">

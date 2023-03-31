@@ -7,6 +7,7 @@ import Register from './Register';
 import Login from "./Login";
 import { loginContext } from "./Context";
 
+
 function Auth (props){
 
 
@@ -17,6 +18,7 @@ function Auth (props){
       
         setValidationBox(false);
 
+        document.querySelector('.heart-icon').style.color="#908778"
     }
 
     function ChangeToSingup(bol){
