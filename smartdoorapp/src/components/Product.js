@@ -190,7 +190,7 @@ const handlechange=()=>{
 // =====================FOR CHECK BOX CLEAR========================
     return(
 
-    <div>
+    <div id="product-view">
         <Navbar></Navbar>
         {/* delete message  */}
         {
@@ -212,7 +212,7 @@ const handlechange=()=>{
       
 
         {/* ======================= */}
-    <div className="product-row row">
+    <div className="product-view-row row">
          {/* ============viewall======== */}
          <div className="col-sm-12 product-show">
             <div className="product-pagination d-flex justify-content-end" >
@@ -227,7 +227,7 @@ const handlechange=()=>{
                 <div className="row show-head ">
                    <div className="show-total">Total product (<span id="total-product-number" className=' text-primary'> {totalProductShow} </span>)</div>
                 </div>
-                <div className="pagination-btn d-flex" >
+                <div className="pagination-btn sm-pagination d-flex" >
                 <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
                     {
                         [...Array(totalProductCount)].map((e,i)=>{
@@ -320,17 +320,11 @@ const handlechange=()=>{
 
                 allproduct.map((product,key)=>{
                         return <div key={key} className="show-card-container" > 
-                            <NavLink to={`/product/page-view${product._id}`} >
+                            <NavLink to={`/product/page-view${product._id}`} className="img-border" >
                                 <div className="show-card-img">
                                      <img src={product.img[0]}></img>
                                 </div>
                                 </NavLink>
-                          
-
-
-                              
-
-                                
                           
                             <div className="show-card-detail">
                                   {/* delete product  */}
@@ -338,25 +332,17 @@ const handlechange=()=>{
                               {/* ========== */} 
                             
                             
-                              <div className="show-card-title"><h1>{product.name}</h1></div>
+                              <div className="show-card-title">{product.name}</div>
                             
-                                <div className="show-card-price"><h1>Rs { product.price}</h1></div> 
+                                <div className="show-card-price">Rs { product.price}</div> 
+                                <div className="show-card-discount">Rs. <span className="price-cut">1,299 <div className="price-line"></div></span>  -31%</div>
                                 {/* <p>{product.categories}</p>  
                                 <p>{product.colors}</p>   */}
-
                            
                             </div>
-                            
                          </div>
                     })
-
-
                 }
-
-         
-
-               
-
 
             </div>
                 

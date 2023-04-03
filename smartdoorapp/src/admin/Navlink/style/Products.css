@@ -6,19 +6,8 @@
     grid-template-columns: repeat(4, 1fr) !important;
     grid-template-rows: auto !important;
 }
-
-.products-edit{
-    border:1px solid green;
-    color:green;
-    border-radius:5px;
-    width:45%;
-    text-align: center;
-    cursor: pointer;
-    transition: all .3s linear;
-}
-.products-edit:hover{
-    background:green;
-    color:#fff;
+.show-card-container-ad{
+    height:70vh;
 }
 .products-delete{
     border:1px solid red;

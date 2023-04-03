@@ -76,10 +76,10 @@ const router = createBrowserRouter(
         <Route path="inbox" element={<Inbox/>}/>
         <Route path="pages" element={<Pages/>}/>
         <Route path="media" element={<Media/>}/>
-        <Route path="add-products" element={<AddProduct/>}/>
+        <Route path="add-products" element={<UpdateProduct/>}/>
         <Route path="products" element={<Products/>}/>
 
-        <Route path="edit" element={<UpdateProduct/>}/>
+        <Route path="edit" element={<AddProduct/>}/>
         <Route path="categories" element={<Categories/>}/>
 
       </Route>
