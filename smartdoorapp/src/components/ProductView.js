@@ -312,9 +312,13 @@ function Productview(){
                     </div>
                
                     <div className="pv-price-detail d-flex">
-                        <div className="pv-price">Rs. {product?product.price:""}</div>
+                        <div className="pv-price">Rs. { product.price*product.discount/100}</div>
                     </div>
-                    <div className="show-card-discount">Rs. <span className="price-cut">1,299 <div className="price-line"></div></span>  -31%</div>
+                    {
+                        product.discount<1?"":
+                    <div className="show-card-discount">Rs. <span className="price-cut">{product?product.price:""}<div className="price-line"></div></span>{product?product.discount:""}%</div>
+
+                    }
 
 
                  

@@ -4,9 +4,9 @@ import axios from 'axios';
 
 
 function CartButton(props) {
-    const[rate,setRate]= useState(props.productrate);
-    const[qt,setqt] = useState();
   
+    const[qt,setqt] = useState();
+    
    
 
 
@@ -16,6 +16,7 @@ function CartButton(props) {
             const product = await axios.post(`http://localhost:3001/addqt`,{product_id:props.product_id,user_id:props.userKey})
             console.log(product.data.qt);
             setqt(product.data.qt);
+            props.rateChange(product.data.qt);
            
         
         }catch(err){
@@ -28,6 +29,8 @@ function CartButton(props) {
             const product = await axios.post(`http://localhost:3001/minqt`,{product_id:props.product_id,user_id:props.userKey})
             console.log(product);
             setqt(product.data.qt);
+            props.rateChange(qt);
+
 
         
         }catch(err){

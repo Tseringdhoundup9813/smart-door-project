@@ -12,9 +12,10 @@ exports.ProductUpload=async(req,res)=>{
 
     const url = req.protocol + '://' + req.get('host');
     
-    const {name,description,price,colors,categories,size} = req.body;
+    const {name,description,price,discount,colors,categories,size} = req.body;
     let imgdata = req.files;
     path = [];
+
     // console.log(req.file);
     try{
         if(req.files){
@@ -28,7 +29,7 @@ exports.ProductUpload=async(req,res)=>{
         }
 
        
-        const productdata = await productModel.create({name,categories,colors,size,description,price,img:path});
+        const productdata = await productModel.create({name,categories,colors,size,description,price,img:path,discount:discount});
         res.status(200).json({
             data:productdata,
             message:"Succefully Upload Product"

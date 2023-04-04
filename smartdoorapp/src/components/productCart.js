@@ -76,6 +76,7 @@ function ProductCart (){
         try{
             const product = await  axios.get(`http://localhost:3001/showCartlist/${localStorage.getItem("user_id")}`)
             setCartList(product.data.data);
+            console.log(product.data);
          
           
         }catch(err){
@@ -127,10 +128,11 @@ function ProductCart (){
 
         // change Rate =======================================
         function rateChange(rate){
-            setQty(rate);
+            
             console.log(rate);
             
         }
+        
     //    
   
         // ==================END+================================
@@ -234,7 +236,8 @@ function ProductCart (){
 
                                 <div className="cart-product-price d-flex justify-content-around">
                                     <div className="cart-product-amount">
-                                   <span className="cart-amt-sm">Grand Total</span>  Rs. {product.price * qty}/-
+                                   <span className="cart-amt-sm">Grand Total</span> 
+                                  
                                     </div>
                                     <div className="cart-product-remove" onClick={()=>deleteCartlist(product._id)}>
                                     <i class="fa-solid fa-trash-can"></i>

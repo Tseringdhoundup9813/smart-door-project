@@ -322,6 +322,13 @@ const handlechange=()=>{
                         return <div key={key} className="show-card-container" > 
                             <NavLink to={`/product/page-view${product._id}`} className="img-border" >
                                 <div className="show-card-img">
+                                    {   
+                                        product.discount < 1?"":
+                                          <div className="product-discount">
+                                            {" "+ product?product.discount:""}%
+                                             </div>
+                                    }   
+                                  
                                      <img src={product.img[0]}></img>
                                 </div>
                                 </NavLink>
@@ -333,11 +340,15 @@ const handlechange=()=>{
                             
                             
                               <div className="show-card-title">{product.name}</div>
-                            
-                                <div className="show-card-price">Rs { product.price}</div> 
-                                <div className="show-card-discount">Rs. <span className="price-cut">1,299 <div className="price-line"></div></span>  -31%</div>
+                                 
+                                <div className="show-card-price">Rs { product.price*product.discount/100}</div> 
+                                {
+                                    product.discount<1?"":<div className="show-card-discount">Rs. <span className="price-cut">{product?product.price:""} <div className="price-line"></div></span>{" "+ product?product.discount:""}%</div>
+                                }
+                                
                                 {/* <p>{product.categories}</p>  
                                 <p>{product.colors}</p>   */}
+                               
                            
                             </div>
                          </div>

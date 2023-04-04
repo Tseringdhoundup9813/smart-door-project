@@ -205,6 +205,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .show-card-img > img{
     width:100%;
@@ -376,3 +377,16 @@
     background:red;
     color:#fff;
 }
+
+/* product-discount============================ */
+.product-discount{
+    position: absolute;
+    top:5px;
+    right:0px;
+    background-color:rgb(251, 92, 92);
+    padding:1px 10px;
+    color:white;
+    font-size:0.7rem;
+    border-radius:2px 0px 0px 2px;
+}
+/* =========END+=============== */

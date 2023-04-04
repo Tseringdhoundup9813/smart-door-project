@@ -3,8 +3,9 @@ import React,{useState} from 'react'
 import axios from "axios"
 
 function UpdateProduct(){
-    const[productupload,setproductupload] = useState({name:"",description:"",price:"",img:[],categories:"3D DOORS",color:"rose wood",size:"80-32"});
+    const[productupload,setproductupload] = useState({name:"",description:"",price:"",img:[],categories:"3D DOORS",color:"rose wood",size:"80-32",discount:"0"});
 
+    console.log(productupload);
     // sucessfully updated
     const[message,setMessage] =useState(""); 
      const onSubmit =(e)=>{
@@ -13,6 +14,7 @@ function UpdateProduct(){
         formdata.append("name",productupload.name)
         formdata.append("description",productupload.description)
         formdata.append("price",productupload.price)
+        formdata.append("discount",productupload.discount)
         {
             for(var a=0;a< productupload.img.length;a++){
                 formdata.append("testImage",productupload.img[a]);
@@ -92,8 +94,8 @@ function UpdateProduct(){
                         </select>
                     </div>
                     <div className="up-product-title">
-                        <label className=" text-capitalize" >Discount</label>
-                        <input className="mb-2 form-control" type="text"  />
+                        <label className=" text-capitalize"  >Discount</label>
+                        <input className="mb-2 form-control" type="number" min="1" max="100"  onChange={(e)=>setproductupload({...productupload ,discount:e.target.value})} />
                     </div>
                     <div className="up-product-title">
                         <label className=" text-capitalize" >description</label>
