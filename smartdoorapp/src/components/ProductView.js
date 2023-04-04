@@ -102,17 +102,14 @@ function Productview(){
 // add to cart list ============================================================================================================================
     async function AddTocart(){
         
-        if(localStorage.getItem("cartcount")==null||localStorage.getItem("cartcount")==undefined){
-            localStorage.setItem("cartcount",0);
-        }
+        
         try{
             const product = await  axios.post(`http://localhost:3001/addtocart`,{product_id:productId,userId:userId})
             console.log(product);
             if(product.data.cartexist){
                 console.log("add already");
             }else{
-                localStorage.setItem("cartcount",Number(localStorage.getItem("cartcount"))+1);
-
+               
                 console.log("not add")
             }
            
@@ -244,7 +241,7 @@ function Productview(){
         console.log('hi')
     }
     return(
-        <div> 
+        <div id="pv-view"> 
             <Navbar></Navbar>
 
              {/*product add to the cart message =------------------------------  */}
@@ -259,7 +256,7 @@ function Productview(){
             {/* large screen */}
 
             <div className="row pv-row ">
-                <div className="col-sm-4 col-12">
+                <div className="col-sm-5 col-12">
                     <div className="row row-pvslider">
                         <div className="col-md-3 col-sm-12 order-2 order-md-1 pv-container">
 
@@ -300,7 +297,7 @@ function Productview(){
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-8 col-12 pv-img-detail">
+                <div className="col-sm-7 col-12 pv-img-detail">
                     
                         {/* // favourite */}
                          {/* <div className="pv-heart-icon text-end">

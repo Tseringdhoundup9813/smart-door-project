@@ -4,6 +4,14 @@
     font-weight:600;
 }
 
+#product-view{
+    background:rgb(240 240 240 / 61%);
+}
+.product-view-row{
+    width: 98%;
+    margin:0 auto;
+}
+
 /* total product text */
 .show-head{
  
@@ -11,12 +19,8 @@
    display: flex;
    justify-content:center;
    align-items: center;
-   overflow: hidden;
-   /* border:2px solid red; */
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   
+   overflow: hidden; 
+   margin:0 auto; 
 
 }
 #total-product-number{
@@ -38,16 +42,14 @@
    display: flex;
    justify-content:space-around;
    align-items: center;
-   margin:auto;
+   margin: 10px auto;
 }
 .pagination-btn  > li{
-
     list-style-type: none;
     background-color:rgb(84, 84, 84);
-    width:21px;
-    height:21px;
     margin:0px 5px;
     border-radius:5px;
+    padding:0 5px;
     text-align: center;
     line-height:21px;
     color:white;
@@ -61,7 +63,7 @@
 
 .pagination-btn button{
     font-size:0.6rem;
-    padding:0px 6px;
+    padding:0px 5px;
     border:none;
     background-color:rgb(250, 99, 72);
     color:white;
@@ -160,30 +162,33 @@
 .show-card{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows:repeat(4,300px);
+    grid-template-rows:repeat(4,1fr);
     grid-gap:20px 10px;
     width:100%;
-
-    
 }
 .show-product{
   
     position: relative;
 }
+.img-border{
+    border-bottom: 1px solid rgb(221, 220, 220);
 
+}
 
 .show-card-container{
     border:1px solid rgb(223, 222, 222);
-    border-radius:4px;
-    height:100%;
+    background:#fff;
+    border-radius:2px;
+    height:50vh;
     overflow: hidden;
-    animation-name:productbox;
-    animation-duration:2s;
+    animation:productbox 2s ease-in;
     transition:all 1s ease;
-
+    display: grid;
+    grid-template-rows:75% 25%;
+    box-shadow: none;
 }
 .show-card-container:hover{
-   box-shadow:1px 1px 1px 3px rgb(239, 239, 239);
+    box-shadow: 2px 4px 8px 1px rgb(213 213 213);
 }
 @keyframes productbox{
   0%{
@@ -196,72 +201,53 @@
 
 .show-card-img{
     width:100%;
-    height:80%;
+    height:100%;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
-
-
 .show-card-img > img{
-    width:90%;
-    height:90%;
+    width:100%;
+    height:100%;
     object-fit:contain;
     margin:auto;
 }
 .show-card-price{
-
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    height:20%;
-    color:rgb(69, 34, 34);
-    
-    padding:5px 0px;
     margin-top:2px;
-}
-.show-card-price > h1{
-    font-size:0.9rem;
-    text-indent:10px;
-    color:orange;
+    font-size:12px;
+    color: #f85606;
 }
 .show-card-title{
-    width:100%;
-    height:20%;
-    display:flex;
-    justify-content:center;
-    align-items: center;
-    padding:10px 0px;
-   
-  
+    font-size:16px;
+    font-weight:600;
+    color:grey;
 }
-.show-card-title > h1{
-  
-    font-size:0.8rem;
-    color:rgb(90, 86, 95);
-    text-indent:10px;
-    margin-top:10px;
-    text-transform: uppercase;
-    font-weight: bold;
-   
-    
-
-}
-
-
 .show-card-detail{
-    width:100%;
-    height:30%;
+    padding-left:10px;
     display:flex;
+    align-items: flex-start;
+    justify-content: center;
     flex-direction: column;
-    background-color: rgb(248, 246, 246);
+    width:100%;
     position: relative;
-
-  
     /* border:2px solid grey; */
 }
-
+.show-card-discount{
+    font-size:10px;
+    color:grey;
+}
+.price-cut{
+    position: relative;
+}
+.price-line{
+    position:absolute; 
+    content: '';
+    height:1px;
+    width:100%;
+    background-color: grey;
+    top:50%;
+    left:0;
+}
 /* end here */
 .deleteproduct{
     position: absolute;
@@ -297,9 +283,6 @@
     margin:10px 0;
 }
 @media screen and (max-width:1023px){
-    .show-card-container{
-        height:70vh;
-    }
     .color{
         height:30px;
         width:30px;
@@ -321,21 +304,12 @@
     .filter-cat-head, .filter-col-head, .filter-length-head {
         font-size: 17px;
     }
-    #pagination {
-    font-size: 12px;
-    }
-    .pagination-btn{
-        padding:9px;
-    }
     .color {
         height: 15px;
         width:15px;
     }
     .filter-cat-head, .filter-col-head, .filter-length-head {
     font-size: 13px;
-    }
-    .show-card-container {
-        height: 53vh;
     }
     .show-card-detail{
         font-size:12px;
@@ -360,19 +334,30 @@
     }
     .show-sm-filter{
         font-size:12px;
-        margin:10px 0;
+        margin:5px 0;
     }
     .show-sm-filter div{
         margin:0 5px;
-    }
-    .show-card-container {
-        height: 44vh;
     }
     .filter-sm-con{
         display: flex;
     }
     .filter-search-btn{
         display: block;
+    }
+    #pagination{
+        display: block;
+        margin-bottom: 0;
+    }
+    .pagination-btn button{
+        font-size:9px;
+    }
+    .show-head{
+        text-align:center;
+    }
+    .sm-pagination{
+        justify-content: flex-end;
+        margin-top:5px;
     }
 }
 

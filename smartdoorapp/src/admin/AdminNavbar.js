@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 
 function AdminNavbar(){
     const navClose=()=>{
-        document.querySelector('.admin-sidebar').style.transform='translate(-300%, 0)'
+        document.querySelector('.admin-sidebar').style.transform='translate(-300%, 0)';
     }
     return(
         <div className="col-md-2  admin-sidebar">

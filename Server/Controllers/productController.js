@@ -149,7 +149,6 @@ exports.AddToCart = async(req,res)=>{
             res.status(200).json({data:addtocart,success:true,cartexist:true})
 
 
-
         }
        
     }catch(err){
@@ -248,6 +247,24 @@ exports.deletecartlist = async(req,res)=>{
 }
 // add to cart=========================
 
+
+exports.totalcartlistcount = async(req,res)=>{
+    console.log(req.params)
+    try{
+        if(req.params.user_id!==undefined){
+            console.log(req.params.user_id);
+             const totalcartlist = await AddToCart.find({userId:req.params.user_id})
+             console.log(totalcartlist.length);
+             res.status(200).json({totalcartlist:totalcartlist.length})
+    
+         
+        }
+    }catch(err){
+        console.log(err);
+    }
+  
+
+}
 // buy now add product===================================
 exports.BuyNowProduct= async(req,res)=>{
    

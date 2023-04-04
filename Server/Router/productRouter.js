@@ -24,8 +24,8 @@ Router.get("/buynowproduct/:product_id/:user_id",productController.BuyNowProduct
 Router.get("/buynowproductshow/:user_id",productController.BuyNowProductShow);
 Router.post("/addqt",productController.addQt);
 Router.post("/minqt",productController.minQt);
-
 Router.get("/quantity/:product_id/:user_id",productController.getQuantity);
+Router.get("/totalcartlistcount/:user_id",productController.totalcartlistcount);
 
 
 

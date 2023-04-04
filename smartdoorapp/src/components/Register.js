@@ -221,9 +221,9 @@ return (
             <p onClick={()=>ChangeTologin(false)}>already have account login</p>
         </div>
         <div className="policy-container">
-            <p>By Continuning|Argee to smart doors</p>
+            <p>By Continuning | Argee to smart doors</p>
             <div>
-                <p>Privacy|</p> <p>Privacy</p>
+                <p > Privacy |</p> <p>Privacy</p>
             </div>
             
         </div>

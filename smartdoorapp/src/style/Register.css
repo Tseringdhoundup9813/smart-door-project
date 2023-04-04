@@ -6,7 +6,7 @@
 
 .register-title{
     width: 100%;
-    height:12vh;
+    padding:25px 0;
     display: flex;
     /* background-color: rgb(250, 109, 66); */
     justify-content: center;
@@ -65,7 +65,6 @@
 .google-facebook{
     margin:auto;
     width:85%;
-    height:10vh;
     display:flex;
     justify-content:space-between;
     align-items: center;
@@ -209,7 +208,6 @@ h1{
 }
 .forgetpassword > p{
     font-size:0.7rem;
-    background-color: rgb(245, 245, 245);
     padding:3px 5px;
     border-radius:2px;
     color:rgb(130, 127, 201);
@@ -217,8 +215,7 @@ h1{
     transition:all 0.5s ease;
 }
 .forgetpassword > p:hover{
-    background-color: rgb(109, 109, 109);
-    color:white;
+    color:red;
 }
 /* policy-container */
 .policy-container{
@@ -253,5 +250,20 @@ h1{
     margin:0px 4px;
     
 }
-
-
+@media screen and (max-width:600px){
+    .forgetpassword{
+        height:auto;
+        display: block;
+    }
+    .forgetpassword p{
+        background: transparent;
+        margin-bottom: 5px;
+    }
+    #logout {
+        height: 30px;
+        margin: auto 20px;
+    }
+    .register-title > h1 {
+        font-size: 10px;
+    }
+}

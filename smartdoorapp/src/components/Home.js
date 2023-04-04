@@ -129,7 +129,7 @@ function Home(){
                 </button>
             </div>
         </div>
-        <div className="row trendy">
+        <div className="row trendy " >
             <div className="col-md-6 col-sm-12">
                 <div className="trendy-detail">
                     <div className="trendy-head">
@@ -197,7 +197,7 @@ function Home(){
         </div>
         <div className="us">
             <div className="row us-row">
-                <div className="col-sm-12 us-detail">
+                <div className="col-sm-12 us-detail" >
                     <div className="us-title text-capitalize">why choose us</div>
                     <div className="us-para">We use the best Teak, Sissau and Chaap wood for our entire range of products and treatments. Each parts of doors pass through proper check before final selection. Durability, Strength and Attractiveness are our top most priority.</div>
                 </div>

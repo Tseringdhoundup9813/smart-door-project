@@ -1,6 +1,6 @@
 //import css
 import '../style/Navbar.css';
-import { useState,useContext,useEffect} from 'react';
+import { useState,useContext,useEffect, useId} from 'react';
 import Auth from './Auth';
 import { loginContext } from './Context';
 
@@ -16,9 +16,9 @@ function Navbar (){
     const{successLogin} = useContext(loginContext);
     const{validationBox,setValidationBox} = useContext(loginContext);
     const[token,setToken] = useState("");
-    const[totalCartList,setTotalCartList] = useState();
+    const[totalCartList,setTotalCartList] = useState(0);
     const[Email_verify_message,set_Email_Verify_message] = useState(); 
-
+    const[userid,setuserid]=useState();
 
   
 
@@ -31,8 +31,15 @@ useEffect(()=>{
         setTotalCartList(localStorage.getItem("cartcount"));
 
     }
+    // totalcartlistshow-------------------------------------------------
+    if(localStorage.getItem("user_id")!==null||localStorage.getItem("user_id")!==undefined){
+        setuserid(localStorage.getItem("user_id"));
+        totalcartlistcount();
+
+    }
+    // end-----------------------------------------------------
     
-},[token,localStorage.getItem("token"),localStorage.getItem("cartcount")]);
+},[]);
 
 
 // customerhaslogout}===========================================================================flaskdflkasdlfkdslf
@@ -43,11 +50,38 @@ function customerhaslogout(){
     localStorage.setItem("user_id","");
     localStorage.setItem("username","");
     localStorage.removeItem("email_verify");
-    localStorage.removeItem("loginSucess");
 
 
 }
+function clickedUser(){
+    var x=document.querySelector('.logout-text');
+    var userName=document.querySelector('.logout-username')
 
+    if (x.style.display === "flex") {
+        x.style.display = "none";
+        userName.style.color="grey";
+    } else {
+        x.style.display = "flex";
+        userName.style.color="black";
+      }
+}
+
+// totalcartlistshow=====================
+
+
+
+// totalcartlist how=============================
+  async function totalcartlistcount(){
+    try{
+        let carttotal=  await  axios.get(`http://localhost:3001/totalcartlistcount/${localStorage.getItem("user_id")}`)
+        
+        setTotalCartList(carttotal.data.totalcartlist)
+       
+    }catch(err){
+        console.log(err);
+    }
+
+  }
 // ===================fkasdlfklsd afds-----------------========================================
   
 // login and signup ===========
@@ -120,6 +154,11 @@ function customerhaslogout(){
 
     // ++++++==============END+====================================
     
+    // click login
+    function clickLogin(){
+        setValidationBox(true)
+        document.querySelector('.heart-icon').style.color="black"
+    }
     return(
         <div>
 
@@ -160,19 +199,18 @@ function customerhaslogout(){
                         {/* loin and signup ====================*/}
                         {
                         token?<div id="logout" >
-                                <div className="username">
-                                    <p>{localStorage.getItem("username").slice(0,3)}</p>
+                                <div className="logout-username " onClick={clickedUser}><span className="me-2 text-capitalize">{localStorage.getItem("username")} </span> <i class="fa-solid fa-caret-down"></i>
                                 </div>
-                                <div onClick={customerhaslogout}className="logout">
-                                    <p>Logout</p>
+                                <div onClick={customerhaslogout} className="logout-text">
+                                Logout
                                 </div>
                             </div>:
-                        <div className="heart-icon fs-4" id="logout" onClick={()=>setValidationBox(true)}><h1>login</h1></div>
+                        <div className="heart-icon d-flex align-items-center justify-content-center text-capitalize nav-item" id="logout" onClick={clickLogin}>login </div>
                         }
                        
                         {/* end ================= */}
 
-                        <div className="heart-icon fs-4"><i class="fa-regular fa-heart"></i></div>
+                        {/* <div className="heart-icon fs-4"><i class="fa-regular fa-heart"></i></div> */}
                         
                         <div className="cart-icon fs-4"><p className='totalcartlistCount'>{totalCartList==null||!totalCartList?0:totalCartList}</p><NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink></div>
                     </div>
@@ -210,13 +248,13 @@ function customerhaslogout(){
                         </li>
                     </ul>
                     </div>
-                    <div className="search-icon"  onClick={searchbtn}>
+                    {/* <div className="search-icon"  onClick={searchbtn}>
                         <div className="search-i"><i class="fa-solid fa-magnifying-glass"></i></div>
                         <div  className="search-input bg-tertiary" >
                             <input type="text" placeholder="search..."  />
                         </div>
                         <div className="search-close" onClick={searchClose}><i class="fa-solid fa-xmark"></i></div>
-                    </div>
+                    </div> */}
                       
                     
                 </div>

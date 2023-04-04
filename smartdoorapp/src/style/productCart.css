@@ -8,11 +8,18 @@
 .cartlist-container{
     margin:0 auto;
     width:80%;
+    padding:10px 0;
 }
 .cart-l-shopping{
     padding:10px 0;
-    border-bottom:1px solid black;
+    color:grey;
     cursor:pointer;
+}
+.cartlist-container a{
+    border-bottom: 1px solid transparent;
+}
+.cartlist-container .active{
+    border-bottom: 1px solid black;
 }
 .row-cart-table{
     padding:20px;
@@ -107,7 +114,7 @@
     font-weight:700;
     transition:all .3s ease-in-out;
 }
-.coupon-btn:hover{
+.coupon-cart-update:hover{
     background:black;
     color:#fff;
 
@@ -115,7 +122,6 @@
 
 .coupon-cart{
     width:100%;
-    background:black;
     border-radius:0;
     text-align:center;
     text-transform: uppercase;
@@ -124,9 +130,8 @@
 
 .coupon-cart-update{
     color:rgb(180, 179, 179);
-}
-.coupon-cart-update:hover{
-    color:#fff;
+    background:black;
+
 }
 /* ====================cart total============= */
 .cart-total{
@@ -267,4 +272,83 @@
     .coupon-cart-update{
         font-size:10px
     }
+}
+
+/* ====Order-Tracking Cart======= */
+.tracker{
+    margin: 40px 0;;
+}
+.track-status-type{
+    border: 1px solid red;
+    padding:0 10px;
+    border-radius:5px ;
+}
+.order-progress{
+   width: 100%;
+   padding:50px 0;
+   margin:10px 0;
+}
+.order-line{
+    width:90%;
+    margin: 10px auto;
+    height:10px;
+    border:1px solid green;
+    position:relative;
+}
+.order-progress-color{
+    width:50%;
+    background-color: green;
+    height: 100%;
+}
+.circle{
+    border-radius:50%;
+    background-color: yellowgreen;
+    position: absolute;
+    bottom:-15px;
+    padding:10px;
+}
+.circle1, .order-placed{
+    left:-5px;
+}
+.circle2, .in-transit{
+    left:48%;
+}
+.circle3, .completed{
+    right:-5px;
+}
+.order-status{
+    position: absolute;
+    bottom:-43px;
+}
+.order-table{
+    display: grid;
+    grid-template-columns: 10% 30% 30% 30%;
+    margin:10px;
+}
+.order-table-list{
+    padding:5px;
+}
+.order-table-head{
+    border-bottom:1px solid black;
+}
+.order-view{
+    background:rgb(243, 242, 242);
+    border:1px spolid rgb(60, 59, 59);
+    border-radius:10px;
+    padding:20px;
+}
+.order-table-border{
+   border: 1px solid green;
+   margin-bottom:10px;
+}
+
+@media screen and (max-width:660px){
+    .tracker{font-size:12px}
+    .order-progress{padding:30px 0;}
+}
+@media screen and (max-width:488px){
+    .tracker{font-size:9px;padding:0;margin:18px auto;}
+    .cartlist-container{padding:0;}
+    .order-progress{padding:10px 0;}
+
 }

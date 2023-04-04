@@ -1,5 +1,11 @@
+#pv-view{
+    background:rgb(240 240 240 / 61%);
+}
+
 .pv-row{
-    width:95%;
+    width:80%;
+    background-color: #fff;
+    padding:10px;
     margin:50px auto;
 }
 
@@ -9,64 +15,50 @@
     width:100%;
     display: flex;
     justify-content:center;
-   
 }
 .indicator-img{
-  
     width:100%;
     height:120px;
-    
-   
 }
 .indicator-img > button{
     width:100%;
     height:100%;
     background-color: rgb(245, 244, 244);
     border:none;
-   
-   
 }
 .indicator-img:nth-child(2) > button{
-
     margin-top:10px;
 }
-
-
 .indicator-img>button  > img{
    width:90%;
    height:90%;
    object-fit: contain;
    border:none;
-   
 }
 .pvslider-indicators{
   width:100%;
   height:100%;
-
 }
 .pvslider-inner{
     width:100%;
     height:70vh;
+    border: 1px solid rgb(218, 218, 218);
     background-color: #e8e8e861;
-    border-radius: 5px;
-    
-
 }
-
+.pv-main-img{
+    background:#fff;
+}
 .pv-main-img img{
-    height:90%;
+    height:100%;
     width:90%;
     object-fit: contain;
     margin:auto;
-    margin-top:20px;
 }
 /* pv-detail-para ====================== */
 .pv-detail-para{
     width:100%;
     height:10vh;
     border:1px solid grey;
-    
-
 }
 /* ==================== */
 
@@ -121,6 +113,9 @@
     .pv-main-img{
         order:1;
     }
+    .pv-row{
+        width:90%
+    }
     .pvslider-indicators{
         display: flex;
         flex-direction:row;
@@ -132,6 +127,9 @@
         width:100%;
         object-fit: contain;
     }
+    .indicator-img:nth-child(2) > button {
+        margin-top:0;
+    }
     .pv-img{
         margin:0 5px;
     }
@@ -139,6 +137,33 @@
 @media screen and (max-width:575px){
     .pvslider-inner {
         height: 56vh;
+    }
+    .pv-row{
+        margin:0 auto;
+    }
+    .pvslider-indicators{
+        width: 50%;
+    }
+    .indicator-img{
+        height:80px;
+    }
+    .pv-img-detail{
+        margin:10px 0;
+    }
+    .pv-title {
+        font-size: 15px;
+    }
+    .pv-product-detail{
+        margin:0 !important;
+    }
+    .pv-detail-para{
+        margin:0 !important;
+    }
+    .cart-buy-button{
+        height: auto;
+    }
+    .cart-buy-button > div{
+        font-size:12px !important;
     }
 }
 /* ========pv detail===== */

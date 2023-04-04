@@ -20,7 +20,8 @@ import ProductCart from './components/productCart';
 import Faqs from './components/Faqs';
 import Vision from "./components/vision";
 import Story from './components/Story'
-import NotFound from './layout/NotFound'
+import NotFound from './layout/NotFound';
+import OrderTracking from './components/OrderTracking';
 
 // layouts
 import RootLayout from './layout/RootLayout';
@@ -64,7 +65,9 @@ const router = createBrowserRouter(
       <Route path="/about/our-story" element={<Story />} />
       <Route path="/product/buy-now" element={<Protected Component={BuyNow} />} />
       <Route path="/product/placeorder" element={<PlaceOrder />} />
+      <Route path="/product/order-tracking" element={<OrderTracking/>} />
       <Route path="/user/:id/verify/:token" element={<EmailVerification/>} />
+
       <Route path="*" element={<NotFound/>}/>
 
 
@@ -76,10 +79,10 @@ const router = createBrowserRouter(
         <Route path="inbox" element={<Inbox/>}/>
         <Route path="pages" element={<Pages/>}/>
         <Route path="media" element={<Media/>}/>
-        <Route path="add-products" element={<AddProduct/>}/>
+        <Route path="add-products" element={<UpdateProduct/>}/>
         <Route path="products" element={<Products/>}/>
 
-        <Route path="edit" element={<UpdateProduct/>}/>
+        <Route path="edit" element={<AddProduct/>}/>
         <Route path="categories" element={<Categories/>}/>
 
       </Route>

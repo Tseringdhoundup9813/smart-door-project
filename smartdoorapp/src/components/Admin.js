@@ -6,36 +6,20 @@ function Admin() {
 
     // sucessfully updated
     const[message,setMessage] =useState(""); 
-
-
-
      const onSubmit =(e)=>{
-   
         e.preventDefault();
         const formdata = new FormData();
         formdata.append("name",productupload.name)
         formdata.append("description",productupload.description)
         formdata.append("price",productupload.price)
         {
-         
             for(var a=0;a< productupload.img.length;a++){
                 formdata.append("testImage",productupload.img[a]);
-
             }
-
-        
         }
         formdata.append("categories",productupload.categories);
         formdata.append("colors",productupload.color);
         formdata.append("size",productupload.size);
-   
-        
-
-    
-
-
-
-        
         axios.post("http://localhost:3001/upload",formdata, {
         }).then(res => {
             console.log(res.data)
@@ -45,8 +29,6 @@ function Admin() {
         }).catch((err)=>{
             console.log(err);
         })
-
-
      }
 
   
