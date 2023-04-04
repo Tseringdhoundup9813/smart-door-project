@@ -50,6 +50,7 @@ const Login = (props) => {
                 localStorage.setItem("user_id",response.data.id);
                 localStorage.setItem("username",response.data.username);
                 localStorage.setItem("email_verify",response.data.email_verify);
+                localStorage.setItem("loginSucess",true);
                 setMessage(response.data.message);
                 setLoginSucess(response.data.success);
                

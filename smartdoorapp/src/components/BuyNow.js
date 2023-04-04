@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState}from 'react'
 //css
 import '../style/BuyNow.css';
 
@@ -7,7 +7,39 @@ import { NavLink } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
+import axios from 'axios';
 export default function BuyNow() {
+    const[userId,setUserId] = useState();
+    const[product,setProduct] = useState();
+
+
+
+    
+
+    useEffect(()=>{
+       
+        showProduct();
+
+        
+    },[])
+    async function showProduct(){
+        setUserId(localStorage.getItem("user_id"));
+        console.log(userId);
+        console.log(localStorage.getItem("user_id"));
+          
+          try{
+              const buynowproduct = await axios.get(`http://localhost:3001/buynowproductshow/${localStorage.getItem("user_id")}`)
+          
+              console.log(buynowproduct.data.data);
+              setProduct(buynowproduct.data.data);
+    
+          
+          }catch(err){
+              console.log(err);
+          }
+    }
+   
+
   return (
     <div>
         <Navbar></Navbar>
@@ -32,20 +64,20 @@ export default function BuyNow() {
                     <div className="buy-cart">
                         <div className="buy-cart-head text-capitalize">orders</div>
                         <div className="buy-cart-container">
-                            <div className="buy-cart-img"></div>
+                            <div className="buy-cart-img" style={{backgroundImage:`url(${ product&&product.img[0]})`}}></div>
                             <div className="buy-cart-detail">
                                 <div className="buy-cart-head">
-                                    VGR 3d Doors
+                                    {product&&product.name}
                                 </div>
                                 <div className="bu-cart-cat">
-                                    category
+                                    {product&&product.categories}
                                 </div>
                             </div>
                             <div className="buy-cart-qty">
                                 Qty :1
                             </div>
                             <div className="buy-cart-price">
-                                Rs. 1,480
+                            {product&&product.price}
                             </div>
                         </div>
                     <div className="buy-subtotal">

@@ -26,9 +26,6 @@ export default function EmailVerification (){
             console.log(verify.data + "working");
             setMessage(verify.data.message);
             
-           
-       
-           
         }catch(err){
          
             console.log(err);

@@ -1,7 +1,9 @@
 
 const express = require("express");
 const productModel = require("../Models/productModel");
-const User = require("../Models/User")
+const User = require("../Models/User");
+const BuyNowProduct = require("../Models/BuyNowProduct");
+const AddToCart = require("../Models/AddToCart")
 
 
 
@@ -127,47 +129,168 @@ exports.ProductDetail = async(req,res)=>{
 
 // add to cart ===================
 exports.AddToCart = async(req,res)=>{
+    const {product_id,userId} = req.body;
+    console.log(req.body);
+   
     try{
-        const id = req.params.id;
-      
-        const userId = req.body.userId;
-        const cartlist = await productModel.find({_id:id});
+        const cartlistExist = await AddToCart.find({userId:userId ,productId:product_id});
+        console.log(cartlistExist);
+        if(cartlistExist.length <  1){
+           
+            const addtocart = await AddToCart({userId:userId ,productId:product_id}).save();
+            res.status(200).json({data:addtocart,success:true,cartexist:false})
+           
+
+        }else{
+            console.log("cart exist");
+            
+
+            const addtocart = await AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{$inc:{quantity:1}})
+            res.status(200).json({data:addtocart,success:true,cartexist:true})
+
+
+
+        }
        
-
-        const updateproudct = await User.findByIdAndUpdate({_id:userId},{$addToSet: {cart:cartlist}});
-        res.status(201).json({updateproudct});
-
     }catch(err){
         console.log(err);
     }
 
 }
 
-exports.CartShow = async(req,res)=>{
+exports.GetProductCart = async(req,res)=>{
     try{
         const user_id = req.params.id;
-      
-  
-        const cartlist  = await User.find({_id:user_id}).select("cart");
        
-        res.status(200).json({data:cartlist})
+     
+        // if(user_id){
+            const cartId = await AddToCart.find({userId:user_id});
+            const cartarray = [];
+            cartId.forEach((cart)=>{
+               
+                cartarray.push(cart.productId);
+            })
+           
+            const cartlist = await productModel.find({_id:cartarray})
+          
+            res.status(200).json({data:cartlist});
+        // }
         
+
     }
     catch(err){
         console.log(err);
     }
 }
+// qunatiy get request 
 
-exports.deletecartlist = async(req,res)=>{
-    const product_id = req.params.id;
-    const user_id = req.body.user_id;
-    console.log(user_id);
-   
-    try{
-        await User.updateOne({_id:user_id},{$pop:{cart:-1}});
+exports.getQuantity = async(req,res)=>{
+    const product_id = req.params.product_id;
+    const user_id = req.params.user_id;
+    const qt = await AddToCart.find({userId:user_id,productId:product_id});
+    console.log(qt[0].quantity);
+    res.status(200).json({qt:qt[0].quantity})
+
+
+
+}
+exports.addQt = async(req,res)=>{
+    console.log(req.body);
+    const{product_id,user_id} = req.body;
+    console.log(req.body);
+  
+    try{    
+        const rateChange = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{$inc:{quantity:1}})
+        const qt = await AddToCart.find({userId:user_id,productId:product_id});
+      
+    
+        res.status(200).json({qt:qt[0].quantity})
         
+        // res.status(200).json({data:rateChange});
+
+    }catch(err){
+        console.log(err);
+    }
+
+}
+
+exports.minQt = async(req,res)=>{
+    const{product_id,user_id} = req.body;
+ 
+  
+    try{    
+        const rateChange = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{$inc:{quantity:-1}})
+        const qt = await AddToCart.find({userId:user_id,productId:product_id});
+      
+    
+        res.status(200).json({qt:qt[0].quantity})
+
+   
+
     }catch(err){
         console.log(err);
     }
 }
+
+exports.deletecartlist = async(req,res)=>{
+    const product_id = req.params.product_id;
+    const user_id = req.params.user_id;
+
+    
+    try{
+        const deletecart = await AddToCart.findOneAndDelete({userId:user_id,productId:product_id});
+        res.status(200).json({sucess:true})
+    }catch(err){
+        console.log(err);
+        res.status(400).json({sucess:true})
+
+    }
+}
 // add to cart=========================
+
+// buy now add product===================================
+exports.BuyNowProduct= async(req,res)=>{
+   
+    try{
+        const user_product_exits = await BuyNowProduct.find({userId:req.params.user_id});
+
+         if(user_product_exits.length < 1){
+          console.log("proudct not exist");
+            const Buynowprouduct = await  BuyNowProduct({
+                userId:req.params.user_id,
+                productId:req.params.product_id,
+            }).save();
+        }
+        else if(user_product_exits){
+          console.log("proudct  exist");
+            
+            await BuyNowProduct.findOneAndUpdate({userId:req.params.user_id,productId:req.params.product_id})
+        }
+         
+        
+      
+        
+    
+    }catch(err){
+        console.log(err);
+    }
+   
+   
+   
+}
+
+exports.BuyNowProductShow = async(req,res)=>{
+   try{
+     const buynow = await BuyNowProduct.find({userId:req.params.user_id})
+     const product = await productModel.findOne({_id:buynow[0].productId})
+     res.status(200).json({data:product});
+
+   }catch(err){
+     console.log(err);
+     
+   }
+  
+}
+
+
+// ===================END===============================================

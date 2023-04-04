@@ -40,6 +40,10 @@ const ProductScheme =new  mongoose.Schema({
         type:Array,
         
     },
+    quantity:{
+        type:Number,
+        default:1,
+    },
   
    
     addToCart:{

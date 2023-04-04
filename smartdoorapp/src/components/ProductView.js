@@ -1,8 +1,8 @@
 // css
 import '../style/Product-view.css';
-import {useEffect, useState} from 'react';
+import {useEffect, useState,useContext} from 'react';
 
-import { json, NavLink, Link,useParams } from 'react-router-dom';
+import { json, NavLink, Link,useParams ,Navigate} from 'react-router-dom';
 import axios from 'axios';
 
 //slick
@@ -35,6 +35,10 @@ import mem6 from '../image/products/membrane/SD115.jpg';
 import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
+
+
+// global varaible 
+import { loginContext } from './Context';
 function SampleNextArrow(props) {
 
     // product id
@@ -64,14 +68,17 @@ function SamplePrevArrow(props) {
   }
   
 function Productview(){
+
     const {productId} = useParams();
-   
-
-
     const[product,setproduct]=useState("");
     const[userId,setUserId] = useState("");
     const[cartlist,setCartList] = useState([]);
     const[productAddedMessage,setProductAddedMessage] = useState(false);
+    const[buyNow,setBuyNow] = useState(false);
+
+    const{setValidationBox} = useContext(loginContext);
+    
+    
    
 
 
@@ -93,44 +100,26 @@ function Productview(){
 
 
 // add to cart list ============================================================================================================================
-    function AddTocart(){
-        if(JSON.parse(localStorage.getItem("cart")) !==null){
-           
-            const checkExists = cartlist.filter((item)=>{
-                if(item._id == product._id){
-                    return true;
-                }else{
-                    return false;
-                }
-            })
-            if(checkExists.length > 0){
-                console.log("already add to cart");
-                setProductAddedMessage("already added to cart");
-                
-                setTimeout(function(){
-                    setProductAddedMessage("");
-                },1200)
-            }
-            else{
-                localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
-                    setCartList([...cartlist,product]);
-                    // product add to cart message ========================
-                    setProductAddedMessage("added to cart");
-                   
-                    setTimeout(function(){
-                        setProductAddedMessage("");
-                    },1200)
-            }
-           
-        }
-        else{
-            localStorage.setItem("cart",JSON.stringify([...cartlist,product]));
-            setCartList([...cartlist,product]);
-            console.log("last one work too");
-        }
+    async function AddTocart(){
         
+        if(localStorage.getItem("cartcount")==null||localStorage.getItem("cartcount")==undefined){
+            localStorage.setItem("cartcount",0);
+        }
+        try{
+            const product = await  axios.post(`http://localhost:3001/addtocart`,{product_id:productId,userId:userId})
+            console.log(product);
+            if(product.data.cartexist){
+                console.log("add already");
+            }else{
+                localStorage.setItem("cartcount",Number(localStorage.getItem("cartcount"))+1);
 
-       
+                console.log("not add")
+            }
+           
+
+        }catch(err){
+            console.log(err);
+        }
        
     }
     // add to cart list =============================f;asdf;sldkaf=================================================
@@ -144,16 +133,47 @@ function Productview(){
             setCartList([]);
 
         }
+        // =================set USerID=============================
+          setUserId(localStorage.getItem("user_id"));
+
+        // =================END+==============================
         // ======================
         // product detail fetch from server==============================================
             productDetail();
             
         //===============END=========================/
+ 
+
+     
 
         
     
         
     },[])
+
+    // buynow function =======================================================
+       async function buyNowFunction(){
+          setUserId(localStorage.getItem("user_id"));
+          console.log(userId);
+            
+            try{
+                const buynowproduct = await axios.get(`http://localhost:3001/buynowproduct/${productId}/${userId}`)
+            
+                console.log(buynowproduct);
+      
+            
+            }catch(err){
+                console.log(err);
+            }
+        }       
+
+    // ====================END+++++++++++++++====================================
+    // show login page===============================================
+    function ShowLoginPageFunction(){
+        setValidationBox(true);
+       
+    }
+    // ==========END=============================
 
    
 
@@ -329,8 +349,8 @@ function Productview(){
                         <div onClick={AddTocart}className="add-to-cart-box">
                             <p>Add to cart</p>
                         </div>
-                        <div className="buy-box">
-                            <p><NavLink to="/product/buy-now" className="nav-link">Buy Now</NavLink></p>
+                        <div className="buy-box" onClick={buyNowFunction}>
+                           <p><NavLink to="/product/buy-now" className="nav-link">Buy Now</NavLink></p>
                         </div>
                     </div>
                     {/* -================= */}

@@ -16,10 +16,18 @@ const productController = require("../Controllers/productController");
 Router.post("/upload",MulterMiddleware.array("testImage"),productController.ProductUpload);
 Router.get("/product",productController.ProductAll);
 Router.delete("/delete",productController.deleteProduct);
-Router.patch("/AddToCart/:id",productController.AddToCart);
-Router.get("/showCartlist/:id",productController.CartShow);
-Router.patch("/deleteCartList/:id",productController.deletecartlist);
+Router.post("/addtocart",productController.AddToCart);
+Router.get("/showCartlist/:id",productController.GetProductCart);
+Router.delete("/deletecartlist/:product_id/:user_id",productController.deletecartlist);
 Router.get("/productdetail/:id",productController.ProductDetail);
+Router.get("/buynowproduct/:product_id/:user_id",productController.BuyNowProduct);
+Router.get("/buynowproductshow/:user_id",productController.BuyNowProductShow);
+Router.post("/addqt",productController.addQt);
+Router.post("/minqt",productController.minQt);
+
+Router.get("/quantity/:product_id/:user_id",productController.getQuantity);
+
+
 
 
 

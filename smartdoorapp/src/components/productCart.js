@@ -33,6 +33,8 @@ import mem6 from '../image/products/membrane/SD115.jpg';
 import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
+import CartButton from '../components/CartButton';
+import axios from 'axios';
 
 //cart quantity
 import CartQty from '../components/cartQty'
@@ -63,16 +65,35 @@ function ProductCart (){
     const [price, setPrice] = useState(0);
     const[userId,setUserId] = useState();
     const[cartlist,setCartList] = useState([]);
-    const[deletecartlist,setdeletecartlist] = useState();
+    const [qty, setQty]=useState(1);
+    const[deletecart,setdeletecart]= useState(false);
+
+  
 
 
+    async function productlistshow(){
+        
+        try{
+            const product = await  axios.get(`http://localhost:3001/showCartlist/${localStorage.getItem("user_id")}`)
+            setCartList(product.data.data);
+         
+          
+        }catch(err){
+            console.log(err);
+        }
+
+    }
 
     useEffect(()=>{
-
-        setCartList(JSON.parse(localStorage.getItem("cart")));
+        setUserId(localStorage.getItem("user_id"));
+        productlistshow();
         handlePrice();
         
     },[]);
+
+    // product show 
+    
+
     
   
 
@@ -88,24 +109,34 @@ function ProductCart (){
 
    
         // deleteCartlist=============
-        function deleteCartlist(key){
-            
-          
-          let deletecart = JSON.parse(localStorage.getItem("cart")).filter((item,index,array)=>{
-                if(index !==key){
-                    return item;
+        async function deleteCartlist(key){
+         
+                try{
+                    let dele =  await  axios.delete(`http://localhost:3001/deletecartlist/${key}/${localStorage.getItem("user_id")}`)
+                    console.log(dele);
+                    productlistshow()
+                    console.log("Work");
+                  
+                }catch(err){
+                    console.log(err);
                 }
-          })
 
-          localStorage.setItem("cart",JSON.stringify(deletecart));
-         setCartList(JSON.parse(localStorage.getItem("cart")));
 
-        
-          
-        //   console.log(deletecart);
+        }   
 
-   
+        // ==============END=====================
+
+
+
+        // change Rate =======================================
+        function rateChange(rate){
+            setQty(rate);
+            console.log(rate);
+            
         }
+    //    
+  
+        // ==================END+================================
     //slick 
     var settings = {
         dots: false,
@@ -164,17 +195,8 @@ function ProductCart (){
         {image:mem6, title:"3d ddors", price:"3800"},
     ]
     
-    const [qty, setQty]=useState(1);
-    const cartplus=()=>{
-        setQty(qty + 1)
-    }
-    const cartminus=()=>{
-        if (qty>1){
-            setQty(qty - 1);
-        }else{
-            setQty(1)
-        }
-    } 
+    
+    
     return(
         <div>
             <Navbar></Navbar>
@@ -212,18 +234,14 @@ function ProductCart (){
                                 
                                 <div className="cart-product-quantity d-flex align-items-center">
                                     <div className="text-uppercase">qty:</div>
-                                    <div className="cart-product-incerase align-items-center ">
-                                        <div className="cart-product-minus" onClick={cartminus}><i class="fa-solid fa-minus"></i></div>
-                                        <div className="cart-product-number">{qty} </div>
-                                        <div className="cart-product-plus" onClick={cartplus}><i class="fa-solid fa-plus"></i></div>
-                                    </div>
+                                    <CartButton productrate={product.quantity} rateChange={rateChange} userKey={userId} product_id={product._id}></CartButton>
                                 </div>
 
                                 <div className="cart-product-price d-flex justify-content-around">
                                     <div className="cart-product-amount">
                                    <span className="cart-amt-sm">Grand Total</span>  Rs. {product.price * qty}/-
                                     </div>
-                                    <div className="cart-product-remove" onClick={()=>deleteCartlist(key)}>
+                                    <div className="cart-product-remove" onClick={()=>deleteCartlist(product._id)}>
                                     <i class="fa-solid fa-trash-can"></i>
                                     </div>
                                 </div>
@@ -239,22 +257,7 @@ function ProductCart (){
 
                     </div>
                 </div>
-                {/* <div className="row row-cart-coupon">
-                    <div className="col-12 coupon-container">
-                        <div className="coupon-name text-capitalize">
-                            coupon
-                        </div>
-                        <div>
-                            <div className="coupon-code d-flex align-items-center justify-content-around">
-                                <div className="coupon-input"><input type="text" placeholder="Coupon Code" /></div>
-                                <div className="coupon-btn btn text-uppercase">apply code</div>
-                            </div>
-                            <div className="coupon-cart">
-                                <div className="btn coupon-cart-update update cart">update cart</div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+               
 
                 <div className="row row-cart-coupon">
                     <div className="col-12 coupon-container">

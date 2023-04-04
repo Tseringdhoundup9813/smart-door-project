@@ -12,7 +12,6 @@ const UserScheme = new mongoose.Schema({
     email:{
         type:String,
         required:[true,"please provide a  email"],
-        unique:true,
         match:[/^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, "please provide a valid email"]
     },
     password:{

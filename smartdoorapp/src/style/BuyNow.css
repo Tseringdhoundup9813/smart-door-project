@@ -11,6 +11,28 @@
     padding:50px 20px;
     margin:30px 0;
     border-radius:5px;
+   
+
+}
+
+.buy-deliver{
+    animation-name: smoothLoad;
+    animation-duration:2s;
+    transition:all 1s ease;
+}
+
+.buy-cart{
+    animation-name: smoothLoad;
+    animation-duration:3s;
+    transition:all 1s ease;
+}
+@keyframes smoothLoad{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
 }
 .buy-cart-container{
     display: grid;

@@ -46,7 +46,10 @@ import { loginContext } from './components/Context';
 import BuyNow from './components/BuyNow';
 import PlaceOrder from './components/PlaceOrder';
 
-import EmailVerification from './components/EmailVerification'
+import EmailVerification from './components/EmailVerification';
+import Protected from './components/Protected';
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
 
@@ -59,7 +62,7 @@ const router = createBrowserRouter(
       <Route path="/faqs" element={<Faqs />} />
       <Route path="/about/our-vision" element={<Vision />} />
       <Route path="/about/our-story" element={<Story />} />
-      <Route path="/product/buy-now" element={<BuyNow />} />
+      <Route path="/product/buy-now" element={<Protected Component={BuyNow} />} />
       <Route path="/product/placeorder" element={<PlaceOrder />} />
       <Route path="/user/:id/verify/:token" element={<EmailVerification/>} />
       <Route path="*" element={<NotFound/>}/>

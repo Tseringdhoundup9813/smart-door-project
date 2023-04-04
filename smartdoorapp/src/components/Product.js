@@ -128,7 +128,7 @@ useEffect(()=>{
     }
     if(pageCount < totalProductCount){
         pageRight.style.opacity="1";
-        console.log(pageCount);
+      
     }
     else{
         pageRight.style.opacity="0.5";

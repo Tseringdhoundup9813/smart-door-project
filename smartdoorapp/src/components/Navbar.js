@@ -19,27 +19,20 @@ function Navbar (){
     const[totalCartList,setTotalCartList] = useState();
     const[Email_verify_message,set_Email_Verify_message] = useState(); 
 
-    console.log(totalCartList);
+
   
 
 // ===============================
 useEffect(()=>{
     setToken(localStorage.getItem("token"));
-    if(JSON.parse(localStorage.getItem("cart"))!==null){
-        if(JSON.parse(localStorage.getItem("cart")).length < 1){
-            setTotalCartList(0);
-          
-        }
-       else{
-            console.log("not working");
-            setTotalCartList(JSON.parse(localStorage.getItem("cart")).length);
-    
-        }
+    if(localStorage.getItem("cartcount")==null||localStorage.getItem("cartcount")==undefined){
+        localStorage.setItem("cartcount",0)
+    }else{
+        setTotalCartList(localStorage.getItem("cartcount"));
+
     }
-   
     
-    
-},[token,localStorage.getItem("token"),localStorage.getItem("cart")]);
+},[token,localStorage.getItem("token"),localStorage.getItem("cartcount")]);
 
 
 // customerhaslogout}===========================================================================flaskdflkasdlfkdslf
@@ -50,6 +43,7 @@ function customerhaslogout(){
     localStorage.setItem("user_id","");
     localStorage.setItem("username","");
     localStorage.removeItem("email_verify");
+    localStorage.removeItem("loginSucess");
 
 
 }
