@@ -312,8 +312,9 @@ function Productview(){
                     </div>
                
                     <div className="pv-price-detail d-flex">
-                        <div className="pv-price"><h1>Rs. {product?product.price:""}</h1></div>
+                        <div className="pv-price">Rs. {product?product.price:""}</div>
                     </div>
+                    <div className="show-card-discount">Rs. <span className="price-cut">1,299 <div className="price-line"></div></span>  -31%</div>
 
 
                  
@@ -337,17 +338,16 @@ function Productview(){
                        </div>
 
                         <div className="pv-detail-size">
-                            <h1>{product?product.size:""}inches</h1>
+                            <h6>{product?product.size:""}inches</h6>
                           
                         </div>
                     </div>
                        {/* add to cart and buy button */}
                        <div className="cart-buy-button ">
-                        <div onClick={AddTocart}className="add-to-cart-box">
-                            <p>Add to cart</p>
+                        <div onClick={AddTocart}className="btn add-to-cart-btn">Add to cart
                         </div>
-                        <div className="buy-box" onClick={buyNowFunction}>
-                           <p><NavLink to="/product/buy-now" className="nav-link">Buy Now</NavLink></p>
+                        <div className="buy-box">
+                            <NavLink to="/product/buy-now" className="nav-link buynow-btn btn">Buy Now</NavLink>
                         </div>
                     </div>
                     {/* -================= */}

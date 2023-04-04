@@ -35,7 +35,7 @@ function UpdateProduct(){
         <div>
             <form onSubmit={onSubmit}>
            <div className="row-uproduct row">
-        <h1>{message}</h1>
+        <h1 className="admin-message">{message}</h1>
 
             <div className="col d-flex align-items-center justify-content-between">
                 <NavLink to='/admin/products'>
@@ -85,7 +85,11 @@ function UpdateProduct(){
                     
                     <div className="up-product-title">
                         <label className=" text-capitalize" >color</label>
-                        <input className="mb-2 form-control" type="text"  />
+                         {/* color ======================== */}
+                        <select id="cars" className="form-control" defaultValue={"red"} onChange={(e)=>setproductupload({...productupload ,color:e.target.value})}>
+                            <option value="rose wood">Rose Wood</option>
+                            <option value="andrateak">Andrateak</option>
+                        </select>
                     </div>
                     <div className="up-product-title">
                         <label className=" text-capitalize" >Discount</label>

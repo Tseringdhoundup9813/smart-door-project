@@ -89,3 +89,11 @@
 .img-upload{
     margin:10px 0;
 }
+
+/* updateproduct */
+.admin-message{
+    color:#fff;
+    background:rgb(4, 141, 4);
+    padding:10px;
+    font-size:14px;
+}
