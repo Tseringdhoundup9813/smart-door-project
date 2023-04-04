@@ -300,7 +300,7 @@ const handlechange=()=>{
         <div className="show-product">
               
              
-            <div className="show-card">
+            <div className="show-card show-card-admin">
             
                     
                  {/* // product is not found ================================================= */}

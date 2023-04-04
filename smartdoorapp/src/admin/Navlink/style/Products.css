@@ -89,7 +89,9 @@
 .img-upload{
     margin:10px 0;
 }
-
+.show-card-admin{
+    grid-template-columns: repeat(4, 1fr) !important;
+}
 /* updateproduct */
 .admin-message{
     color:#fff;
