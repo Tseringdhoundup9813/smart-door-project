@@ -4,6 +4,7 @@ const productModel = require("../Models/productModel");
 const User = require("../Models/User");
 const BuyNowProduct = require("../Models/BuyNowProduct");
 const AddToCart = require("../Models/AddToCart")
+const Order = require("../Models/Order")
 
 
 
@@ -96,8 +97,6 @@ exports.ProductAll =async (req,res)=>{
 // delete product =========
 
 exports.deleteProduct =async (req,res)=>{
-
-    console.log(req.query.id);
     try{
         const deleteproduct = await productModel.findByIdAndDelete(req.query.id);
         res.status(202).json({
@@ -131,22 +130,49 @@ exports.ProductDetail = async(req,res)=>{
 // add to cart ===================
 exports.AddToCart = async(req,res)=>{
     const {product_id,userId} = req.body;
-    console.log(req.body);
+   
    
     try{
         const cartlistExist = await AddToCart.find({userId:userId ,productId:product_id});
-        console.log(cartlistExist);
+        
         if(cartlistExist.length <  1){
            
             const addtocart = await AddToCart({userId:userId ,productId:product_id}).save();
+            const product = await productModel.find({_id:product_id});
+            const cartlist = await AddToCart.find({userId:userId,productId:product_id});
+            
+            if(product[0].discount> 0){
+    
+                let discount = product[0].price*product[0].discount/100;
+                discount = discount * cartlist[0].quantity;
+                const addamount =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+            }
+            else{
+                let discount = product[0].price;
+                discount = discount * cartlist[0].quantity;
+                const addamount = await AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+             }
             res.status(200).json({data:addtocart,success:true,cartexist:false})
            
-
         }else{
-            console.log("cart exist");
-            
-
+        
             const addtocart = await AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{$inc:{quantity:1}})
+            const product = await productModel.find({_id:product_id});
+            const cartlist = await AddToCart.find({userId:userId,productId:product_id});
+
+           
+            if(product[0].discount> 0){
+                let discount = product[0].price*product[0].discount/100;
+                discount = discount * cartlist[0].quantity;
+                const addamount = await AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+              
+            }
+            else{
+                let discount = product[0].price;
+                discount = discount * cartlist[0].quantity;
+                const addamount =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+                 
+            }
             res.status(200).json({data:addtocart,success:true,cartexist:true})
 
 
@@ -170,10 +196,13 @@ exports.GetProductCart = async(req,res)=>{
                
                 cartarray.push(cart.productId);
             })
+            
+            const cartlist = await productModel.find({_id:cartarray}, {},{sort: { '_id': 1 }} )
            
-            const cartlist = await productModel.find({_id:cartarray})
+            const quantity = await AddToCart.find({userId:user_id},{},{sort: { 'productId': 1} });
+
           
-            res.status(200).json({data:cartlist});
+            res.status(200).json({data:cartlist,quantity:quantity});
         // }
         
 
@@ -187,26 +216,52 @@ exports.GetProductCart = async(req,res)=>{
 exports.getQuantity = async(req,res)=>{
     const product_id = req.params.product_id;
     const user_id = req.params.user_id;
+
     const qt = await AddToCart.find({userId:user_id,productId:product_id});
-    console.log(qt[0].quantity);
+    
     res.status(200).json({qt:qt[0].quantity})
 
 
 
 }
 exports.addQt = async(req,res)=>{
-    console.log(req.body);
+ 
     const{product_id,user_id} = req.body;
-    console.log(req.body);
+    
   
     try{    
         const rateChange = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{$inc:{quantity:1}})
         const qt = await AddToCart.find({userId:user_id,productId:product_id});
-      
-    
-        res.status(200).json({qt:qt[0].quantity})
+
+        const discount = await productModel.find({_id:product_id})
+        const price = await productModel.find({_id:product_id})
+        const P_price = price[0].price;
         
-        // res.status(200).json({data:rateChange});
+        const P_discount = discount[0].discount;
+       
+   
+        if(P_discount > 0){
+            const after_discount_price = P_price*P_discount/100;
+          
+            let totalamount = after_discount_price * qt[0].quantity;
+            totalamount =  totalamount.toFixed(2);
+            const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
+            const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
+            res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
+        }
+        else{
+       
+            let totalamount = P_price * qt[0].quantity;
+            totalamount =  totalamount.toFixed(2);
+            const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
+            const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
+            res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
+            
+            
+        }
+       
+       
+        
 
     }catch(err){
         console.log(err);
@@ -221,17 +276,65 @@ exports.minQt = async(req,res)=>{
     try{    
         const rateChange = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{$inc:{quantity:-1}})
         const qt = await AddToCart.find({userId:user_id,productId:product_id});
-      
-    
-        res.status(200).json({qt:qt[0].quantity})
 
-   
+       
+
+        const discount = await productModel.find({_id:product_id})
+        const price = await productModel.find({_id:product_id})
+        const P_price = price[0].price;
+        const P_discount = discount[0].discount;
+
+        if(P_discount > 0){
+            const after_discount_price = P_price*P_discount/100;
+           
+            let totalamount = after_discount_price * qt[0].quantity;
+            totalamount =  totalamount.toFixed(2);
+            const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
+            const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
+            res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
+        }
+        else{
+       
+            let totalamount = P_price * qt[0].quantity;
+            totalamount =  totalamount.toFixed(2);
+            const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
+            const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
+            res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
+             
+        }
+
 
     }catch(err){
         console.log(err);
     }
 }
 
+// ==================TOTAL AMOUNT=============================
+
+
+exports.totalamount = async(req,res)=>{
+      
+        const totalamount = await AddToCart.find({userId:req.params.user_id})
+        let sum = 0;
+        if(totalamount.length>0){
+            if(totalamount.length>0){
+                for(var a= 0; a< totalamount.length;a++){
+                
+                    sum = sum+ Number(totalamount[a].amount);
+                }
+            }
+            else{
+                sum = totalamount[0].amount;
+                
+            }
+        
+            res.status(200).json({totalamount:sum});
+        }
+       
+       
+}
+
+// ============END+===============================
 exports.deletecartlist = async(req,res)=>{
     const product_id = req.params.product_id;
     const user_id = req.params.user_id;
@@ -250,12 +353,11 @@ exports.deletecartlist = async(req,res)=>{
 
 
 exports.totalcartlistcount = async(req,res)=>{
-    console.log(req.params)
+ 
     try{
         if(req.params.user_id!==undefined){
-            console.log(req.params.user_id);
+         
              const totalcartlist = await AddToCart.find({userId:req.params.user_id})
-             console.log(totalcartlist.length);
              res.status(200).json({totalcartlist:totalcartlist.length})
     
          
@@ -273,15 +375,13 @@ exports.BuyNowProduct= async(req,res)=>{
         const user_product_exits = await BuyNowProduct.find({userId:req.params.user_id});
 
          if(user_product_exits.length < 1){
-          console.log("proudct not exist");
+        
             const Buynowprouduct = await  BuyNowProduct({
                 userId:req.params.user_id,
                 productId:req.params.product_id,
             }).save();
         }
         else if(user_product_exits){
-          console.log("proudct  exist");
-            
             await BuyNowProduct.findOneAndUpdate({userId:req.params.user_id,productId:req.params.product_id})
         }
          
@@ -312,3 +412,44 @@ exports.BuyNowProductShow = async(req,res)=>{
 
 
 // ===================END===============================================
+
+
+// order-----------------------------order   order ----------------===============================
+
+exports.Order=async(req,res)=>{
+    const user_id = req.params.user_id;
+
+    const{address,number} = req.body;
+    try{
+        const cartlist = await AddToCart.find({userId:user_id});
+        let totalquantity = 0;
+        let totalamount = 0;
+        cartlist.map((item)=>{
+            
+            totalquantity += item.quantity;
+            totalamount +=item.amount;
+        })
+        const createorder = await Order.create({userId:user_id,productId:cartlist,location:address,number:number,totalamount:totalamount,totalquantity:totalquantity})
+        console.log(createorder);
+        res.status(200).json({order_id:createorder._id,totalamount:totalamount})
+
+
+    }catch(err){
+        console.log(err);
+    }
+   
+
+   
+}
+// end=========================================================
+
+// order confirm and get total amount of order
+
+exports.orderConfirm=(req,res)=>{
+    console.log(req.body);
+    
+}
+
+
+
+
