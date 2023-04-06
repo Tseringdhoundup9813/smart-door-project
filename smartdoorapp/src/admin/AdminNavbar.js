@@ -8,7 +8,7 @@ function AdminNavbar(){
     }
     return(
         <div className="col-md-2  admin-sidebar">
-                    <div className="d-flex justify-content-around align-items-center w-100 my-2">
+                    <div className="d-flex justify-content-around align-items-center w-100 my-2 sm-relative">
                         <div className="sidebar-logo">
                         </div>
                         <div className="sidebar-sm-btn" onClick={navClose}>
@@ -17,7 +17,7 @@ function AdminNavbar(){
                     </div>
                     <div className="sidebar-menu">
                         <div className="side-chat text-capitalize nav-item ">
-                        <NavLink to="/admin/dashboard" className="nav-link sidechatNav">
+                        <NavLink to="/admin/dashboard" className="nav-link sidechatNav ">
                             <div className="side-icon">
                             <i class="fa-solid fa-chart-line"></i></div>Dashboard
                         </NavLink>

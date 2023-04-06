@@ -6,6 +6,14 @@ import ColorPicker  from '../ColorPicker';
 
 import { useState } from 'react';
 
+//css
+import '../../style/aadmin.css'
+
+//navbar
+import AdminNavbar from '../AdminNavbar'
+//footer
+import AdminTop from '../AdminTop'
+
 function Categories (){
     const [length,setLength]=useState('0');
     const [breath,setBreath]=useState('0');
@@ -17,6 +25,10 @@ function Categories (){
     }
     return(
         <div>
+            <div className="row row-admin">
+              <AdminNavbar></AdminNavbar>
+              <div className="col-md-10 col-sm-12 admin-main">
+                  <AdminTop></AdminTop>
             <div className="row-ad-cat row">
                 <div className="add-cat">
                 <div className="col-12 text-capitalize mt-2 fw-bold fs-3">
@@ -85,6 +97,8 @@ function Categories (){
                 
                 </div>
             </div>
+              </div>
+          </div>
         </div>
     )
 }

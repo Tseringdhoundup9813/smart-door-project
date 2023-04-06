@@ -3,7 +3,16 @@ import './style/Products.css';
 import {NavLink} from "react-router-dom";
 
 import React,{useState,useEffect} from 'react'
-import axios from "axios"
+import axios from "axios";
+
+//css
+import '../../style/aadmin.css'
+
+//navbar
+import AdminNavbar from '../AdminNavbar'
+//footer
+import AdminTop from '../AdminTop'
+
 function Product (){
 //product get all from Server =================================================
 const[allproduct,setallproduct] =useState([]);
@@ -186,179 +195,187 @@ const handlechange=()=>{
     return(
 
     <div id="product-view">
-        {/* delete message  */}
-        {
-            deleteConfirmBox?<div id="delete-confirm-box">
-                <h1>Delete Confirm</h1>
-                <div>
-                    <button onClick={()=>setdeleteConfirmBox(false)}>No</button>
-                    <button onClick={()=>deleteConfirmYes()}>Yes</button>
-
-                </div>
-            </div>:<div></div>
-
-        }
-
-    
-
-        {/* product not  found */}
-
-      
-
-        {/* ======================= */}
-    <div className="product-view-row row">
-         {/* ============viewall======== */}
-         <div className="col-sm-12 product-show">
-            <div className="product-pagination d-flex justify-content-end" >
-
-
-
-
-             
-
-                 {/* pagination ======================================== */}
-               <div id="pagination">
-                <div className="row show-head ">
-                   <div className="show-total">Total product (<span id="total-product-number" className=' text-primary'> {totalProductShow} </span>)</div>
-                </div>
-                <div className="pagination-btn sm-pagination d-flex" >
-                <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
-                    {
-                        [...Array(totalProductCount)].map((e,i)=>{
-                        return <li class="pagination-selection" key={i} onClick={(e)=>setpageCount(e.target.value)} value={i+1}>{i+1}</li>
-                     })
-                    }
-                 <button className="pageRight" onClick={()=>setpageCount((prev)=>prev>=totalProductCount-1?totalProductCount:++prev)}><i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-                
-            {/* end of pagination =================================== */}
-
-            </div>
-
-           
-            <div className="row show-sort">
-
-                <div className="col show-sm-filter d-flex align-items-center justify-content-end">
-                <div className="filter-sm-con" onClick={filter}>
-                    <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div>
-                    <div className="sm-filter">filter </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        {/* ============filter============= */}
-        {
-            showf ?
-            <div className="col-sm-3 col-xm-12 product-filter  filter-md">
-            <div className="d-flex align-items-end justify-content-between">
-            <div className="product-filter-title">Filter</div>
-            <div className="filter-clear" onClick={ClearFilterData}>Clear All</div>
-            </div>
-
-            <div className="filter-cat">
-            <div className="filter-cat-head">Categories</div>
-            <ul className="filter-cat-ul">
-                <li><input  className='category' type="radio" id="3D Doors" name="cat" onChange={handlechange} value="3D DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="3D Doors">3d Doors</label> </li>
-                <li><input className='category' type="radio" id="dd" name="cat"  value="DOUBLE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="dd">Double Doors</label></li>
-                <li><input className='category'  type="radio"  id="cd" name="cat" value="CANADA DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="cd">Canadian Doors</label></li>
-                <li><input className='category' type="radio" id="md" name="cat" value="MEMBRANE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="md">Membrance Doors</label></li>
-            </ul>  
-            </div>
-            <div className="filter-col">
-                <div className="filter-col-head">Color</div>
-                <div className="filter-col d-flex">
-                    <div className="color" value="rose wood" onClick={()=>setFilterColor("rose wood")}></div>
-                    <div className="color"value="andrateak" onClick={()=>setFilterColor("andrateak")}></div>
-                </div>
-            </div>  
-            <div className="filter-length">
-                <div className="filter-length-head">Length</div>
-                <div className="filter-con">
-                    <div className="filter-size"><input type="radio" className="size" id="size1" value="80-32"   onClick={(e)=>setFilterSize(e.target.value)} name="size"/><label htmlFor='size1'> 80 * 32</label> </div>
-                    <div className="filter-size"><input type="radio" className="size" id="size2" value= "80-26"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size2">80 * 26</label></div>
-                    <div className="filter-size"><input type="radio" className="size" id="size3" value ="75-26"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size3">75 * 26</label></div>
-                    <div className="filter-size"><input type="radio" className="size" id="size4" value="72-26"   onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size4">72 * 26</label></div>
-                    <div className="filter-size"><input type="radio" className="size" id="size5" value="80-38"   onClick={(e)=>setFilterSize(e.target.value)} name="size"/><label htmlFor="size5">80 * 38</label></div>
-                    <div className="filter-size"><input type="radio" className="size" id="size6" value="DD80-19"  onClick={(e)=>setFilterSize(e.target.value)}   name="size"/><label htmlFor="size6">DD80 * 19</label></div>
-                    <div className="filter-size"><input type="radio" className="size" id="size7" value="DD80-22"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size7">DD80 * 22</label></div>
-
-
-                </div>
-            </div>
-            <div className="filter-btn-sm d-flex justify-content-around my-2">
-                <div className="filter-search-btn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-            </div>
-        </div>
-        :<></>
-        }
-        
-        {/* =================product-view============= */}
-        <div className="col-sm-9 col-xm-12 p-0" id="product-view">
-        <div className="show-product">
-              
-             
-            <div className="show-card show-card-admin">
-            
-                    
-                 {/* // product is not found ================================================= */}
-
-                    {
-                         DeleteMessage?<img src={"./Image/no-products.jpg"}></img>:""
-                    }
-                    
+        <div className="row row-admin">
+              <AdminNavbar></AdminNavbar>
+              <div className="col-md-10 col-sm-12 admin-main">
+                  <AdminTop></AdminTop>
+                {/* delete message  */}
                 {
+                    deleteConfirmBox?<div id="delete-confirm-box">
+                        <h1>Delete Confirm</h1>
+                        <div>
+                            <button onClick={()=>setdeleteConfirmBox(false)}>No</button>
+                            <button onClick={()=>deleteConfirmYes()}>Yes</button>
 
+                        </div>
+                    </div>:<div></div>
 
-                allproduct.map((product,key)=>{
-                        return <div key={key} className="show-card-container show-card-container-ad" > 
-                            <NavLink to={`/product/page-view${product._id}`} className="img-border" >
-                                <div className="show-card-img">
-                                     <img src={product.img[0]}></img>
-                                </div>
-                                </NavLink>
-                          
-                            <div className="show-card-detail p-2">
-                                  {/* delete product  */}
-                                      {/* <li className="deleteproduct" onClick={()=>DeleteConfirmBoxFunction(product._id)}>delete</li> */}
-                              {/* ========== */} 
-                            
-                            
-                              <div className="show-card-title">{product.name}</div>
-                            
-                                <div className="show-card-price">Rs { product.price}</div> 
-                                <div className="show-card-discount">Rs. <span className="price-cut">1,299 <div className="price-line"></div></span>  -31%</div>
-                                {/* <p>{product.categories}</p>  
-                                <p>{product.colors}</p>   */}
-
-                                    <div className="d-flex w-100 justify-content-between align-items-center">
-                                  <NavLink to="/admin/products/edit" className="products-edit">
-                                  <div>
-                                  <i class="fa-solid fa-pen"></i>
-                                  </div>
-                                  </NavLink>
-                                  <div className="products-delete" onClick={()=>
-                                  DeleteConfirmBoxFunction(product._id)
-                                  
-                                  }>
-                                  <i class="fa-solid fa-trash"></i>
-                                  </div>
-                                </div>
-                           
-                            </div>
-                         </div>
-                    })
                 }
+                {/* product not  found */}
+                {/* ======================= */}
+            <div className="product-view-row row">
+                {/* ============viewall======== */}
+                <div className="col-sm-12 product-show">
+                    <div className="product-pagination d-flex justify-content-end" >
 
-            </div>
+
+
+
+                    
+
+                        {/* pagination ======================================== */}
+                    <div id="pagination">
+                        <div className="row show-head ">
+                        <div className="show-total">Total product (<span id="total-product-number" className=' text-primary'> {totalProductShow} </span>)</div>
+                        </div>
+                        <div className="pagination-btn sm-pagination d-flex" >
+                        <button className="pageLeft"onClick={()=>setpageCount((prev)=>prev <=1?1:--prev)}><i class="fa-solid fa-arrow-left"></i></button>
+                            {
+                                [...Array(totalProductCount)].map((e,i)=>{
+                                return <li class="pagination-selection" key={i} onClick={(e)=>setpageCount(e.target.value)} value={i+1}>{i+1}</li>
+                            })
+                            }
+                        <button className="pageRight" onClick={()=>setpageCount((prev)=>prev>=totalProductCount-1?totalProductCount:++prev)}><i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                        
+                    {/* end of pagination =================================== */}
+
+                    </div>
+
                 
-            </div>
-            
-        </div>
+                    <div className="row show-sort">
 
-    </div>
+                        <div className="col show-sm-filter d-flex align-items-center justify-content-end">
+                        <div className="filter-sm-con" onClick={filter}>
+                            <div className="filter-icon"><i class="fa-solid fa-sliders"></i></div>
+                            <div className="sm-filter">filter </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {/* ============filter============= */}
+                {
+                    showf ?
+                    <div className="col-sm-3 col-xm-12 product-filter  filter-md">
+                    <div className="d-flex align-items-end justify-content-between">
+                    <div className="product-filter-title">Filter</div>
+                    <div className="filter-clear" onClick={ClearFilterData}>Clear All</div>
+                    </div>
+
+                    <div className="filter-cat">
+                    <div className="filter-cat-head">Categories</div>
+                    <ul className="filter-cat-ul">
+                        <li><input  className='category' type="radio" id="3D Doors" name="cat" onChange={handlechange} value="3D DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="3D Doors">3d Doors</label> </li>
+                        <li><input className='category' type="radio" id="dd" name="cat"  value="DOUBLE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="dd">Double Doors</label></li>
+                        <li><input className='category'  type="radio"  id="cd" name="cat" value="CANADA DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="cd">Canadian Doors</label></li>
+                        <li><input className='category' type="radio" id="md" name="cat" value="MEMBRANE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="md">Membrance Doors</label></li>
+                    </ul>  
+                    </div>
+                    <div className="filter-col">
+                        <div className="filter-col-head">Color</div>
+                        <div className="filter-col d-flex">
+                            <div className="color" value="rose wood" onClick={()=>setFilterColor("rose wood")}></div>
+                            <div className="color"value="andrateak" onClick={()=>setFilterColor("andrateak")}></div>
+                        </div>
+                    </div>  
+                    <div className="filter-length">
+                        <div className="filter-length-head">Length</div>
+                        <div className="filter-con">
+                            <div className="filter-size"><input type="radio" className="size" id="size1" value="80-32"   onClick={(e)=>setFilterSize(e.target.value)} name="size"/><label htmlFor='size1'> 80 * 32</label> </div>
+                            <div className="filter-size"><input type="radio" className="size" id="size2" value= "80-26"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size2">80 * 26</label></div>
+                            <div className="filter-size"><input type="radio" className="size" id="size3" value ="75-26"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size3">75 * 26</label></div>
+                            <div className="filter-size"><input type="radio" className="size" id="size4" value="72-26"   onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size4">72 * 26</label></div>
+                            <div className="filter-size"><input type="radio" className="size" id="size5" value="80-38"   onClick={(e)=>setFilterSize(e.target.value)} name="size"/><label htmlFor="size5">80 * 38</label></div>
+                            <div className="filter-size"><input type="radio" className="size" id="size6" value="DD80-19"  onClick={(e)=>setFilterSize(e.target.value)}   name="size"/><label htmlFor="size6">DD80 * 19</label></div>
+                            <div className="filter-size"><input type="radio" className="size" id="size7" value="DD80-22"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size7">DD80 * 22</label></div>
+
+
+                        </div>
+                    </div>
+                    <div className="filter-btn-sm d-flex justify-content-around my-2">
+                        <div className="filter-search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                </div>
+                :<></>
+                }
+                
+                {/* =================product-view============= */}
+                <div className="col-sm-9 col-xm-12 p-0" id="product-view">
+                <div className="show-product">
+                    
+                    
+                    <div className="show-card show-card-admin">
+                    
+                            
+                        {/* // product is not found ================================================= */}
+
+                            {
+                                DeleteMessage?<img src={"./Image/no-products.jpg"}></img>:""
+                            }
+                            
+                        {
+
+
+                        allproduct.map((product,key)=>{
+                                return <div key={key} className="show-card-container show-card-container-ad" > 
+                                    <NavLink to={`/product/page-view${product._id}`} className="img-border" >
+                                        <div className="show-card-img">
+                                        {   
+                                                product.discount < 1?"":
+                                                <div className="product-discount">
+                                                    {" "+ product?product.discount:""}%
+                                                    </div>
+                                            }   
+                                            <img src={product.img[0]}></img>
+                                        </div>
+                                        </NavLink>
+                                
+                                    <div className="show-card-detail p-2">
+                                        {/* delete product  */}
+                                            {/* <li className="deleteproduct" onClick={()=>DeleteConfirmBoxFunction(product._id)}>delete</li> */}
+                                    {/* ========== */} 
+                                    
+                                    
+                                    <div className="show-card-title">{product.name}</div>
+                                    
+                                    <div className="show-card-price">Rs { product.price*product.discount/100}</div> 
+                                        {
+                                            product.discount<1?"":<div className="show-card-discount">Rs. <span className="price-cut">{product?product.price:""} <div className="price-line"></div></span>{" "+ product?product.discount:""}%</div>
+                                        }
+                                        {/* <p>{product.categories}</p>  
+                                        <p>{product.colors}</p>   */}
+
+                                            <div className="d-flex w-100 justify-content-between align-items-center">
+                                        <NavLink to="/admin/products/edit" className="products-edit">
+                                        <div>
+                                        <i class="fa-solid fa-pen"></i>
+                                        </div>
+                                        </NavLink>
+                                        <div className="products-delete" onClick={()=>
+                                        DeleteConfirmBoxFunction(product._id)
+                                        
+                                        }>
+                                        <i class="fa-solid fa-trash"></i>
+                                        </div>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            })
+                        }
+
+                    </div>
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+              </div>
+          </div>
     </div>
 
     )

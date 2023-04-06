@@ -1,5 +1,5 @@
 .row-admin{
-    width:99%;
+    width:100%;
     margin:0 auto;
 }
 .admin-sidebar{
@@ -11,7 +11,7 @@
 }
 .sidebar-logo{
     height:100px;
-    width:100px;
+    width:128px;
     margin:10px auto;
     background:url('../image/logo/smart-doors-logo.png')center/cover no-repeat;
 }
@@ -215,7 +215,17 @@
     margin:10px 0;
     color:grey;
 }
-
+.ad-nav-btn, .sidebar-sm-btn{
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.ad-nav-btn:hover, .sidebar-sm-btn:hover{
+    transform:scale(1.2);
+    color:red;
+}
+.admin-sidebar{
+    background: #eeeaff;
+}
 /* ===navrbar=-sm==== */
 .admin-main-nav{
     position:relative
@@ -225,6 +235,7 @@
     font-size:22px;
     cursor: pointer;
     display: none;
+    padding: 5px;
 }
 
 @media screen and (max-width:768px){
@@ -249,10 +260,19 @@
     .ad-nav-btn{
         font-size:20px;
     }
+    .admin-sidebar{
+    border-right: 1px solid #b10808;
+    }
 }
 @media screen and (max-width:767px){
     .sidebar-sm-btn{
         display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+    .sm-relative{
+        position: relative;
     }
     .admin-sidebar{
         width:auto;
@@ -269,8 +289,10 @@
         transition:all .3s linear;
     }
     .side-chat{
-        padding:10px 36px;
         font-size:12px;
+    }
+    .sidebar-menu{
+        margin-top:10px;
     }
 }
 @media screen and (max-width:991px){

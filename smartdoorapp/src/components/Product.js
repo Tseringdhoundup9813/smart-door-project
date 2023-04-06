@@ -188,6 +188,26 @@ const handlechange=()=>{
     setSelected('yes');
 }
 // =====================FOR CHECK BOX CLEAR========================
+
+
+// ====for color--=====
+const rosewood=()=>{
+    setFilterColor("rose wood")
+    document.querySelector('.rosewood').style.border="3px solid hsl(245, 92%, 67%)";
+    document.querySelector('.andrateak').style.border="0";
+    document.querySelector('.color-name-rosewood').style.color="hsl(245, 92%, 67%)";
+    document.querySelector('.color-name-andrateak').style.color="#000000";
+
+
+}
+const andrateak=()=>{
+    setFilterColor("andrateak")
+    document.querySelector('.andrateak').style.border="3px solid hsl(245, 92%, 67%)";
+    document.querySelector('.color-name-andrateak').style.color="hsl(245, 92%, 67%)";
+    document.querySelector('.color-name-rosewood').style.color="#000000";
+    document.querySelector('.rosewood').style.border="0";
+
+}
     return(
 
     <div id="product-view">
@@ -265,17 +285,35 @@ const handlechange=()=>{
             <div className="filter-cat">
             <div className="filter-cat-head">Categories</div>
             <ul className="filter-cat-ul">
-                <li><input  className='category' type="radio" id="3D Doors" name="cat" onChange={handlechange} value="3D DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="3D Doors">3d Doors</label> </li>
-                <li><input className='category' type="radio" id="dd" name="cat"  value="DOUBLE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="dd">Double Doors</label></li>
-                <li><input className='category'  type="radio"  id="cd" name="cat" value="CANADA DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="cd">Canadian Doors</label></li>
-                <li><input className='category' type="radio" id="md" name="cat" value="MEMBRANE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> <label htmlFor="md">Membrance Doors</label></li>
+                <li className='d-flex align-items-center justify-content-start'>
+                    <div><input  className='category' type="radio" id="3dDoors" name="cat" onChange={handlechange} value="3D DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/>  </div>
+                    <div className='ms-1'><label htmlFor="3dDoors" className='category-label'> 3d Doors</label> </div>
+                </li>
+                <li className='d-flex align-items-center justify-content-start'>
+                    <div><input className='category' type="radio" id="dd" name="cat"  value="DOUBLE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> </div>
+                    <div  className='ms-1'><label htmlFor="dd">Double Doors</label></div>
+                </li>
+                <li className='d-flex align-items-center justify-content-start'>
+                    <div><input className='category'  type="radio"  id="cd" name="cat" value="CANADA DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/>  </div>
+                    <div  className='ms-1'><label htmlFor="cd">Canadian Doors</label></div>
+                </li>
+                <li className='d-flex align-items-center justify-content-start'>
+                    <div><input className='category' type="radio" id="md" name="cat" value="MEMBRANE DOORS" onClick={(e)=>setFiltercategory(e.target.value)}/> </div>
+                    <div  className='ms-1'><label htmlFor="md">Membrance Doors</label></div>
+                </li>
             </ul>  
             </div>
             <div className="filter-col">
                 <div className="filter-col-head">Color</div>
-                <div className="filter-col d-flex">
-                    <div className="color" value="rose wood" onClick={()=>setFilterColor("rose wood")}></div>
-                    <div className="color"value="andrateak" onClick={()=>setFilterColor("andrateak")}></div>
+                <div className="filter-col">
+                    <div className="d-flex mb-2" onClick={rosewood}>
+                    <div className="color rosewood" value="rose wood" ></div>
+                    <div className="color-name-rosewood">Rosewood</div>
+                    </div>
+                    <div className="d-flex" onClick={andrateak}>
+                    <div className="color andrateak"value="andrateak" ></div>
+                    <div className="color-name-andrateak">Andrateak</div>
+                    </div>
                 </div>
             </div>  
             <div className="filter-length">
@@ -288,8 +326,6 @@ const handlechange=()=>{
                     <div className="filter-size"><input type="radio" className="size" id="size5" value="80-38"   onClick={(e)=>setFilterSize(e.target.value)} name="size"/><label htmlFor="size5">80 * 38</label></div>
                     <div className="filter-size"><input type="radio" className="size" id="size6" value="DD80-19"  onClick={(e)=>setFilterSize(e.target.value)}   name="size"/><label htmlFor="size6">DD80 * 19</label></div>
                     <div className="filter-size"><input type="radio" className="size" id="size7" value="DD80-22"  onClick={(e)=>setFilterSize(e.target.value)}  name="size"/><label htmlFor="size7">DD80 * 22</label></div>
-
-
                 </div>
             </div>
             <div className="filter-btn-sm d-flex justify-content-around my-2">

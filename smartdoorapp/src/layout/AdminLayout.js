@@ -18,7 +18,6 @@ export default function RootLayout() {
               <div className="col-md-10 col-sm-12 admin-main">
                   <AdminTop></AdminTop>
                   <Outlet></Outlet>
-
               </div>
           </div>
          

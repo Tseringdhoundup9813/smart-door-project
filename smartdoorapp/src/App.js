@@ -72,20 +72,19 @@ const router = createBrowserRouter(
 
 
       {/* for admin */}
-      <Route path='/admin' element={<Admin/>}>
-        <Route path="dashboard" element={<Dashboard/>}/>
-        <Route path="order" element={<List/>}/>
-        <Route path="chats" element={<Chats/>}/>
-        <Route path="inbox" element={<Inbox/>}/>
-        <Route path="pages" element={<Pages/>}/>
-        <Route path="media" element={<Media/>}/>
-        <Route path="add-products" element={<UpdateProduct/>}/>
-        <Route path="products" element={<Products/>}/>
+      <Route path='/admin/dashboard' element={<Dashboard/>}/>
+        <Route path="/admin/order" element={<List/>}/>
+        <Route path="admin/add-products" element={<UpdateProduct/>}/>
+        <Route path="admin/categories" element={<Categories/>}/>
 
-        <Route path="edit" element={<AddProduct/>}/>
-        <Route path="categories" element={<Categories/>}/>
+        <Route path="admin/chats" element={<Chats/>}/>
+        <Route path="admin/inbox" element={<Inbox/>}/>
+        <Route path="admin/pages" element={<Pages/>}/>
+        <Route path="admin/media" element={<Media/>}/>
+        <Route path="admin/products" element={<Products/>}/>
 
-      </Route>
+        <Route path="admin/edit" element={<AddProduct/>}/>
+
 
       
       <Route path="/product/page-view:productId" element={<Productview />} />

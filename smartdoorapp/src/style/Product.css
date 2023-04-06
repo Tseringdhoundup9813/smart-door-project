@@ -138,12 +138,12 @@
     width:30px;
     margin:0 5px;
     border-radius:50%;
-    border:3px solid hsl(245, 92%, 67%);
+    
 }
-.color:nth-child(1){
+.rosewood{
     background: #462828;
 }
-.color:nth-child(2){
+.andrateak{
     background: #46282899;
 
 }

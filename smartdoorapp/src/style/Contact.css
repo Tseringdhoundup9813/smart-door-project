@@ -1,11 +1,12 @@
 .contact-map{
-    border:1px solid rgba(128, 128, 128, 0.448);
     width:99%;
     margin:10px auto;
-    border-radius:5px;
 }
 .contact-map iframe{
+    border-radius:5px;
     height:60vh;
+    border:1px solid grey;
+    padding:10px;
     width:100%;
 }
 
@@ -148,6 +149,9 @@
     }
     .message-textarea{
         height:100px;
+    }
+    .contact-map iframe{
+        height:35vh;
     }
         
 }

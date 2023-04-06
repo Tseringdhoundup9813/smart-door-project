@@ -3,7 +3,6 @@ function AdminTop (){
         console.log('ghi')
         document.querySelector('.admin-sidebar').style.transform='translate(0, 0)'
         document.querySelector('.admin-sidebar').style.display="flex"
-
     }
     return(
         <div className="admin-main-nav">

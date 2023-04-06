@@ -4,11 +4,14 @@ import '../style/Contact.css';
 import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
+//aos 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 function Contact (){
-    const checkboxsub=()=>{
-        let input =document.querySelector('.checkbox');
-        input.click();
-    }
+    useEffect(()=>{
+        AOS.init();
+    })
     return(
         <div>
             <Navbar></Navbar>
@@ -18,8 +21,8 @@ function Contact (){
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3530.626763655633!2d85.32460421476105!3d27.759655882770268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1fe0ae5e987d%3A0x1ede3e5742df2552!2sSmart%20Doors!5e0!3m2!1sen!2snp!4v1679046090202!5m2!1sen!2snp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
-                <div className="row row-form">
-                    <div className="col-xsm-12 col-sm-5 contact-detail">
+                <div className="row row-form" >
+                    <div className="col-xsm-12 col-sm-5 contact-detail" data-aos="fade-right">
                         <div className="contact-title text-uppercase">
                             get <span className="contact-title-blue"> in touch</span>
                         </div>
@@ -74,7 +77,9 @@ function Contact (){
                     </div>
                     <div className="col-10 mx-auto">
                         <div className="sub-input order-1"><input type="email" placeholder="Enter your Email ID" requried/> <div className="sub-btn btn text-uppercase order-3">Subscribe</div></div>
-                        <div className="sub-check order-2"><div className="sub-checkbox"><input type="checkbox" className="checkbox" /></div><div className="sub-check-title" onClick={checkboxsub}>I consent to LABELUK collecting my details through this form.</div></div>
+                        <div className="sub-check order-2"><div className="sub-checkbox"><input type="checkbox" id="checkboxsub"className="checkbox" /></div>
+                            <label htmlFor="checkboxsub" className='sub-check-title'>I consent to LABELUK collecting my details through this form.</label>
+                        </div>
                     </div>
 
                 </div>

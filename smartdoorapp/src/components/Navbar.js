@@ -9,7 +9,7 @@ import {NavLink} from 'react-router-dom'
 import axios from 'axios';
 
 
-
+import logo from '../image/logo/smart-doors-logo.png'
 function Navbar (){
 
     // login sucuessfull or not ----------
@@ -164,12 +164,12 @@ function clickedUser(){
 
             {/* email verfication notification ================================================== */}
             {   
-                Email_verify_message?<div className='email-send-notify '><h1>{Email_verify_message}</h1><h1 className='email'>Send Email Again</h1></div>:
+                Email_verify_message?<div className='email-verification-notification'><div>{Email_verify_message}</div><div className='email-red'>Send Email Again</div></div>:
 
                 JSON.parse(localStorage.getItem("email_verify"))||JSON.parse(localStorage.getItem("email_verify"))==null?"":
                 <div className="email-verification-notification">
-                <h1>{(localStorage.getItem("username"))} You need to  Verify your Email</h1>
-                <h1 onClick={VerifyEmailSend}>Send Verification code to email</h1>
+                <div>{(localStorage.getItem("username"))} You need to  Verify your Email</div>
+                <div className="email-red" onClick={VerifyEmailSend}>Send Verification code to email</div> 
                 </div>
             }
 
@@ -189,11 +189,12 @@ function clickedUser(){
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand navbar-img" href="#">
-                    </a>
+                    <NavLink className="navbar-brand navbar-img" to="/">
+                        <img src={logo} alt="logo" className='logo-img' />
+                    </NavLink>
 
                    
-                    <div className="two-icon ms-auto order-md-3">
+                    <div className="two-icon order-md-3">
 
 
                         {/* loin and signup ====================*/}

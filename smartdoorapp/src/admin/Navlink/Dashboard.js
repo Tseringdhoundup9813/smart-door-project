@@ -1,20 +1,34 @@
 //admin graph
 import AdminGraph from '../AdminGraph';
-import Orderlist from '../Orderlist';
+import OrderMain from '../Navlink/OrderMain';
 import TopProduct from '../TopProduct';
+
+//css
+import '../../style/aadmin.css'
+
+//navbar
+import AdminNavbar from '../AdminNavbar'
+//footer
+import AdminTop from '../AdminTop'
 
 function Dashboard(){
     return(
-            <div>
-                    {/* ====graph===== */}
-                    <AdminGraph></AdminGraph>   
+        <div>
+                <div className="row row-admin">
+                <AdminNavbar></AdminNavbar>
+                <div className="col-md-10 col-sm-12 admin-main">
+                        <AdminTop></AdminTop>
+                        {/* ====graph===== */}
+                        <AdminGraph></AdminGraph>   
 
-                    {/* =====order-list===== */}
-                    <Orderlist></Orderlist>
+                        {/* =====order-main===== */}
+                        <OrderMain></OrderMain>
 
-                    {/* ========topproduct====== */}
-                    <TopProduct></TopProduct>
-            </div>
+                        {/* ========topproduct====== */}
+                        <TopProduct></TopProduct>
+                </div>
+                </div>
+        </div>
 
     )
 }

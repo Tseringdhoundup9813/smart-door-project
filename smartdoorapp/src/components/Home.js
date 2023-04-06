@@ -1,6 +1,7 @@
 
 //home css
 import '../style/Home.css';
+import { NavLink } from 'react-router-dom';
 
 //service card- images
 import service1 from '../image/services/service1.jpg';
@@ -20,7 +21,15 @@ import productimg from '../image/products/3d/SD110.jpeg';
 import productimgcan from '../image/products/canadian/CD101.jpg';
 import productimgdouble from '../image/products/double/DDGK.jpg';
 import productimgmembrane from '../image/products/membrane/SD11.jpeg';
+
+//animation on scroll
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 function Home(){
+    useEffect(()=>{
+        AOS.init()
+    })
     const top=()=>{
         window.scrollTo(0,0)
     }
@@ -60,8 +69,8 @@ function Home(){
                                     <div className="home-carousel-topic fs-2 text-uppercase text-start text-white fw-bolder">The Futuristic Smart Doors</div>
                                     <div className="home-carousel-para text-capitalize text-white text-start my-2">The advancement of technology has significantly impacted our daily lives, and it has made many tasks easier and more efficient. One such technological advancement is the futuristic smart doors. These...</div>
                                     <div className="carousel-btn d-flex">
-                                        <div className="btn btn-explore px-4">explore now</div>
-                                        <div className="btn btn-find px-4">find us</div>
+                                        <div><NavLink to="/product" className="nav-link btn-explore px-4">explore now</NavLink></div>
+                                        <div><NavLink to="/contact" className="nav-link btn-find px-4">find us</NavLink></div>
                                     </div>
                                 </div>
                             </div>                
@@ -76,9 +85,9 @@ function Home(){
                                     </div>
                                     <div className="home-carousel-topic fs-2 text-start text-uppercase text-white fw-bolder">Traditional doors vs. Smart Doors</div>
                                     <div className=" home-carousel-para  text-capitalize text-white text-start my-2">Doors are a fundamental component of any building, providing a means of access and security for its occupants. Over the years, doors have evolved from simple wooden barriers to more...</div>
-                                    <div className="carousel-btn">
-                                        <div className="btn btn-explore px-4">explore now</div>
-                                        <div className="btn btn-find px-4">find us</div>
+                                    <div className="carousel-btn d-flex">
+                                        <div><NavLink to="/product" className="nav-link btn-explore px-4">explore now</NavLink></div>
+                                        <div><NavLink to="/contact" className="nav-link btn-find px-4">find us</NavLink></div>
                                     </div>
                                 </div>
                             </div> 
@@ -94,8 +103,8 @@ function Home(){
                                     <div className="home-carousel-topic fs-2 text-uppercase text-start text-white fw-bolder">The Futuristic Smart Doors</div>
                                     <div className="home-carousel-para text-capitalize text-white text-start my-2">The advancement of technology has significantly impacted our daily lives, and it has made many tasks easier and more efficient. One such technological advancement is the futuristic smart doors. These...</div>
                                     <div className="carousel-btn d-flex">
-                                        <div className="btn btn-explore px-4">explore now</div>
-                                        <div className="btn btn-find px-4">find us</div>
+                                        <div><NavLink to="/product" className="nav-link btn-explore px-4">explore now</NavLink></div>
+                                        <div><NavLink to="/contact" className="nav-link btn-find px-4">find us</NavLink></div>
                                     </div>
                                 </div>
                             </div>                
@@ -110,9 +119,9 @@ function Home(){
                                     </div>
                                     <div className="home-carousel-topic fs-2 text-uppercase text-start text-white fw-bolder">Traditional doors vs. Smart Doors</div>
                                     <div className=" home-carousel-para  text-capitalize text-white text-start my-2">Doors are a fundamental component of any building, providing a means of access and security for its occupants. Over the years, doors have evolved from simple wooden barriers to more...</div>
-                                    <div className="carousel-btn">
-                                        <div className="btn btn-explore px-4">explore now</div>
-                                        <div className="btn btn-find px-4">find us</div>
+                                    <div className="carousel-btn d-flex">
+                                        <div><NavLink to="/product" className="nav-link btn-explore px-4">explore now</NavLink></div>
+                                        <div><NavLink to="/contact" className="nav-link btn-find px-4">find us</NavLink></div>
                                     </div>
                                 </div>
                             </div> 
@@ -130,7 +139,7 @@ function Home(){
             </div>
         </div>
         <div className="row trendy " >
-            <div className="col-md-6 col-sm-12">
+            <div className="col-md-6 col-sm-12" > 
                 <div className="trendy-detail">
                     <div className="trendy-head">
                     A Trendy Doors For Trendy Home
@@ -140,10 +149,10 @@ function Home(){
                     <br />
                     This company focus has been in place for more than a half century. We are committed to providing our customers with exceptional service while offering our employees the best training best of all and a working environment.
                     </div>
-                    <div className="trendy-btn text-uppercase">Learn More</div>
+                    <div className="text-uppercase"><NavLink to="/contact" className='nav-link trendy-btn '  >Learn More</NavLink></div>
                 </div>
             </div>
-            <div className="col-md-6 trendy-img .d-sm-none .d-md-block" ></div>
+            <div className="col-md-6 trendy-img .d-sm-none .d-md-block" data-aos="fade-left" ></div>
         </div>
 
         <div className="service">
@@ -152,7 +161,7 @@ function Home(){
                     Services
                 </div>
             </div>
-            <div className="row service-grid">
+            <div className="row service-grid" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
               {serviceCard.map((e)=>{
                   return <div className="service-card">
                         <div className="service-card-img" style={{background: `url(${e.image})`}}></div>
@@ -168,8 +177,8 @@ function Home(){
            <div className="row row-premium">
             <div className="col-sm-12">
             <div className="premium-head">Upgrade Your Home Security with Our Expert Door Services</div>
-            <div className="premium-detail">If you're in need of new doors for your home or business, or if your current doors need repair or maintenance, don't hesitate to give us a call. Our team of experienced professionals will work with you to find the perfect doors for your needs and budget. Contact us today to schedule your consultation and get started on improving the security and appearance of your property.</div>
-            <div className="premium-btn btn text-uppercase">find more</div>
+            <div className="premium-detail" data-aos="fade-right">If you're in need of new doors for your home or business, or if your current doors need repair or maintenance, don't hesitate to give us a call. Our team of experienced professionals will work with you to find the perfect doors for your needs and budget. Contact us today to schedule your consultation and get started on improving the security and appearance of your property.</div>
+            <NavLink to="/contact"><div className="premium-btn btn text-uppercase">find more</div></NavLink>
             </div>
            </div>
         </div>
@@ -181,7 +190,7 @@ function Home(){
               </div>
               <div className="row product-grid">
                 {product.map((e)=>{
-                return <div className="product-card">
+                return <div className="product-card" data-aos="flip-up">
                             <div className="product-img"  style={{background: `url(${e.image})center/contain no-repeat`}}>
                                 <div className="product-detail">
                                     <div className="product-name">premium {e.cat} Door</div>
@@ -202,8 +211,8 @@ function Home(){
                     <div className="us-para">We use the best Teak, Sissau and Chaap wood for our entire range of products and treatments. Each parts of doors pass through proper check before final selection. Durability, Strength and Attractiveness are our top most priority.</div>
                 </div>
             </div>
-            <div className="row row-card-us">
-            <div className="col-sm-4 us-card">
+            <div className="row row-card-us" >
+            <div className="col-sm-4 us-card" >
                     <div className="us-icon"><i class="fa-solid fa-rocket"></i></div>
                     <div className="us-card-title">200+ Distributer</div>
                 </div>
@@ -219,7 +228,7 @@ function Home(){
             </div>
         </div>
         <div className="testomial">
-             <div className="row testomial-row">
+             <div className="row testomial-row" >
                 <div className="testomial-head text-capitalize">
                     clients
                 </div>
@@ -292,7 +301,7 @@ function Home(){
             </div>
         </div>
         <div className="yourdesign">
-            <div className="row yourdesign-row">
+            <div className="row yourdesign-row" >
                 <div className="col-12 col-sm-9 d-flex align-items-center justify-content-center flex-column">
                     <div className="yourdesign-title text-capitalize">
                     Got an Incredible Door Design Or Idea Right Now?
@@ -302,7 +311,7 @@ function Home(){
                     </div>
                 </div>
                 <div className="col-12 my-sm-0 my-3 col-sm-3 d-flex align-items-center justify-content-center">
-                    <div className="yourdesign-btn btn text-uppercase">contact us</div>
+                    <div className="yourdesign-btn btn text-uppercase" data-aos="fade-left"><NavLink to="contact" className="nav-link"> contact us</NavLink> </div>
                 </div>
             </div>
         </div>
