@@ -43,8 +43,19 @@
     align-items: center;
     justify-content: center;
     margin:5px 0;
+    animation-name: fadeout;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
 }
 
+@keyframes fadeout{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
 .cart-product-detail{
     display: grid;
     grid-template-columns: 20% 80%;

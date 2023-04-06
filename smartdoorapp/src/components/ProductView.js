@@ -312,7 +312,7 @@ function Productview(){
                     </div>
                
                     <div className="pv-price-detail d-flex">
-                        <div className="pv-price">Rs. { product.price*product.discount/100}</div>
+                        <div className="pv-price">Rs. {product.discount>0?product.price*product.discount/100:product.price}</div>
                     </div>
                     {
                         product.discount<1?"":

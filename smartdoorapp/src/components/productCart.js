@@ -34,6 +34,8 @@ import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
 import CartButton from '../components/CartButton';
+import TotalAmount from './TotalAmount';
+
 import axios from 'axios';
 
 //cart quantity
@@ -66,19 +68,19 @@ function ProductCart (){
     const[userId,setUserId] = useState();
     const[cartlist,setCartList] = useState([]);
     const [qty, setQty]=useState(1);
-    const[deletecart,setdeletecart]= useState(false);
+    const[qt_amount,set_qt_amount] = useState();
 
   
+   
 
 
     async function productlistshow(){
         
         try{
             const product = await  axios.get(`http://localhost:3001/showCartlist/${localStorage.getItem("user_id")}`)
-            setCartList(product.data.data);
             console.log(product.data);
-         
-          
+            setCartList(product.data.data);
+            set_qt_amount(product.data.quantity);
         }catch(err){
             console.log(err);
         }
@@ -89,9 +91,13 @@ function ProductCart (){
         setUserId(localStorage.getItem("user_id"));
         productlistshow();
         handlePrice();
-        
-    },[]);
+        // total amount from server 
 
+    },[qty]);
+    
+
+    
+    //
     // product show 
     
 
@@ -111,8 +117,25 @@ function ProductCart (){
          
                 try{
                     let dele =  await  axios.delete(`http://localhost:3001/deletecartlist/${key}/${localStorage.getItem("user_id")}`)
-                 
+                    
+                    axios.interceptors.request.use(function(config){
+                    
+                        return config
+                    },function(err){
+
+                        return Promise.reject(err);
+                    })
+
+                    axios.interceptors.response.use(function(response){
+                        
+                        console.log(response);
+                        return response
+
+                    },function(err){
+                        return Promise.reject(err);
+                    })
                     productlistshow()
+
             
                   
                 }catch(err){
@@ -128,9 +151,8 @@ function ProductCart (){
 
         // change Rate =======================================
         function rateChange(rate){
-            
-            console.log(rate);
-            
+            setQty(rate);
+          
         }
         
     //    
@@ -225,27 +247,31 @@ function ProductCart (){
                                     <div className="cart-product-name text-capitalize">{product.categories}</div>
                                 </div>
                                 <div className="cart-product-amt">
-                                    Rs.{product.price}
+                                    Rs.{product.discount==0?product.price:product.price*product.discount/100}
                                 </div>
                                 
                                 
                                 <div className="cart-product-quantity d-flex align-items-center">
                                     <div className="text-uppercase">qty:</div>
-                                    <CartButton productrate={product.quantity} rateChange={rateChange} userKey={userId} product_id={product._id}></CartButton>
+                                    <CartButton productrate={product.quantity} product_price={product.discount>0?product.price*product.discount/100:product.price} rateChange={rateChange} userKey={userId} product_id={product._id}></CartButton>
                                 </div>
 
                                 <div className="cart-product-price d-flex justify-content-around">
+                                   
                                     <div className="cart-product-amount">
-                                   <span className="cart-amt-sm">Grand Total</span> 
+                                        {/* <span className="cart-amt-sm">Grand Total</span>  */}
+                                           <div className="cart-product-amount">
+                                                <span className="cart-amt-sm">Grand Total</span> 
+                                                    {qt_amount[key].amount}
+                                            </div>
+                                        
+                                    </div>
                                   
-                                    </div>
                                     <div className="cart-product-remove" onClick={()=>deleteCartlist(product._id)}>
-                                    <i class="fa-solid fa-trash-can"></i>
+                                      <i class="fa-solid fa-trash-can"></i>
                                     </div>
                                 </div>
-                                <div className="cart-product-remove-sm"onClick={()=>deleteCartlist(key)}>
-                                <i class="fa-solid fa-trash-can"></i>
-                                </div>
+                             
                             </div>
     
                             })
@@ -263,18 +289,21 @@ function ProductCart (){
                             cart totals
                         </div>
                         <div>
-                            <div className="cart-total">
+                            {/* <div className="cart-total">
                                 <div className="cart-total-head text-capitalize">subtotal</div>
                                 <div className="cart-total-amt"> Rs.{price}/-</div>
-                            </div>
+                            </div> */}
                             <div className="cart-total">
                                 <div className="cart-total-head text-capitalize">shipping</div>
                                 <div className="cart-shipp">Enter your shipping address</div>
                             </div>
-                            <div className="cart-total">
+
+                            {/*    total amount  */}
+                                <TotalAmount cartcount={qty}></TotalAmount>
+                            {/* <div className="cart-total">
                                 <div className="cart-total-head text-capitalize">total</div>
-                                <div className="cart-total-amt"> Rs.{price}/-</div>
-                            </div>
+                                <div className="cart-total-amt"> Rs.{total_Amount}/-</div>
+                            </div> */}
                             <div className="coupon-cart">
                                 <div className="btn coupon-cart-update update cart"><NavLink to="/product/buy-now" className="nav-link">proceed to checkout</NavLink></div>
                             </div>

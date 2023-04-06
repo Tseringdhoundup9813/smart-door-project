@@ -26,6 +26,10 @@ Router.post("/addqt",productController.addQt);
 Router.post("/minqt",productController.minQt);
 Router.get("/quantity/:product_id/:user_id",productController.getQuantity);
 Router.get("/totalcartlistcount/:user_id",productController.totalcartlistcount);
+Router.get("/totalamount/:user_id",productController.totalamount);
+Router.post("/orders/:user_id",productController.Order)
+Router.post("/orderconfirm",productController.orderConfirm);
+
 
 
 

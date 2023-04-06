@@ -341,7 +341,7 @@ const handlechange=()=>{
                             
                               <div className="show-card-title">{product.name}</div>
                                  
-                                <div className="show-card-price">Rs { product.price*product.discount/100}</div> 
+                                <div className="show-card-price">Rs {product.discount>0? product.price*product.discount/100:product.price}</div> 
                                 {
                                     product.discount<1?"":<div className="show-card-discount">Rs. <span className="price-cut">{product?product.price:""} <div className="price-line"></div></span>{" "+ product?product.discount:""}%</div>
                                 }

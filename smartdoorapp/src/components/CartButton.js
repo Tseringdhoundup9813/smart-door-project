@@ -6,17 +6,19 @@ import axios from 'axios';
 function CartButton(props) {
   
     const[qt,setqt] = useState();
+    const[totalamount,setTotalamount] = useState();
     
    
 
 
     async function AddQt(quantity){
-        console.log(qt);
+       
         try{
             const product = await axios.post(`http://localhost:3001/addqt`,{product_id:props.product_id,user_id:props.userKey})
-            console.log(product.data.qt);
+           
+            setTotalamount(product.data.totalamount)
             setqt(product.data.qt);
-            props.rateChange(product.data.qt);
+            props.rateChange(qt);
            
         
         }catch(err){
@@ -24,15 +26,14 @@ function CartButton(props) {
         }
     }
     async function MinQt(quantity){
-        console.log(qt);
+        
         try{
             const product = await axios.post(`http://localhost:3001/minqt`,{product_id:props.product_id,user_id:props.userKey})
-            console.log(product);
+       
             setqt(product.data.qt);
             props.rateChange(qt);
 
-
-        
+    
         }catch(err){
             console.log(err);
         }
@@ -53,7 +54,11 @@ function CartButton(props) {
                 console.log(err);
             }
         }
+
         getQuantity();
+
+        // get total amount 
+
     },[])
 
 
@@ -67,12 +72,16 @@ function CartButton(props) {
             }
 
   return (
+    <div>
     <div className="cart-product-incerase align-items-center ">
             <div className="cart-product-minus" onClick={cartminus}><i class="fa-solid fa-minus"></i></div>
             <div className="cart-product-number">{qt} </div>
 
             <div className="cart-product-plus" onClick={cartplus}><i class="fa-solid fa-plus"></i></div>
     </div>
+     
+     
+  </div>
   )
 }
 

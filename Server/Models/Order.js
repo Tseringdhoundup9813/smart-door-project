@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const AddToCartSchema= new Schema({
+const OrderSchema= new Schema({
     userId:{
         type:Schema.Types.ObjectId,
         required:true,
@@ -11,23 +11,35 @@ const AddToCartSchema= new Schema({
         unquie:false,
     },
     productId:{
-        type:String,
+        type:Array,
         
     },
-    quantity:{
+    totalquantity:{
         type:Number,
         default:1,
     },
-    amount:{
+    totalamount:{
         type:Number,
         default:0,
         
     },
+    number:{
+        type:Number,
+        required:true
+    },
+    location:{
+        type:String,
+        required:true,
+    },
+    confirm:{
+       type:Boolean,
+       default:false,
+    },
     createdAt:{
         type:Date,
         default:Date.now(),
-       
+        
     }
    
 })
-module.exports = mongoose.model("AddToCart",AddToCartSchema);
+module.exports = mongoose.model("Order",OrderSchema);

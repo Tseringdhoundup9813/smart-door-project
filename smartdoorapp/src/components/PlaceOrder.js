@@ -1,14 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect} from 'react'
+import { useNavigate } from "react-router-dom"
 import '../style/PlaceOrder.css';
 
 //navbar
 import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
+import axios from 'axios';
 
 export default function PlaceOrder() {
     const [khalti, setKhalti]=useState(true);
     const [cod, setCod]=useState(false);
+    const[total_Amount,set_total_Amount]=useState(0);
+    const[order_id,set_order_id]=useState();
+
+    const navigate = useNavigate();
+
+    // useeffect ======================================
+    useEffect(()=>{
+        
+        set_order_id(localStorage.getItem("order_id"));
+        totalproductamount();
+        
+    })
+
+    // ====================
+    // total amount ================================================================
+
+
+    async function totalproductamount(){
+        
+        try{
+            const totalamount = await  axios.get(`http://localhost:3001/totalamount/${localStorage.getItem("user_id")}`)
+            
+            set_total_Amount(totalamount.data.totalamount);
+           
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+ 
 
     const handle=()=>{
         setKhalti(true)
@@ -19,6 +51,76 @@ export default function PlaceOrder() {
         setKhalti(false)
         document.querySelector('.cod').style.background="#fff"
     }
+
+    // order confirm =======================================
+
+    async function confirmOrder(){
+        try{
+            const order = await axios.post(`http://localhost:3001/orderconfirm`,{user_id:order_id})
+            console.log(order);
+        }catch(err){
+            console.log(err);
+        }
+    }
+    // =============END+=======================================
+
+
+    // =================================================
+
+    let payload = {
+        "return_url": "https://example.com/payment/",
+        "website_url": "https://example.com/",
+        "amount": 1300,
+        "purchase_order_id": "test12",
+        "purchase_order_name": "test",
+        "customer_info": {
+            "name": localStorage.getItem("username"),
+            "email": "example@gmail.com",
+            "phone": ""
+        },
+        "amount_breakdown": [
+            {
+                "label": "Mark Price",
+                "amount": 1000
+            },
+            {
+                "label": "VAT",
+                "amount": 300
+            }
+        ],
+        "product_details": [
+            {
+                "identity": "1234567890",
+                "name": "Khalti logo",
+                "total_price": 1300,
+                "quantity": 1,
+         "unit_price": 1300
+            }
+        ]
+      }
+
+
+    // pay on khalti =====================================================================================================
+     async function KhaltiPay(){
+       
+        const response = await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",payload,{
+            headers:{
+                'Authorization':`Key 6e223eea84c04cc5bd7ac70b92c9bfaf `
+            }
+        })
+
+        console.log(response.data.payment_url)
+        window.open(response.data.payment_url, '_blank')
+
+        
+        
+     }
+    // =--------------------------------flasklfksadf=========================================================
+
+
+
+
+
   return (
     <div>
         <Navbar></Navbar>
@@ -59,7 +161,7 @@ export default function PlaceOrder() {
 
                             <div className="khalti-warning"> ***Login with your khalti mobile and PASSWORD (not MPin)***</div>
 
-                            <div className="pay-nowbtn btn text-capitalize"> pay now</div>
+                            <div className="pay-nowbtn btn text-capitalize" onClick={KhaltiPay}> pay now</div>
                         </div>)}
                         {
                             cod && (
@@ -68,7 +170,7 @@ export default function PlaceOrder() {
                             <ol>
                                 <li>Do pay your Amout while delivering.</li>
                             </ol>
-                            <div className="pay-nowbtn btn text-capitalize"> Confirm now</div>
+                            <div className="pay-nowbtn btn text-capitalize" onClick={confirmOrder}> Confirm now</div>
                         </div>
                             )
                         }
