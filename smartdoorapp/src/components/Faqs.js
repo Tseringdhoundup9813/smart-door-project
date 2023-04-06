@@ -3,15 +3,24 @@ import '../style/faqs.css'
 import Navbar from '../components/Navbar';
 //footer
 import Footer from '../components/Footer';
+
+//animation on scroll
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+
 function Faqs(){
+    useEffect(()=>{
+        AOS.init()
+    })
     return(
         <div>
             <Navbar></Navbar>
             <div id="faq-how">
                 <div className="row row-fa">
                     <div className="fa-center d-flex justify-content-center flex-column">
-                        <div className="fa-how fa-ques-head text-center">How can we help ?</div>
-                        <div className="fa-how-input text-center"><input type="text" placeholder="Search Frequently asked question" />  <div className="fa-how-btn btn"><i class="fa-solid fa-magnifying-glass"></i></div></div>
+                        <div className="fa-how fa-ques-head text-center" data-aos="fade-down">How can we help ?</div>
+                        <div className="fa-how-input text-center"  data-aos="fade-right"><input type="text" placeholder="Search Frequently asked question" />  <div className="fa-how-btn btn"><i class="fa-solid fa-magnifying-glass"></i></div></div>
                     </div>
                 </div>
             </div>

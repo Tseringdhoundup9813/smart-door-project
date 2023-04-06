@@ -1,6 +1,14 @@
 import { NavLink } from "react-router-dom";
 import React,{useState} from 'react'
-import axios from "axios"
+import axios from "axios";
+
+//css
+import '../../style/aadmin.css'
+
+//navbar
+import AdminNavbar from '../AdminNavbar'
+//footer
+import AdminTop from '../AdminTop'
 
 function UpdateProduct(){
     const[productupload,setproductupload] = useState({name:"",description:"",price:"",img:[],categories:"3D DOORS",color:"rose wood",size:"80-32",discount:"0"});
@@ -35,6 +43,10 @@ function UpdateProduct(){
      }
     return(
         <div>
+            <div className="row row-admin">
+              <AdminNavbar></AdminNavbar>
+              <div className="col-md-10 col-sm-12 admin-main">
+                  <AdminTop></AdminTop>
             <form onSubmit={onSubmit}>
            <div className="row-uproduct row">
         <h1 className="admin-message">{message}</h1>
@@ -122,6 +134,8 @@ function UpdateProduct(){
            </div>
 
             </form>
+              </div>
+          </div>
         </div>
     )
 }

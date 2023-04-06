@@ -259,10 +259,6 @@ h1{
         background: transparent;
         margin-bottom: 5px;
     }
-    #logout {
-        height: 30px;
-        margin: auto 20px;
-    }
     .register-title > h1 {
         font-size: 10px;
     }

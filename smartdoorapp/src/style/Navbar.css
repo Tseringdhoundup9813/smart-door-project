@@ -1,7 +1,11 @@
 .navbar-img{
-   height:50px;
+    object-fit: contain;
+    height:50px;
    width:10%;
-   background:url('../image/logo/smart-doors-logo.png')center/contain no-repeat;
+   
+}
+.logo-img{
+    height: 100%;
 }
 .nav-item{
     text-align:left;
@@ -9,7 +13,7 @@
 }
 .navbar-nav{
     width:100%;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .navbar-signbtn{
     padding:5px 20px;
@@ -17,21 +21,24 @@
     border-radius:0;
     font-weight:700;
 }
-.search-icon{
-    border:1px solid red;
-    transition:all 9s ease-in;
-}
-.search-icon, .two-icon{
+ .two-icon{
     display:flex;
     align-items: center;
     cursor:pointer;
     font-size:18px;
     color:#908778;
     padding:0 5px;
+    width: 20%;
+    justify-content: space-around;
+}
+.navbar-collapse{
+    flex-basis:auto;
+    flex-grow: 0;
+    width:90%;
 }
 .navbar-ul{
     position:relative;
-    width:67%;
+    width:70%;
     margin-left:auto;
 }
 .search-input{
@@ -134,7 +141,26 @@
         width: auto !important;;
         margin-left:auto !important;
     }
+    .two-icon{
+        flex-grow:2;
+        justify-content: flex-end;
+        width: auto;;
+    }
+    #logout{
+        margin:auto 5px;
+    }
     
+}
+@media screen and (max-width:568px){
+    .cart-icon{
+        font-size:18px
+    }
+    #logout{
+        font-size:12px;
+    }
+    .navbar{
+        padding:0;
+    }
 }
 /* Remove border from toggler */
 .navbar-toggler {
@@ -160,45 +186,52 @@
 /* email verifcation- notication =============================== */
 
 .email-verification-notification{
-    width:100%;
-    height:25px;
-    background-color: rgb(0, 0, 0);
-    top:0px;
     display: flex;
-    justify-content:center;
+    font-size:12px;
     align-items: center;
-    z-index: 999;
-    overflow: hidden;
-
+    justify-content: center;
+    background:#233D4D;
+    color:#fff;
 }
-.email-verification-notification > h1:nth-child(1){
-    font-size:1rem;
-    color:white;
-    margin-right:2%;
-    margin:auto 0px;
-}
-.email-verification-notification > h1:nth-child(2){
-    font-size:0.8rem;
-    background-color: rgb(255, 40, 40);
-    padding:5px 10px;
-    color:white;
-    margin:auto 0px;
-    margin-left:20px;
-
+.email-red{
+    padding:2px 40px;
+    margin-left:10px;
     cursor: pointer;
+    transition: all .3s linear;
+    color:#fff;
+    background-color: #e3230e;
 }
-.email-verification-notification > h1:nth-child(2):hover{
-   background-color: rgb(245, 86, 86);
+.email-red:hover{
+    background-color: #a92617;
+}
+@media screen and (max-width:658px){
+    .email-verification-notification{
+        font-size:8px;
+    }
+    .email-red{
+        padding: 0 5px;
+    }
+    #logout{
+        padding:5px 9px !important;
+    }
+    .navbar-toggler{
+        padding:0;
+    }
+    .navbar-container{
+        padding:0;width:90%
+    }
 }
 /* --------------------faskldkflsad================================ */
 
 /* logout =========================== */
 /* logout================= */
 #logout{
-    height:40px;
-    margin:auto 17px;
+    position: relative;
     cursor: pointer;
     z-index: 2;
+    border:1px solid rgb(132, 132, 132);
+    padding:5px 20px;
+    color:green;
 }
 .logout-username{
     height:100%;
@@ -209,8 +242,10 @@
 }
 .logout-text{
     display: none;
-    height: 120%;
-    width: 120%;
+    position: absolute;
+    bottom: - 10%;
+    left: 9%;
+    padding: 5px 19px;
     align-items: center;
     justify-content: center;
     background: #fff;
