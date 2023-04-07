@@ -5,6 +5,7 @@ const User = require("../Models/User");
 const BuyNowProduct = require("../Models/BuyNowProduct");
 const AddToCart = require("../Models/AddToCart")
 const Order = require("../Models/Order")
+const axios = require("axios");
 
 
 
@@ -445,11 +446,114 @@ exports.Order=async(req,res)=>{
 
 // order confirm and get total amount of order
 
-exports.orderConfirm=(req,res)=>{
+exports.orderConfirm= async(req,res)=>{
     console.log(req.body);
+    const{order_id} = req.body;
     
+    const orderconfirm = await Order.findByIdAndUpdate({_id:order_id},{confirm:true})
+    console.log(orderconfirm);
+   
+
+}
+
+exports.khaltidata=async(req,res)=>{
+    console.log(req.params);
+        const payload = {
+            "return_url": "https://example.com/payment/",
+            "website_url": "https://example.com/",
+            "amount": 1300,
+            "purchase_order_id": "test12",
+            "purchase_order_name": "test",
+            "customer_info": {
+                "name": "Ashim Upadhaya",
+                "email": "example@gmail.com",
+                "phone": "9811496763"
+            },
+            "amount_breakdown": [
+                {
+                    "label": "Mark Price",
+                    "amount": 1000
+                },
+                {
+                    "label": "VAT",
+                    "amount": 300
+                }
+            ],
+            "product_details": [
+                {
+                    "identity": "1234567890",
+                    "name": "Khalti logo",
+                    "total_price": 1300,
+                    "quantity": 1,
+             "unit_price": 1300
+                }
+            ]
+          }
+          
+        try{
+        const response = await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",payload,{
+            headers:{
+                'Authorization':`Key 6e223eea84c04cc5bd7ac70b92c9bfaf `
+            }
+        
+        })
+        res.status(200).json({khaltiurl:response.data.payment_url})
+        console.log(response.data.payment_url);
+    }catch(err){
+        console.log(err);
+    }
+        
 }
 
 
 
 
+
+exports.CustomerOrder=async(req,res)=>{
+    console.log("working");
+  
+    const orderlist = await Order.find({},{},{sort: { '_id': 1 }})
+     
+    // const cartproduct = await orderlist[0].productId;
+    res.status(200).json("hello")
+
+    const userIdlist=[];
+    const productcartlist = [];
+    const mainproductid =[];
+
+    const ordermainlist = [];
+
+
+    
+    orderlist.map((order)=>{
+       
+        ordermainlist.push([order]);
+    
+    })
+   
+  
+    ordermainlist.map((order,index)=>{
+   
+        userIdlist.push(order[0].userId);
+        
+        
+    })
+    
+    console.log(userIdlist);
+    const userlist = await User.find({_id:userIdlist})
+    console.log(userlist);
+
+
+ 
+   
+    
+    // console.log(productIdlist);
+
+
+    // const mainproduct = await productModel({_id:productIdlist})
+
+   
+  
+
+    
+}
