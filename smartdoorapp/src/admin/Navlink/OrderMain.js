@@ -53,7 +53,7 @@ export default function OrderMain() {
 
           <div className="row row-cart-head">
             <div className="order-cart-head">
-              <div className="order-detail">Image</div>
+              <div className="order-detail">Product detail</div>
               <div className="order-rate">Rate</div>
               <div className="orer-qty">QTY</div>
               <div className="orer-total">Total Price</div>
