@@ -29,7 +29,7 @@ Router.get("/totalcartlistcount/:user_id",productController.totalcartlistcount);
 Router.get("/totalamount/:user_id",productController.totalamount);
 Router.post("/orders/:user_id",productController.Order)
 Router.post("/orderconfirm",productController.orderConfirm);
-Router.get("/khaltipayload/:product_id",productController.khaltidata)
+Router.get("/khaltipayload/:order_id",productController.khaltidata)
 
 
 // admin router ============================================

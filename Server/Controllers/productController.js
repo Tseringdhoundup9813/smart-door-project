@@ -147,11 +147,14 @@ exports.AddToCart = async(req,res)=>{
                 let discount = product[0].price*product[0].discount/100;
                 discount = discount * cartlist[0].quantity;
                 const addamount =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+                const addMainProduct =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{mainproduct:product})
             }
             else{
                 let discount = product[0].price;
                 discount = discount * cartlist[0].quantity;
                 const addamount = await AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+                const addMainProduct =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{mainproduct:product})
+
              }
             res.status(200).json({data:addtocart,success:true,cartexist:false})
            
@@ -166,12 +169,16 @@ exports.AddToCart = async(req,res)=>{
                 let discount = product[0].price*product[0].discount/100;
                 discount = discount * cartlist[0].quantity;
                 const addamount = await AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+                const addMainProduct =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{mainproduct:product})
+
               
             }
             else{
                 let discount = product[0].price;
                 discount = discount * cartlist[0].quantity;
                 const addamount =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{amount:discount})
+                const addMainProduct =await  AddToCart.findOneAndUpdate({userId:userId,productId:product_id},{mainproduct:product})
+
                  
             }
             res.status(200).json({data:addtocart,success:true,cartexist:true})
@@ -423,6 +430,8 @@ exports.Order=async(req,res)=>{
     const{address,number} = req.body;
     try{
         const cartlist = await AddToCart.find({userId:user_id});
+        const user = await User.find({_id:user_id});
+    
         let totalquantity = 0;
         let totalamount = 0;
         cartlist.map((item)=>{
@@ -430,8 +439,8 @@ exports.Order=async(req,res)=>{
             totalquantity += item.quantity;
             totalamount +=item.amount;
         })
-        const createorder = await Order.create({userId:user_id,productId:cartlist,location:address,number:number,totalamount:totalamount,totalquantity:totalquantity})
-        console.log(createorder);
+        const createorder = await Order.create({userId:user_id,productId:cartlist,location:address,number:number,totalamount:totalamount,totalquantity:totalquantity,mainuser:user})
+     
         res.status(200).json({order_id:createorder._id,totalamount:totalamount})
 
 
@@ -451,17 +460,24 @@ exports.orderConfirm= async(req,res)=>{
     const{order_id} = req.body;
     
     const orderconfirm = await Order.findByIdAndUpdate({_id:order_id},{confirm:true})
-    console.log(orderconfirm);
+   
    
 
 }
 
 exports.khaltidata=async(req,res)=>{
-    console.log(req.params);
+  
+    const order_id = req.params.order_id;
+
+    const order = await Order.find({_id:order_id});
+    const VAT = 300
+    let totalamount = order[0].totalamount;
+    totalamount = Math.trunc(totalamount);
+    console.log(totalamount);
         const payload = {
-            "return_url": "https://example.com/payment/",
+            "return_url": "http://localhost:3000/product/placeorder",
             "website_url": "https://example.com/",
-            "amount": 1300,
+            "amount": totalamount + VAT,
             "purchase_order_id": "test12",
             "purchase_order_name": "test",
             "customer_info": {
@@ -472,20 +488,20 @@ exports.khaltidata=async(req,res)=>{
             "amount_breakdown": [
                 {
                     "label": "Mark Price",
-                    "amount": 1000
+                    "amount": totalamount,
                 },
                 {
                     "label": "VAT",
-                    "amount": 300
+                    "amount": VAT,
                 }
             ],
             "product_details": [
                 {
                     "identity": "1234567890",
                     "name": "Khalti logo",
-                    "total_price": 1300,
+                    "total_price": totalamount,
                     "quantity": 1,
-             "unit_price": 1300
+             "unit_price":totalamount,
                 }
             ]
           }
@@ -513,47 +529,7 @@ exports.CustomerOrder=async(req,res)=>{
     console.log("working");
   
     const orderlist = await Order.find({},{},{sort: { '_id': 1 }})
-     
-    // const cartproduct = await orderlist[0].productId;
-    res.status(200).json("hello")
-
-    const userIdlist=[];
-    const productcartlist = [];
-    const mainproductid =[];
-
-    const ordermainlist = [];
-
-
     
-    orderlist.map((order)=>{
-       
-        ordermainlist.push([order]);
-    
-    })
-   
-  
-    ordermainlist.map((order,index)=>{
-   
-        userIdlist.push(order[0].userId);
-        
-        
-    })
-    
-    console.log(userIdlist);
-    const userlist = await User.find({_id:userIdlist})
-    console.log(userlist);
-
-
- 
-   
-    
-    // console.log(productIdlist);
-
-
-    // const mainproduct = await productModel({_id:productIdlist})
-
-   
-  
-
+    res.status(200).json({data:orderlist})
     
 }

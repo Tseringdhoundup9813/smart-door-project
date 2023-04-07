@@ -39,6 +39,9 @@ const OrderSchema= new Schema({
         type:Number,
         default:1,
     },
+    mainuser:{
+        type:Array,
+    },
     createdAt:{
         type:Date,
         default:Date.now(),

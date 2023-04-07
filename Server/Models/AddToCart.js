@@ -23,11 +23,15 @@ const AddToCartSchema= new Schema({
         default:0,
         
     },
+    mainproduct:{
+        type:Array,
+    },
     createdAt:{
         type:Date,
         default:Date.now(),
        
-    }
+    },
+
    
 })
 module.exports = mongoose.model("AddToCart",AddToCartSchema);
