@@ -1,106 +1,134 @@
-
-#buyNow{
-    background:rgb(228, 224, 224);
+#buyNow {
+  background: rgb(228, 224, 224);
 }
-.row-buy{
-    width:95%;
-    margin:0 auto;
+.row-buy {
+  width: 95%;
+  margin: 0 auto;
 }
-.buy-deliver, .buy-cart, .buy-place-order{
-    background:#fff;
-    padding:50px 20px;
-    margin:30px 0;
-    border-radius:5px;
-   
-
-}
-
-.buy-deliver{
-    animation-name: smoothLoad;
-    animation-duration:2s;
-    transition:all 1s ease;
+.buy-deliver,
+.buy-cart,
+.buy-place-order {
+  background: #fff;
+  padding: 50px 20px;
+  margin: 30px 0;
+  border-radius: 5px;
 }
 
-.buy-cart{
-    animation-name: smoothLoad;
-    animation-duration:3s;
-    transition:all 1s ease;
+.buy-deliver {
+  animation-name: smoothLoad;
+  animation-duration: 2s;
+  transition: all 1s ease;
 }
-@keyframes smoothLoad{
-    0%{
-        opacity:0;
-    }
-    100%{
-        opacity:1;
-    }
+
+.buy-cart {
+  animation-name: smoothLoad;
+  animation-duration: 3s;
+  transition: all 1s ease;
 }
-.buy-cart-container{
-    display: grid;
-    grid-template-columns: 20% 40% 20% 20%;
-    align-items: center;
-    justify-content: center;
-    grid-gap:10px;
+@keyframes smoothLoad {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.buy-cart-img{
-    background:url('../image/products/3d/SD110.jpeg')center/contain no-repeat;
-    height:100px;
-    width:100%;
-    border:1px solid red;
+.buy-cart-container {
+  display: grid;
+  grid-template-columns: 20% 40% 20% 20%;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 10px;
 }
-.buy-subtotal{
-    text-align: end;
-    margin:10px 0;
+.buy-cart-img {
+  background: url("../image/products/3d/SD110.jpeg") center/contain no-repeat;
+  height: 100px;
+  width: 100%;
+  border: 1px solid red;
 }
-.main-subtotal{
-    color:red;
+.buy-subtotal {
+  text-align: end;
+  margin: 10px 0;
+}
+.main-subtotal {
+  color: red;
 }
 
 /* order-summarty */
-.order-summary{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 10px;;
+.order-summary {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 10px;
 }
 
-.placeorder-btn{
-    background:green;
-    width: 100%;
-    margin:20px 0;
-    color:#fff;
-    border-radius:10px;
-    transition: all .3s linear;
+.placeorder-btn {
+  background: green;
+  width: 100%;
+  margin: 20px 0;
+  color: #fff;
+  border-radius: 10px;
+  transition: all 0.3s linear;
 }
-.placeorder-btn:hover{
-    background:#fff;
-    width: 100%;
-    margin:20px 0;
-    color:green;
-    border-radius:10px;
-    border:1px solid green;
+.placeorder-btn:hover {
+  background: #fff;
+  width: 100%;
+  margin: 20px 0;
+  color: green;
+  border-radius: 10px;
+  border: 1px solid green;
 }
-.po-head, .buy-cart-head{
-    font-weight:700;
-    margin:10px 0;
+.po-head,
+.buy-cart-head {
+  font-weight: 700;
+  margin: 10px 0;
 }
-.b-deliver-to{
-    font-weight: 500;
+.b-deliver-to {
+  font-weight: 500;
+}
+.bd-address input,
+#province,
+#cars {
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.bd-address input:focus,
+#province:focus,
+#cars:focus {
+  box-shadow: none;
+  border: 1px solid rgb(61, 61, 216);
 }
 
 /* ====meida query=== */
-@media screen and (max-width:922px){
-    .buy-deliver, .buy-cart, .buy-place-order {
-        font-size:13px;
-        padding:35px 25px;
-    }
+@media screen and (max-width: 922px) {
+  .buy-deliver,
+  .buy-cart,
+  .buy-place-order {
+    font-size: 13px;
+    padding: 35px 25px;
+  }
 }
-@media screen and (max-width:768px){
-    .buy-deliver, .buy-cart, .buy-place-order {
-        font-size: 11px;
-        padding: 23px 25px;
-    }
+@media screen and (max-width: 768px) {
+  .buy-deliver,
+  .buy-cart,
+  .buy-place-order {
+    font-size: 11px;
+    padding: 23px 25px;
+  }
+  .bd-address input,
+  #province,
+  #cars {
+    font-size: 13px;
+  }
 }
-@media screen and (max-width:576px){
-    .buy-deliver, .buy-cart, .buy-place-order{
-        margin:10px 0;
-    }
+@media screen and (max-width: 576px) {
+  .buy-deliver,
+  .buy-cart,
+  .buy-place-order {
+    margin: 10px 0;
+  }
+  .bd-address input,
+  #province,
+  #cars {
+    font-size: 9px;
+  }
 }
