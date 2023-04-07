@@ -1,8 +1,30 @@
 
 
-import React from 'react'
+import React,{useEffect,useState} from 'react'
+
+import axios from 'axios';
+
+
+
 
 export default function OrderMain() {
+
+    async function OrderList(){
+        try{
+            const orderlist = await axios.get(`http://localhost:3001/customerorder`)
+            console.log(orderlist);
+
+        }catch(err){
+
+        }
+    }
+
+    useEffect(()=>{
+        console.log("1");
+        OrderList();
+       
+
+    })
   return (
     <div>
         <div className="row row-order-list">

@@ -56,7 +56,7 @@ export default function PlaceOrder() {
 
     async function confirmOrder(){
         try{
-            const order = await axios.post(`http://localhost:3001/orderconfirm`,{user_id:order_id})
+            const order = await axios.post(`http://localhost:3001/orderconfirm`,{order_id:order_id})
             console.log(order);
         }catch(err){
             console.log(err);
@@ -68,9 +68,9 @@ export default function PlaceOrder() {
     // =================================================
 
     let payload = {
-        "return_url": "https://example.com/payment/",
+        "return_url": "http://localhost:3000/product/placeorder",
         "website_url": "https://example.com/",
-        "amount": 1300,
+        "amount": 5200,
         "purchase_order_id": "test12",
         "purchase_order_name": "test",
         "customer_info": {
@@ -81,40 +81,52 @@ export default function PlaceOrder() {
         "amount_breakdown": [
             {
                 "label": "Mark Price",
-                "amount": 1000
+                "amount":4600,
             },
+            
             {
                 "label": "VAT",
-                "amount": 300
+                "amount": 600
             }
         ],
+   
+        
         "product_details": [
             {
                 "identity": "1234567890",
                 "name": "Khalti logo",
-                "total_price": 1300,
+                "total_price": 2300,
                 "quantity": 1,
-         "unit_price": 1300
-            }
-        ]
+            "unit_price": 2300
+            },
+            {
+                "identity": "1234567890f",
+                "name": "Khalti logo",
+                "total_price": 2300,
+                "quantity": 1,
+            "unit_price": 2300
+            },
+           
+         
+
+        ],
+        
       }
 
 
     // pay on khalti =====================================================================================================
      async function KhaltiPay(){
+        try{
+            const order = await axios.get(`http://localhost:3001/khaltipayload/${order_id}`)
+            console.log(order.data.khaltiurl);
+            window.location.replace(order.data.khaltiurl);
+        }catch(err){
+            console.log(err);
+        }
        
-        const response = await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",payload,{
-            headers:{
-                'Authorization':`Key 6e223eea84c04cc5bd7ac70b92c9bfaf `
-            }
-        })
+        }
+      
 
-        console.log(response.data.payment_url)
-        window.open(response.data.payment_url, '_blank')
-
-        
-        
-     }
     // =--------------------------------flasklfksadf=========================================================
 
 
@@ -188,7 +200,7 @@ export default function PlaceOrder() {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between">
                                 <div className="po-total fs-4 text-success">Total </div>
-                                <div className="po-total-amt fs-6 text-success">Rs 9897</div>
+                                <div className="po-total-amt fs-6 text-success">Rs {total_Amount}</div>
                                 </div>
                     </div>
                 </div>

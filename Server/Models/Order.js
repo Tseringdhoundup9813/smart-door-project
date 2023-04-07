@@ -35,6 +35,10 @@ const OrderSchema= new Schema({
        type:Boolean,
        default:false,
     },
+    deliverystatus:{
+        type:Number,
+        default:1,
+    },
     createdAt:{
         type:Date,
         default:Date.now(),
