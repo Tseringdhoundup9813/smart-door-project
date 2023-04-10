@@ -13,9 +13,10 @@ function CartButton(props) {
 
     async function AddQt(quantity){
        
+        
         try{
             const product = await axios.post(`http://localhost:3001/addqt`,{product_id:props.product_id,user_id:props.userKey})
-           
+            
             setTotalamount(product.data.totalamount)
             setqt(product.data.qt);
             props.rateChange(qt);
@@ -26,17 +27,19 @@ function CartButton(props) {
         }
     }
     async function MinQt(quantity){
-        
-        try{
-            const product = await axios.post(`http://localhost:3001/minqt`,{product_id:props.product_id,user_id:props.userKey})
-       
-            setqt(product.data.qt);
-            props.rateChange(qt);
-
+        if(qt > 1){
+            try{
+                const product = await axios.post(`http://localhost:3001/minqt`,{product_id:props.product_id,user_id:props.userKey})
+           
+                setqt(product.data.qt);
+                props.rateChange(qt);
     
-        }catch(err){
-            console.log(err);
+        
+            }catch(err){
+                console.log(err);
+            }
         }
+       
     }
 
   

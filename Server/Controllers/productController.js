@@ -628,8 +628,24 @@ exports.AddCategoryColor = async(req,res)=>{
 // ===========END+==================================================
 
 // check admin or not ============================
-exports.CheckAdmin=(req,res)=>{
-    console.log(res.params);
+exports.CheckAdmin=async(req,res)=>{
+    console.log(req.params);
+    console.log("it is working");
+    try{
+
+        const checkuser = await User.find({_id:req.params.user_id})
+        if(checkuser[0].admin==true){
+           res.status(200).json({admin:true})
+        }
+        else{
+           res.status(200).json({admin:false})
+   
+        }
+    }catch(err){
+        console.log(err);
+    }
+    
+   
 }
 // ---------------==========================
 
@@ -662,3 +678,19 @@ exports.CheckPidx=async(req,res)=>{
 }
 
 // ========END=====================================
+
+// change order status=================
+exports.OrderStatus=async(req,res)=>{
+    console.log(req.params);
+    const{order_id,status} = req.params;
+    if(status<3){
+        const updatestatus = await Order.findByIdAndUpdate({_id:order_id},{deliverystatus:status});
+
+    }else{
+        const del = await Order.findByIdAndDelete({_id:order_id});
+        console.log(del)
+    }
+    
+   
+}
+// 

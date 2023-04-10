@@ -1,6 +1,6 @@
 import React, { useEffect,useContext } from 'react'
 import { loginContext } from './Context';
-import { useNavigate ,useLocation} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 
 function Protected(props) {
@@ -9,7 +9,7 @@ function Protected(props) {
 
  const{Component} = props
  const navigate = useNavigate();
- const location = useLocation();
+
  useEffect(()=>{
     // console.log(location.state.previousUrl)
     let login = localStorage.getItem("loginSucess");

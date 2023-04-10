@@ -88,10 +88,28 @@ export default function OrderTracking() {
   useEffect(() => {
     handlePrice();
     OrderTracking();
-    Order_status_word_function();
-  }, [order_status_num]);
 
-  console.log(order_status_num);
+    
+
+   
+  },[]);
+
+
+  // condition =================
+   const trackingwidth  = function(status){
+        if(status===0){
+         
+          return 0;
+        }
+        else if(status===1){
+          return 50;
+        }
+        else if(status===2){
+          return 100;
+        }
+   }
+
+
 
   async function OrderTracking() {
     try {
@@ -108,15 +126,17 @@ export default function OrderTracking() {
   }
 
   // order ===========================
-  function Order_status_word_function() {
-    if (order_status_num == 0) {
-      set_order_status_word("Order Placed");
-    } else if (order_status_num == 1) {
-      set_order_status_word("In transited");
-    } else if (order_status_num == 2) {
-      set_order_status_word("delivered");
-    }
-  }
+   let order_text = function (order_status){
+       if(order_status==0){
+         return "order place";
+       }
+       if(order_status ==1){
+        return "transit";
+       }
+       if(order_status==2){
+         return "delivered"
+       }
+   }
 
   //
 
@@ -267,7 +287,7 @@ export default function OrderTracking() {
                           {orderlist.createdAt}
                         </div>
                         <div className="text-capitalize order-table-list text-center">
-                          unpaid
+                          {orderlist.payment?"paid":"unpaid"}
                         </div>
                       </div>
                       <div className="order-view">
@@ -276,13 +296,13 @@ export default function OrderTracking() {
                             <tr>
                               <td>
                                 <div className="track-status text-capitalize">
-                                  status{" "}
+                                  status
                                 </div>
                               </td>
                               <td className="px-2">:</td>
                               <td className="ps-3">
                                 <span className="track-status-type">
-                                  {order_status_word}
+                                {order_text(orderlist.deliverystatus)}
                                 </span>
                               </td>
                             </tr>
@@ -295,7 +315,7 @@ export default function OrderTracking() {
                               <td className="px-2">:</td>
                               <td className="ps-3">
                                 <div className="track-address">
-                                  Swoyambhu, kathmandu
+                                  {orderlist.location}
                                 </div>
                               </td>
                             </tr>
@@ -308,7 +328,7 @@ export default function OrderTracking() {
                               <td className="px-2">:</td>
                               <td className="ps-3">
                                 <div className="track-number-type">
-                                  98716872399
+                                  {orderlist.number}
                                 </div>
                               </td>
                             </tr>
@@ -328,39 +348,49 @@ export default function OrderTracking() {
                                 total price
                               </div>
                             </div>
-                            <div className="cart-product-list">
-                              <div className="cart-product-detail">
-                                <div
-                                  className="cart-product-img"
-                                  style={{
-                                    backgroundImage: productimg,
-                                  }}
-                                ></div>
-                                <div className="cart-product-name text-capitalize">
-                                  3d doors
-                                </div>
-                              </div>
-                              <div className="cart-product-amt d-flex">
-                                <div className="price-name"> Price : </div>
-                                Rs.343
-                              </div>
 
-                              <div className="cart-product-quantity d-flex align-items-center">
-                                <div className="price-qty"> QTY : </div> 1
-                              </div>
 
-                              <div className="cart-product-price d-flex justify-content-around">
-                                <div className="cart-product-amount">
-                                  {/* <span className="cart-amt-sm">Grand Total</span>  */}
-                                  <div className="cart-product-amount">
-                                    <span className="cart-amt-sm">
-                                      Grand Total
-                                    </span>
-                                    RS.565656
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            {orderlist.productId.map((product)=>{
+                              return <div className="cart-product-list">
+                                   <div className="cart-product-detail">
+                                     <div
+                                       className="cart-product-img"
+                                       style={{
+                                         backgroundImage: `url(${product.mainproduct[0].img[0]})`
+                                       }}
+                                     ></div>
+                                     <div className="cart-product-name text-capitalize">
+                                     {product.mainproduct[0].categories}
+                                     </div>
+                                   </div>
+                                   <div className="cart-product-amt d-flex">
+                                     <div className="price-name"> Price : </div>
+                                     {product.mainproduct[0].price}
+                                   </div>
+     
+                                   <div className="cart-product-quantity d-flex align-items-center">
+                                     <div className="price-qty"> QTY : </div>  {product.quantity}
+                                   </div>
+     
+                                   <div className="cart-product-price d-flex justify-content-around">
+                                     <div className="cart-product-amount">
+                                       {/* <span className="cart-amt-sm">Grand Total</span>  */}
+                                       <div className="cart-product-amount">
+                                         <span className="cart-amt-sm">
+                                           Grand Total
+                                         </span>
+                                         RS.{product.amount}
+                                       </div>
+                                     </div>
+                                   </div>
+                                 </div>
+                            })}
+                           
+
+
+
+
+
                           </div>
                         </div>
                         <div className="order-prog-title my-2">
@@ -370,11 +400,9 @@ export default function OrderTracking() {
                         <div className="order-progress ">
                           <div className="order-line">
                             <div
+                          
                               className="order-progress-color"
-                              style={{
-                                background: `${
-                                  order_status_num < 1 ? "none" : "grey"
-                                }`,
+                              style={{ width:`${trackingwidth(orderlist.deliverystatus)}%`,
                               }}
                             ></div>
                             <div className="circle circle1">
@@ -406,14 +434,14 @@ export default function OrderTracking() {
           </div>
         </div>
         {/* ============End of Order-Tracker========= */}
-
+{/* 
         <div className="row like-row">
           <div className="pl d-flex justify-content-between">
             <div className="pl-left">You may also Like</div>
             <div className="pl-right">View all</div>
-          </div>
+          </div> */}
           {/* slick */}
-          <div>
+          {/* <div>
             <Slider {...settings}>
               {likeimg.map((e, key) => {
                 return (
@@ -440,7 +468,9 @@ export default function OrderTracking() {
               })}
             </Slider>
           </div>
-        </div>
+        </div> */}
+
+        
       </div>
       <Footer></Footer>
     </div>
