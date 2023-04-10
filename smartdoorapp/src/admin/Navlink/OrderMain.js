@@ -78,10 +78,10 @@ export default function OrderMain() {
                       <div className="orer-qty">QTY</div>
                       <div className="orer-total">Total Price</div>
                     </div>
-                    {order.productId.map((product) => {
+                    {order.productId.map((product, index) => {
                       return (
                         <div className="order-cart">
-                          <div className="sn-number">1</div>
+                          <div className="sn-number">{index + 1}</div>
                           {product.mainproduct.map((mainproduct) => {
                             return (
                               <div className="order-detail">
