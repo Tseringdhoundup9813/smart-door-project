@@ -1,27 +1,35 @@
-.addCatName{
-    margin-right:5px;
+.addCatName {
+  margin-right: 5px;
 }
 
-.addCatBtn{
-    background:green;
-    color:#fff;
-    transition:all .3s linear;
+.addCatBtn {
+  background: green;
+  color: #fff;
+  transition: all 0.3s linear;
 }
-.addCatBtn:hover{
-    border:1px solid green;
-    background-color: #fff;
-    color:green;
+#color-container {
+  position: relative;
 }
-.ad-grid{
-    display: grid;
-    grid-template-columns: 30% 70%;
-    grid-gap:10px;
+.addCatBtn1 {
+  position: absolute;
+  bottom: 10px;
+  right: 2%;
 }
-.add-color{
-    background: #8df28444;
-    padding:5px 10px;
+.addCatBtn:hover {
+  border: 1px solid green;
+  background-color: #fff;
+  color: green;
 }
-.side-chat .active{
-    background-color: rgba(0, 0, 255, 0.697);
-    color:#fff;
+.ad-grid {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-gap: 10px;
+}
+.add-color {
+  background: #8df28444;
+  padding: 5px 10px;
+}
+.side-chat .active {
+  background-color: rgba(0, 0, 255, 0.697);
+  color: #fff;
 }
