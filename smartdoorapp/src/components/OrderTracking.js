@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 //slick
 import{ Component } from "react";
 import Slider from "react-slick";
+import axios from 'axios';
 
 
 //slick  css
@@ -64,18 +65,54 @@ export default function OrderTracking() {
   const [price, setPrice] = useState(0);
   const[userId,setUserId] = useState();
   const[cartlist,setCartList] = useState([]);
-  const[deletecartlist,setdeletecartlist] = useState();
+  const[order_tracking_list,set_order_tracking_list] =useState();
+  const[order_status_num,set_Order_status_num] = useState();
+  const[order_status_word,set_order_status_word] = useState();
 
 
 
   useEffect(()=>{
 
-      setCartList(JSON.parse(localStorage.getItem("cart")));
+   
       handlePrice();
+      OrderTracking();
+      Order_status_word_function();
       
-  },[]);
+  },[order_status_num]);
+
+  console.log(order_status_num);
+  
   
 
+  async function OrderTracking(){
+   
+      try{
+          const order = await axios.get(`http://localhost:3001/ordertracking/${localStorage.getItem("user_id")}`)
+          
+          set_order_tracking_list(order.data.data);
+          // set_Order_status_num(order.data.data[0].deliverystatus)
+          
+      }catch(err){
+          console.log(err);
+      }
+  
+  }
+
+
+  // order ===========================
+  function Order_status_word_function(){
+    if(order_status_num==0){
+      set_order_status_word("Order Placed");
+    }
+    else if(order_status_num==1){
+      set_order_status_word("In transited");
+    }
+    else if(order_status_num==2){
+      set_order_status_word("delivered");
+    }
+  }
+
+  // 
 
 
   const itemprice=55;
@@ -87,26 +124,21 @@ export default function OrderTracking() {
   }
 
 
- 
-      // deleteCartlist=============
-      function deleteCartlist(key){
-          
-        
-        let deletecart = JSON.parse(localStorage.getItem("cart")).filter((item,index,array)=>{
-              if(index !==key){
-                  return item;
-              }
-        })
-
-        localStorage.setItem("cart",JSON.stringify(deletecart));
-       setCartList(JSON.parse(localStorage.getItem("cart")));
-
+  function ViewOrderStatus(id){
+    console.log(id);
+      let selectedorder = [];
+     order_tracking_list&&order_tracking_list.map((order)=>{
+         if(order._id==id){
+          selectedorder.push(order);
+         }
+      })
       
+      // set_order_status_num(selectedorder.deliverystatus)
+      set_Order_status_num(selectedorder[0].deliverystatus)
+      console.log(selectedorder[0]);
+  }
+     
         
-      //   console.log(deletecart);
-
- 
-      }
   //slick 
   var settings = {
       dots: false,
@@ -199,13 +231,18 @@ export default function OrderTracking() {
 
                    
                     </div>
-                    <div className="order-table">
-                    <div className="text-capitalize order-table-list text-center"><i className="fa-solid fa-eye"></i></div>
-                      <div className="text-capitalize order-table-list text-center">1232134214</div>
-                      <div className="text-capitalize order-table-list text-center">7 feb 2023</div>
-                      <div className="text-capitalize order-table-list text-center">3d doorr-Sd102</div>
-
-                    </div>
+                    {
+                      order_tracking_list&&order_tracking_list.map((orderlist)=>{
+                        return <div className="order-table">
+                            <div className="text-capitalize order-table-list text-center" onClick={()=>ViewOrderStatus(orderlist._id)}><i className="fa-solid fa-eye"></i></div>
+                              <div className="text-capitalize order-table-list text-center">{orderlist._id}</div>
+                              <div className="text-capitalize order-table-list text-center">{orderlist.createdAt}</div>
+                              <div className="text-capitalize order-table-list text-center">smartdoor</div>
+        
+                        </div>
+                      })
+                    }
+                   
                   </div>
                     <div className="order-view">
                     <div >
@@ -213,7 +250,7 @@ export default function OrderTracking() {
                         <tr>
                           <td><div className="track-status text-capitalize">status </div></td>
                           <td className='px-2'>:</td>
-                          <td className='ps-3'><div className="track-status-type"> Deliverd</div></td>
+                          <td className='ps-3'><div className="track-status-type">{order_status_word}</div></td>
                         </tr>
                       </table>
                       
@@ -221,12 +258,12 @@ export default function OrderTracking() {
                     </div>
                       <div className="order-prog-title my-2"> Your Order Progress :</div>
                     <div className="order-progress ">
-                      <div className="order-line">
-                      <div className="order-progress-color"></div>
+                      <div className="order-line" >
+                      <div className="order-progress-color" style={{background:`${order_status_num<1?"none":"grey"}`}}></div>
                       <div className="circle circle1"><i class="fa-solid fa-cart-shopping"></i></div>
                       <div className="circle circle2"><i class="fa-solid fa-truck"></i></div>
                       <div className="circle circle3"><i class="fa-solid fa-check"></i></div>
-                      <div className="order-status order-placed"> Order Placed</div>
+                      <div className="order-status order-placed" > Order Placed</div>
                       <div className="order-status in-transit">In Transit</div>
                       <div className="order-status completed">completed</div>
                       </div>

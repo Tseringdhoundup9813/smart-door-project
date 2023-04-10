@@ -349,7 +349,7 @@ const handlechange=()=>{
                                         <p>{product.colors}</p>   */}
 
                                             <div className="d-flex w-100 justify-content-between align-items-center">
-                                        <NavLink to="/admin/products/edit" className="products-edit">
+                                        <NavLink to= {`/admin/products/edit/${product._id}`} className="products-edit">
                                         <div>
                                         <i class="fa-solid fa-pen"></i>
                                         </div>

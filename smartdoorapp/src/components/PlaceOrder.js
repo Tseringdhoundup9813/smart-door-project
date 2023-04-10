@@ -13,16 +13,27 @@ export default function PlaceOrder() {
     const [cod, setCod]=useState(false);
     const[total_Amount,set_total_Amount]=useState(0);
     const[order_id,set_order_id]=useState();
+    const[orderconfirm_success,set_order_confirm_success] = useState(false);
+
 
     const navigate = useNavigate();
 
+    console.log(orderconfirm_success);
     // useeffect ======================================
     useEffect(()=>{
         
         set_order_id(localStorage.getItem("order_id"));
         totalproductamount();
+        if(orderconfirm_success){
+            console.log("working sucess");
+            setTimeout(function(){
+                navigate("/product/order-tracking");
+
+            },2500)
+          
+        }
         
-    })
+    },[orderconfirm_success])
 
     // ====================
     // total amount ================================================================
@@ -57,7 +68,13 @@ export default function PlaceOrder() {
     async function confirmOrder(){
         try{
             const order = await axios.post(`http://localhost:3001/orderconfirm`,{order_id:order_id})
-            console.log(order);
+            console.log(order.data);
+            set_order_confirm_success(order.data.success)
+            if(orderconfirm_success){
+
+            }
+            
+            
         }catch(err){
             console.log(err);
         }
@@ -67,51 +84,8 @@ export default function PlaceOrder() {
 
     // =================================================
 
-    let payload = {
-        "return_url": "http://localhost:3000/product/placeorder",
-        "website_url": "https://example.com/",
-        "amount": 5200,
-        "purchase_order_id": "test12",
-        "purchase_order_name": "test",
-        "customer_info": {
-            "name": localStorage.getItem("username"),
-            "email": "example@gmail.com",
-            "phone": ""
-        },
-        "amount_breakdown": [
-            {
-                "label": "Mark Price",
-                "amount":4600,
-            },
-            
-            {
-                "label": "VAT",
-                "amount": 600
-            }
-        ],
-   
         
-        "product_details": [
-            {
-                "identity": "1234567890",
-                "name": "Khalti logo",
-                "total_price": 2300,
-                "quantity": 1,
-            "unit_price": 2300
-            },
-            {
-                "identity": "1234567890f",
-                "name": "Khalti logo",
-                "total_price": 2300,
-                "quantity": 1,
-            "unit_price": 2300
-            },
-           
-         
-
-        ],
-        
-      }
+      
 
 
     // pay on khalti =====================================================================================================
@@ -136,6 +110,16 @@ export default function PlaceOrder() {
   return (
     <div>
         <Navbar></Navbar>
+
+        {/* order confirm success fully =====================================MESSAGE ======================== */}
+        {
+            <div className="order_confirm_message" style={{transform:`${orderconfirm_success?"translateY(20%)":"translateY(-300%)"}`}}>
+               
+                <p>You Have sucessully place order<span> Thank you {localStorage.getItem("username").slice(0,4)}.... </span></p>
+                
+            </div>
+        }
+        {/* ================END+=====================END+=================================================== */}
         <div id="placeOrder">
             <div className="row row-placeOrder">
                 <div className="col-sm-12 col-xsm-12 order-xsm-1 text-capitalize fs-3 my-4 fw-bold">

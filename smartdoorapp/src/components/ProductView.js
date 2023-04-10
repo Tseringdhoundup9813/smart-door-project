@@ -73,8 +73,11 @@ function Productview(){
     const[product,setproduct]=useState("");
     const[userId,setUserId] = useState("");
     const[cartlist,setCartList] = useState([]);
-    const[productAddedMessage,setProductAddedMessage] = useState(false);
+  
     const[buyNow,setBuyNow] = useState(false);
+
+    const[product_add_message,set_product_add_message] =useState(false);
+    const[product_add_number,set_product_add_number] =useState(0);
 
     const{setValidationBox} = useContext(loginContext);
     
@@ -105,12 +108,21 @@ function Productview(){
         
         try{
             const product = await  axios.post(`http://localhost:3001/addtocart`,{product_id:productId,userId:userId})
-            console.log(product);
+            console.log(product.data.data.quantity);
+           
             if(product.data.cartexist){
                 console.log("add already");
+                set_product_add_message(true);
+                set_product_add_number(product.data.data.quantity);
+
             }else{
                
                 console.log("not add")
+                set_product_add_message(true);
+                set_product_add_number(product.data.data.quantity);
+               
+                localStorage.setItem("cartcount",Number(localStorage.getItem("cartcount"))+1)
+
             }
            
 
@@ -138,15 +150,20 @@ function Productview(){
         // product detail fetch from server==============================================
             productDetail();
             
-        //===============END=========================/
- 
+        //===============END=========================
 
-     
+        // product_add message ====================================
+         if(product_add_message){
+            console.log("it is working")
+            setTimeout(function(){
+                set_product_add_message(false);
+            },2000)
+         }
 
+
+        // =======END+====================================
         
-    
-        
-    },[])
+    },[product_add_message])
 
     // buynow function =======================================================
        async function buyNowFunction(){
@@ -246,9 +263,10 @@ function Productview(){
 
              {/*product add to the cart message =------------------------------  */}
                 {
-                    productAddedMessage.length > 0?<div style={{transform:"TranslateX(0px)"}} className="product_add">
-                    <p>{productAddedMessage}</p>
-                    </div>:""
+                    <div className="add_to_cart_message" style={{transform:`${product_add_message?"translateX(-10%)":"translateX(200%)"}`}}>
+                        <p>Product_Add to cart<span>{product_add_number > 0?product_add_number:product_add_number}</span></p>
+                        
+                    </div>
                 }
               
              {/* ==========================END========================================= */}

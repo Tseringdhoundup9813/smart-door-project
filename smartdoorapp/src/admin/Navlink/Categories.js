@@ -4,7 +4,8 @@ import './style/Categories.css'
 //color picker
 import ColorPicker  from '../ColorPicker';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 //css
 import '../../style/aadmin.css'
@@ -17,12 +18,45 @@ import AdminTop from '../AdminTop'
 function Categories (){
     const [length,setLength]=useState('0');
     const [breath,setBreath]=useState('0');
+
+    const[categories,setcategories] = useState({name:"",color:"",size:""})
+    const[categories_name,set_categories_name] = useState();
+    const[categories_color,set_categories_color] = useState();
+
+    
+    console.log(categories_color);
+
+
     const inputlength=(e)=>{
         setLength(e.target.value)
     }
     const inputbreath=(e)=>{
         setBreath(e.target.value)
     }
+    function getcolorvalue(v){
+        console.log(v);
+    }
+
+    // add category name ===========
+   async function AddCategoryName(){
+        try{
+            const categoryname = axios.post("http://localhost:3001/addcategoryname",{name:categories_name});
+
+        }catch(err){
+
+        }
+    }
+
+    // add cateogry color
+    async function AddCategoryColor(){
+        try{
+            const categoryname = axios.post("http://localhost:3001/addcategorycolor",{name:categories_color});
+
+        }catch(err){
+
+        }
+    }
+
     return(
         <div>
             <div className="row row-admin">
@@ -37,9 +71,9 @@ function Categories (){
                 <div className="col-12 my-2 d-flex align-items-center justify-content-between">
                     <div className="addCat d-flex">
                         <div className="addCatName">Name : </div>
-                        <div className="addCatInput"><input type="text" className="form-control" /></div>
+                        <div className="addCatInput"><input type="text" onChange={(e)=>set_categories_name(e.target.value)}className="form-control" /></div>
                     </div>
-                    <div className="addCatBtn btn">
+                    <div className="addCatBtn btn" onClick={AddCategoryName}>
                         Add category
                     </div>
                 </div>
@@ -51,10 +85,10 @@ function Categories (){
                 </div>
                 <div className="col-12 my-2 d-flex align-items-center justify-content-between">
                     <div className="addCat">
-                        <div className="mb-2">Pick color : </div>
-                         <ColorPicker></ColorPicker>
+                        <div className="mb-2"  onChange={(e)=>setcategories({...categories,name:e.target.value})}>Pick color : </div>
+                         <ColorPicker getcolorvalue={getcolorvalue}></ColorPicker>
                     </div>
-                    <div className="addCatBtn btn">
+                    <div className="addCatBtn btn" onClick={AddCategoryColor}>
                         submit color
                     </div>
                 </div>

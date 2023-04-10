@@ -4,8 +4,10 @@ const productModel = require("../Models/productModel");
 const User = require("../Models/User");
 const BuyNowProduct = require("../Models/BuyNowProduct");
 const AddToCart = require("../Models/AddToCart")
+const AddCategory = require("../Models/Category")
 const Order = require("../Models/Order")
 const axios = require("axios");
+
 
 
 
@@ -252,7 +254,7 @@ exports.addQt = async(req,res)=>{
             const after_discount_price = P_price*P_discount/100;
           
             let totalamount = after_discount_price * qt[0].quantity;
-            totalamount =  totalamount.toFixed(2);
+            totalamount =  totalamount.toFixed(0);
             const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
             const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
             res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
@@ -260,7 +262,7 @@ exports.addQt = async(req,res)=>{
         else{
        
             let totalamount = P_price * qt[0].quantity;
-            totalamount =  totalamount.toFixed(2);
+            totalamount =  totalamount.toFixed(0);
             const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
             const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
             res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
@@ -296,7 +298,7 @@ exports.minQt = async(req,res)=>{
             const after_discount_price = P_price*P_discount/100;
            
             let totalamount = after_discount_price * qt[0].quantity;
-            totalamount =  totalamount.toFixed(2);
+            totalamount =  totalamount.toFixed(0);
             const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
             const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
             res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
@@ -304,7 +306,7 @@ exports.minQt = async(req,res)=>{
         else{
        
             let totalamount = P_price * qt[0].quantity;
-            totalamount =  totalamount.toFixed(2);
+            totalamount =  totalamount.toFixed(0);
             const setTotalamount = await AddToCart.findOneAndUpdate({userId:user_id,productId:product_id},{amount:totalamount})
             const get_total_amount = await AddToCart.find({userId:user_id,productId:product_id});
             res.status(200).json({qt:qt[0].quantity,totalamount:get_total_amount[0].amount})
@@ -459,7 +461,16 @@ exports.orderConfirm= async(req,res)=>{
     console.log(req.body);
     const{order_id} = req.body;
     
-    const orderconfirm = await Order.findByIdAndUpdate({_id:order_id},{confirm:true})
+    try{
+
+        const orderconfirm = await Order.findByIdAndUpdate({_id:order_id},{confirm:true})
+        res.status(200).json({success:true})
+
+
+    }catch(err){
+        console.log(err);
+    }
+    
    
    
 
@@ -471,19 +482,48 @@ exports.khaltidata=async(req,res)=>{
 
     const order = await Order.find({_id:order_id});
     const VAT = 300
-    let totalamount = order[0].totalamount;
+    const customer_number = order[0].number;
+    const customer_name = order[0].mainuser[0].username;
+    const customer_email = order[0].mainuser[0].email;
+
+    
+    let totalamount = order[0].totalamount * 100;
     totalamount = Math.trunc(totalamount);
-    console.log(totalamount);
+    
+   
+    const product_details=[];
+
+    // console.log(order[0].productId);
+
+    order[0].productId.map((product)=>{
+    
+        product_details.push( {
+                 "identity": product._id,
+                    "name": "Khalti logo",
+                    "total_price": product.amount * 100,
+                    "quantity": product.quantity,
+             "unit_price": product.amount * 100,
+                })
+            
+        
+    })
+
+ 
+    
+
+    // totalamount * 100;
+
+
         const payload = {
             "return_url": "http://localhost:3000/product/placeorder",
             "website_url": "https://example.com/",
             "amount": totalamount + VAT,
-            "purchase_order_id": "test12",
-            "purchase_order_name": "test",
+            "purchase_order_id": order_id,
+            "purchase_order_name": "smart door/doors",
             "customer_info": {
-                "name": "Ashim Upadhaya",
-                "email": "example@gmail.com",
-                "phone": "9811496763"
+                "name": customer_name,
+                "email": customer_email,
+                "phone": customer_number,
             },
             "amount_breakdown": [
                 {
@@ -495,26 +535,26 @@ exports.khaltidata=async(req,res)=>{
                     "amount": VAT,
                 }
             ],
-            "product_details": [
-                {
-                    "identity": "1234567890",
-                    "name": "Khalti logo",
-                    "total_price": totalamount,
-                    "quantity": 1,
-             "unit_price":totalamount,
-                }
-            ]
+            product_details,
           }
           
         try{
+
+
         const response = await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",payload,{
             headers:{
                 'Authorization':`Key 6e223eea84c04cc5bd7ac70b92c9bfaf `
             }
         
         })
+        console.log(response);
+
+
         res.status(200).json({khaltiurl:response.data.payment_url})
-        console.log(response.data.payment_url);
+      
+
+
+
     }catch(err){
         console.log(err);
     }
@@ -533,3 +573,65 @@ exports.CustomerOrder=async(req,res)=>{
     res.status(200).json({data:orderlist})
     
 }
+
+
+// order tracking======================
+
+exports.OrderTracking=async(req,res)=>{
+    console.log(req.params);
+    try{
+        const user_order = await Order.find({userId:req.params.user_id,confirm:true});
+        res.status(200).json({data:user_order})
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"server error"})
+
+    }
+  
+
+}
+
+// add categories ===================================
+
+exports.AddCategoryName=async(req,res)=>{
+   
+       const name = req.body.name;
+       const categoryexist = await AddCategory.find();
+
+       console.log(categoryexist[0]._id)
+       try{
+            if(categoryexist.length < 1){
+                const category_name = await AddCategory.create({category_name:name})
+            }
+            else{
+                const category_name = await AddCategory.findByIdAndUpdate({_id:categoryexist[0]._id},{$push:{category_name:name}})
+            }
+            res.status(200).json({success:true})
+       }catch(err){
+         console.log(err);
+       }
+
+
+}
+
+exports.AddCategoryColor = async(req,res)=>{
+    const name = req.body.color;
+    const categoryexist = await AddCategory.find();
+
+    console.log(categoryexist[0]._id)
+    try{
+         if(categoryexist.length < 1){
+             const category_name = await AddCategory.create({category_color:name})
+         }
+         else{
+             const category_name = await AddCategory.findByIdAndUpdate({_id:categoryexist[0]._id},{$push:{category_color:name}})
+         }
+         res.status(200).json({success:true})
+    }catch(err){
+      console.log(err);
+    }
+
+}
+
+// ===========END+==================================================

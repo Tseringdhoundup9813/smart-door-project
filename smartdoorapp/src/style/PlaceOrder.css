@@ -77,3 +77,28 @@
         padding:0;
     }
 }
+
+/* order confirm message sucessfully ========================== */
+.order_confirm_message{
+
+    position: absolute;
+    top:20%;
+    right:10%;
+    transform:translate(0%,50%);
+    transition:all 1s ease;
+    z-index: 9999;
+   
+    
+}
+.order_confirm_message >p{
+    background-color:rgb(38, 208, 38);
+    padding:7px 15px;
+    color:white;
+    border-radius:2px;
+    font: size 0.9em;
+}
+.order_confirm_message  span{
+    color:rgb(255, 255, 255);
+    font-weight: bold;
+    margin-left:10px;
+}

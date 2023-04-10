@@ -69,6 +69,7 @@ function ProductCart (){
     const[cartlist,setCartList] = useState([]);
     const [qty, setQty]=useState(1);
     const[qt_amount,set_qt_amount] = useState();
+    const[totalamount,settotalamount] = useState();
 
   
    
@@ -78,9 +79,16 @@ function ProductCart (){
         
         try{
             const product = await  axios.get(`http://localhost:3001/showCartlist/${localStorage.getItem("user_id")}`)
-            console.log(product.data);
+           
             setCartList(product.data.data);
             set_qt_amount(product.data.quantity);
+            
+            let total_amount_v = 0;
+            product.data.quantity.map((product)=>{
+                total_amount_v += product.amount;
+            })
+            settotalamount(total_amount_v);
+
         }catch(err){
             console.log(err);
         }
@@ -127,14 +135,18 @@ function ProductCart (){
                     })
 
                     axios.interceptors.response.use(function(response){
-                        
-                        console.log(response);
+                
                         return response
 
                     },function(err){
                         return Promise.reject(err);
                     })
                     productlistshow()
+                    if(localStorage.getItem("cartcount") > 0){
+                        localStorage.setItem("cartcount",Number(localStorage.getItem("cartcount"))-1)
+                    }
+                   
+
 
             
                   
@@ -298,12 +310,12 @@ function ProductCart (){
                                 <div className="cart-shipp">Enter your shipping address</div>
                             </div>
 
-                            {/*    total amount  */}
-                                <TotalAmount cartcount={qty}></TotalAmount>
-                            {/* <div className="cart-total">
+                            <div className="cart-total">
                                 <div className="cart-total-head text-capitalize">total</div>
-                                <div className="cart-total-amt"> Rs.{total_Amount}/-</div>
-                            </div> */}
+                                <div className="cart-total-amt"> Rs.{totalamount}/-</div>
+                            </div> 
+
+
                             <div className="coupon-cart">
                                 <div className="btn coupon-cart-update update cart"><NavLink to="/product/buy-now" className="nav-link">proceed to checkout</NavLink></div>
                             </div>

@@ -37,7 +37,7 @@ const OrderSchema= new Schema({
     },
     deliverystatus:{
         type:Number,
-        default:1,
+        default:0,
     },
     mainuser:{
         type:Array,

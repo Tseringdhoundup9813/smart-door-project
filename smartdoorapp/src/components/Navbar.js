@@ -16,7 +16,7 @@ function Navbar (){
     const{successLogin} = useContext(loginContext);
     const{validationBox,setValidationBox} = useContext(loginContext);
     const[token,setToken] = useState("");
-    const[totalCartList,setTotalCartList] = useState(0);
+    const[totalCartList,setTotalCartList] = useState();
     const[Email_verify_message,set_Email_Verify_message] = useState(); 
     const[userid,setuserid]=useState();
 
@@ -34,12 +34,17 @@ useEffect(()=>{
     // totalcartlistshow-------------------------------------------------
     if(localStorage.getItem("user_id")!==null||localStorage.getItem("user_id")!==undefined){
         setuserid(localStorage.getItem("user_id"));
-        totalcartlistcount();
+        // totalcartlistcount();
+       
 
+        setTotalCartList(localStorage.getItem("cartcount"));
     }
+  
+    
+    
     // end-----------------------------------------------------
     
-},[]);
+},[localStorage.getItem("cartcount")]);
 
 
 // customerhaslogout}===========================================================================flaskdflkasdlfkdslf
@@ -213,7 +218,7 @@ function clickedUser(){
 
                         {/* <div className="heart-icon fs-4"><i class="fa-regular fa-heart"></i></div> */}
                         
-                        <div className="cart-icon fs-4"><p className='totalcartlistCount'>{totalCartList==null||!totalCartList?0:totalCartList}</p><NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink></div>
+                        <div className="cart-icon fs-4"><p className='totalcartlistCount'>{totalCartList}</p><NavLink to="/product-cart" className=" nav-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></NavLink></div>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     {/* <div className="navbar-search-sm row d-flex align-items-center justify-content-center">

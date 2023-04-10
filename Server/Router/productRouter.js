@@ -31,9 +31,14 @@ Router.post("/orders/:user_id",productController.Order)
 Router.post("/orderconfirm",productController.orderConfirm);
 Router.get("/khaltipayload/:order_id",productController.khaltidata)
 
+// order tracking
+Router.get("/ordertracking/:user_id",productController.OrderTracking)
 
 // admin router ============================================
 Router.get("/customerorder/",productController.CustomerOrder);
+Router.post("/addcategoryname/",productController.AddCategoryName)
+Router.post("/addcategorycolor/",productController.AddCategoryName)
+
 // 
 
 
