@@ -296,7 +296,7 @@ function ProductCart() {
                       {/* <span className="cart-amt-sm">Grand Total</span>  */}
                       <div className="cart-product-amount">
                         <span className="cart-amt-sm">Grand Total</span>
-                        {qt_amount[key].amount}
+                        Rs.{qt_amount[key].amount}
                       </div>
                     </div>
 
