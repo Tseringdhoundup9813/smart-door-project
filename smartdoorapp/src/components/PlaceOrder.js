@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate ,useSearchParams} from "react-router-dom"
 import '../style/PlaceOrder.css';
 
 //navbar
@@ -14,11 +14,37 @@ export default function PlaceOrder() {
     const[total_Amount,set_total_Amount]=useState(0);
     const[order_id,set_order_id]=useState();
     const[orderconfirm_success,set_order_confirm_success] = useState(false);
+    const[payment,set_payment] =useState();
+    const[pidx_number,set_pidx_number] =useState();
 
+    
+    
+    const [params] = useSearchParams();
+    
+    if(params.get("pidx") !==null){
+        let pidx = params.get("pidx");
+        console.log(pidx);
+        CheckPidx();
+       
+        async function CheckPidx(){
+
+            try{
+                const response= await  axios.get(`http://localhost:3001/checkpidx/${pidx}/${localStorage.getItem("order_id")}`)
+                console.log(response.data.payment);
+                set_payment(response.data.payment);
+                    
+            }catch(err){
+                console.log(err);
+            }
+        }
+       
+    }
+    // setpidx(params.get("pidx"));
+  
+   
 
     const navigate = useNavigate();
 
-    console.log(orderconfirm_success);
     // useeffect ======================================
     useEffect(()=>{
         
@@ -32,8 +58,17 @@ export default function PlaceOrder() {
             },2500)
           
         }
+
+        if(payment){
+            console.log("working sucess");
+            setTimeout(function(){
+                navigate("/product/order-tracking");
+
+            },2500)
+          
+        }
         
-    },[orderconfirm_success])
+    },[orderconfirm_success,payment])
 
     // ====================
     // total amount ================================================================
@@ -91,7 +126,7 @@ export default function PlaceOrder() {
     // pay on khalti =====================================================================================================
      async function KhaltiPay(){
         try{
-            const order = await axios.get(`http://localhost:3001/khaltipayload/${order_id}`)
+            const order = await axios.get(`http://localhost:3001/khaltipayload/${localStorage.getItem("order_id")}`)
             console.log(order.data.khaltiurl);
             window.location.replace(order.data.khaltiurl);
         }catch(err){
@@ -118,6 +153,13 @@ export default function PlaceOrder() {
                 <p>You Have sucessully place order<span> Thank you {localStorage.getItem("username").slice(0,4)}.... </span></p>
                 
             </div>
+        }
+
+
+        {
+            <div className="order_confirm_message" style={{transform:`${payment?"translateY(20%)":"translateY(-300%)"}`}}>
+               <p>You Have sucessfully paid <span> Thank you {localStorage.getItem("username").slice(0,4)}.... </span></p>
+             </div>
         }
         {/* ================END+=====================END+=================================================== */}
         <div id="placeOrder">
