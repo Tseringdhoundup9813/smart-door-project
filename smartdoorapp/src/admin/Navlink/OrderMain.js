@@ -24,8 +24,6 @@ export default function OrderMain() {
         <div className="col-12 main-ol">
           <div className="order-list ol-head">
             <div className="ol-name fw-bolder text-capitalize">customer</div>
-            <div className="ol-name fw-bolder text-capitalize">Quantity</div>
-            <div className="ol-name fw-bolder text-capitalize">totalamount</div>
             <div className="ol-name fw-bolder text-capitalize">date</div>
             <div className="ol-name fw-bolder text-capitalize">status</div>
             <div className="ol-name fw-bolder text-capitalize">
@@ -43,13 +41,6 @@ export default function OrderMain() {
                       </div>
                       <div className="cus-email">{order.mainuser[0].email}</div>
                     </div>
-
-                    <div className="cus-product">
-                      <div className="cusp-model">{order.totalquantity}</div>
-                      <div className="cus-color">Antrek</div>
-                    </div>
-
-                    <div className="cus-order-number">{order.totalamount}</div>
 
                     {/* <div className="cus-date">{moment(order.createdAt.slice(0,order.createdAt.indexOf("T")), "YYYYMMDD").fromNow()}</div> */}
                     <div className="cus-date">{order.createdAt}</div>
@@ -71,6 +62,7 @@ export default function OrderMain() {
                   </div>
                   <div className="row row-cart-head">
                     <div className="order-cart-head">
+                      <div className="order-sn">S.No.</div>
                       <div className="order-detail">Product detail</div>
                       <div className="order-rate">Rate</div>
                       <div className="orer-qty">QTY</div>
@@ -79,6 +71,7 @@ export default function OrderMain() {
                     {order.productId.map((product) => {
                       return (
                         <div className="order-cart">
+                          <div className="sn-number">1</div>
                           {product.mainproduct.map((mainproduct) => {
                             return (
                               <div className="order-detail">
@@ -92,12 +85,19 @@ export default function OrderMain() {
                               </div>
                             );
                           })}
-                          <div className="order-rate">25%</div>
+                          <div className="order-rate">Rs.25</div>
                           <div className="orer-qty">{product.quantity}</div>
-                          <div className="orer-rate">rs.{product.amount}/-</div>
+                          <div className="orer-rate">Rs.{product.amount}/-</div>
                         </div>
                       );
                     })}
+                    <div className="order-cart-total">
+                      <div className="total-sn">2</div>
+                      <div className="c-total">Total</div>
+                      <div className="total-price">Rs. 100</div>
+                      <div className="total-qty">4</div>
+                      <div className="total-amount">Rs.400</div>
+                    </div>
                   </div>
                 </div>
               );

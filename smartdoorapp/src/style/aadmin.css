@@ -164,6 +164,15 @@
   margin: 20px auto;
 }
 /* ========order-list============ */
+.order-cart-total {
+  display: grid;
+  grid-template-columns: 10% 50% 10% 10% 20%;
+  font-size: 12px;
+  background: #f7f7f7;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 5px;
+}
 .main-ol {
   padding: 20px;
   border-radius: 5px;
@@ -172,7 +181,7 @@
 }
 .order-list {
   display: grid;
-  grid-template-columns: 25% 10% 15% 15% 15% 20%;
+  grid-template-columns: 40% 25% 15% 20%;
 }
 .ol-head {
   border-bottom: 2px solid grey;
