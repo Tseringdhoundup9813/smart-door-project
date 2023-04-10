@@ -46,6 +46,13 @@ const OrderSchema= new Schema({
         type:Date,
         default:Date.now(),
         
+    },
+    payment:{
+        type:Boolean,
+        default:false,
+    },
+    pidx:{
+        type:String,
     }
    
 })

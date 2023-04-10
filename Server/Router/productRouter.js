@@ -31,13 +31,21 @@ Router.post("/orders/:user_id",productController.Order)
 Router.post("/orderconfirm",productController.orderConfirm);
 Router.get("/khaltipayload/:order_id",productController.khaltidata)
 
+
+// khalti===========================================================
+Router.get("/checkpidx/:pidx/:order_id",productController.CheckPidx);
+
+// ==============
 // order tracking
 Router.get("/ordertracking/:user_id",productController.OrderTracking)
 
 // admin router ============================================
 Router.get("/customerorder/",productController.CustomerOrder);
 Router.post("/addcategoryname/",productController.AddCategoryName)
-Router.post("/addcategorycolor/",productController.AddCategoryName)
+Router.post("/addcategorycolor/",productController.AddCategoryName);
+Router.get("/checkadmin/:user_id/",productController.CheckAdmin);
+
+
 
 // 
 

@@ -464,6 +464,7 @@ exports.orderConfirm= async(req,res)=>{
     try{
 
         const orderconfirm = await Order.findByIdAndUpdate({_id:order_id},{confirm:true})
+        
         res.status(200).json({success:true})
 
 
@@ -479,24 +480,23 @@ exports.orderConfirm= async(req,res)=>{
 exports.khaltidata=async(req,res)=>{
   
     const order_id = req.params.order_id;
+    console.log(order_id);
 
     const order = await Order.find({_id:order_id});
     const VAT = 300
-    const customer_number = order[0].number;
-    const customer_name = order[0].mainuser[0].username;
-    const customer_email = order[0].mainuser[0].email;
+    console.log(order);
+  
+        const customer_number = order[0].number;
+        const customer_name = order[0].mainuser[0].username;
+        const customer_email = order[0].mainuser[0].email;
+        let totalamount = order[0].totalamount * 100;
+        totalamount = Math.trunc(totalamount);
+  
+  
 
-    
-    let totalamount = order[0].totalamount * 100;
-    totalamount = Math.trunc(totalamount);
-    
-   
+
     const product_details=[];
-
-    // console.log(order[0].productId);
-
     order[0].productId.map((product)=>{
-    
         product_details.push( {
                  "identity": product._id,
                     "name": "Khalti logo",
@@ -504,16 +504,7 @@ exports.khaltidata=async(req,res)=>{
                     "quantity": product.quantity,
              "unit_price": product.amount * 100,
                 })
-            
-        
-    })
-
- 
-    
-
-    // totalamount * 100;
-
-
+         })
         const payload = {
             "return_url": "http://localhost:3000/product/placeorder",
             "website_url": "https://example.com/",
@@ -540,21 +531,21 @@ exports.khaltidata=async(req,res)=>{
           
         try{
 
-
         const response = await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",payload,{
             headers:{
                 'Authorization':`Key 6e223eea84c04cc5bd7ac70b92c9bfaf `
             }
         
-        })
-        console.log(response);
+        })   
 
+
+
+        const pidx = response.data.pidx;
+        const savepidx = await Order.findByIdAndUpdate({_id:order_id},{pidx:pidx});
+        console.log(savepidx);
 
         res.status(200).json({khaltiurl:response.data.payment_url})
       
-
-
-
     }catch(err){
         console.log(err);
     }
@@ -635,3 +626,39 @@ exports.AddCategoryColor = async(req,res)=>{
 }
 
 // ===========END+==================================================
+
+// check admin or not ============================
+exports.CheckAdmin=(req,res)=>{
+    console.log(res.params);
+}
+// ---------------==========================
+
+
+// checkpidx ======================================================================
+
+exports.CheckPidx=async(req,res)=>{
+    const{pidx,order_id} = req.params;
+    try{
+        const orderdata = await Order.find({_id:order_id})
+        console.log(orderdata);
+        if(orderdata[0].pidx ===pidx){
+            const updatepayment = await Order.findByIdAndUpdate({_id:order_id},{payment:true})
+            await Order.findByIdAndUpdate({_id:order_id},{confirm:true})
+            res.status(200).json({payment:true})
+
+        }
+        else{
+            const updatepayment = await Order.findByIdAndUpdate({_id:order_id},{payment:false})
+            await Order.findByIdAndUpdate({_id:order_id},{confirm:false})
+
+            res.status(200).json({payment:false})
+        }
+    }catch(err){
+        console.log(err);
+    }
+   
+    
+
+}
+
+// ========END=====================================

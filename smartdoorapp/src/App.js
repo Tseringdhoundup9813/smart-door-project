@@ -49,6 +49,7 @@ import PlaceOrder from "./components/PlaceOrder";
 
 import EmailVerification from "./components/EmailVerification";
 import Protected from "./components/Protected";
+import AdminProtected from "./components/AdminProtected";
 
 import AdminLogin from "./components/AdminLogin";
 
