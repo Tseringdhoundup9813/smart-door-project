@@ -56,17 +56,7 @@ export default function BuyNow() {
       getCity();
     }
 
-    // if(province_name!==undefined||city_name!==undefined||district_name!==undefined||contact!==undefined||landmark!==undefined){
-    //   console.log("working");
-    //   console.log(contact.length)
-    //   if((province_name.length>1)&&(district_name.length>1)&&(city_name>1)&&(contact.length>1)){
-    //       set_orderplace_allow(true);
-    //   }
-    //   else{
-    //     set_orderplace_allow(false);
-    //   }
-    // }
-    // end===================
+  
     
     
 
@@ -76,14 +66,19 @@ export default function BuyNow() {
   // place order=================================================================
   async function placeOrder() {
     
+    
     if(orderplace_allow){
         let address = `${landmark}/${city_name}/${district_name}/${province_name}`;
         try {
           const payorder = await axios.post(
             `http://localhost:3001/orders/${localStorage.getItem("user_id")}`,
             { address: address, number: contact }
+           
           );
+          console.log(payorder.data.order_id)
           localStorage.setItem("order_id", payorder.data.order_id);
+
+      
         } catch (err) {
           console.log(err);
         }

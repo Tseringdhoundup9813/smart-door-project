@@ -533,7 +533,7 @@ exports.khaltidata=async(req,res)=>{
 
         const response = await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",payload,{
             headers:{
-                'Authorization':`Key 6e223eea84c04cc5bd7ac70b92c9bfaf `
+                'Authorization':`Key ${process.env.KHALTI_TOKEN } `
             }
         
         })   

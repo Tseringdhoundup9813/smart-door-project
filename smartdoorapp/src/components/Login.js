@@ -96,7 +96,7 @@ const Login = (props) => {
     <form onSubmit={SubmitForm}>
         <div className="input-container">
             <input onChange={(e)=>setFormData({...formdata,email:e.target.value})} type="text" placeholder='enter email' />
-            <input  onChange={(e)=>setFormData({...formdata,password:e.target.value})}  type="text" placeholder='enter password' />
+            <input  onChange={(e)=>setFormData({...formdata,password:e.target.value})}  type="password" placeholder='enter password' />
             <button style={{backgroundColor:"dodgerblue"}}>Login</button>
          </div>
     </form>
