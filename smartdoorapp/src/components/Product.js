@@ -33,6 +33,7 @@ async function getProduct(){
     try{
         let res = await axios.get(`product?page=${pageCount}&limit=20&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
             setallproduct(res.data.data);
+            console.log(res);
        
             if(res.data.data <=0){
                 setDeleteMessage(true);
