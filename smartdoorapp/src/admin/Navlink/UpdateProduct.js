@@ -106,7 +106,7 @@ function UpdateProduct(){
                        <div className="up-size ">
                        <label className=" text-capitalize " >Size : </label>
                         <select className="form-control mb-2"  onChange={(e)=>setproductupload({...productupload ,size:e.target.value})} name="" id="upSize">
-                            <option value={product&&product.size}>{product&&product.size}</option>
+                           
                             <option value="size">80 * 32</option>
                             <option value="size">80 * 26</option>
                             <option value="size">75 * 26</option>
