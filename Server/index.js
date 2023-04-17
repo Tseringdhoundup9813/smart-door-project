@@ -12,8 +12,7 @@ const cors= require("cors");
 const { json } = require("body-parser");
 
 
-app.use(cors({
-    origin:["https://localhost:3001","https://smartdoor-fronted.onrender.com/"]));
+app.use(cors());
 app.use("/Uploads",express.static("Uploads"))
 app.use(json());
 app.use(Router,authRouter);
