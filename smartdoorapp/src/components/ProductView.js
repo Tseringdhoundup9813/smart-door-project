@@ -104,31 +104,39 @@ function Productview(){
 
 // add to cart list ============================================================================================================================
     async function AddTocart(){
-        
-        
-        try{
-            const product = await  axios.post(`http://localhost:3001/addtocart`,{product_id:productId,userId:userId})
-            console.log(product.data.data.quantity);
-           
-            if(product.data.cartexist){
-                console.log("add already");
-                set_product_add_message(true);
-                set_product_add_number(product.data.data.quantity);
-
-            }else{
-               
-                console.log("not add")
-                set_product_add_message(true);
-                set_product_add_number(product.data.data.quantity);
-               
-                localStorage.setItem("cartcount",Number(localStorage.getItem("cartcount"))+1)
-
-            }
-           
-
-        }catch(err){
-            console.log(err);
+         
+        if(localStorage.getItem("token")==undefined){
+            setValidationBox(true);
         }
+        else{
+                
+            try{
+                const product = await  axios.post(`http://localhost:3001/addtocart`,{product_id:productId,userId:userId})
+                console.log(product.data.data.quantity);
+            
+                if(product.data.cartexist){
+                    console.log("add already");
+                    set_product_add_message(true);
+                    set_product_add_number(product.data.data.quantity);
+
+                }else{
+                
+                    console.log("not add")
+                    set_product_add_message(true);
+                    set_product_add_number(product.data.data.quantity);
+                
+                    localStorage.setItem("cartcount",Number(localStorage.getItem("cartcount"))+1)
+
+                }
+            
+
+            }catch(err){
+                console.log(err);
+            }
+            
+        }
+        
+      
        
     }
     // add to cart list =============================f;asdf;sldkaf=================================================
@@ -368,9 +376,9 @@ function Productview(){
                        <div className="cart-buy-button ">
                         <div onClick={AddTocart}className="btn add-to-cart-btn">Add to cart
                         </div>
-                        <div className="buy-box">
+                        {/* <div className="buy-box">
                             <NavLink to="/product/buy-now" className="nav-link buynow-btn btn">Buy Now</NavLink>
-                        </div>
+                        </div> */}
                     </div>
                     {/* -================= */}
 
@@ -394,12 +402,16 @@ function Productview(){
                     </div>
                 </div>
             </div>
+
+            {/* list of product ==================================================================== */}
+
+{/*             
              <div className="row like-row">
                 <div className="pl d-flex justify-content-between">
                     <div className="pl-left">You may also Like</div>
                     <div className="pl-right">View all</div>
                 </div>
-                {/* slick */}
+             
                 <div>
                   
                     <Slider {...settings}>
@@ -424,7 +436,7 @@ function Productview(){
                      }
                     </Slider>
                 </div>
-            </div>                   
+            </div>                    */}
             
             {/* <div className="row look-row text-center ">
                 <div className="">

@@ -55,6 +55,8 @@ function customerhaslogout(){
     localStorage.setItem("user_id","");
     localStorage.setItem("username","");
     localStorage.removeItem("email_verify");
+    localStorage.removeItem("loginSucess");
+    localStorage.removeItem("token");
 
 
 }

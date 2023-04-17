@@ -100,6 +100,12 @@ const Login = (props) => {
         </div>
       </form>
       <div className="forgetpassword">
+            <input onChange={(e)=>setFormData({...formdata,email:e.target.value})} type="text" placeholder='enter email' />
+            <input  onChange={(e)=>setFormData({...formdata,password:e.target.value})}  type="password" placeholder='enter password' />
+            <button style={{backgroundColor:"dodgerblue"}}>Login</button>
+         </div>
+    </form>
+    <div className="forgetpassword">
         <p>forget password</p>
         <p onClick={ChangeToSingup}>Don't have account sign up</p>
       </div>

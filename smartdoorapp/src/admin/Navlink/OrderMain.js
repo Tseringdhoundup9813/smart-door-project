@@ -4,10 +4,20 @@ import axios from "axios";
 
 export default function OrderMain() {
   const [orderlist, setorderlist] = useState();
+  const[order_status,set_order_status] = useState();
+  console.log(order_status);
 
   async function OrderList() {
     try {
       const orderlist = await axios.get(`http://localhost:3001/customerorder`);
+      console.log(orderlist.data.data);
+      setorderlist(orderlist.data.data);
+    } catch (err) {}
+  }
+
+  async function confirm_order(order_id){
+    try {
+      const orderlist = await axios.get(`http://localhost:3001/orderstatus/${order_id}/${order_status}`);
       console.log(orderlist.data.data);
       setorderlist(orderlist.data.data);
     } catch (err) {}
@@ -47,17 +57,17 @@ export default function OrderMain() {
 
                     <div className="cus-status">
                       <div>
-                        <select name="status" id="">
-                          <option value="pending">pending</option>
-                          <option value="shipped">shipped</option>
-                          <option value="canceled">canceled</option>
-                          <option value="delivery">delivered</option>
+                        <select name="status" id="" onChange={(e)=>set_order_status(e.target.value)}>
+                          <option value="0">pending</option>
+                          <option value="1">shipped</option>
+                          <option value="3">canceled</option>
+                          <option value="2">delivered</option>
                         </select>
                       </div>
                     </div>
 
                     <div>
-                      <span className="cus-confirm">confirm order</span>
+                      <span className="cus-confirm" onClick={()=>confirm_order(order._id)}>confirm order</span>
                     </div>
                   </div>
                   <div className="row row-cart-head">

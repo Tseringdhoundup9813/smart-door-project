@@ -273,7 +273,7 @@ function ProductCart() {
                     Rs.
                     {product.discount == 0
                       ? product.price
-                      : (product.price * product.discount) / 100}
+                      : (product.price * product.discount) / 100}/-
                   </div>
 
                   <div className="cart-product-quantity d-flex align-items-center">
@@ -296,7 +296,7 @@ function ProductCart() {
                       {/* <span className="cart-amt-sm">Grand Total</span>  */}
                       <div className="cart-product-amount">
                         <span className="cart-amt-sm">Grand Total</span>
-                        Rs.{qt_amount[key].amount}
+                        Rs.{qt_amount[key].amount}/-
                       </div>
                     </div>
 
@@ -343,13 +343,16 @@ function ProductCart() {
             </div>
           </div>
         </div>
-
+{/* 
         <div className="row like-row">
           <div className="pl d-flex justify-content-between">
             <div className="pl-left">You may also Like</div>
             <div className="pl-right">View all</div>
           </div>
-          {/* slick */}
+   
+
+
+
           <div>
             <Slider {...settings}>
               {likeimg.map((e, key) => {
@@ -377,7 +380,7 @@ function ProductCart() {
               })}
             </Slider>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer></Footer>
     </div>

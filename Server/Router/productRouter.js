@@ -44,6 +44,7 @@ Router.get("/customerorder/",productController.CustomerOrder);
 Router.post("/addcategoryname/",productController.AddCategoryName)
 Router.post("/addcategorycolor/",productController.AddCategoryName);
 Router.get("/checkadmin/:user_id/",productController.CheckAdmin);
+Router.get("/orderstatus/:order_id/:status",productController.OrderStatus);
 
 
 

@@ -25,6 +25,8 @@ export default function BuyNow() {
   const [city, setcity] = useState();
   const [city_name, setcity_name] = useState();
   const [contact, setContact] = useState();
+  const[landmark,set_landmark] = useState();
+  const[orderplace_allow,set_orderplace_allow] = useState();
 
   useEffect(() => {
     productlistshow();
@@ -54,21 +56,34 @@ export default function BuyNow() {
       getCity();
     }
 
-    // end===================
-  }, [province_name, district_name]);
+  
+    
+    
+
+
+  }, [province_name, district_name,city_name,contact,landmark]);
 
   // place order=================================================================
   async function placeOrder() {
-    let address = `${city_name}/${district_name}/${province_name}`;
-    try {
-      const payorder = await axios.post(
-        `http://localhost:3001/orders/${localStorage.getItem("user_id")}`,
-        { address: address, number: contact }
-      );
-      localStorage.setItem("order_id", payorder.data.order_id);
-    } catch (err) {
-      console.log(err);
+    
+    
+    if(orderplace_allow){
+        let address = `${landmark}/${city_name}/${district_name}/${province_name}`;
+        try {
+          const payorder = await axios.post(
+            `http://localhost:3001/orders/${localStorage.getItem("user_id")}`,
+            { address: address, number: contact }
+           
+          );
+          console.log(payorder.data.order_id)
+          localStorage.setItem("order_id", payorder.data.order_id);
+
+      
+        } catch (err) {
+          console.log(err);
+        }
     }
+    
   }
 
   // END===============================================================
@@ -188,20 +203,20 @@ export default function BuyNow() {
                     </div>
 
                     {/* ====for address=== */}
-                    <label htmlFor="number">Address</label>
+                    {/* <label htmlFor="number">Address</label>
                     <div className="br-address">
                       <input
                         type="text"
                         className="form-control"
                         placeholder="house no./Area name"
                       />
-                    </div>
+                    </div> */}
 
                     <label htmlFor="number">Landmark (Optional)</label>
                     <div className="bd-address">
                       <input
                         type="text"
-                        onChange={(e) => setContact(e.target.value)}
+                        onChange={(e) => set_landmark(e.target.value)}
                         placeholder="EG. Beside rai chowk/"
                         className="form-control"
                       ></input>
@@ -294,9 +309,9 @@ export default function BuyNow() {
                 Bill to the same address <span className="edit-ba">Edit</span>
               </div> */}
               <div className="b-email">
-                Email to{" "}
+                {/* Email to{" "}
                 <span className="bemail">sangeylama1000@gmail.com</span>{" "}
-                <span className="edit-email">Edit</span>
+                <span className="edit-email">Edit</span> */}
               </div>
             </div>
             <div className="buy-cart">
@@ -327,8 +342,8 @@ export default function BuyNow() {
                 })}
 
               <div className="buy-subtotal">
-                <span className="subtotal-item">1 items.</span>
-                Subtotal :{" "}
+                {/* <span className="subtotal-item">1 items.</span> */}
+                Total :{" "}
                 <span className="main-subtotal">Rs. {total_Amount}</span>
               </div>
             </div>
@@ -341,8 +356,8 @@ export default function BuyNow() {
                 <div className="items-total-amt text-end">
                   Rs. {total_Amount}
                 </div>
-                <div className="deliveryfee text-capitalize">Delivery Fee</div>
-                <div className="deliveryfeee-amt text-end">Rs.100</div>
+                {/* <div className="deliveryfee text-capitalize">Delivery Fee</div>
+                <div className="deliveryfeee-amt text-end">Rs.100</div> */}
                 <div className="total-pay text-capitalize">Total payment</div>
                 <div className="total-pay-amt text-end">Rd. {total_Amount}</div>
               </div>
@@ -350,9 +365,9 @@ export default function BuyNow() {
                 className="placeorder-btn btn text-capitalize"
                 onClick={placeOrder}
               >
-                <NavLink to="/product/placeorder" className="nav-link">
+               { <NavLink to="/product/placeorder" className="nav-link">
                   place order
-                </NavLink>
+                </NavLink>}
               </div>
             </div>
           </div>

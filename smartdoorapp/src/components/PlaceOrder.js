@@ -15,8 +15,7 @@ export default function PlaceOrder() {
     const[order_id,set_order_id]=useState();
     const[orderconfirm_success,set_order_confirm_success] = useState(false);
     const[payment,set_payment] =useState();
-    const[pidx_number,set_pidx_number] =useState();
-
+  
     
     
     const [params] = useSearchParams();
