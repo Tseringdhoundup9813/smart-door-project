@@ -31,7 +31,7 @@ const[deleteID,setDeleteID]=useState("");
 
 async function getProduct(){
     try{
-        let res = await axios.get(`product?page=${pageCount}&limit=20&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
+        let res = await axios.get(`https://smartdoornepal-com.onrender.com/product?page=${pageCount}&limit=20&colors=${filterColor}&category=${filtercategory}&size=${filterSize}`)
             setallproduct(res.data.data);
             console.log(res);
        
