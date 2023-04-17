@@ -20,7 +20,7 @@ function Admin() {
         formdata.append("categories",productupload.categories);
         formdata.append("colors",productupload.color);
         formdata.append("size",productupload.size);
-        axios.post("http://localhost:3001/upload",formdata, {
+        axios.post("https://smartdoor-fronted.onrender.com/upload",formdata, {
         }).then(res => {
             console.log(res.data)
             console.log(res.data.message);
