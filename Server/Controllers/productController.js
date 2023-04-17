@@ -80,6 +80,7 @@ exports.ProductAll =async (req,res)=>{
 
     
         res.status(200).json({
+            work:"working tsering"
             data:product,
             productLenght:totalProduct.length,
         })
