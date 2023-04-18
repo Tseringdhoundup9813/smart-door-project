@@ -99,7 +99,7 @@ function Productview() {
       );
 
       setproduct(product.data.data);
-      console.log(product.data);
+      console.log(JSON.parse(product));
     } catch (err) {
       console.log(err);
     }
