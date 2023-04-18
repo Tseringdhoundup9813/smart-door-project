@@ -88,7 +88,6 @@ const router = createBrowserRouter(
       <Route path="admin/pages" element={<AdminProtected Component={Pages} />} />
       <Route path="admin/media" element={<AdminProtected Component={Media}/>} />
       <Route path="admin/products" element={<AdminProtected Component={Products}/>} />
-{/* this is m,e */}
       <Route path="admin/products/edit/:productId" element={<AdminProtected Component={UpdateProduct}/>} />
 
     </Route>
