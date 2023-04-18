@@ -99,6 +99,7 @@ function Productview() {
       );
 
       setproduct(product.data.data);
+      console.log(product.data);
     } catch (err) {
       console.log(err);
     }
