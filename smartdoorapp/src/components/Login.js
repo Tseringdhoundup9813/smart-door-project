@@ -36,7 +36,10 @@ const Login = (props) => {
     event.preventDefault();
 
     try {
-      let response = await axios.post("http://localhost:3001/login", formdata);
+      let response = await axios.post(
+        "https://smartdoor-fronted.onrender.com/login",
+        formdata
+      );
       console.log(response.data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user_id", response.data.id);

@@ -89,7 +89,9 @@ function ProductCart() {
   async function productlistshow() {
     try {
       const product = await axios.get(
-        `http://localhost:3001/showCartlist/${localStorage.getItem("user_id")}`
+        `https://smartdoor-fronted.onrender.com/showCartlist/${localStorage.getItem(
+          "user_id"
+        )}`
       );
 
       setCartList(product.data.data);
@@ -126,7 +128,7 @@ function ProductCart() {
   async function deleteCartlist(key) {
     try {
       let dele = await axios.delete(
-        `http://localhost:3001/deletecartlist/${key}/${localStorage.getItem(
+        `https://smartdoor-fronted.onrender.com/deletecartlist/${key}/${localStorage.getItem(
           "user_id"
         )}`
       );
@@ -273,7 +275,8 @@ function ProductCart() {
                     Rs.
                     {product.discount == 0
                       ? product.price
-                      : (product.price * product.discount) / 100}/-
+                      : (product.price * product.discount) / 100}
+                    /-
                   </div>
 
                   <div className="cart-product-quantity d-flex align-items-center">
@@ -343,7 +346,7 @@ function ProductCart() {
             </div>
           </div>
         </div>
-{/* 
+        {/* 
         <div className="row like-row">
           <div className="pl d-flex justify-content-between">
             <div className="pl-left">You may also Like</div>
